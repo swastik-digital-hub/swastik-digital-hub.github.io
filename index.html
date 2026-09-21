@@ -489,7 +489,6 @@
             transform: translateY(-2px);
         }
 
-        /* Profile Modal Info Details Styling */
         .profile-info-grid {
             display: flex;
             flex-direction: column;
@@ -548,7 +547,7 @@
     <aside class="sidebar">
         <div class="brand-icon"><i class="fa-solid fa-code"></i></div>
         <nav class="sidebar-nav">
-            <a href="#" class="sidebar-link active" title="Dashboard"><i class="fa-solid fa-house"></i></a>
+            <a href="index.html" class="sidebar-link active" title="Dashboard"><i class="fa-solid fa-house"></i></a>
             <a href="about.html" class="sidebar-link" title="About"><i class="fa-solid fa-circle-info"></i></a>
             <a href="contact.html" class="sidebar-link" title="Contact"><i class="fa-solid fa-envelope"></i></a>
         </nav>
@@ -595,7 +594,7 @@
                 "Every solved problem is a step closer to your dream campus."
             </div>
 
-            <!-- Learning Category Hub Grid -->
+            <!-- Learning Category Hub Grid (Linked to pyqs.html) -->
             <section class="hub-grid">
                 <a href="class10/class10-hub.html" class="hub-card">
                     <i class="fa-solid fa-book-bookmark"></i>
@@ -605,9 +604,9 @@
                     <i class="fa-solid fa-laptop-code"></i>
                     <span class="hub-card-title">Class 11<sup>th</sup></span>
                 </a>
-                <a href="mains/mains-hub.html" class="hub-card">
-                    <i class="fa-solid fa-microchip"></i>
-                    <span class="hub-card-title">JEE Main & Advance</span>
+                <a href="pyqs.html" class="hub-card">
+                    <i class="fa-solid fa-file-pdf"></i>
+                    <span class="hub-card-title">PYQ Bank</span>
                 </a>
                 <a href="neet/neet-hub.html" class="hub-card">
                     <i class="fa-solid fa-user-doctor"></i>
@@ -758,7 +757,7 @@
         const modalAvatarPreview = document.getElementById('modalAvatarPreview');
         const avatarFileInput = document.getElementById('avatarFileInput');
 
-        // Load Saved Data from LocalStorage (with fallback to default profile info)
+        // Load Saved Data from LocalStorage
         const savedUserName = localStorage.getItem('studentName');
         const savedClass = localStorage.getItem('studentClass');
         const savedStream = localStorage.getItem('studentStream');
