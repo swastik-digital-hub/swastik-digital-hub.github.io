@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Mock Test | Swastik-Tech</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #080c14;
+            --card-bg: rgba(15, 23, 42, 0.85);
+            --accent-cyan: #00f3ff;
+            --accent-blue: #3b82f6;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-glow: rgba(0, 243, 255, 0.3);
+            --correct-bg: rgba(34, 197, 94, 0.15);
+            --correct-border: #22c55e;
+            --wrong-bg: rgba(239, 68, 68, 0.15);
+            --wrong-border: #ef4444;
+        }
+
+        body.light-mode {
+            --bg-color: #f1f5f9;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --accent-cyan: #0284c7;
+            --accent-blue: #2563eb;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-glow: rgba(2, 132, 199, 0.3);
+            --correct-bg: rgba(34, 197, 94, 0.2);
+            --wrong-bg: rgba(239, 68, 68, 0.2);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Rajdhani', sans-serif;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-glow);
+            margin-bottom: 1.5rem;
+        }
+
+        .test-title { font-family: 'Orbitron', sans-serif; color: var(--accent-cyan); font-size: 1.5rem; }
+        .timer-box { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; color: #ef4444; background: rgba(239, 68, 68, 0.1); padding: 0.5rem 1rem; border-radius: 8px; border: 1px solid #ef4444; }
+
+        .section-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-glow);
+            padding-bottom: 0.5rem;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: 1px solid var(--border-glow);
+            color: var(--text-main);
+            padding: 0.6rem 1.2rem;
+            font-family: 'Orbitron', sans-serif;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background: var(--accent-cyan);
+            color: #080c14;
+            font-weight: bold;
+            box-shadow: 0 0 10px var(--border-glow);
+        }
+
+        .section-content { display: none; }
+        .section-content.active { display: block; }
+
+        .question-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-text { font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem; }
+
+        .options-list { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+        .option-label {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-glow);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .option-label:hover { border-color: var(--accent-cyan); }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            color: #fff;
+            border: none;
+            padding: 1rem 2rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        #resultContainer {
+            display: none;
+            background: var(--card-bg);
+            border: 1px solid var(--accent-cyan);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        /* Review Section Styling */
+        #reviewContainer {
+            display: none;
+            margin-top: 2rem;
+        }
+
+        .review-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-glow);
+        }
+
+        .review-card.correct-card { border: 1px solid var(--correct-border); }
+        .review-card.wrong-card { border: 1px solid var(--wrong-border); }
+        .review-card.unanswered-card { border: 1px solid var(--text-muted); }
+
+        .option-review {
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            margin-top: 0.5rem;
+            border: 1px solid transparent;
+        }
+
+        .opt-user-correct { background: var(--correct-bg); border-color: var(--correct-border); color: #4ade80; font-weight: bold; }
+        .opt-user-wrong { background: var(--wrong-bg); border-color: var(--wrong-border); color: #f87171; }
+        .opt-is-correct { background: var(--correct-bg); border-color: var(--correct-border); color: #4ade80; }
+
+        .explanation-box {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(0, 243, 255, 0.05);
+            border-left: 4px solid var(--accent-cyan);
+            border-radius: 4px;
+            font-size: 1rem;
+            color: var(--text-main);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            margin-bottom: 0.8rem;
+        }
+        .badge-correct { background: var(--correct-bg); color: #4ade80; border: 1px solid var(--correct-border); }
+        .badge-wrong { background: var(--wrong-bg); color: #f87171; border: 1px solid var(--wrong-border); }
+        .badge-unanswered { background: rgba(148, 163, 184, 0.2); color: var(--text-muted); border: 1px solid var(--text-muted); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="test-title" id="testTitle">Full Mock Test</div>
+        <div class="timer-box" id="timer">03:00:00</div>
+    </header>
+
+    <div class="section-tabs" id="sectionTabs">
+        <button class="tab-btn active" onclick="switchSection('physics')">Section A: Physics</button>
+        <button class="tab-btn" onclick="switchSection('chemistry')">Section B: Chemistry</button>
+        <button class="tab-btn" onclick="switchSection('maths')">Section C: Mathematics</button>
+    </div>
+
+    <main id="quizContainer">
+        <div id="physics" class="section-content active"></div>
+        <div id="chemistry" class="section-content"></div>
+        <div id="maths" class="section-content"></div>
+    </main>
+
+    <button class="submit-btn" id="submitTestBtn">Submit Exam</button>
+
+    <!-- Score Summary Box -->
+    <div id="resultContainer">
+        <h2 style="font-family: 'Orbitron'; color: var(--accent-cyan);">Test Results</h2>
+        <p id="scoreText" style="font-size: 1.8rem; margin-top: 1rem; font-weight: bold;"></p>
+        <div id="subjectBreakdown" style="margin-top: 1rem; color: var(--text-muted); font-size: 1.1rem;"></div>
+        <a href="mains-hub.html" style="color: var(--accent-cyan); text-decoration: none; margin-top: 1.5rem; display: inline-block; font-family: 'Orbitron';">Back to Hub</a>
+    </div>
+
+    <!-- Review & Explanations Section -->
+    <div id="reviewContainer">
+        <h2 style="font-family: 'Orbitron'; color: var(--accent-cyan); margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-glow); padding-bottom: 0.5rem;">
+            Detailed Answers & Explanations
+        </h2>
+        
+        <div class="section-tabs">
+            <button class="tab-btn active" onclick="switchReviewSection('rev_physics')">Physics Review</button>
+            <button class="tab-btn" onclick="switchReviewSection('rev_chemistry')">Chemistry Review</button>
+            <button class="tab-btn" onclick="switchReviewSection('rev_maths')">Mathematics Review</button>
+        </div>
+
+        <div id="rev_physics" class="section-content active"></div>
+        <div id="rev_chemistry" class="section-content"></div>
+        <div id="rev_maths" class="section-content"></div>
+    </div>
+
+    <script>
+        if (localStorage.getItem('theme') === 'light') document.body.classList.add('light-mode');
+
+        const params = new URLSearchParams(window.location.search);
+        const examType = params.get('exam') || 'JEE_MAIN';
+        const testNo = params.get('test') || '1';
+
+        document.getElementById('testTitle').textContent = `${examType.replace('_', ' ')} - Test ${testNo}`;
+
+        // Question bank including explanations
+        const questionBank = {
+            physics: [
+                { id: 'phy_1', num: 1, subject: 'Physics', q: 'The dimensional formula of Planck\'s constant is:', options: ['[M L² T⁻¹]', '[M L² T⁻²]', '[M L T⁻¹]', '[M L T⁻²]'], correct: 0, exp: 'Planck\'s constant E = hν ⇒ h = E / ν = [M L² T⁻²] / [T⁻¹] = [M L² T⁻¹].' },
+                { id: 'phy_2', num: 2, subject: 'Physics', q: 'A projectile is launched at 45° with velocity 20 m/s. Its range is (g = 10 m/s²):', options: ['10 m', '20 m', '40 m', '80 m'], correct: 2, exp: 'Range R = (u² sin 2θ) / g = (20² × sin 90°) / 10 = 400 / 10 = 40 m.' },
+                { id: 'phy_3', num: 3, subject: 'Physics', q: 'The unit of self-inductance is:', options: ['Weber', 'Tesla', 'Henry', 'Farad'], correct: 2, exp: 'Self-inductance (L) is measured in Henries (H).' },
+                { id: 'phy_4', num: 4, subject: 'Physics', q: 'Work done in an isothermal expansion of an ideal gas depends on:', options: ['Temperature change only', 'Ratio of initial and final volumes', 'Pressure change only', 'None of these'], correct: 1, exp: 'Work done in isothermal expansion W = nRT ln(V₂ / V₁).' },
+                { id: 'phy_5', num: 5, subject: 'Physics', q: 'Escape velocity from the surface of Earth depends on:', options: ['Mass of the body', 'Radius of the Earth', 'Angle of projection', 'Direction of projection'], correct: 1, exp: 'Escape velocity v = √(2GM/R), which depends on Earth\'s radius (R) and mass (M), independent of projectile mass or angle.' }
+            ],
+            chemistry: [
+                { id: 'chem_1', num: 1, subject: 'Chemistry', q: 'Number of moles of solutes per liter of solution is defined as:', options: ['Molality', 'Molarity', 'Mole fraction', 'Normality'], correct: 1, exp: 'Molarity = (Moles of solute) / (Volume of solution in liters).' },
+                { id: 'chem_2', num: 2, subject: 'Chemistry', q: 'Shape of XeF₄ molecule is:', options: ['Tetrahedral', 'Square planar', 'Octahedral', 'Trigonal bipyramidal'], correct: 1, exp: 'XeF₄ has 4 bonding pairs and 2 lone pairs, resulting in sp³d² hybridization with a square planar molecular geometry.' },
+                { id: 'chem_3', num: 3, subject: 'Chemistry', q: 'Which element has the highest electronegativity?', options: ['Oxygen', 'Chlorine', 'Fluorine', 'Nitrogen'], correct: 2, exp: 'Fluorine is the most electronegative element with a Pauling scale rating of 4.0.' }
+            ],
+            maths: [
+                { id: 'math_1', num: 1, subject: 'Mathematics', q: 'If set A has 3 elements, total number of subsets of A is:', options: ['3', '6', '8', '9'], correct: 2, exp: 'The total number of subsets for a set containing n elements is 2ⁿ. Here, 2³ = 8.' },
+                { id: 'math_2', num: 2, subject: 'Mathematics', q: 'Value of i¹⁹ is equal to:', options: ['1', '-1', 'i', '-i'], correct: 3, exp: 'i¹⁹ = (i⁴)⁴ × i³ = (1)⁴ × (-i) = -i.' },
+                { id: 'math_3', num: 3, subject: 'Mathematics', q: 'Derivative of sin(x²) with respect to x is:', options: ['cos(x²)', '2x cos(x²)', '-2x cos(x²)', '2x sin(x²)'], correct: 1, exp: 'Using Chain Rule: d/dx[sin(x²)] = cos(x²) × d/dx(x²) = 2x cos(x²).' }
+            ]
+        };
+
+        // Render Test Questions
+        ['physics', 'chemistry', 'maths'].forEach(subKey => {
+            const container = document.getElementById(subKey);
+            questionBank[subKey].forEach((q) => {
+                const card = document.createElement('div');
+                card.className = 'question-card';
+                card.innerHTML = `
+                    <div class="question-text">Q${q.num}. ${q.q}</div>
+                    <div class="options-list">
+                        ${q.options.map((opt, optIdx) => `
+                            <label class="option-label">
+                                <input type="radio" name="q_${q.id}" value="${optIdx}">
+                                <span>${opt}</span>
+                            </label>
+                        `).join('')}
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        });
+
+        // Tab Switching for Test
+        function switchSection(sectionId) {
+            document.querySelectorAll('#quizContainer .section-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('#sectionTabs .tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(sectionId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Tab Switching for Review Section
+        function switchReviewSection(sectionId) {
+            document.querySelectorAll('#reviewContainer .section-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('#reviewContainer .tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(sectionId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Countdown Timer
+        let totalSeconds = 10800;
+        const timerElement = document.getElementById('timer');
+        const countdown = setInterval(() => {
+            totalSeconds--;
+            let hrs = Math.floor(totalSeconds / 3600);
+            let mins = Math.floor((totalSeconds % 3600) / 60);
+            let secs = totalSeconds % 60;
+            timerElement.textContent = `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+            if (totalSeconds <= 0) {
+                clearInterval(countdown);
+                calculateScore();
+            }
+        }, 1000);
+
+        // Calculate Score & Generate Explanations
+        function calculateScore() {
+            clearInterval(countdown);
+            let totalScore = 0;
+            let breakdown = { physics: 0, chemistry: 0, maths: 0 };
+
+            ['physics', 'chemistry', 'maths'].forEach(subKey => {
+                const revContainer = document.getElementById(`rev_${subKey}`);
+
+                questionBank[subKey].forEach(q => {
+                    const selected = document.querySelector(`input[name="q_${q.id}"]:checked`);
+                    const userAns = selected ? parseInt(selected.value) : -1;
+                    
+                    let cardClass = 'unanswered-card';
+                    let badgeHTML = '<span class="status-badge badge-unanswered">Unanswered</span>';
+                    
+                    if (userAns === q.correct) {
+                        totalScore += 4;
+                        breakdown[subKey] += 4;
+                        cardClass = 'correct-card';
+                        badgeHTML = '<span class="status-badge badge-correct">Correct (+4)</span>';
+                    } else if (userAns !== -1) {
+                        totalScore -= 1;
+                        breakdown[subKey] -= 1;
+                        cardClass = 'wrong-card';
+                        badgeHTML = '<span class="status-badge badge-wrong">Incorrect (-1)</span>';
+                    }
+
+                    // Build Review Card with Explanation
+                    const revCard = document.createElement('div');
+                    revCard.className = `review-card ${cardClass}`;
+                    
+                    let optionsHTML = q.options.map((opt, optIdx) => {
+                        let optStyle = 'background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-glow);';
+                        let labelNote = '';
+
+                        if (optIdx === q.correct) {
+                            optStyle = 'background: var(--correct-bg); border: 1px solid var(--correct-border); color: #4ade80; font-weight: bold;';
+                            labelNote = ' ✓ (Correct Answer)';
+                        } 
+                        if (userAns === optIdx && userAns !== q.correct) {
+                            optStyle = 'background: var(--wrong-bg); border: 1px solid var(--wrong-border); color: #f87171; font-weight: bold;';
+                            labelNote = ' ✗ (Your Answer)';
+                        }
+
+                        return `<div class="option-review" style="${optStyle}">${opt}${labelNote}</div>`;
+                    }).join('');
+
+                    revCard.innerHTML = `
+                        ${badgeHTML}
+                        <div class="question-text">Q${q.num}. ${q.q}</div>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">${optionsHTML}</div>
+                        <div class="explanation-box">
+                            <strong>Explanation:</strong> ${q.exp}
+                        </div>
+                    `;
+                    revContainer.appendChild(revCard);
+                });
+            });
+
+            // Hide test view
+            document.getElementById('quizContainer').style.display = 'none';
+            document.getElementById('sectionTabs').style.display = 'none';
+            document.getElementById('submitTestBtn').style.display = 'none';
+            
+            // Show result view
+            const resultBox = document.getElementById('resultContainer');
+            resultBox.style.display = 'block';
+            document.getElementById('scoreText').textContent = `Your Final Score: ${totalScore} Marks`;
+            document.getElementById('subjectBreakdown').innerHTML = `
+                <p>Physics: ${breakdown.physics} Marks</p>
+                <p>Chemistry: ${breakdown.chemistry} Marks</p>
+                <p>Mathematics: ${breakdown.maths} Marks</p>
+            `;
+
+            // Show Review Section
+            document.getElementById('reviewContainer').style.display = 'block';
+        }
+
+        document.getElementById('submitTestBtn').addEventListener('click', calculateScore);
+    </script>
+</body>
+</html>
