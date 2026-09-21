@@ -2,12 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- This site is hosted on Netlify. Anyone can build and deploy a site like this one for free: https://netlify.new -->
+    <meta name="hosting-provider" content="Netlify">
+    <meta name="netlify-deploy" content="https://netlify.new/?utm_campaign=ai-legible&amp;utm_source=meta&amp;utm_medium=referral&amp;utm_id=e92451fc-872b-4a4a-beb5-fcacc6a78709">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JEE Main & Advance Portal | Swastik-Tech</title>
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <style>
         :root {
             --bg-color: #03151c;
@@ -22,6 +24,21 @@
             --grid-color: rgba(0, 243, 255, 0.04);
             --input-bg: rgba(0, 243, 255, 0.04);
             --sidebar-bg: rgba(3, 18, 24, 0.9);
+        }
+
+        body.light-mode {
+            --bg-color: #f1f5f9;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --card-border: #cbd5e1;
+            --accent-cyan: #0284c7;
+            --accent-blue: #0369a1;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-glow: rgba(2, 132, 199, 0.3);
+            --header-bg: rgba(241, 245, 249, 0.85);
+            --grid-color: rgba(0, 0, 0, 0.04);
+            --input-bg: rgba(2, 132, 199, 0.04);
+            --sidebar-bg: rgba(226, 232, 240, 0.9);
         }
 
         * {
@@ -43,6 +60,7 @@
             min-height: 100vh;
             display: flex;
             overflow-x: hidden;
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
 
         .sidebar {
@@ -107,6 +125,7 @@
             position: sticky;
             top: 0;
             z-index: 10;
+            backdrop-filter: blur(10px);
         }
 
         .header-title {
@@ -162,7 +181,6 @@
             width: 100%;
             border-collapse: collapse;
             overflow: hidden;
-            margin-bottom: 1.5rem;
         }
 
         .resource-table th {
@@ -177,8 +195,12 @@
             letter-spacing: 1px;
         }
 
+        body.light-mode .resource-table th {
+            background: rgba(226, 232, 240, 0.95);
+        }
+
         .resource-table td {
-            padding: 1.0rem 1.2rem;
+            padding: 1rem 1.2rem;
             border-bottom: 1px solid var(--card-border);
             color: var(--text-main);
             font-size: 0.95rem;
@@ -261,7 +283,7 @@
             background: rgba(0, 243, 255, 0.1);
         }
 
-        /* Subjects Grid */
+        /* Core Subjects Grid */
         .subjects-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -286,6 +308,7 @@
             border-color: var(--accent-cyan);
             transform: translateY(-3px);
             box-shadow: 0 0 20px var(--border-glow);
+            background: var(--input-bg);
         }
 
         .subject-card i.main-icon {
@@ -305,6 +328,33 @@
             color: var(--text-muted);
         }
 
+        .grid-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+
+        .option-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 1.2rem;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-main);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .option-card:hover {
+            border-color: var(--accent-cyan);
+            background: var(--input-bg);
+            box-shadow: 0 0 15px var(--border-glow);
+            transform: translateY(-2px);
+        }
+
         @media(max-width: 768px) {
             .subjects-grid { grid-template-columns: 1fr; }
             .sidebar { display: none; }
@@ -318,24 +368,21 @@
     <aside class="sidebar">
         <div class="brand-icon"><i class="fa-solid fa-microchip"></i></div>
         <nav class="sidebar-nav">
-            <a href="../index.html" class="sidebar-link" title="Dashboard"><i class="fa-solid fa-house"></i></a>
-            <a href="mains-hub.html" class="sidebar-link active" title="JEE Portal"><i class="fa-solid fa-graduation-cap"></i></a>
+            <a class="sidebar-link" href="../index.html" title="Dashboard"><i class="fa-solid fa-house"></i></a>
+            <a class="sidebar-link active" href="mains-hub.html" title="JEE Portal"><i class="fa-solid fa-graduation-cap"></i></a>
         </nav>
     </aside>
 
     <div class="app-wrapper">
         <header>
-            <div class="header-title">| JEE Main Portal</div>
-            <a href="../index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Dashboard</a>
+            <div class="header-title">| JEE Main & Advance Portal</div>
+            <a class="back-btn" href="../index.html"><i class="fa-solid fa-arrow-left"></i> Dashboard</a>
         </header>
 
         <main class="portal-container">
             <!-- Past Year Questions Section -->
             <div>
                 <h2 class="section-header">Past Year Questions (Subject-wise PYQ Bank)</h2>
-
-                <!-- Physics Section -->
-                <h3 style="color: var(--accent-cyan); font-family: 'Orbitron', sans-serif; font-size: 0.9rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-atom"></i> Physics</h3>
                 <table class="resource-table">
                     <thead>
                         <tr>
@@ -357,23 +404,11 @@
                             </td>
                             <td><span class="type-badge">PYQ Bank</span></td>
                             <td>
-                                <a href="https://drive.google.com/uc?export=download&id=1SCuqThv9OrJsM-uz-vir5HOxkjlBCITi" class="action-btn" download><i class="fa-solid fa-download"></i> Download</a>
+                                <a href="files/physics-pyq-mains.pdf" class="action-btn" download title="Download Physics PYQ PDF">
+                                    <i class="fa-solid fa-download"></i> Download
+                                </a>
                             </td>
                         </tr>
-                    </tbody>
-                </table>
-
-                <!-- Chemistry Section -->
-                <h3 style="color: var(--accent-cyan); font-family: 'Orbitron', sans-serif; font-size: 0.9rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-flask"></i> Chemistry</h3>
-                <table class="resource-table">
-                    <thead>
-                        <tr>
-                            <th>Document</th>
-                            <th>Type</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
                         <tr>
                             <td>
                                 <div class="doc-info">
@@ -386,23 +421,11 @@
                             </td>
                             <td><span class="type-badge">PYQ Bank</span></td>
                             <td>
-                                <a href="pyqs/chemistry/chemistry-pyq-mains.pdf" class="action-btn" download><i class="fa-solid fa-download"></i> Download</a>
+                                <a href="files/chemistry-pyq-mains.pdf" class="action-btn" download title="Download Chemistry PYQ PDF">
+                                    <i class="fa-solid fa-download"></i> Download
+                                </a>
                             </td>
                         </tr>
-                    </tbody>
-                </table>
-
-                <!-- Mathematics Section -->
-                <h3 style="color: var(--accent-cyan); font-family: 'Orbitron', sans-serif; font-size: 0.9rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-square-root-variable"></i> Mathematics</h3>
-                <table class="resource-table">
-                    <thead>
-                        <tr>
-                            <th>Document</th>
-                            <th>Type</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
                         <tr>
                             <td>
                                 <div class="doc-info">
@@ -415,7 +438,9 @@
                             </td>
                             <td><span class="type-badge">PYQ Bank</span></td>
                             <td>
-                                <a href="pyqs/maths/maths-pyq-mains.pdf" class="action-btn" download><i class="fa-solid fa-download"></i> Download</a>
+                                <a href="files/maths-pyq-mains.pdf" class="action-btn" download title="Download Mathematics PYQ PDF">
+                                    <i class="fa-solid fa-download"></i> Download
+                                </a>
                             </td>
                         </tr>
                     </tbody>
@@ -444,70 +469,41 @@
                 </div>
             </div>
 
-            <!-- Mock Tests Table Style -->
+            <!-- Mock Tests Section -->
             <div>
                 <h2 class="section-header">Mock Tests (3 Hours | 300 Marks - Unique Questions per Paper)</h2>
-                <table class="resource-table">
-                    <thead>
-                        <tr>
-                            <th>Document</th>
-                            <th>Type</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><div class="doc-info"><i class="fa-solid fa-file-pdf doc-icon"></i><div class="doc-details"><h4>Mock Test 1 <span class="pdf-badge">PDF</span></h4><div class="doc-meta">Full Syllabus</div></div></div></td>
-                            <td><span class="type-badge">Mock Test</span></td>
-                            <td><a href="files/mock-test-1.pdf" class="action-btn" download><i class="fa-solid fa-download"></i> Download</a></td>
-                        </tr>
-                        <tr>
-                            <td><div class="doc-info"><i class="fa-solid fa-file-pdf doc-icon"></i><div class="doc-details"><h4>Mock Test 2 <span class="pdf-badge">PDF</span></h4><div class="doc-meta">Full Syllabus</div></div></div></td>
-                            <td><span class="type-badge">Mock Test</span></td>
-                            <td><a href="files/mock-test-2.pdf" class="action-btn" download><i class="fa-solid fa-download"></i> Download</a></td>
-                        </tr>
-                        <tr>
-                            <td><div class="doc-info"><i class="fa-solid fa-file-pdf doc-icon"></i><div class="doc-details"><h4>Mock Test 3 <span class="pdf-badge">PDF</span></h4><div class="doc-meta">Full Syllabus</div></div></div></td>
-                            <td><span class="type-badge">Mock Test</span></td>
-                            <td><a href="files/mock-test-3.pdf" class="action-btn" download><i class="fa-solid fa-download"></i> Download</a></td>
-                        </tr>
-                        <tr>
-                            <td><div class="doc-info"><i class="fa-solid fa-file-pdf doc-icon"></i><div class="doc-details"><h4>Mock Test 4 <span class="pdf-badge">PDF</span></h4><div class="doc-meta">Full Syllabus</div></div></div></td>
-                            <td><span class="type-badge">Mock Test</span></td>
-                            <td><a href="files/mock-test-4.pdf" class="action-btn" download><i class="fa-solid fa-download"></i> Download</a></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="grid-options">
+                    <a href="mock-test-1.html" class="option-card">Mock Test 1</a>
+                    <a href="mock-test-2.html" class="option-card">Mock Test 2</a>
+                    <a href="mock-test-3.html" class="option-card">Mock Test 3</a>
+                    <a href="mock-test-4.html" class="option-card">Mock Test 4</a>
+                </div>
             </div>
 
-            <!-- Practice Sets Table Style -->
+            <!-- Practice Sets Section -->
             <div>
                 <h2 class="section-header">Practice Sets (Distinct Question Sets)</h2>
-                <table class="resource-table">
-                    <thead>
-                        <tr>
-                            <th>Document</th>
-                            <th>Type</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Loop for Practice Sets 1 to 10 -->
-                        <script>
-                            for(let i = 1; i <= 10; i++) {
-                                document.write(`
-                                    <tr>
-                                        <td><div class="doc-info"><i class="fa-solid fa-file-pdf doc-icon"></i><div class="doc-details"><h4>Practice Set ${i} <span class="pdf-badge">PDF</span></h4><div class="doc-meta">Targeted Practice</div></div></div></td>
-                                        <td><span class="type-badge">Practice Set</span></td>
-                                        <td><a href="files/practice-set-${i}.pdf" class="action-btn" download><i class="fa-solid fa-download"></i> Download</a></td>
-                                    </tr>
-                                `);
-                            }
-                        </script>
-                    </tbody>
-                </table>
+                <div class="grid-options">
+                    <a href="practice-set-1.html" class="option-card">Set 1</a>
+                    <a href="practice-set-2.html" class="option-card">Set 2</a>
+                    <a href="practice-set-3.html" class="option-card">Set 3</a>
+                    <a href="practice-set-4.html" class="option-card">Set 4</a>
+                    <a href="practice-set-5.html" class="option-card">Set 5</a>
+                    <a href="practice-set-6.html" class="option-card">Set 6</a>
+                    <a href="practice-set-7.html" class="option-card">Set 7</a>
+                    <a href="practice-set-8.html" class="option-card">Set 8</a>
+                    <a href="practice-set-9.html" class="option-card">Set 9</a>
+                    <a href="practice-set-10.html" class="option-card">Set 10</a>
+                </div>
             </div>
         </main>
     </div>
+
+    <script>
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-mode');
+        }
+    </script>
 </body>
 </html>
+<script async src="/.netlify/scripts/hud?variant=public" data-nf-variant="public" data-netlify-site-id="e92451fc-872b-4a4a-beb5-fcacc6a78709" data-app-host="app.netlify.com"></script>
