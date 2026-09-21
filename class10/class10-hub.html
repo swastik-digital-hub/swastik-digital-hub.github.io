@@ -2,160 +2,452 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- This site is hosted on Netlify. Anyone can build and deploy a site like this one for free: https://netlify.new -->
+    <meta name="hosting-provider" content="Netlify">
+    <meta name="netlify-deploy" content="https://netlify.new/?utm_campaign=ai-legible&amp;utm_source=meta&amp;utm_medium=referral&amp;utm_id=e92451fc-872b-4a4a-beb5-fcacc6a78709">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Class 10 Board Portal | Swastik-Tech</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-color: #080c14;
-            --card-bg: rgba(15, 23, 42, 0.85);
+            --bg-color: #03151c;
+            --card-bg: rgba(6, 32, 43, 0.85);
+            --card-border: #0e3746;
             --accent-cyan: #00f3ff;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-glow: rgba(0, 243, 255, 0.3);
-            --grid-color: rgba(255, 255, 255, 0.03);
+            --accent-blue: #00b4d8;
+            --text-main: #ffffff;
+            --text-muted: #83c5be;
+            --border-glow: rgba(0, 243, 255, 0.25);
+            --header-bg: rgba(3, 21, 28, 0.85);
+            --grid-color: rgba(0, 243, 255, 0.04);
+            --input-bg: rgba(0, 243, 255, 0.04);
+            --sidebar-bg: rgba(3, 18, 24, 0.9);
         }
 
         body.light-mode {
             --bg-color: #f1f5f9;
             --card-bg: rgba(255, 255, 255, 0.95);
+            --card-border: #cbd5e1;
             --accent-cyan: #0284c7;
+            --accent-blue: #0369a1;
             --text-main: #0f172a;
             --text-muted: #475569;
             --border-glow: rgba(2, 132, 199, 0.3);
+            --header-bg: rgba(241, 245, 249, 0.85);
             --grid-color: rgba(0, 0, 0, 0.04);
+            --input-bg: rgba(2, 132, 199, 0.04);
+            --sidebar-bg: rgba(226, 232, 240, 0.9);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Rajdhani', 'Orbitron', sans-serif;
+            letter-spacing: 0.5px;
+        }
 
         body {
             background-color: var(--bg-color);
             background-image: 
-                radial-gradient(circle at 50% 50%, var(--border-glow) 0%, transparent 80%),
+                radial-gradient(circle at 50% 20%, rgba(0, 180, 216, 0.12) 0%, transparent 70%),
                 linear-gradient(var(--grid-color) 1px, transparent 1px),
                 linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-            background-size: 100% 100%, 40px 40px, 40px 40px;
+            background-size: 100% 100%, 35px 35px, 35px 35px;
             color: var(--text-main);
-            font-family: 'Rajdhani', sans-serif;
             min-height: 100vh;
-            padding: 2rem;
+            display: flex;
+            overflow-x: hidden;
             transition: background-color 0.4s ease, color 0.4s ease;
         }
 
-        header {
+        .sidebar {
+            width: 64px;
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid var(--card-border);
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid var(--border-glow);
-            margin-bottom: 2rem;
+            padding: 1.2rem 0;
+            gap: 1.8rem;
+            position: fixed;
+            height: 100vh;
+            z-index: 20;
         }
 
-        .brand-container {
+        .brand-icon {
+            font-size: 1.2rem;
+            color: var(--accent-cyan);
+        }
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 1.4rem;
+        }
+
+        .sidebar-link {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-link:hover, .sidebar-link.active {
+            color: var(--accent-cyan);
+            background: var(--input-bg);
+            box-shadow: 0 0 10px var(--border-glow);
+        }
+
+        .app-wrapper {
+            margin-left: 64px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            height: 60px;
+            padding: 0 2rem;
+            background: var(--header-bg);
+            border-bottom: 1px solid var(--card-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            border-left: 3px solid var(--accent-cyan);
+            padding-left: 10px;
+            letter-spacing: 1px;
+        }
+
+        .back-btn {
+            background: var(--input-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-muted);
+            padding: 0.4rem 0.9rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-family: 'Orbitron', sans-serif;
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            color: var(--accent-cyan);
+            border-color: var(--accent-cyan);
+        }
+
+        .portal-container {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .section-header {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 0.8rem;
+            letter-spacing: 0.8px;
+        }
+
+        /* Table Styling for Study Notes & Downloads */
+        .resource-table {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            width: 100%;
+            border-collapse: collapse;
+            overflow: hidden;
+        }
+
+        .resource-table th {
+            background: rgba(3, 21, 28, 0.95);
+            color: var(--text-muted);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            padding: 0.9rem 1.2rem;
+            text-align: left;
+            border-bottom: 1px solid var(--card-border);
+            letter-spacing: 1px;
+        }
+
+        body.light-mode .resource-table th {
+            background: rgba(226, 232, 240, 0.95);
+        }
+
+        .resource-table td {
+            padding: 1rem 1.2rem;
+            border-bottom: 1px solid var(--card-border);
+            color: var(--text-main);
+            font-size: 0.95rem;
+            vertical-align: middle;
+        }
+
+        .resource-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .resource-table tr:hover {
+            background: rgba(0, 243, 255, 0.02);
+        }
+
+        .doc-info {
             display: flex;
             align-items: center;
             gap: 1rem;
         }
 
-        .brand-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
+        .doc-icon {
+            font-size: 1.4rem;
             color: var(--accent-cyan);
-            text-decoration: none;
         }
 
-        .logo-img { height: 45px; width: auto; }
-
-        .back-nav {
+        .doc-details h4 {
             font-family: 'Orbitron', sans-serif;
-            color: var(--accent-cyan);
-            text-decoration: none;
+            font-size: 0.95rem;
             font-weight: 600;
-            transition: opacity 0.3s ease;
+            margin-bottom: 2px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .back-nav:hover { opacity: 0.8; }
-
-        .section-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
+        .folder-badge {
+            background: rgba(0, 243, 255, 0.15);
             color: var(--accent-cyan);
-            margin: 2rem 0 1rem 0;
-            border-left: 4px solid var(--accent-cyan);
-            padding-left: 0.8rem;
-        }
-
-        h3 {
+            font-size: 0.65rem;
+            padding: 1px 6px;
+            border-radius: 4px;
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            margin-top: 1.5rem;
         }
 
-        .grid-container {
+        .pdf-badge {
+            background: rgba(255, 77, 77, 0.15);
+            color: #ff6b6b;
+            font-size: 0.65rem;
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .doc-meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .type-badge {
+            background: var(--input-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-muted);
+            padding: 0.25rem 0.7rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-family: 'Orbitron', sans-serif;
+            display: inline-block;
+        }
+
+        .action-btn {
+            background: var(--input-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-muted);
+            padding: 0.4rem 0.9rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-family: 'Orbitron', sans-serif;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .action-btn:hover {
+            color: var(--accent-cyan);
+            border-color: var(--accent-cyan);
+            background: rgba(0, 243, 255, 0.1);
+        }
+
+        /* Subjects Grid */
+        .subjects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.2rem;
         }
 
         .subject-card {
             background: var(--card-bg);
-            border: 1px solid var(--border-glow);
-            border-radius: 10px;
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
             padding: 1.5rem;
             text-align: center;
             text-decoration: none;
             color: var(--text-main);
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(8px);
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .subject-card:hover {
-            transform: translateY(-5px);
             border-color: var(--accent-cyan);
+            transform: translateY(-3px);
             box-shadow: 0 0 20px var(--border-glow);
+            background: var(--input-bg);
         }
 
-        .notes-card {
-            background: rgba(0, 243, 255, 0.1);
-            border: 1px solid var(--accent-cyan);
+        .subject-card i.main-icon {
+            font-size: 2rem;
+            color: var(--accent-cyan);
+            margin-bottom: 0.8rem;
         }
 
-        .pdf-card {
-            background: rgba(0, 243, 255, 0.05);
-            border: 1px dashed var(--accent-cyan);
+        .subject-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .subject-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        @media(max-width: 768px) {
+            .sidebar { display: none; }
+            .app-wrapper { margin-left: 0; }
+            .resource-table { display: block; overflow-x: auto; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="brand-container">
-            <a href="../index.html" class="brand-title">Swastik-Tech</a>
-            <img src="../assets/logo.png" alt="Swastik-Tech Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/120x40?text=Swastik-Tech'">
-        </div>
-        <a href="../index.html" class="back-nav">&larr; Main Menu</a>
-    </header>
+    <aside class="sidebar">
+        <div class="brand-icon"><i class="fa-solid fa-microchip"></i></div>
+        <nav class="sidebar-nav">
+            <a class="sidebar-link" href="/" title="Dashboard"><i class="fa-solid fa-house"></i></a>
+            <a class="sidebar-link active" href="/notes/class10" title="Class 10 Portal"><i class="fa-solid fa-graduation-cap"></i></a>
+        </nav>
+    </aside>
 
-    <h2 class="section-title">Class 10 Board Resources</h2>
+    <div class="app-wrapper">
+        <header>
+            <div class="header-title">| Class 10 Board Portal</div>
+            <a class="back-btn" href="/"><i class="fa-solid fa-arrow-left"></i> Main Menu</a>
+        </header>
 
-    <h3>Study Notes & Downloads</h3>
-    <div class="grid-container" style="margin-top: 1rem;">
-        <a href="../notes/class10-notes.html" class="subject-card notes-card">📁 Class 10 Notes</a>
-        <a href="../notes/pyq-pdfs/class10-pyq.pdf" class="subject-card pdf-card" target="_blank">📄 Download Board PYQs</a>
-    </div>
+        <main class="portal-container">
+            <!-- Study Notes & Downloads Section -->
+            <div>
+                <h2 class="section-header">Study Notes & Downloads</h2>
+                <table class="resource-table">
+                    <thead>
+                        <tr>
+                            <th>Document / Repository</th>
+                            <th>Type</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="doc-info">
+                                    <i class="fa-solid fa-folder-open doc-icon" style="color: var(--accent-cyan);"></i>
+                                    <div class="doc-details">
+                                        <h4>Class 10 Comprehensive Notes <span class="folder-badge">Directory</span></h4>
+                                        <div class="doc-meta">Access all chapter notes & summaries</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="type-badge">Notes Hub</span></td>
+                            <td>
+                                <a href="/notes/class10-notes" class="action-btn">
+                                    <i class="fa-solid fa-folder-tree"></i> Open Folder
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="doc-info">
+                                    <i class="fa-solid fa-file-pdf doc-icon" style="color: #ff4d4d;"></i>
+                                    <div class="doc-details">
+                                        <h4>Class 10 Board PYQs <span class="pdf-badge">PDF</span></h4>
+                                        <div class="doc-meta">Previous Years Board Question Papers</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="type-badge">PYQ Bank</span></td>
+                            <td>
+                                <a href="../notes/pyq-pdfs/class10-pyq.pdf" class="action-btn" target="_blank" title="Download Board PYQ PDF">
+                                    <i class="fa-solid fa-download"></i> Download
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-    <h3>Subject Practice & Test Suites</h3>
-    <div class="grid-container" style="margin-top: 1rem;">
-        <a href="../mains/practice-test.html?class=10&sub=science" class="subject-card">Science Practice</a>
-        <a href="../mains/practice-test.html?class=10&sub=maths" class="subject-card">Mathematics Practice</a>
-        <a href="../mains/practice-test.html?class=10&sub=ai" class="subject-card">Artificial Intelligence Practice</a>
-        <a href="../mains/practice-test.html?class=10&sub=sst" class="subject-card">Social Science Practice</a>
-        <a href="../mains/practice-test.html?class=10&sub=english" class="subject-card">English Practice</a>
-        <a href="../mains/practice-test.html?class=10&sub=sanskrit" class="subject-card">Sanskrit Practice</a>
+            <!-- Subject Practice & Test Suites -->
+            <div>
+                <h2 class="section-header">Subject Practice & Test Suites</h2>
+                <div class="subjects-grid">
+                    <a href="/mains/practice-test?class=10&sub=science" class="subject-card">
+                        <i class="fa-solid fa-atom main-icon"></i>
+                        <h3>Science Practice</h3>
+                        <p>Physics, Chemistry & Biology</p>
+                    </a>
+                    <a href="/mains/practice-test?class=10&sub=maths" class="subject-card">
+                        <i class="fa-solid fa-square-root-variable main-icon"></i>
+                        <h3>Mathematics</h3>
+                        <p>Algebra, Geometry & Trigonometry</p>
+                    </a>
+                    <a href="/mains/practice-test?class=10&sub=ai" class="subject-card">
+                        <i class="fa-solid fa-microchip main-icon"></i>
+                        <h3>Artificial Intelligence</h3>
+                        <p>AI Concepts, Python & Data Literacy</p>
+                    </a>
+                    <a href="/mains/practice-test?class=10&sub=sst" class="subject-card">
+                        <i class="fa-solid fa-globe main-icon"></i>
+                        <h3>Social Science</h3>
+                        <p>History, Civics, Geography & Economics</p>
+                    </a>
+                    <a href="/mains/practice-test?class=10&sub=english" class="subject-card">
+                        <i class="fa-solid fa-book-open main-icon"></i>
+                        <h3>English Practice</h3>
+                        <p>Literature, Grammar & Writing</p>
+                    </a>
+                    <a href="/mains/practice-test?class=10&sub=sanskrit" class="subject-card">
+                        <i class="fa-solid fa-scroll main-icon"></i>
+                        <h3>Sanskrit Practice</h3>
+                        <p>Grammar, Samasa & Literature</p>
+                    </a>
+                </div>
+            </div>
+        </main>
     </div>
 
     <script>
@@ -165,3 +457,4 @@
     </script>
 </body>
 </html>
+<script async src="/.netlify/scripts/hud?variant=public" data-nf-variant="public" data-netlify-site-id="e92451fc-872b-4a4a-beb5-fcacc6a78709" data-app-host="app.netlify.com"></script>
