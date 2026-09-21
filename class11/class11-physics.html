@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class 11 Physics | Swastik-Tech</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #080c14;
+            --card-bg: rgba(15, 23, 42, 0.85);
+            --card-border: #1e293b;
+            --accent-cyan: #00f3ff;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-glow: rgba(0, 243, 255, 0.3);
+            --grid-color: rgba(255, 255, 255, 0.03);
+            --input-bg: rgba(0, 243, 255, 0.04);
+        }
+
+        body.light-mode {
+            --bg-color: #f1f5f9;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --card-border: #cbd5e1;
+            --accent-cyan: #0284c7;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-glow: rgba(2, 132, 199, 0.3);
+            --grid-color: rgba(0, 0, 0, 0.04);
+            --input-bg: rgba(2, 132, 199, 0.04);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 50% 50%, var(--border-glow) 0%, transparent 80%),
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 100% 100%, 40px 40px, 40px 40px;
+            color: var(--text-main);
+            font-family: 'Rajdhani', sans-serif;
+            min-height: 100vh;
+            padding: 2rem;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        .portal-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-glow);
+            margin-bottom: 2rem;
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .brand-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: var(--accent-cyan);
+            text-decoration: none;
+        }
+
+        .back-nav {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-weight: 600;
+            transition: opacity 0.3s ease;
+        }
+
+        .back-nav:hover { opacity: 0.8; }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            color: var(--accent-cyan);
+            margin: 2rem 0 1rem 0;
+            border-left: 4px solid var(--accent-cyan);
+            padding-left: 0.8rem;
+        }
+
+        /* Table Styling for Physics PDFs */
+        .resource-table {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            width: 100%;
+            border-collapse: collapse;
+            overflow: hidden;
+            margin-top: 1rem;
+            backdrop-filter: blur(8px);
+        }
+
+        .resource-table th {
+            background: rgba(3, 21, 28, 0.95);
+            color: var(--text-muted);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            padding: 0.9rem 1.2rem;
+            text-align: left;
+            border-bottom: 1px solid var(--card-border);
+            letter-spacing: 1px;
+        }
+
+        body.light-mode .resource-table th {
+            background: rgba(226, 232, 240, 0.95);
+        }
+
+        .resource-table td {
+            padding: 1rem 1.2rem;
+            border-bottom: 1px solid var(--card-border);
+            color: var(--text-main);
+            font-size: 0.95rem;
+            vertical-align: middle;
+        }
+
+        .resource-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .resource-table tr:hover {
+            background: var(--input-bg);
+        }
+
+        .doc-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .doc-icon {
+            font-size: 1.4rem;
+            color: #ff4d4d;
+        }
+
+        .doc-details h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pdf-badge {
+            background: rgba(255, 77, 77, 0.15);
+            color: #ff6b6b;
+            font-size: 0.65rem;
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .doc-meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .type-badge {
+            background: var(--input-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-muted);
+            padding: 0.25rem 0.7rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-family: 'Orbitron', sans-serif;
+            display: inline-block;
+        }
+
+        .action-btn {
+            background: var(--input-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-muted);
+            padding: 0.4rem 0.9rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-family: 'Orbitron', sans-serif;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .action-btn:hover {
+            color: var(--accent-cyan);
+            border-color: var(--accent-cyan);
+            background: rgba(0, 243, 255, 0.1);
+        }
+
+        @media(max-width: 768px) {
+            .resource-table { display: block; overflow-x: auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="portal-container">
+        <header>
+            <div class="brand-container">
+                <a href="../index.html" class="brand-title">Swastik-Tech</a>
+            </div>
+            <a href="class11-hub.html" class="back-nav">&larr; Back to Hub</a>
+        </header>
+
+        <h2 class="section-title">Class 11 Physics Question Bank</h2>
+
+        <table class="resource-table">
+            <thead>
+                <tr>
+                    <th>Document</th>
+                    <th>Type</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="doc-info">
+                            <i class="fa-solid fa-file-pdf doc-icon"></i>
+                            <div class="doc-details">
+                                <h4>Scalar & Vector (Questions) <span class="pdf-badge">PDF</span></h4>
+                                <div class="doc-meta">Subject: Physics | Class 11</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td><span class="type-badge">Practice Set</span></td>
+                    <td>
+                        <a href="02. Scalar & Vector (Q).pdf" class="action-btn" download>
+                            <i class="fa-solid fa-download"></i> Download
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="doc-info">
+                            <i class="fa-solid fa-file-pdf doc-icon"></i>
+                            <div class="doc-details">
+                                <h4>Projectile Motion (Questions) <span class="pdf-badge">PDF</span></h4>
+                                <div class="doc-meta">Subject: Physics | Class 11</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td><span class="type-badge">Practice Set</span></td>
+                    <td>
+                        <a href="04. Projectile  (Q).pdf" class="action-btn" download>
+                            <i class="fa-solid fa-download"></i> Download
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="doc-info">
+                            <i class="fa-solid fa-file-pdf doc-icon"></i>
+                            <div class="doc-details">
+                                <h4>Laws of Motion and Friction (Questions) <span class="pdf-badge">PDF</span></h4>
+                                <div class="doc-meta">Subject: Physics | Class 11</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td><span class="type-badge">Practice Set</span></td>
+                    <td>
+                        <a href="05. Laws of motion and Friction  (Q).pdf" class="action-btn" download>
+                            <i class="fa-solid fa-download"></i> Download
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="doc-info">
+                            <i class="fa-solid fa-file-pdf doc-icon"></i>
+                            <div class="doc-details">
+                                <h4>Work, Energy and Power (Questions) <span class="pdf-badge">PDF</span></h4>
+                                <div class="doc-meta">Subject: Physics | Class 11</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td><span class="type-badge">Practice Set</span></td>
+                    <td>
+                        <a href="06. Work, Energy and Power (Q).pdf" class="action-btn" download>
+                            <i class="fa-solid fa-download"></i> Download
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-mode');
+        }
+    </script>
+</body>
+</html>
