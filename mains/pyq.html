@@ -3,48 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JEE Hub & PYQ Bank | Swastik-Tech Portal</title>
+    <title>JEE Main & Advance Portal | Swastik-Tech</title>
     <!-- Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <style>
-        /* Default Dark Cyber Theme */
         :root {
             --bg-color: #03151c;
             --card-bg: rgba(6, 32, 43, 0.85);
             --card-border: #0e3746;
-            --card-inner: rgba(8, 40, 53, 0.8);
             --accent-cyan: #00f3ff;
             --accent-blue: #00b4d8;
-            --accent-purple: #48cae4;
             --text-main: #ffffff;
             --text-muted: #83c5be;
             --border-glow: rgba(0, 243, 255, 0.25);
             --header-bg: rgba(3, 21, 28, 0.85);
             --grid-color: rgba(0, 243, 255, 0.04);
-            --quote-text: #edf6f9;
             --input-bg: rgba(0, 243, 255, 0.04);
             --sidebar-bg: rgba(3, 18, 24, 0.9);
-        }
-
-        /* Light Theme Variables */
-        body.light-mode {
-            --bg-color: #f1f5f9;
-            --card-bg: rgba(255, 255, 255, 0.95);
-            --card-border: #e2e8f0;
-            --card-inner: rgba(248, 250, 252, 0.9);
-            --accent-cyan: #0284c7;
-            --accent-blue: #2563eb;
-            --accent-purple: #4f46e5;
-            --text-main: #0f172a;
-            --text-muted: #475569;
-            --border-glow: rgba(2, 132, 199, 0.3);
-            --header-bg: rgba(255, 255, 255, 0.85);
-            --grid-color: rgba(0, 0, 0, 0.04);
-            --quote-text: #334155;
-            --input-bg: rgba(0, 0, 0, 0.03);
-            --sidebar-bg: rgba(255, 255, 255, 0.95);
         }
 
         * {
@@ -58,7 +34,7 @@
         body {
             background-color: var(--bg-color);
             background-image: 
-                radial-gradient(circle at 50% 30%, rgba(0, 180, 216, 0.12) 0%, transparent 70%),
+                radial-gradient(circle at 50% 20%, rgba(0, 180, 216, 0.12) 0%, transparent 70%),
                 linear-gradient(var(--grid-color) 1px, transparent 1px),
                 linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
             background-size: 100% 100%, 35px 35px, 35px 35px;
@@ -66,14 +42,11 @@
             min-height: 100vh;
             display: flex;
             overflow-x: hidden;
-            transition: background-color 0.4s ease, color 0.4s ease;
         }
 
-        /* --- Left Icon Sidebar --- */
         .sidebar {
             width: 64px;
             background-color: var(--sidebar-bg);
-            backdrop-filter: blur(12px);
             border-right: 1px solid var(--card-border);
             display: flex;
             flex-direction: column;
@@ -100,13 +73,13 @@
             color: var(--text-muted);
             font-size: 1.1rem;
             text-decoration: none;
-            transition: all 0.3s ease;
             display: flex;
             justify-content: center;
             align-items: center;
             width: 40px;
             height: 40px;
             border-radius: 8px;
+            transition: all 0.3s ease;
         }
 
         .sidebar-link:hover, .sidebar-link.active {
@@ -115,21 +88,17 @@
             box-shadow: 0 0 10px var(--border-glow);
         }
 
-        /* --- Main App Wrapper --- */
         .app-wrapper {
             margin-left: 64px;
             flex: 1;
             display: flex;
             flex-direction: column;
-            min-width: 0;
         }
 
-        /* --- Top Header Navigation --- */
         header {
             height: 60px;
             padding: 0 2rem;
             background: var(--header-bg);
-            backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--card-border);
             display: flex;
             align-items: center;
@@ -141,681 +110,368 @@
 
         .header-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 700;
             color: var(--accent-cyan);
-            letter-spacing: 1px;
             border-left: 3px solid var(--accent-cyan);
             padding-left: 10px;
+            letter-spacing: 1px;
         }
 
-        .header-actions {
+        .back-btn {
+            background: var(--input-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-muted);
+            padding: 0.4rem 0.9rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-family: 'Orbitron', sans-serif;
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            color: var(--accent-cyan);
+            border-color: var(--accent-cyan);
+        }
+
+        .portal-container {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .section-header {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 0.8rem;
+            letter-spacing: 0.8px;
+        }
+
+        /* Table Styling */
+        .resource-table {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            width: 100%;
+            border-collapse: collapse;
+            overflow: hidden;
+        }
+
+        .resource-table th {
+            background: rgba(3, 21, 28, 0.95);
+            color: var(--text-muted);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            padding: 0.9rem 1.2rem;
+            text-align: left;
+            border-bottom: 1px solid var(--card-border);
+            letter-spacing: 1px;
+        }
+
+        .resource-table td {
+            padding: 1rem 1.2rem;
+            border-bottom: 1px solid var(--card-border);
+            color: var(--text-main);
+            font-size: 0.95rem;
+            vertical-align: middle;
+        }
+
+        .resource-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .resource-table tr:hover {
+            background: rgba(0, 243, 255, 0.02);
+        }
+
+        .doc-info {
             display: flex;
             align-items: center;
-            gap: 0.8rem;
-            position: relative;
+            gap: 1rem;
+        }
+
+        .doc-icon {
+            font-size: 1.4rem;
+            color: #ff4d4d;
+        }
+
+        .doc-details h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pdf-badge {
+            background: rgba(255, 77, 77, 0.15);
+            color: #ff6b6b;
+            font-size: 0.65rem;
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .doc-meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .type-badge {
+            background: var(--input-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-muted);
+            padding: 0.25rem 0.7rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-family: 'Orbitron', sans-serif;
+            display: inline-block;
         }
 
         .action-btn {
             background: var(--input-bg);
             border: 1px solid var(--card-border);
-            color: var(--text-main);
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
+            color: var(--text-muted);
+            padding: 0.4rem 0.9rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-family: 'Orbitron', sans-serif;
+            text-decoration: none;
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
         }
 
         .action-btn:hover {
             color: var(--accent-cyan);
             border-color: var(--accent-cyan);
-            box-shadow: 0 0 10px var(--border-glow);
+            background: rgba(0, 243, 255, 0.1);
         }
 
-        .nav-text-btn {
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
-            color: #03151c;
-            border: none;
-            padding: 0.45rem 1rem;
-            border-radius: 6px;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        .nav-text-btn:hover {
-            box-shadow: 0 0 12px var(--border-glow);
-            transform: translateY(-1px);
-        }
-
-        .header-avatar {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            border: 2px solid var(--accent-cyan);
-            cursor: pointer;
-            object-fit: cover;
-            box-shadow: 0 0 10px var(--border-glow);
-        }
-
-        /* User Dropdown */
-        .dropdown-menu {
-            position: absolute;
-            top: 48px;
-            right: 0;
-            width: 220px;
-            background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--accent-cyan);
-            border-radius: 12px;
-            padding: 1rem;
-            display: none;
-            flex-direction: column;
-            gap: 0.6rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            z-index: 30;
-        }
-
-        .dropdown-menu.active {
-            display: flex;
-        }
-
-        .dropdown-header {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            font-size: 0.9rem;
-            color: var(--accent-cyan);
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid var(--card-border);
-        }
-
-        .dropdown-item {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            padding: 0.4rem 0;
-            transition: color 0.2s;
-            cursor: pointer;
-            background: none;
-            border: none;
-            width: 100%;
-            text-align: left;
-        }
-
-        .dropdown-item:hover {
-            color: var(--text-main);
-        }
-
-        /* --- Dashboard Main Area --- */
-        .dashboard {
-            padding: 2rem;
-            max-width: 1050px;
-            margin: 0 auto;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        /* Breadcrumb back navigation */
-        .back-nav {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-family: 'Orbitron', sans-serif;
-            transition: color 0.2s;
-            width: fit-content;
-        }
-
-        .back-nav:hover {
-            color: var(--accent-cyan);
-        }
-
-        /* Hub Header Banner Card */
-        .hub-banner-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 1.8rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hub-banner-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 4px; height: 100%;
-            background: linear-gradient(to bottom, var(--accent-blue), var(--accent-cyan));
-        }
-
-        .hub-banner-info h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 0.4rem;
-        }
-
-        .hub-banner-info p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        .hub-stats {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .stat-box {
-            background: var(--input-bg);
-            border: 1px solid var(--card-border);
-            padding: 0.8rem 1.2rem;
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        .stat-number {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--accent-cyan);
-        }
-
-        .stat-label {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-        }
-
-        /* Section Header */
-        .section-header {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--text-main);
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            margin-top: 0.5rem;
-        }
-
-        .section-header i {
-            color: var(--accent-cyan);
-        }
-
-        /* JEE Subject & PYQ Grid Cards */
-        .pyq-grid {
+        /* Subjects Grid */
+        .subjects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 1.2rem;
         }
 
-        .pyq-card {
+        .subject-card {
             background: var(--card-bg);
-            backdrop-filter: blur(8px);
             border: 1px solid var(--card-border);
-            border-radius: 10px;
+            border-radius: 8px;
             padding: 1.5rem;
+            text-align: center;
             text-decoration: none;
             color: var(--text-main);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s;
             display: flex;
             flex-direction: column;
-            gap: 1rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            position: relative;
+            align-items: center;
         }
 
-        .pyq-card:hover {
+        .subject-card:hover {
             border-color: var(--accent-cyan);
             transform: translateY(-3px);
             box-shadow: 0 0 20px var(--border-glow);
         }
 
-        .pyq-card-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .pyq-icon-box {
-            width: 44px;
-            height: 44px;
-            background: var(--input-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .subject-card i.main-icon {
+            font-size: 2rem;
             color: var(--accent-cyan);
-            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
         }
 
-        .pyq-badge {
-            font-size: 0.72rem;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            background: var(--input-bg);
-            color: var(--accent-cyan);
-            padding: 0.25rem 0.6rem;
-            border-radius: 4px;
-            border: 1px solid var(--card-border);
-        }
-
-        .pyq-title {
+        .subject-card h3 {
             font-family: 'Orbitron', sans-serif;
             font-size: 1.1rem;
-            font-weight: 700;
+            margin-bottom: 0.3rem;
         }
 
-        .pyq-desc {
-            font-size: 0.88rem;
-            color: var(--text-muted);
-            line-height: 1.4;
-        }
-
-        .pyq-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid var(--card-border);
-            padding-top: 0.8rem;
-            margin-top: auto;
-            font-size: 0.82rem;
-            color: var(--text-muted);
-        }
-
-        .pyq-action-link {
-            color: var(--accent-cyan);
-            font-weight: 700;
-            font-family: 'Orbitron', sans-serif;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-            text-decoration: none;
-        }
-
-        .pyq-action-link:hover {
-            text-decoration: underline;
-        }
-
-        /* Modal Overlays */
-        .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(3, 21, 28, 0.85);
-            backdrop-filter: blur(8px);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 100;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal-card {
-            background: var(--card-bg);
-            border: 1px solid var(--accent-cyan);
-            border-radius: 12px;
-            padding: 2rem;
-            width: 90%;
-            max-width: 420px;
-            box-shadow: 0 0 30px var(--border-glow);
-            position: relative;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 1rem;
-            right: 1.2rem;
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-size: 1.4rem;
-            cursor: pointer;
-        }
-
-        .modal-header-sub {
-            color: var(--accent-cyan);
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.72rem;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-        }
-
-        .modal-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin: 0.3rem 0 0.5rem 0;
-        }
-
-        .modal-desc {
+        .subject-card p {
             font-size: 0.85rem;
             color: var(--text-muted);
-            margin-bottom: 1.5rem;
         }
 
-        .profile-info-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-            margin-top: 1rem;
-        }
-
-        .profile-info-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.6rem 0.8rem;
-            background: var(--input-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 6px;
-            font-size: 0.95rem;
-        }
-
-        .profile-info-label {
-            color: var(--text-muted);
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.8rem;
-        }
-
-        .profile-info-value {
-            font-weight: 700;
-            color: var(--text-main);
-        }
-
-        .avatar-upload-container {
-            display: flex;
-            align-items: center;
+        .grid-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 1rem;
-            margin-bottom: 1rem;
         }
 
-        .avatar-preview {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            border: 2px solid var(--accent-cyan);
-            object-fit: cover;
+        .option-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 1.2rem;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-main);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            transition: all 0.3s;
         }
 
-        @media (max-width: 640px) {
+        .option-card:hover {
+            border-color: var(--accent-cyan);
+            background: var(--input-bg);
+            box-shadow: 0 0 15px var(--border-glow);
+            transform: translateY(-2px);
+        }
+
+        @media(max-width: 768px) {
+            .subjects-grid { grid-template-columns: 1fr; }
             .sidebar { display: none; }
             .app-wrapper { margin-left: 0; }
-            .dashboard { padding: 1rem; }
-            .hub-banner-card { flex-direction: column; gap: 1rem; align-items: flex-start; }
-            .hub-stats { width: 100%; justify-content: space-between; }
+            .resource-table { display: block; overflow-x: auto; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Left Navigation Sidebar -->
     <aside class="sidebar">
-        <div class="brand-icon"><i class="fa-solid fa-code"></i></div>
+        <div class="brand-icon"><i class="fa-solid fa-microchip"></i></div>
         <nav class="sidebar-nav">
-            <a href="../index.html" class="sidebar-link" title="Dashboard"><i class="fa-solid fa-house"></i></a>
-            <a href="../about.html" class="sidebar-link" title="About"><i class="fa-solid fa-circle-info"></i></a>
-            <a href="../contact.html" class="sidebar-link" title="Contact"><i class="fa-solid fa-envelope"></i></a>
+            <a class="sidebar-link" href="../index.html" title="Dashboard"><i class="fa-solid fa-house"></i></a>
+            <a class="sidebar-link active" href="pyqs.html" title="JEE Portal"><i class="fa-solid fa-graduation-cap"></i></a>
         </nav>
     </aside>
 
     <div class="app-wrapper">
-        <!-- Top Navbar -->
         <header>
-            <div class="header-title">Swastik-Tech Portal</div>
-            <div class="header-actions">
-                <button class="action-btn" id="themeToggle" title="Toggle Theme">
-                    <span id="themeIcon"><i class="fa-solid fa-moon"></i></span>
-                </button>
-                <a href="../index.html" class="nav-text-btn"><i class="fa-solid fa-arrow-left"></i> Home</a>
-                <img src="../My Logo.jpeg" alt="Avatar" class="header-avatar" id="avatarBtn">
-
-                <!-- Profile Dropdown Menu -->
-                <div class="dropdown-menu" id="profileDropdown">
-                    <div class="dropdown-header" id="dropdownUserName">Swastik Sambhu Panda</div>
-                    <button class="dropdown-item" id="openProfileModalBtn"><i class="fa-solid fa-user"></i> Profile</button>
-                    <a href="../about.html" class="dropdown-item"><i class="fa-solid fa-globe"></i> About Us</a>
-                    <button class="dropdown-item" id="logoutDropdownBtn"><i class="fa-solid fa-power-off"></i> Logout</button>
-                </div>
-            </div>
+            <div class="header-title">| JEE Main Portal</div>
+            <a class="back-btn" href="../index.html"><i class="fa-solid fa-arrow-left"></i> Dashboard</a>
         </header>
 
-        <!-- Main Dashboard View -->
-        <main class="dashboard">
-            <!-- Breadcrumb Back Nav -->
-            <a href="../index.html" class="back-nav"><i class="fa-solid fa-chevron-left"></i> Back to Main Dashboard</a>
-
-            <!-- Hub Banner Card -->
-            <section class="hub-banner-card">
-                <div class="hub-banner-info">
-                    <h1>JEE Main & Advanced Hub</h1>
-                    <p>Access high-yield Previous Year Questions (PYQs), chapter practice modules, and formula sheets.</p>
-                </div>
-                <div class="hub-stats">
-                    <div class="stat-box">
-                        <div class="stat-number">15+</div>
-                        <div class="stat-label">Years PYQs</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-number">100%</div>
-                        <div class="stat-label">Syllabus</div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Subject-wise PYQ Section -->
-            <div class="section-header">
-                <i class="fa-solid fa-layer-group"></i> Subject-Wise Question Bank
+        <main class="portal-container">
+            <!-- Past Year Questions Section in Table Layout -->
+            <div>
+                <h2 class="section-header">Past Year Questions (Subject-wise PYQ Bank)</h2>
+                <table class="resource-table">
+                    <thead>
+                        <tr>
+                            <th>Document</th>
+                            <th>Type</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="doc-info">
+                                    <i class="fa-solid fa-file-pdf doc-icon"></i>
+                                    <div class="doc-details">
+                                        <h4>Physics PYQs <span class="pdf-badge">PDF</span></h4>
+                                        <div class="doc-meta">Year: 2025</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="type-badge">PYQ Bank</span></td>
+                            <td>
+                                <a href="files/physics-pyq-mains.pdf" class="action-btn" download title="Download Physics PYQ PDF">
+                                    <i class="fa-solid fa-download"></i> Download
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="doc-info">
+                                    <i class="fa-solid fa-file-pdf doc-icon"></i>
+                                    <div class="doc-details">
+                                        <h4>Chemistry PYQs <span class="pdf-badge">PDF</span></h4>
+                                        <div class="doc-meta">Year: 2025</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="type-badge">PYQ Bank</span></td>
+                            <td>
+                                <a href="files/chemistry-pyq-mains.pdf" class="action-btn" download title="Download Chemistry PYQ PDF">
+                                    <i class="fa-solid fa-download"></i> Download
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="doc-info">
+                                    <i class="fa-solid fa-file-pdf doc-icon"></i>
+                                    <div class="doc-details">
+                                        <h4>Mathematics PYQs <span class="pdf-badge">PDF</span></h4>
+                                        <div class="doc-meta">Year: 2025</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="type-badge">PYQ Bank</span></td>
+                            <td>
+                                <a href="files/maths-pyq-mains.pdf" class="action-btn" download title="Download Mathematics PYQ PDF">
+                                    <i class="fa-solid fa-download"></i> Download
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
-            <section class="pyq-grid">
-                <!-- Physics PYQ Card -->
-                <div class="pyq-card">
-                    <div class="pyq-card-top">
-                        <div class="pyq-icon-box"><i class="fa-solid fa-atom"></i></div>
-                        <span class="pyq-badge">Mechanics & Electrodynamics</span>
-                    </div>
-                    <h3 class="pyq-title">Physics PYQ Bank</h3>
-                    <p class="pyq-desc">Master kinematics, Newton's laws, thermodynamics, current electricity, and optics with solved papers.</p>
-                    <div class="pyq-footer">
-                        <span>Updated for 2026</span>
-                        <a href="#" class="pyq-action-link" onclick="alert('Physics PYQ module opening...'); return false;">Explore Papers <i class="fa-solid fa-arrow-right"></i></a>
-                    </div>
+            <!-- Core Subjects Hub Links -->
+            <div>
+                <h2 class="section-header">Core Subjects</h2>
+                <div class="subjects-grid">
+                    <a href="physics.html" class="subject-card">
+                        <i class="fa-solid fa-atom main-icon"></i>
+                        <h3>Physics</h3>
+                        <p>Mechanics, Electrodynamics, Modern Physics</p>
+                    </a>
+                    <a href="chemistry.html" class="subject-card">
+                        <i class="fa-solid fa-flask main-icon"></i>
+                        <h3>Chemistry</h3>
+                        <p>Physical, Organic & Inorganic</p>
+                    </a>
+                    <a href="maths.html" class="subject-card">
+                        <i class="fa-solid fa-square-root-variable main-icon"></i>
+                        <h3>Mathematics</h3>
+                        <p>Calculus, Algebra, Coordinate Geometry</p>
+                    </a>
                 </div>
+            </div>
 
-                <!-- Chemistry PYQ Card -->
-                <div class="pyq-card">
-                    <div class="pyq-card-top">
-                        <div class="pyq-icon-box"><i class="fa-solid fa-flask"></i></div>
-                        <span class="pyq-badge">Physical, Organic & Inorganic</span>
-                    </div>
-                    <h3 class="pyq-title">Chemistry PYQ Bank</h3>
-                    <p class="pyq-desc">Comprehensive reaction mechanisms, stoichiometric calculations, coordination compounds, and periodic trends.</p>
-                    <div class="pyq-footer">
-                        <span>Updated for 2026</span>
-                        <a href="#" class="pyq-action-link" onclick="alert('Chemistry PYQ module opening...'); return false;">Explore Papers <i class="fa-solid fa-arrow-right"></i></a>
-                    </div>
+            <!-- Mock Tests Section -->
+            <div>
+                <h2 class="section-header">Mock Tests (3 Hours | 300 Marks - Unique Questions per Paper)</h2>
+                <div class="grid-options">
+                    <a href="mock-test-1.html" class="option-card">Mock Test 1</a>
+                    <a href="mock-test-2.html" class="option-card">Mock Test 2</a>
+                    <a href="mock-test-3.html" class="option-card">Mock Test 3</a>
+                    <a href="mock-test-4.html" class="option-card">Mock Test 4</a>
                 </div>
+            </div>
 
-                <!-- Mathematics PYQ Card -->
-                <div class="pyq-card">
-                    <div class="pyq-card-top">
-                        <div class="pyq-icon-box"><i class="fa-solid fa-square-root-variable"></i></div>
-                        <span class="pyq-badge">Algebra, Calculus & Coords</span>
-                    </div>
-                    <h3 class="pyq-title">Mathematics PYQ Bank</h3>
-                    <p class="pyq-desc">Rigorous problem sets covering definite integrals, matrices, complex numbers, vectors, and 3D geometry.</p>
-                    <div class="pyq-footer">
-                        <span>Updated for 2026</span>
-                        <a href="#" class="pyq-action-link" onclick="alert('Mathematics PYQ module opening...'); return false;">Explore Papers <i class="fa-solid fa-arrow-right"></i></a>
-                    </div>
+            <!-- Practice Sets Section -->
+            <div>
+                <h2 class="section-header">Practice Sets (Distinct Question Sets)</h2>
+                <div class="grid-options">
+                    <a href="practice-set-1.html" class="option-card">Set 1</a>
+                    <a href="practice-set-2.html" class="option-card">Set 2</a>
+                    <a href="practice-set-3.html" class="option-card">Set 3</a>
+                    <a href="practice-set-4.html" class="option-card">Set 4</a>
+                    <a href="practice-set-5.html" class="option-card">Set 5</a>
+                    <a href="practice-set-6.html" class="option-card">Set 6</a>
+                    <a href="practice-set-7.html" class="option-card">Set 7</a>
+                    <a href="practice-set-8.html" class="option-card">Set 8</a>
+                    <a href="practice-set-9.html" class="option-card">Set 9</a>
+                    <a href="practice-set-10.html" class="option-card">Set 10</a>
                 </div>
-            </section>
+            </div>
         </main>
     </div>
-
-    <!-- View Profile Modal -->
-    <div class="modal-overlay" id="profileModal">
-        <div class="modal-card">
-            <button class="close-btn" id="closeProfileBtn">&times;</button>
-            <div class="modal-header-sub">STUDENT PROFILE</div>
-            <h3 class="modal-title">Your Account Details</h3>
-            <p class="modal-desc">Manage your personal credentials and profile photo.</p>
-            
-            <div class="avatar-upload-container">
-                <img src="../My Logo.jpeg" alt="Profile Avatar" class="avatar-preview" id="modalAvatarPreview">
-                <div>
-                    <label for="avatarFileInput" class="nav-text-btn" style="display:inline-block; cursor:pointer; padding: 0.35rem 0.8rem; font-size: 0.75rem;">Change Photo</label>
-                    <input type="file" id="avatarFileInput" accept="image/*" style="display: none;">
-                </div>
-            </div>
-
-            <div class="profile-info-grid">
-                <div class="profile-info-row">
-                    <span class="profile-info-label">Full Name</span>
-                    <span class="profile-info-value" id="profileModalName">Swastik Sambhu Panda</span>
-                </div>
-                <div class="profile-info-row">
-                    <span class="profile-info-label">Class</span>
-                    <span class="profile-info-value" id="profileModalClass">Class 11 Science</span>
-                </div>
-                <div class="profile-info-row">
-                    <span class="profile-info-label">Stream</span>
-                    <span class="profile-info-value" id="profileModalStream">JEE</span>
-                </div>
-                <div class="profile-info-row">
-                    <span class="profile-info-label">School Name</span>
-                    <span class="profile-info-value" id="profileModalSchool">Science Scholar</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Theme Toggle Logic
-        const themeToggleBtn = document.getElementById('themeToggle');
-        const themeIcon = document.getElementById('themeIcon');
-
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'light') {
-            document.body.classList.add('light-mode');
-            themeIcon.innerHTML = '<i class="fa-solid fa-sun"></i>';
-        }
-
-        themeToggleBtn.addEventListener('click', () => {
-            document.body.classList.toggle('light-mode');
-            const isLight = document.body.classList.contains('light-mode');
-            themeIcon.innerHTML = isLight ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
-            localStorage.setItem('theme', isLight ? 'light' : 'dark');
-        });
-
-        // Dropdown Menu Logic
-        const avatarBtn = document.getElementById('avatarBtn');
-        const profileDropdown = document.getElementById('profileDropdown');
-
-        avatarBtn.addEventListener('click', () => {
-            profileDropdown.classList.toggle('active');
-        });
-
-        window.addEventListener('click', (e) => {
-            if (!avatarBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
-                profileDropdown.classList.remove('active');
-            }
-        });
-
-        // Profile Modal Elements & Logic
-        const profileModal = document.getElementById('profileModal');
-        const openProfileModalBtn = document.getElementById('openProfileModalBtn');
-        const closeProfileBtn = document.getElementById('closeProfileBtn');
-
-        const dropdownUserName = document.getElementById('dropdownUserName');
-        const profileModalName = document.getElementById('profileModalName');
-        const profileModalClass = document.getElementById('profileModalClass');
-        const profileModalStream = document.getElementById('profileModalStream');
-        const profileModalSchool = document.getElementById('profileModalSchool');
-        const modalAvatarPreview = document.getElementById('modalAvatarPreview');
-        const avatarFileInput = document.getElementById('avatarFileInput');
-        const headerAvatar = document.querySelector('.header-avatar');
-
-        // Load Saved Data from LocalStorage
-        const savedUserName = localStorage.getItem('studentName');
-        const savedClass = localStorage.getItem('studentClass');
-        const savedStream = localStorage.getItem('studentStream');
-        const savedSchool = localStorage.getItem('studentSchool');
-        const savedAvatar = localStorage.getItem('studentAvatar');
-
-        if (savedUserName) {
-            dropdownUserName.textContent = savedUserName;
-            profileModalName.textContent = savedUserName;
-        }
-        if (savedClass) profileModalClass.textContent = savedClass;
-        if (savedStream) profileModalStream.textContent = savedStream;
-        if (savedSchool) profileModalSchool.textContent = savedSchool;
-        if (savedAvatar) {
-            headerAvatar.src = savedAvatar;
-            modalAvatarPreview.src = savedAvatar;
-        }
-
-        openProfileModalBtn.addEventListener('click', () => {
-            profileDropdown.classList.remove('active');
-            profileModal.classList.add('active');
-        });
-
-        closeProfileBtn.addEventListener('click', () => {
-            profileModal.classList.remove('active');
-        });
-
-        window.addEventListener('click', (e) => {
-            if (e.target === profileModal) profileModal.classList.remove('active');
-        });
-
-        // Profile Picture Upload Handler
-        avatarFileInput.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    const base64Image = event.target.result;
-                    headerAvatar.src = base64Image;
-                    modalAvatarPreview.src = base64Image;
-                    localStorage.setItem('studentAvatar', base64Image);
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        // Logout action from dropdown
-        document.getElementById('logoutDropdownBtn').addEventListener('click', (e) => {
-            e.preventDefault();
-            localStorage.clear();
-            window.location.href = '../index.html';
-        });
-    </script>
 </body>
 </html>
