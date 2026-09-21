@@ -1,90 +1,252 @@
-<!-- Past Year Questions Table -->
-<div>
-    <h2 class="section-header">Past Year Questions & Subject Folders (G-Drive Archive)</h2>
-    <table class="resource-table">
-        <thead>
-            <tr>
-                <th>Document / Archive</th>
-                <th>Type</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    <div class="doc-info">
-                        <i class="fa-solid fa-folder-open doc-icon" style="color: #00f3ff;"></i>
-                        <div class="doc-details">
-                            <h4>PYQ Archive Folder <span class="pdf-badge" style="background: rgba(0,243,255,0.15); color: #00f3ff;">G-Drive</span></h4>
-                            <div class="doc-meta">Complete Question Bank Archive</div>
-                        </div>
-                    </div>
-                </td>
-                <td><span class="type-badge">Folder</span></td>
-                <td>
-                    <a href="https://drive.google.com/drive/folders/1axFGtTumGQQVyV2SsLTTkNLU_EYHxHMP" target="_blank" class="action-btn"><i class="fa-solid fa-external-link-alt"></i> Open Folder</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="doc-info">
-                        <i class="fa-solid fa-folder-open doc-icon" style="color: #00f3ff;"></i>
-                        <div class="doc-details">
-                            <h4>Subject Resource Folder 1 <span class="pdf-badge" style="background: rgba(0,243,255,0.15); color: #00f3ff;">G-Drive</span></h4>
-                            <div class="doc-meta">Curated Study Materials</div>
-                        </div>
-                    </div>
-                </td>
-                <td><span class="type-badge">Folder</span></td>
-                <td>
-                    <a href="https://drive.google.com/drive/folders/1HGdIeavR7fYO_uLHDY5pOhXXtizqEDw1" target="_blank" class="action-btn"><i class="fa-solid fa-external-link-alt"></i> Open Folder</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="doc-info">
-                        <i class="fa-solid fa-folder-open doc-icon" style="color: #00f3ff;"></i>
-                        <div class="doc-details">
-                            <h4>Subject Resource Folder 2 <span class="pdf-badge" style="background: rgba(0,243,255,0.15); color: #00f3ff;">G-Drive</span></h4>
-                            <div class="doc-meta">Curated Study Materials</div>
-                        </div>
-                    </div>
-                </td>
-                <td><span class="type-badge">Folder</span></td>
-                <td>
-                    <a href="https://drive.google.com/drive/folders/1mGiaWE_2FAbkGV8IGMpUF_JMiiD0_0qA" target="_blank" class="action-btn"><i class="fa-solid fa-external-link-alt"></i> Open Folder</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="doc-info">
-                        <i class="fa-solid fa-folder-open doc-icon" style="color: #00f3ff;"></i>
-                        <div class="doc-details">
-                            <h4>Subject Resource Folder 3 <span class="pdf-badge" style="background: rgba(0,243,255,0.15); color: #00f3ff;">G-Drive</span></h4>
-                            <div class="doc-meta">Curated Study Materials</div>
-                        </div>
-                    </div>
-                </td>
-                <td><span class="type-badge">Folder</span></td>
-                <td>
-                    <a href="https://drive.google.com/drive/folders/1jOJyOWDAS6FWgRlL3tnEmWQz4PwUDhir" target="_blank" class="action-btn"><i class="fa-solid fa-external-link-alt"></i> Open Folder</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="doc-info">
-                        <i class="fa-solid fa-folder-open doc-icon" style="color: #00f3ff;"></i>
-                        <div class="doc-details">
-                            <h4>Subject Resource Folder 4 <span class="pdf-badge" style="background: rgba(0,243,255,0.15); color: #00f3ff;">G-Drive</span></h4>
-                            <div class="doc-meta">Curated Study Materials</div>
-                        </div>
-                    </div>
-                </td>
-                <td><span class="type-badge">Folder</span></td>
-                <td>
-                    <a href="https://drive.google.com/drive/folders/1az6xztYsApbmk5Coi-bTgrLbmVjCQbB2" target="_blank" class="action-btn"><i class="fa-solid fa-external-link-alt"></i> Open Folder</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PYQ Bank - Swastik-Tech Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #03151c;
+            --card-bg: rgba(6, 32, 43, 0.85);
+            --card-border: #0e3746;
+            --accent-cyan: #00f3ff;
+            --text-main: #ffffff;
+            --text-muted: #83c5be;
+            --border-glow: rgba(0, 243, 255, 0.25);
+            --input-bg: rgba(0, 243, 255, 0.04);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 50% 30%, rgba(0, 180, 216, 0.12) 0%, transparent 70%),
+                linear-gradient(rgba(0, 243, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 243, 255, 0.04) 1px, transparent 1px);
+            background-size: 100% 100%, 35px 35px, 35px 35px;
+            color: var(--text-main);
+            font-family: 'Rajdhani', sans-serif;
+            margin: 0;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.15rem;
+            color: var(--accent-cyan);
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        .subject-group {
+            margin-bottom: 2rem;
+        }
+
+        .subject-heading {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            color: var(--accent-cyan);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pyq-table {
+            width: 100%;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            border-collapse: collapse;
+            overflow: hidden;
+            backdrop-filter: blur(8px);
+        }
+
+        .pyq-table th {
+            text-align: left;
+            padding: 0.8rem 1rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .pyq-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--card-border);
+            vertical-align: middle;
+        }
+
+        .pyq-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .doc-info {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .doc-icon {
+            color: #ff4d4d;
+            font-size: 1.4rem;
+        }
+
+        .doc-name {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--text-main);
+        }
+
+        .doc-tag {
+            background: #ff4d4d;
+            color: white;
+            font-size: 0.6rem;
+            padding: 0.1rem 0.3rem;
+            border-radius: 3px;
+            font-family: 'Orbitron', sans-serif;
+            vertical-align: middle;
+            margin-left: 0.4rem;
+        }
+
+        .doc-year {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .type-badge {
+            display: inline-block;
+            background: var(--input-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-muted);
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+        }
+
+        .download-btn {
+            background: transparent;
+            border: 1px solid var(--accent-cyan);
+            color: var(--text-main);
+            padding: 0.4rem 1rem;
+            border-radius: 6px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background: var(--accent-cyan);
+            color: #03151c;
+            box-shadow: 0 0 10px var(--border-glow);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2 class="section-title">Past Year Questions (Subject-wise PYQ Bank)</h2>
+
+        <!-- Physics Group -->
+        <div class="subject-group">
+            <div class="subject-heading"><i class="fa-solid fa-atom"></i> Physics</div>
+            <table class="pyq-table">
+                <thead>
+                    <tr>
+                        <th>DOCUMENT</th>
+                        <th>TYPE</th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="doc-info">
+                                <i class="fa-solid fa-file-pdf doc-icon"></i>
+                                <div>
+                                    <span class="doc-name">Physics PYQs</span><span class="doc-tag">PDF</span>
+                                    <div class="doc-year">Year: 2025</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="type-badge">PYQ Bank</span></td>
+                        <td><a href="#" class="download-btn"><i class="fa-solid fa-download"></i> Download</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Chemistry Group -->
+        <div class="subject-group">
+            <div class="subject-heading"><i class="fa-solid fa-flask"></i> Chemistry</div>
+            <table class="pyq-table">
+                <thead>
+                    <tr>
+                        <th>DOCUMENT</th>
+                        <th>TYPE</th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="doc-info">
+                                <i class="fa-solid fa-file-pdf doc-icon"></i>
+                                <div>
+                                    <span class="doc-name">Chemistry PYQs</span><span class="doc-tag">PDF</span>
+                                    <div class="doc-year">Year: 2025</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="type-badge">PYQ Bank</span></td>
+                        <td><a href="#" class="download-btn"><i class="fa-solid fa-download"></i> Download</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Mathematics Group -->
+        <div class="subject-group">
+            <div class="subject-heading"><i class="fa-solid fa-square-root-variable"></i> Mathematics</div>
+            <table class="pyq-table">
+                <thead>
+                    <tr>
+                        <th>DOCUMENT</th>
+                        <th>TYPE</th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="doc-info">
+                                <i class="fa-solid fa-file-pdf doc-icon"></i>
+                                <div>
+                                    <span class="doc-name">Mathematics PYQs</span><span class="doc-tag">PDF</span>
+                                    <div class="doc-year">Year: 2025</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="type-badge">PYQ Bank</span></td>
+                        <td><a href="#" class="download-btn"><i class="fa-solid fa-download"></i> Download</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>
