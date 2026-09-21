@@ -874,7 +874,888 @@
             displayAvatarImg.src = 'My Logo.jpeg';
             modalAvatarPreview.src = 'My Logo.jpeg';
 
-            openLoginBtn.textContent = 'Log in';
+            openLoginBtn.textContent = 'Login';
+            profileDropdown.classList.remove('active');
+        });
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swastik-Tech | Learning Portal</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Default Dark Cyber Theme (Matched to Portal Style) */
+        :root {
+            --bg-color: #03151c;
+            --card-bg: rgba(6, 32, 43, 0.85);
+            --card-border: #0e3746;
+            --card-inner: rgba(8, 40, 53, 0.8);
+            --accent-cyan: #00f3ff;
+            --accent-blue: #00b4d8;
+            --accent-purple: #48cae4;
+            --text-main: #ffffff;
+            --text-muted: #83c5be;
+            --border-glow: rgba(0, 243, 255, 0.25);
+            --header-bg: rgba(3, 21, 28, 0.85);
+            --grid-color: rgba(0, 243, 255, 0.04);
+            --quote-text: #edf6f9;
+            --input-bg: rgba(0, 243, 255, 0.04);
+            --sidebar-bg: rgba(3, 18, 24, 0.9);
+        }
+
+        /* Light Theme Variables */
+        body.light-mode {
+            --bg-color: #f1f5f9;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --card-border: #e2e8f0;
+            --card-inner: rgba(248, 250, 252, 0.9);
+            --accent-cyan: #0284c7;
+            --accent-blue: #2563eb;
+            --accent-purple: #4f46e5;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-glow: rgba(2, 132, 199, 0.3);
+            --header-bg: rgba(255, 255, 255, 0.85);
+            --grid-color: rgba(0, 0, 0, 0.04);
+            --quote-text: #334155;
+            --input-bg: rgba(0, 0, 0, 0.03);
+            --sidebar-bg: rgba(255, 255, 255, 0.95);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Rajdhani', 'Orbitron', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        /* Exact Portal Background Match */
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 50% 30%, rgba(0, 180, 216, 0.12) 0%, transparent 70%),
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 100% 100%, 35px 35px, 35px 35px;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            overflow-x: hidden;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        /* --- Left Icon Sidebar --- */
+        .sidebar {
+            width: 64px;
+            background-color: var(--sidebar-bg);
+            backdrop-filter: blur(12px);
+            border-right: 1px solid var(--card-border);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.2rem 0;
+            gap: 1.8rem;
+            position: fixed;
+            height: 100vh;
+            z-index: 20;
+        }
+
+        .brand-icon {
+            font-size: 1.2rem;
+            color: var(--accent-cyan);
+        }
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 1.4rem;
+        }
+
+        .sidebar-link {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+        }
+
+        .sidebar-link:hover, .sidebar-link.active {
+            color: var(--accent-cyan);
+            background: var(--input-bg);
+            box-shadow: 0 0 10px var(--border-glow);
+        }
+
+        /* --- Main Content Layout --- */
+        .app-wrapper {
+            margin-left: 64px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        /* --- Top Header Navigation --- */
+        header {
+            height: 60px;
+            padding: 0 2rem;
+            background: var(--header-bg);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--card-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .header-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            letter-spacing: 1px;
+            border-left: 3px solid var(--accent-cyan);
+            padding-left: 10px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            position: relative;
+        }
+
+        .action-btn {
+            background: var(--input-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .action-btn:hover {
+            color: var(--accent-cyan);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 10px var(--border-glow);
+        }
+
+        .nav-text-btn {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            color: #03151c;
+            border: none;
+            padding: 0.45rem 1rem;
+            border-radius: 6px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-text-btn:hover {
+            box-shadow: 0 0 12px var(--border-glow);
+            transform: translateY(-1px);
+        }
+
+        .header-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid var(--accent-cyan);
+            cursor: pointer;
+            object-fit: cover;
+            box-shadow: 0 0 10px var(--border-glow);
+        }
+
+        /* User Dropdown */
+        .dropdown-menu {
+            position: absolute;
+            top: 48px;
+            right: 0;
+            width: 220px;
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--accent-cyan);
+            border-radius: 12px;
+            padding: 1rem;
+            display: none;
+            flex-direction: column;
+            gap: 0.6rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            z-index: 30;
+        }
+
+        .dropdown-menu.active {
+            display: flex;
+        }
+
+        .dropdown-header {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--accent-cyan);
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .dropdown-item {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.4rem 0;
+            transition: color 0.2s;
+            cursor: pointer;
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: left;
+        }
+
+        .dropdown-item:hover {
+            color: var(--text-main);
+        }
+
+        /* --- Dashboard Main Area --- */
+        .dashboard {
+            padding: 2rem;
+            max-width: 1050px;
+            margin: 0 auto;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        /* User Header Banner Card */
+        .user-profile-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .profile-img-large {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            border: 2px solid var(--accent-cyan);
+            object-fit: cover;
+            box-shadow: 0 0 15px var(--border-glow);
+        }
+
+        .user-details h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .badge-list {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: var(--input-bg);
+            color: var(--text-muted);
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            border: 1px solid var(--card-border);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        /* Motivational Banner */
+        .quote-box {
+            background: var(--card-inner);
+            border-left: 3px solid var(--accent-cyan);
+            padding: 0.9rem 1.2rem;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            color: var(--quote-text);
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+        }
+
+        /* Courses/Hub Grid styled like portal cards */
+        .hub-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .hub-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 1.8rem 1rem;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-main);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .hub-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px var(--border-glow);
+        }
+
+        .hub-card i {
+            font-size: 1.6rem;
+            color: var(--accent-cyan);
+        }
+
+        .hub-card-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+        }
+
+        /* --- Modal Popup Styling --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(3, 21, 28, 0.85);
+            backdrop-filter: blur(8px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-card {
+            background: var(--card-bg);
+            border: 1px solid var(--accent-cyan);
+            border-radius: 12px;
+            padding: 2rem;
+            width: 90%;
+            max-width: 420px;
+            box-shadow: 0 0 30px var(--border-glow);
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1.2rem;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.4rem;
+            cursor: pointer;
+        }
+
+        .modal-header-sub {
+            color: var(--accent-cyan);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .modal-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 0.3rem 0 0.5rem 0;
+        }
+
+        .modal-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .form-group label {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .form-group input, .form-group select {
+            background: var(--input-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 6px;
+            padding: 0.75rem 0.9rem;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.3s ease;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+        }
+
+        .form-group select option {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 10px var(--border-glow);
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            color: #03151c;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 6px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            box-shadow: 0 0 15px var(--border-glow);
+            transform: translateY(-2px);
+        }
+
+        .profile-info-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .profile-info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.6rem 0.8rem;
+            background: var(--input-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 6px;
+            font-size: 0.95rem;
+        }
+
+        .profile-info-label {
+            color: var(--text-muted);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+        }
+
+        .profile-info-value {
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .avatar-upload-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .avatar-preview {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 2px solid var(--accent-cyan);
+            object-fit: cover;
+        }
+
+        @media (max-width: 640px) {
+            .sidebar { display: none; }
+            .app-wrapper { margin-left: 0; }
+            .dashboard { padding: 1rem; }
+            .user-profile-card { flex-direction: column; text-align: center; }
+            .badge-list { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Left Navigation Sidebar -->
+    <aside class="sidebar">
+        <div class="brand-icon"><i class="fa-solid fa-code"></i></div>
+        <nav class="sidebar-nav">
+            <a href="index.html" class="sidebar-link active" title="Dashboard"><i class="fa-solid fa-house"></i></a>
+            <a href="about.html" class="sidebar-link" title="About"><i class="fa-solid fa-circle-info"></i></a>
+            <a href="contact.html" class="sidebar-link" title="Contact"><i class="fa-solid fa-envelope"></i></a>
+        </nav>
+    </aside>
+
+    <div class="app-wrapper">
+        <!-- Top Navbar -->
+        <header>
+            <div class="header-title">Swastik-Tech Portal</div>
+            <div class="header-actions">
+                <button class="action-btn" id="themeToggle" title="Toggle Theme">
+                    <span id="themeIcon"><i class="fa-solid fa-moon"></i></span>
+                </button>
+                <button class="nav-text-btn" id="openLoginBtn">Account</button>
+                <img src="My Logo.jpeg" alt="Avatar" class="header-avatar" id="avatarBtn">
+
+                <!-- Profile Dropdown Menu -->
+                <div class="dropdown-menu" id="profileDropdown">
+                    <div class="dropdown-header" id="dropdownUserName">Swastik Sambhu Panda</div>
+                    <button class="dropdown-item" id="openProfileModalBtn"><i class="fa-solid fa-user"></i> Profile</button>
+                    <a href="about.html" class="dropdown-item"><i class="fa-solid fa-globe"></i> About Us</a>
+                    <button class="dropdown-item" id="logoutDropdownBtn"><i class="fa-solid fa-power-off"></i> Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Dashboard View -->
+        <main class="dashboard">
+            <!-- Student Header Banner -->
+            <section class="user-profile-card">
+                <img src="My Logo.jpeg" alt="Swastik-Tech Logo" class="profile-img-large" id="displayAvatarImg">
+                <div class="user-details">
+                    <h2 id="displayUserName">Swastik Sambhu Panda</h2>
+                    <div class="badge-list">
+                        <span class="badge" id="displayClassBadge">Class 11 Science</span>
+                        <span class="badge" id="displayStreamBadge">JEE</span>
+                        <span class="badge" id="displaySchoolBadge">Science Scholar</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Motivational Banner -->
+            <div class="quote-box">
+                "Every solved problem is a step closer to your dream campus."
+            </div>
+
+            <!-- Learning Category Hub Grid (Linked to mains/pyqs.html) -->
+            <section class="hub-grid">
+                <a href="class10/class10-hub.html" class="hub-card">
+                    <i class="fa-solid fa-book-bookmark"></i>
+                    <span class="hub-card-title">Class 10<sup>th</sup></span>
+                </a>
+                <a href="class11/class11-hub.html" class="hub-card">
+                    <i class="fa-solid fa-laptop-code"></i>
+                    <span class="hub-card-title">Class 11<sup>th</sup></span>
+                </a>
+                <a href="mains/pyqs.html" class="hub-card">
+                    <i class="fa-solid fa-file-pdf"></i>
+                    <span class="hub-card-title">PYQ Bank</span>
+                </a>
+                <a href="neet/neet-hub.html" class="hub-card">
+                    <i class="fa-solid fa-user-doctor"></i>
+                    <span class="hub-card-title">NEET</span>
+                </a>
+            </section>
+        </main>
+    </div>
+
+    <!-- Login Popup Modal -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal-card">
+            <button class="close-btn" id="closeLoginBtn">&times;</button>
+            <div class="modal-header-sub">WELCOME BACK</div>
+            <h3 class="modal-title">Log in to continue your progress</h3>
+            <p class="modal-desc">Pick up where you left off — your topics, tests, and results are all here.</p>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" value="Swastik Sambhu Panda" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="userName">Username or Email</label>
+                    <input type="text" id="userName" placeholder="Enter username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="••••••••" required>
+                </div>
+                <div class="form-group">
+                    <label for="classSelect">Class</label>
+                    <select id="classSelect" required>
+                        <option value="" disabled>Select Class</option>
+                        <option value="Class 10">Class 10</option>
+                        <option value="Class 11 Science" selected>Class 11 Science</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="streamSelect">Stream</label>
+                    <select id="streamSelect" required>
+                        <option value="" disabled>Select Stream</option>
+                        <option value="JEE" selected>JEE</option>
+                        <option value="NEET">NEET</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="schoolNameInput">School Name</label>
+                    <input type="text" id="schoolNameInput" value="Science Scholar" placeholder="Enter your school name" required>
+                </div>
+                <button type="submit" class="submit-btn">Update Profile <i class="fa-solid fa-arrow-right"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <!-- View Profile Modal -->
+    <div class="modal-overlay" id="profileModal">
+        <div class="modal-card">
+            <button class="close-btn" id="closeProfileBtn">&times;</button>
+            <div class="modal-header-sub">STUDENT PROFILE</div>
+            <h3 class="modal-title">Your Account Details</h3>
+            <p class="modal-desc">Manage your personal credentials and profile photo.</p>
+            
+            <div class="avatar-upload-container">
+                <img src="My Logo.jpeg" alt="Profile Avatar" class="avatar-preview" id="modalAvatarPreview">
+                <div>
+                    <label for="avatarFileInput" class="nav-text-btn" style="display:inline-block; cursor:pointer; padding: 0.35rem 0.8rem; font-size: 0.75rem;">Change Photo</label>
+                    <input type="file" id="avatarFileInput" accept="image/*" style="display: none;">
+                </div>
+            </div>
+
+            <div class="profile-info-grid">
+                <div class="profile-info-row">
+                    <span class="profile-info-label">Full Name</span>
+                    <span class="profile-info-value" id="profileModalName">Swastik Sambhu Panda</span>
+                </div>
+                <div class="profile-info-row">
+                    <span class="profile-info-label">Class</span>
+                    <span class="profile-info-value" id="profileModalClass">Class 11 Science</span>
+                </div>
+                <div class="profile-info-row">
+                    <span class="profile-info-label">Stream</span>
+                    <span class="profile-info-value" id="profileModalStream">JEE</span>
+                </div>
+                <div class="profile-info-row">
+                    <span class="profile-info-label">School Name</span>
+                    <span class="profile-info-value" id="profileModalSchool">Science Scholar</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            document.body.classList.add('light-mode');
+            themeIcon.innerHTML = '<i class="fa-solid fa-sun"></i>';
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            const isLight = document.body.classList.contains('light-mode');
+            themeIcon.innerHTML = isLight ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        });
+
+        // Dropdown Menu Logic
+        const avatarBtn = document.getElementById('avatarBtn');
+        const profileDropdown = document.getElementById('profileDropdown');
+
+        avatarBtn.addEventListener('click', () => {
+            profileDropdown.classList.toggle('active');
+        });
+
+        window.addEventListener('click', (e) => {
+            if (!avatarBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
+                profileDropdown.classList.remove('active');
+            }
+        });
+
+        // Modal Elements & Logic
+        const loginModal = document.getElementById('loginModal');
+        const openLoginBtn = document.getElementById('openLoginBtn');
+        const closeLoginBtn = document.getElementById('closeLoginBtn');
+        const loginForm = document.getElementById('loginForm');
+
+        const profileModal = document.getElementById('profileModal');
+        const openProfileModalBtn = document.getElementById('openProfileModalBtn');
+        const closeProfileBtn = document.getElementById('closeProfileBtn');
+
+        // Dashboard Display Elements
+        const displayUserName = document.getElementById('displayUserName');
+        const dropdownUserName = document.getElementById('dropdownUserName');
+        const displayClassBadge = document.getElementById('displayClassBadge');
+        const displayStreamBadge = document.getElementById('displayStreamBadge');
+        const displaySchoolBadge = document.getElementById('displaySchoolBadge');
+        const displayAvatarImg = document.getElementById('displayAvatarImg');
+
+        // Profile Modal Display Elements
+        const profileModalName = document.getElementById('profileModalName');
+        const profileModalClass = document.getElementById('profileModalClass');
+        const profileModalStream = document.getElementById('profileModalStream');
+        const profileModalSchool = document.getElementById('profileModalSchool');
+        const modalAvatarPreview = document.getElementById('modalAvatarPreview');
+        const avatarFileInput = document.getElementById('avatarFileInput');
+
+        // Load Saved Data from LocalStorage
+        const savedUserName = localStorage.getItem('studentName');
+        const savedClass = localStorage.getItem('studentClass');
+        const savedStream = localStorage.getItem('studentStream');
+        const savedSchool = localStorage.getItem('studentSchool');
+        const savedAvatar = localStorage.getItem('studentAvatar');
+
+        if (savedUserName) {
+            displayUserName.textContent = savedUserName;
+            dropdownUserName.textContent = savedUserName;
+            profileModalName.textContent = savedUserName;
+            openLoginBtn.textContent = 'Account';
+        }
+        if (savedClass) {
+            displayClassBadge.textContent = savedClass;
+            profileModalClass.textContent = savedClass;
+        }
+        if (savedStream) {
+            displayStreamBadge.textContent = savedStream;
+            profileModalStream.textContent = savedStream;
+        }
+        if (savedSchool) {
+            displaySchoolBadge.textContent = savedSchool;
+            profileModalSchool.textContent = savedSchool;
+        }
+        if (savedAvatar) {
+            displayAvatarImg.src = savedAvatar;
+            modalAvatarPreview.src = savedAvatar;
+        }
+
+        // Login Modal Controls
+        openLoginBtn.addEventListener('click', () => {
+            loginModal.classList.add('active');
+        });
+
+        closeLoginBtn.addEventListener('click', () => {
+            loginModal.classList.remove('active');
+        });
+
+        // Profile Modal Controls
+        openProfileModalBtn.addEventListener('click', () => {
+            profileDropdown.classList.remove('active');
+            profileModal.classList.add('active');
+        });
+
+        closeProfileBtn.addEventListener('click', () => {
+            profileModal.classList.remove('active');
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === loginModal) loginModal.classList.remove('active');
+            if (e.target === profileModal) profileModal.classList.remove('active');
+        });
+
+        // Handle Login Form Submission
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const nameVal = document.getElementById('fullName').value;
+            const classVal = document.getElementById('classSelect').value;
+            const streamVal = document.getElementById('streamSelect').value;
+            const schoolVal = document.getElementById('schoolNameInput').value;
+
+            displayUserName.textContent = nameVal;
+            dropdownUserName.textContent = nameVal;
+            profileModalName.textContent = nameVal;
+
+            displayClassBadge.textContent = classVal;
+            profileModalClass.textContent = classVal;
+
+            displayStreamBadge.textContent = streamVal;
+            profileModalStream.textContent = streamVal;
+
+            displaySchoolBadge.textContent = schoolVal;
+            profileModalSchool.textContent = schoolVal;
+
+            localStorage.setItem('studentName', nameVal);
+            localStorage.setItem('studentClass', classVal);
+            localStorage.setItem('studentStream', streamVal);
+            localStorage.setItem('studentSchool', schoolVal);
+
+            openLoginBtn.textContent = 'Account';
+            loginModal.classList.remove('active');
+        });
+
+        // Profile Picture Upload Handler
+        avatarFileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const base64Image = event.target.result;
+                    displayAvatarImg.src = base64Image;
+                    modalAvatarPreview.src = base64Image;
+                    localStorage.setItem('studentAvatar', base64Image);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Logout action from dropdown
+        document.getElementById('logoutDropdownBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            localStorage.removeItem('studentName');
+            localStorage.removeItem('studentClass');
+            localStorage.removeItem('studentStream');
+            localStorage.removeItem('studentSchool');
+            localStorage.removeItem('studentAvatar');
+
+            displayUserName.textContent = 'Swastik Sambhu Panda';
+            dropdownUserName.textContent = 'Swastik Sambhu Panda';
+            profileModalName.textContent = 'Swastik Sambhu Panda';
+            displayClassBadge.textContent = 'Class 11 Science';
+            displayStreamBadge.textContent = 'JEE';
+            displaySchoolBadge.textContent = 'Science Scholar';
+            displayAvatarImg.src = 'My Logo.jpeg';
+            modalAvatarPreview.src = 'My Logo.jpeg';
+
+            openLoginBtn.textContent = 'Login';
             profileDropdown.classList.remove('active');
         });
     </script>
