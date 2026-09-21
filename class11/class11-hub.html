@@ -3,158 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Class 11 Science Portal | Swastik-Tech</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <title>Class 11 Hub | Swastik-Tech Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-color: #080c14;
-            --card-bg: rgba(15, 23, 42, 0.85);
-            --accent-cyan: #00f3ff;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-glow: rgba(0, 243, 255, 0.3);
-            --grid-color: rgba(255, 255, 255, 0.03);
+            --bg-color: #03151c; --card-bg: rgba(6, 32, 43, 0.85); --card-border: #0e3746;
+            --accent-cyan: #00f3ff; --accent-blue: #00b4d8; --text-main: #ffffff; --text-muted: #83c5be;
+            --border-glow: rgba(0, 243, 255, 0.25); --header-bg: rgba(3, 21, 28, 0.85);
+            --grid-color: rgba(0, 243, 255, 0.04); --input-bg: rgba(0, 243, 255, 0.04); --sidebar-bg: rgba(3, 18, 24, 0.9);
         }
-
         body.light-mode {
-            --bg-color: #f1f5f9;
-            --card-bg: rgba(255, 255, 255, 0.95);
-            --accent-cyan: #0284c7;
-            --text-main: #0f172a;
-            --text-muted: #475569;
-            --border-glow: rgba(2, 132, 199, 0.3);
-            --grid-color: rgba(0, 0, 0, 0.04);
+            --bg-color: #f1f5f9; --card-bg: rgba(255, 255, 255, 0.95); --card-border: #e2e8f0;
+            --accent-cyan: #0284c7; --accent-blue: #2563eb; --text-main: #0f172a; --text-muted: #475569;
+            --border-glow: rgba(2, 132, 199, 0.3); --header-bg: rgba(255, 255, 255, 0.85);
+            --grid-color: rgba(0, 0, 0, 0.04); --input-bg: rgba(0, 0, 0, 0.03); --sidebar-bg: rgba(255, 255, 255, 0.95);
         }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            background-color: var(--bg-color);
-            background-image: 
-                radial-gradient(circle at 50% 50%, var(--border-glow) 0%, transparent 80%),
-                linear-gradient(var(--grid-color) 1px, transparent 1px),
-                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-            background-size: 100% 100%, 40px 40px, 40px 40px;
-            color: var(--text-main);
-            font-family: 'Rajdhani', sans-serif;
-            min-height: 100vh;
-            padding: 2rem;
-            transition: background-color 0.4s ease, color 0.4s ease;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid var(--border-glow);
-            margin-bottom: 2rem;
-        }
-
-        .brand-container {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .brand-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
-            color: var(--accent-cyan);
-            text-decoration: none;
-        }
-
-        .logo-img { height: 45px; width: auto; }
-
-        .back-nav {
-            font-family: 'Orbitron', sans-serif;
-            color: var(--accent-cyan);
-            text-decoration: none;
-            font-weight: 600;
-            transition: opacity 0.3s ease;
-        }
-
-        .back-nav:hover { opacity: 0.8; }
-
-        .section-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
-            color: var(--accent-cyan);
-            margin: 2rem 0 1rem 0;
-            border-left: 4px solid var(--accent-cyan);
-            padding-left: 0.8rem;
-        }
-
-        h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            margin-top: 1.5rem;
-        }
-
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .subject-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-glow);
-            border-radius: 10px;
-            padding: 1.5rem;
-            text-align: center;
-            text-decoration: none;
-            color: var(--text-main);
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(8px);
-        }
-
-        .subject-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-cyan);
-            box-shadow: 0 0 20px var(--border-glow);
-        }
-
-        .notes-card {
-            background: rgba(0, 243, 255, 0.1);
-            border: 1px solid var(--accent-cyan);
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Rajdhani', 'Orbitron', sans-serif; letter-spacing: 0.5px; }
+        body { background-color: var(--bg-color); background-image: radial-gradient(circle at 50% 30%, rgba(0, 180, 216, 0.12) 0%, transparent 70%), linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px); background-size: 100% 100%, 35px 35px, 35px 35px; color: var(--text-main); min-height: 100vh; display: flex; transition: 0.4s; }
+        .sidebar { width: 64px; background: var(--sidebar-bg); border-right: 1px solid var(--card-border); display: flex; flex-direction: column; align-items: center; padding: 1.2rem 0; gap: 1.8rem; position: fixed; height: 100vh; z-index: 20; }
+        .brand-icon { color: var(--accent-cyan); font-size: 1.2rem; }
+        .sidebar-nav { display: flex; flex-direction: column; gap: 1.4rem; }
+        .sidebar-link { color: var(--text-muted); font-size: 1.1rem; text-decoration: none; display: flex; justify-content: center; align-items: center; width: 40px; height: 40px; border-radius: 8px; transition: 0.3s; }
+        .sidebar-link:hover, .sidebar-link.active { color: var(--accent-cyan); background: var(--input-bg); box-shadow: 0 0 10px var(--border-glow); }
+        .app-wrapper { margin-left: 64px; flex: 1; display: flex; flex-direction: column; }
+        header { height: 60px; padding: 0 2rem; background: var(--header-bg); border-bottom: 1px solid var(--card-border); display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 10; backdrop-filter: blur(12px); }
+        .header-title { font-family: 'Orbitron', sans-serif; font-size: 1rem; color: var(--accent-cyan); border-left: 3px solid var(--accent-cyan); padding-left: 10px; font-weight: 700; }
+        .header-actions { display: flex; align-items: center; gap: 0.8rem; }
+        .action-btn { background: var(--input-bg); border: 1px solid var(--card-border); color: var(--text-main); width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .nav-text-btn { background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan)); color: #03151c; border: none; padding: 0.45rem 1rem; border-radius: 6px; font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 0.85rem; cursor: pointer; text-decoration: none; }
+        .header-avatar { width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--accent-cyan); object-fit: cover; }
+        .dashboard { padding: 2rem; max-width: 1050px; margin: 0 auto; width: 100%; display: flex; flex-direction: column; gap: 1.5rem; }
+        .back-nav { display: flex; align-items: center; gap: 0.5rem; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-family: 'Orbitron', sans-serif; }
+        .back-nav:hover { color: var(--accent-cyan); }
+        .hub-banner-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.8rem; display: flex; justify-content: space-between; align-items: center; }
+        .hub-banner-info h1 { font-family: 'Orbitron', sans-serif; font-size: 1.6rem; margin-bottom: 0.4rem; }
+        .hub-banner-info p { color: var(--text-muted); font-size: 0.95rem; }
+        .section-header { font-family: 'Orbitron', sans-serif; font-size: 1.1rem; color: var(--text-main); display: flex; align-items: center; gap: 0.6rem; }
+        .section-header i { color: var(--accent-cyan); }
+        .grid-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.2rem; }
+        .card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 10px; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; transition: 0.3s; text-decoration: none; color: var(--text-main); }
+        .card:hover { border-color: var(--accent-cyan); transform: translateY(-3px); box-shadow: 0 0 20px var(--border-glow); }
+        .card-top { display: flex; justify-content: space-between; align-items: center; }
+        .card-icon { width: 44px; height: 44px; background: var(--input-bg); border: 1px solid var(--card-border); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--accent-cyan); font-size: 1.2rem; }
+        .card-title { font-family: 'Orbitron', sans-serif; font-size: 1.1rem; font-weight: 700; }
+        .card-desc { font-size: 0.88rem; color: var(--text-muted); }
     </style>
 </head>
 <body>
-
-    <header>
-        <div class="brand-container">
-            <a href="../index.html" class="brand-title">Swastik-Tech</a>
-            <img src="../assets/logo.png" alt="Swastik-Tech Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/120x40?text=Swastik-Tech'">
-        </div>
-        <a href="../index.html" class="back-nav">&larr; Main Menu</a>
-    </header>
-
-    <h2 class="section-title">Class 11 Science Portal</h2>
-
-    <h3>Study Notes</h3>
-    <div class="grid-container" style="margin-top: 1rem;">
-        <a href="../notes/class11-notes.html" class="subject-card notes-card">📁 Class 11 Notes</a>
+    <aside class="sidebar">
+        <div class="brand-icon"><i class="fa-solid fa-code"></i></div>
+        <nav class="sidebar-nav">
+            <a href="../index.html" class="sidebar-link"><i class="fa-solid fa-house"></i></a>
+            <a href="../about.html" class="sidebar-link"><i class="fa-solid fa-circle-info"></i></a>
+            <a href="../contact.html" class="sidebar-link"><i class="fa-solid fa-envelope"></i></a>
+        </nav>
+    </aside>
+    <div class="app-wrapper">
+        <header>
+            <div class="header-title">Swastik-Tech Portal</div>
+            <div class="header-actions">
+                <button class="action-btn" id="themeToggle"><i class="fa-solid fa-moon" id="themeIcon"></i></button>
+                <a href="../index.html" class="nav-text-btn"><i class="fa-solid fa-arrow-left"></i> Home</a>
+                <img src="../My Logo.jpeg" alt="Avatar" class="header-avatar">
+            </div>
+        </header>
+        <main class="dashboard">
+            <a href="../index.html" class="back-nav"><i class="fa-solid fa-chevron-left"></i> Back to Main Dashboard</a>
+            <section class="hub-banner-card">
+                <div class="hub-banner-info">
+                    <h1>Class 11 Science Hub</h1>
+                    <p>Core curriculum resources, physics derivations, chemistry equations, and computer science notes.</p>
+                </div>
+            </section>
+            <div class="section-header"><i class="fa-solid fa-book-open"></i> Explore Subjects</div>
+            <div class="grid-cards">
+                <div class="card">
+                    <div class="card-top"><div class="card-icon"><i class="fa-solid fa-atom"></i></div></div>
+                    <h3 class="card-title">Physics (Kinematics & Laws)</h3>
+                    <p class="card-desc">Detailed notes on motion in a plane, work, energy, and gravitation.</p>
+                </div>
+                <div class="card">
+                    <div class="card-top"><div class="card-icon"><i class="fa-solid fa-flask"></i></div></div>
+                    <h3 class="card-title">Chemistry (Structure & Thermo)</h3>
+                    <p class="card-desc">Chemical bonding, stoichiometry, and thermodynamic principles.</p>
+                </div>
+                <div class="card">
+                    <div class="card-top"><div class="card-icon"><i class="fa-solid fa-laptop-code"></i></div></div>
+                    <h3 class="card-title">Python & Computer Science</h3>
+                    <p class="card-desc">Logic gates, Boolean algebra, and Python programming exercises.</p>
+                </div>
+            </div>
+        </main>
     </div>
-
-    <h3>Subject Practice & Test Suites</h3>
-    <div class="grid-container" style="margin-top: 1rem;">
-        <a href="../mains/practice-test.html?class=11&sub=physics" class="subject-card">Physics Practice</a>
-        <a href="../mains/practice-test.html?class=11&sub=chemistry" class="subject-card">Chemistry Practice</a>
-        <a href="../mains/practice-test.html?class=11&sub=maths" class="subject-card">Mathematics Practice</a>
-        <a href="../mains/practice-test.html?class=11&sub=english" class="subject-card">English Practice</a>
-        <a href="../mains/practice-test.html?class=11&sub=cs" class="subject-card">Computer Science Practice</a>
-    </div>
-
     <script>
-        if (localStorage.getItem('theme') === 'light') {
-            document.body.classList.add('light-mode');
-        }
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        if(localStorage.getItem('theme')==='light'){ document.body.classList.add('light-mode'); themeIcon.className='fa-solid fa-sun'; }
+        themeToggleBtn.addEventListener('click', ()=>{
+            document.body.classList.toggle('light-mode');
+            const isLight = document.body.classList.contains('light-mode');
+            themeIcon.className = isLight ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        });
     </script>
 </body>
 </html>
