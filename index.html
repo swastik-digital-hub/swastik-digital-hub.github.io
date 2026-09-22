@@ -3,627 +3,228 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | Swastik-Tech</title>
+    <title>Dashboard Hub | Swastik-Tech</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Self-Contained Browser Tab Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%2300f3ff%22><path d=%22M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5%22/></svg>">
 
-    <!-- Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Identity Services SDK -->
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-    
     <style>
         :root {
-            --bg-color: #03151c;
-            --card-bg: rgba(6, 32, 43, 0.85);
-            --card-border: #0e3746;
+            --bg-color: #080c14;
+            --card-bg: rgba(15, 23, 42, 0.85);
             --accent-cyan: #00f3ff;
-            --accent-blue: #00b4d8;
-            --text-main: #ffffff;
-            --text-muted: #83c5be;
-            --border-glow: rgba(0, 243, 255, 0.25);
-            --header-bg: rgba(3, 21, 28, 0.85);
-            --grid-color: rgba(0, 243, 255, 0.04);
-            --input-bg: rgba(0, 243, 255, 0.04);
-            --sidebar-bg: rgba(3, 18, 24, 0.9);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-glow: rgba(0, 243, 255, 0.3);
+            --grid-color: rgba(255, 255, 255, 0.03);
         }
 
         body.light-mode {
             --bg-color: #f1f5f9;
             --card-bg: rgba(255, 255, 255, 0.95);
-            --card-border: #cbd5e1;
             --accent-cyan: #0284c7;
-            --accent-blue: #0369a1;
             --text-main: #0f172a;
             --text-muted: #475569;
             --border-glow: rgba(2, 132, 199, 0.3);
-            --header-bg: rgba(241, 245, 249, 0.85);
             --grid-color: rgba(0, 0, 0, 0.04);
-            --input-bg: rgba(2, 132, 199, 0.04);
-            --sidebar-bg: rgba(226, 232, 240, 0.9);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Rajdhani', 'Orbitron', sans-serif;
-            letter-spacing: 0.5px;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             background-color: var(--bg-color);
             background-image: 
-                radial-gradient(circle at 50% 20%, rgba(0, 180, 216, 0.12) 0%, transparent 70%),
+                radial-gradient(circle at 50% 50%, var(--border-glow) 0%, transparent 80%),
                 linear-gradient(var(--grid-color) 1px, transparent 1px),
                 linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-            background-size: 100% 100%, 35px 35px, 35px 35px;
+            background-size: 100% 100%, 40px 40px, 40px 40px;
             color: var(--text-main);
+            font-family: 'Rajdhani', sans-serif;
             min-height: 100vh;
-            display: flex;
-            overflow-x: hidden;
+            padding: 2rem;
             transition: background-color 0.4s ease, color 0.4s ease;
         }
 
-        .sidebar {
-            width: 64px;
-            background-color: var(--sidebar-bg);
-            border-right: 1px solid var(--card-border);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 1.2rem 0;
-            gap: 1.8rem;
-            position: fixed;
-            height: 100vh;
-            z-index: 20;
-        }
-
-        .brand-icon {
-            font-size: 1.2rem;
-            color: var(--accent-cyan);
-        }
-
-        .sidebar-nav {
-            display: flex;
-            flex-direction: column;
-            gap: 1.4rem;
-        }
-
-        .sidebar-link {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            text-decoration: none;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .sidebar-link:hover, .sidebar-link.active {
-            color: var(--accent-cyan);
-            background: var(--input-bg);
-            box-shadow: 0 0 10px var(--border-glow);
-        }
-
-        .app-wrapper {
-            margin-left: 64px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
         header {
-            height: 60px;
-            padding: 0 2rem;
-            background: var(--header-bg);
-            border-bottom: 1px solid var(--card-border);
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            backdrop-filter: blur(10px);
+            align-items: center;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-glow);
+            margin-bottom: 2rem;
         }
 
         .header-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 700;
+            font-size: 1.2rem;
             color: var(--accent-cyan);
             border-left: 3px solid var(--accent-cyan);
             padding-left: 10px;
-            letter-spacing: 1px;
         }
 
-        .header-actions {
+        .top-nav-btns {
             display: flex;
-            gap: 10px;
-            align-items: center;
+            gap: 1rem;
         }
 
-        .theme-toggle-btn {
-            background: var(--input-bg);
-            border: 1px solid var(--card-border);
-            color: var(--text-muted);
-            padding: 0.4rem 0.9rem;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            font-family: 'Orbitron', sans-serif;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.3s;
-        }
-
-        .theme-toggle-btn:hover {
+        .nav-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow);
             color: var(--accent-cyan);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+        }
+
+        .nav-btn:hover {
             border-color: var(--accent-cyan);
             box-shadow: 0 0 10px var(--border-glow);
         }
 
-        .container {
-            padding: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .dashboard-welcome {
+        .welcome-banner {
             background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            padding: 1.8rem 2.2rem;
-            border-radius: 10px;
+            border: 1px solid var(--border-glow);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
             backdrop-filter: blur(8px);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-            margin-bottom: 2rem;
         }
 
-        .dashboard-welcome h1 {
+        .welcome-banner h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.35rem;
+            font-size: 1.8rem;
             color: var(--accent-cyan);
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.5rem;
         }
 
-        .dashboard-welcome p {
+        .welcome-banner p {
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 1.05rem;
         }
 
-        /* Modules Grid */
-        .modules-grid {
+        .dashboard-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 1.5rem;
         }
 
-        .module-card {
+        .dash-card {
             background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 12px;
+            border: 1px solid var(--border-glow);
+            border-radius: 10px;
             padding: 1.8rem;
             text-decoration: none;
             color: var(--text-main);
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
             transition: all 0.3s ease;
             backdrop-filter: blur(8px);
-        }
-
-        .module-card:hover {
-            border-color: var(--accent-cyan);
-            box-shadow: 0 0 20px var(--border-glow);
-            transform: translateY(-3px);
-        }
-
-        .module-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 10px;
-            background: var(--input-bg);
-            border: 1px solid var(--card-border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            color: var(--accent-cyan);
-        }
-
-        .module-info h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.1rem;
-            margin-bottom: 0.3rem;
-        }
-
-        .module-info p {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        /* --- MODAL STYLES --- */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(3, 21, 28, 0.85);
-            backdrop-filter: blur(12px);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem;
-        }
-
-        .login-modal {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 2.5rem;
-            width: 100%;
-            max-width: 440px;
-            box-shadow: 0 0 40px rgba(0, 243, 255, 0.15);
-        }
-
-        .signup-modal {
-            max-width: 480px;
-        }
-
-        .login-header {
-            text-align: center;
-            margin-bottom: 1.8rem;
-        }
-
-        .login-header h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
-            color: var(--text-main);
-            margin-bottom: 0.5rem;
-        }
-
-        .login-header p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        .free-account-tag {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.7rem;
-            color: var(--accent-blue);
-            letter-spacing: 1.5px;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-
-        .google-btn-wrapper {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            margin-bottom: 1.2rem;
-        }
-
-        .divider {
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.8rem;
-            font-family: 'Orbitron', sans-serif;
-            margin: 1.2rem 0;
-            opacity: 0.7;
-        }
-
-        .divider::before, .divider::after {
-            content: '';
-            flex: 1;
-            border-bottom: 1px solid var(--card-border);
-        }
-        .divider::before { margin-right: .75em; }
-        .divider::after { margin-left: .75em; }
-
-        .form-group {
-            margin-bottom: 1rem;
             display: flex;
             flex-direction: column;
-            gap: 0.3rem;
+            gap: 0.8rem;
         }
 
-        .form-group label {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            font-family: 'Orbitron', sans-serif;
-        }
-
-        .input-wrapper {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-
-        .form-group input {
-            width: 100%;
-            background: var(--input-bg);
-            border: 1px solid var(--card-border);
-            padding: 0.75rem 1rem;
-            border-radius: 8px;
-            color: var(--text-main);
-            font-size: 0.95rem;
-            transition: all 0.3s;
-        }
-
-        .form-group input:focus {
-            outline: none;
+        .dash-card:hover {
+            transform: translateY(-5px);
             border-color: var(--accent-cyan);
-            box-shadow: 0 0 10px var(--border-glow);
+            box-shadow: 0 0 20px var(--border-glow);
         }
 
-        .toggle-password {
-            position: absolute;
-            right: 12px;
-            color: var(--text-muted);
-            cursor: pointer;
-            font-size: 0.9rem;
-        }
-
-        .submit-btn {
-            width: 100%;
-            background: var(--accent-cyan);
-            color: #03151c;
-            border: none;
-            padding: 0.8rem;
-            border-radius: 8px;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .submit-btn:hover {
-            box-shadow: 0 0 15px var(--accent-cyan);
-        }
-
-        .continue-btn {
-            background: var(--accent-blue);
-            color: #ffffff;
-            margin-top: 1.2rem;
-        }
-
-        .modal-footer {
-            text-align: center;
-            margin-top: 1.5rem;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        .modal-footer a {
+        .dash-card i {
+            font-size: 1.8rem;
             color: var(--accent-cyan);
-            text-decoration: none;
-            font-weight: 600;
+            margin-bottom: 0.2rem;
         }
 
-        @media(max-width: 768px) {
-            .sidebar { display: none; }
-            .app-wrapper { margin-left: 0; }
+        .dash-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+        }
+
+        .dash-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.4;
         }
     </style>
 </head>
 <body>
 
-    <aside class="sidebar">
-        <div class="brand-icon"><i class="fa-solid fa-microchip"></i></div>
-        <nav class="sidebar-nav">
-            <a class="sidebar-link active" href="index.html" title="Dashboard"><i class="fa-solid fa-house"></i></a>
-            <a class="sidebar-link" href="profile.html" title="Profile"><i class="fa-solid fa-user"></i></a>
-            <a class="sidebar-link" href="class11/class11-hub.html" title="Class 11 Science Portal"><i class="fa-solid fa-atom"></i></a>
-            <a class="sidebar-link" href="mains/pyqs.html" title="JEE Portal"><i class="fa-solid fa-graduation-cap"></i></a>
-        </nav>
-    </aside>
+    <header>
+        <div class="header-title" id="welcomeUserTitle">| Dashboard Hub</div>
+        <div class="top-nav-btns">
+            <a href="profile.html" class="nav-btn"><i class="fa-solid fa-user"></i> Profile</a>
+            <button onclick="toggleTheme()" class="nav-btn"><i class="fa-solid fa-circle-half-stroke"></i> Theme</button>
+        </div>
+    </header>
 
-    <div class="app-wrapper">
-        <header>
-            <div class="header-title">| Dashboard Hub</div>
-            <div class="header-actions">
-                <a href="profile.html" class="theme-toggle-btn">
-                    <i class="fa-solid fa-user"></i> Profile
-                </a>
-                <button class="theme-toggle-btn" onclick="toggleTheme()">
-                    <i class="fa-solid fa-circle-half-stroke"></i> Theme
-                </button>
-            </div>
-        </header>
-
-        <main class="container">
-            <div class="dashboard-welcome">
-                <h1>Welcome to Swastik-Tech Portal</h1>
-                <p>Select a module from the sidebar to begin your sessions in physics, computer science, or exam practice.</p>
-            </div>
-
-            <!-- Exam Sections & Class Modules Grid -->
-            <div class="modules-grid">
-                <a href="class11/class11-hub.html" class="module-card">
-                    <div class="module-icon"><i class="fa-solid fa-atom"></i></div>
-                    <div class="module-info">
-                        <h3>Class 11th Section</h3>
-                        <p>Physics, Chemistry, Computer Science & CS materials.</p>
-                    </div>
-                </a>
-
-                <a href="class10/class10-hub.html" class="module-card">
-                    <div class="module-icon"><i class="fa-solid fa-book-open"></i></div>
-                    <div class="module-info">
-                        <h3>Class 10th Section</h3>
-                        <p>Foundation courses, science & board preparation.</p>
-                    </div>
-                </a>
-
-                <a href="mains/pyqs.html" class="module-card">
-                    <div class="module-icon"><i class="fa-solid fa-graduation-cap"></i></div>
-                    <div class="module-info">
-                        <h3>JEE Portal</h3>
-                        <p>Previous year questions, mechanics & engineering tests.</p>
-                    </div>
-                </a>
-
-                <a href="neet/neet-hub.html" class="module-card">
-                    <div class="module-icon"><i class="fa-solid fa-heart-pulse"></i></div>
-                    <div class="module-info">
-                        <h3>NEET Section</h3>
-                        <p>Medical entrance biology, chemistry & physics practice.</p>
-                    </div>
-                </a>
-            </div>
-        </main>
+    <div class="welcome-banner">
+        <h1 id="bannerWelcomeText">Welcome to Swastik-Tech Portal</h1>
+        <p>Select a module to begin your sessions in physics, computer science, or exam practice.</p>
     </div>
 
-    <!-- LOGIN MODAL OVERLAY -->
-    <div id="loginModalOverlay" class="modal-overlay" style="display: none;">
-        <div class="login-modal">
-            <div class="login-header">
-                <h2>Welcome Back</h2>
-                <p>Log in to access your dashboard & tracking</p>
-            </div>
+    <div class="dashboard-grid">
+        <a href="class11/class11-hub.html" class="dash-card">
+            <i class="fa-solid fa-atom"></i>
+            <h3>Class 11th Section</h3>
+            <p>Physics, Chemistry, Computer Science & CS materials.</p>
+        </a>
 
-            <div id="g_id_onload" data-client_id="YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com" data-context="signin" data-ux_mode="popup" data-callback="handleGoogleSignIn" data-auto_prompt="false"></div>
-            <div class="google-btn-wrapper">
-                <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline" data-text="continue_with" data-shape="rectangular" data-logo_alignment="left"></div>
-            </div>
+        <a href="class10/class10-science.html" class="dash-card">
+            <i class="fa-solid fa-book-open"></i>
+            <h3>Class 10th Section</h3>
+            <p>Foundation courses, science & board preparation.</p>
+        </a>
 
-            <div class="divider">OR</div>
+        <a href="jee-physics-mocktest.html" class="dash-card">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <h3>JEE Portal</h3>
+            <p>Previous year questions, mechanics & engineering tests.</p>
+        </a>
 
-            <form id="loginForm" onsubmit="handleLoginSubmit(event)">
-                <div class="form-group">
-                    <label>Username or Email</label>
-                    <input type="text" id="loginUser" placeholder="Enter username" required>
-                </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <div class="input-wrapper">
-                        <input type="password" id="loginPass" placeholder="••••••••" required>
-                        <i class="fa-regular fa-eye toggle-password" onclick="togglePasswordVisibility('loginPass', this)"></i>
-                    </div>
-                </div>
-                <button type="submit" class="submit-btn">Log In <i class="fa-solid fa-arrow-right"></i></button>
-            </form>
-
-            <div class="modal-footer">
-                New to Swastik Tech? <a href="#" onclick="toggleModals('loginToSignup')">Create an account</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- SIGN UP MODAL OVERLAY -->
-    <div id="signupModalOverlay" class="modal-overlay" style="display: none;">
-        <div class="login-modal signup-modal">
-            <div class="login-header">
-                <span class="free-account-tag">FREE ACCOUNT</span>
-                <h2>Start learning with real exam questions.</h2>
-                <p>Join students preparing for CBSE & competitive exams.</p>
-            </div>
-
-            <div class="google-btn-wrapper">
-                <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline" data-text="continue_with" data-shape="rectangular" data-logo_alignment="left"></div>
-            </div>
-
-            <div class="divider">OR</div>
-
-            <form id="signupForm" onsubmit="handleSignupSubmit(event)">
-                <div class="form-group">
-                    <label>Full Name</label>
-                    <input type="text" id="signupName" placeholder="Your name" required>
-                </div>
-                <div class="form-group">
-                    <label>Email Address</label>
-                    <input type="email" id="signupEmail" placeholder="you@example.com" required>
-                </div>
-                <div class="form-group">
-                    <label>Create Password</label>
-                    <div class="input-wrapper">
-                        <input type="password" id="signupPass" placeholder="••••••••" required minlength="8">
-                        <i class="fa-regular fa-eye toggle-password" onclick="togglePasswordVisibility('signupPass', this)"></i>
-                    </div>
-                </div>
-                <button type="submit" class="submit-btn continue-btn">Continue <i class="fa-solid fa-arrow-right"></i></button>
-            </form>
-
-            <div class="modal-footer">
-                Already have an account? <a href="#" onclick="toggleModals('signupToLogin')">Log in</a>
-            </div>
-        </div>
+        <a href="neet/neet-hub.html" class="dash-card">
+            <i class="fa-solid fa-heart-pulse"></i>
+            <h3>NEET Section</h3>
+            <p>Medical entrance biology, chemistry & physics practice.</p>
+        </a>
     </div>
 
     <script>
-        if (localStorage.getItem('theme') === 'light') document.body.classList.add('light-mode');
+        // Theme switcher logic
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-mode');
+        }
+
         function toggleTheme() {
             document.body.classList.toggle('light-mode');
-            localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+            if (document.body.classList.contains('light-mode')) {
+                localStorage.setItem('theme', 'light');
+            } else {
+                localStorage.setItem('theme', 'dark');
+            }
         }
 
-        const loginOverlay = document.getElementById('loginModalOverlay');
-        const signupOverlay = document.getElementById('signupModalOverlay');
-
+        // Dynamic User Name Loader on Page Reload
         window.addEventListener('DOMContentLoaded', () => {
-            if (!localStorage.getItem('user_name')) {
-                loginOverlay.style.display = 'flex';
+            // Checks localStorage for 'userName' (adjust key name if your profile uses something else like 'profileName')
+            const savedName = localStorage.getItem('userName') || localStorage.getItem('profileName');
+            
+            const titleEl = document.getElementById('welcomeUserTitle');
+            const bannerEl = document.getElementById('bannerWelcomeText');
+
+            if (savedName) {
+                if (titleEl) titleEl.textContent = `Welcome, ${savedName}`;
+                if (bannerEl) bannerEl.textContent = `Welcome back, ${savedName}!`;
             }
         });
-
-        function toggleModals(action) {
-            if (action === 'loginToSignup') {
-                loginOverlay.style.display = 'none';
-                signupOverlay.style.display = 'flex';
-            } else {
-                signupOverlay.style.display = 'none';
-                loginOverlay.style.display = 'flex';
-            }
-        }
-
-        function handleLoginSubmit(event) {
-            event.preventDefault();
-            localStorage.setItem('user_name', document.getElementById('loginUser').value);
-            loginOverlay.style.display = 'none';
-        }
-
-        function handleSignupSubmit(event) {
-            event.preventDefault();
-            localStorage.setItem('user_name', document.getElementById('signupName').value);
-            localStorage.setItem('user_email', document.getElementById('signupEmail').value);
-            signupOverlay.style.display = 'none';
-        }
-
-        function handleGoogleSignIn(response) {
-            const base64Url = response.credential.split('.')[1];
-            const jsonPayload = decodeURIComponent(window.atob(base64Url.replace(/-/g, '+').replace(/_/g, '/')).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
-            const userData = JSON.parse(jsonPayload);
-            localStorage.setItem('user_name', userData.name);
-            localStorage.setItem('user_email', userData.email);
-            if(userData.picture) localStorage.setItem('user_avatar', userData.picture);
-            loginOverlay.style.display = 'none';
-            signupOverlay.style.display = 'none';
-        }
-
-        function togglePasswordVisibility(id, icon) {
-            const input = document.getElementById(id);
-            input.type = input.type === 'password' ? 'text' : 'password';
-            icon.classList.toggle('fa-eye');
-            icon.classList.toggle('fa-eye-slash');
-        }
     </script>
 </body>
 </html>
