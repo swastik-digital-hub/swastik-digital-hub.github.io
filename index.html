@@ -167,8 +167,8 @@
     </header>
 
     <div class="welcome-banner">
-        <h1 id="bannerWelcomeText">Welcome to Swastik-Tech Portal</h1>
-        <p>Select a module to begin your sessions in physics, computer science, or exam practice.</p>
+        <h1>Welcome to Swastik-Tech Portal</h1>
+        <p>Select a module from the sidebar to begin your sessions in physics, computer science, or exam practice.</p>
     </div>
 
     <div class="dashboard-grid">
@@ -212,17 +212,13 @@
             }
         }
 
-        // Dynamic User Name Loader on Page Reload
+        // Dynamic User Name Loader for top-left title on page reload
         window.addEventListener('DOMContentLoaded', () => {
-            // Checks localStorage for 'userName' (adjust key name if your profile uses something else like 'profileName')
             const savedName = localStorage.getItem('userName') || localStorage.getItem('profileName');
-            
             const titleEl = document.getElementById('welcomeUserTitle');
-            const bannerEl = document.getElementById('bannerWelcomeText');
 
-            if (savedName) {
-                if (titleEl) titleEl.textContent = `Welcome, ${savedName}`;
-                if (bannerEl) bannerEl.textContent = `Welcome back, ${savedName}!`;
+            if (savedName && titleEl) {
+                titleEl.textContent = `Welcome, ${savedName}`;
             }
         });
     </script>
