@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Profile & Stats | Swastik-Tech</title>
+    <title>Profile | Swastik-Tech</title>
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -163,146 +163,72 @@
             box-shadow: 0 0 10px var(--border-glow);
         }
 
-        .profile-container {
+        .container {
             padding: 2rem;
-            max-width: 1200px;
+            max-width: 900px;
             margin: 0 auto;
             width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
         }
 
-        /* Profile Top Banner with Editable Avatar & Blank Details */
-        .profile-banner {
+        /* Profile Card Layout */
+        .profile-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 8px;
-            padding: 2rem;
+            border-radius: 12px;
+            padding: 2.5rem;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
-            backdrop-filter: blur(8px);
-        }
-
-        .profile-top-row {
-            display: flex;
-            align-items: center;
             gap: 2rem;
         }
 
-        .avatar-wrapper {
-            position: relative;
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 2px solid var(--accent-cyan);
-            box-shadow: 0 0 15px var(--border-glow);
-            cursor: pointer;
-            flex-shrink: 0;
+        .profile-top {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
         }
 
-        .avatar-wrapper img {
+        .profile-avatar {
+            width: 85px;
+            height: 85px;
+            border: 2px solid var(--accent-cyan);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            color: var(--accent-cyan);
+            background: var(--input-bg);
+            box-shadow: 0 0 15px var(--border-glow);
+            overflow: hidden;
+        }
+
+        .profile-avatar img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        .avatar-overlay {
-            position: absolute;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
-            width: 100%;
-            text-align: center;
-            font-size: 0.65rem;
-            padding: 2px 0;
-            color: var(--accent-cyan);
+        .profile-avatar-info h2 {
             font-family: 'Orbitron', sans-serif;
-        }
-
-        .editable-details {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1rem;
-            width: 100%;
-        }
-
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.4rem;
-        }
-
-        .input-group label {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        .input-group input {
-            background: var(--input-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 6px;
-            padding: 0.6rem 0.9rem;
+            font-size: 1.4rem;
             color: var(--text-main);
-            font-size: 0.95rem;
-            outline: none;
-            transition: all 0.3s;
         }
 
-        .input-group input:focus {
-            border-color: var(--accent-cyan);
-            box-shadow: 0 0 10px var(--border-glow);
-        }
-
-        /* Stats Grid */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1.2rem;
-        }
-
-        .stat-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 8px;
-            padding: 1.5rem;
-            text-align: center;
-            backdrop-filter: blur(8px);
-            transition: 0.3s;
-        }
-
-        .stat-card:hover {
-            border-color: var(--accent-cyan);
-            box-shadow: 0 0 15px var(--border-glow);
-        }
-
-        .stat-card h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.2rem;
-            color: var(--accent-cyan);
-            margin-bottom: 0.3rem;
-        }
-
-        .stat-card span {
-            font-size: 0.85rem;
+        .profile-avatar-info p {
             color: var(--text-muted);
-            font-family: 'Orbitron', sans-serif;
+            font-size: 0.95rem;
         }
 
-        /* Progress Sections */
-        .section-box {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 8px;
-            padding: 1.8rem;
-            backdrop-filter: blur(8px);
+        .profile-section {
+            border-top: 1px solid var(--card-border);
+            padding-top: 1.5rem;
         }
 
-        .section-box h3 {
+        .profile-section-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: var(--accent-cyan);
             margin-bottom: 1.2rem;
             display: flex;
@@ -310,37 +236,69 @@
             gap: 8px;
         }
 
-        .progress-item {
-            margin-bottom: 1rem;
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.2rem 2rem;
         }
 
-        .progress-info {
+        .profile-field {
             display: flex;
-            justify-content: space-between;
-            font-size: 0.95rem;
-            margin-bottom: 0.4rem;
+            flex-direction: column;
+            gap: 0.2rem;
         }
 
-        .progress-bar-bg {
-            background: var(--input-bg);
-            border: 1px solid var(--card-border);
-            height: 8px;
-            border-radius: 4px;
-            overflow: hidden;
+        .profile-field.full-width {
+            grid-column: span 2;
         }
 
-        .progress-bar-fill {
-            background: var(--accent-cyan);
-            height: 100%;
-            width: 0%;
-            transition: width 0.6s ease;
-            box-shadow: 0 0 8px var(--border-glow);
+        .field-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .field-value {
+            font-size: 1.05rem;
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        /* Log out button styling */
+        .logout-container {
+            border-top: 1px solid var(--card-border);
+            padding-top: 1.5rem;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .logout-btn {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            color: #ef4444;
+            padding: 0.6rem 1.4rem;
+            border-radius: 6px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: #ef4444;
+            color: #ffffff;
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
         }
 
         @media(max-width: 768px) {
             .sidebar { display: none; }
             .app-wrapper { margin-left: 0; }
-            .profile-top-row { flex-direction: column; align-items: center; text-align: center; }
+            .profile-grid { grid-template-columns: 1fr; }
+            .profile-field.full-width { grid-column: span 1; }
         }
     </style>
 </head>
@@ -349,7 +307,7 @@
     <aside class="sidebar">
         <div class="brand-icon"><i class="fa-solid fa-microchip"></i></div>
         <nav class="sidebar-nav">
-            <a class="sidebar-link" href="../index.html" title="Dashboard"><i class="fa-solid fa-house"></i></a>
+            <a class="sidebar-link" href="index.html" title="Dashboard"><i class="fa-solid fa-house"></i></a>
             <a class="sidebar-link active" href="profile.html" title="Profile"><i class="fa-solid fa-user"></i></a>
             <a class="sidebar-link" href="class11/class11-physics.html" title="Class 11 Physics"><i class="fa-solid fa-atom"></i></a>
             <a class="sidebar-link" href="mains/pyqs.html" title="JEE Portal"><i class="fa-solid fa-graduation-cap"></i></a>
@@ -358,9 +316,9 @@
 
     <div class="app-wrapper">
         <header>
-            <div class="header-title">| Student Profile & Stats</div>
+            <div class="header-title">| Student Profile</div>
             <div class="header-actions">
-                <a href="../index.html" class="theme-toggle-btn">
+                <a href="index.html" class="theme-toggle-btn">
                     <i class="fa-solid fa-house"></i> Dashboard
                 </a>
                 <button class="theme-toggle-btn" onclick="toggleTheme()">
@@ -369,146 +327,128 @@
             </div>
         </header>
 
-        <main class="profile-container">
-            <!-- Profile Banner with Editable Photo & Blank Fields -->
-            <div class="profile-banner">
-                <div class="profile-top-row">
-                    <div class="avatar-wrapper" onclick="document.getElementById('avatarInput').click()" title="Click to upload profile photo">
-                        <img id="profileAvatar" src="https://via.placeholder.com/150/03151c/00f3ff?text=IMG" alt="Profile Avatar">
-                        <div class="avatar-overlay">Upload</div>
+        <main class="container">
+            <div class="profile-card">
+                <!-- Top Row: Photo & Username -->
+                <div class="profile-top">
+                    <div class="profile-avatar" id="profileAvatarContainer">
+                        <i class="fa-solid fa-user" id="defaultAvatarIcon"></i>
                     </div>
-                    <input type="file" id="avatarInput" accept="image/*" style="display: none;" onchange="updateProfilePhoto(event)">
-                    
-                    <div class="editable-details">
-                        <div class="input-group">
-                            <label>Full Name</label>
-                            <input type="text" id="inputName" placeholder="Enter your full name" oninput="saveProfileData()">
-                        </div>
-                        <div class="input-group">
-                            <label>Academic Stream / Class</label>
-                            <input type="text" id="inputAcademic" placeholder="e.g. Class 11 Science" oninput="saveProfileData()">
-                        </div>
-                        <div class="input-group">
-                            <label>Email Address</label>
-                            <input type="email" id="inputEmail" placeholder="Enter your email" oninput="saveProfileData()">
-                        </div>
-                        <div class="input-group">
-                            <label>Phone Number / Contact</label>
-                            <input type="text" id="inputContact" placeholder="Enter your phone number" oninput="saveProfileData()">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Dynamic Stat Counters -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <h2 id="topicsCompletedCount">2</h2>
-                    <span>TOPICS COMPLETED</span>
-                </div>
-                <div class="stat-card">
-                    <h2 id="testsTakenCount">7</h2>
-                    <span>TESTS TAKEN</span>
-                </div>
-                <div class="stat-card">
-                    <h2 id="avgScoreDisplay">77%</h2>
-                    <span>AVERAGE SCORE</span>
-                </div>
-                <div class="stat-card">
-                    <h2 id="streakCount">5</h2>
-                    <span>DAY STREAK</span>
-                </div>
-            </div>
-
-            <!-- Learning Progress Section -->
-            <div class="section-box">
-                <h3><i class="fa-solid fa-chart-line"></i> Learning Progress</h3>
-                
-                <div class="progress-item">
-                    <div class="progress-info">
-                        <span>Unit I: Computer Systems and Organisation</span>
-                        <span id="prog1-text">75%</span>
-                    </div>
-                    <div class="progress-bar-bg">
-                        <div class="progress-bar-fill" id="prog1-bar" style="width: 75%;"></div>
+                    <div class="profile-avatar-info">
+                        <h2 id="displayUsername">Swastik Sambhu Panda</h2>
+                        <p>Profile Photo / Student Account</p>
                     </div>
                 </div>
 
-                <div class="progress-item">
-                    <div class="progress-info">
-                        <span>Unit II: Computational Thinking and Programming - I</span>
-                        <span id="prog2-text">40%</span>
-                    </div>
-                    <div class="progress-bar-bg">
-                        <div class="progress-bar-fill" id="prog2-bar" style="width: 40%;"></div>
+                <!-- Academic Details Section -->
+                <div class="profile-section">
+                    <div class="profile-section-title"><i class="fa-solid fa-graduation-cap"></i> Academic Details</div>
+                    <div class="profile-grid">
+                        <div class="profile-field">
+                            <span class="field-label">Date of Birth</span>
+                            <span class="field-value">--/--/----</span>
+                        </div>
+                        <div class="profile-field">
+                            <span class="field-label">Gender</span>
+                            <span class="field-value">Male</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="progress-item">
-                    <div class="progress-info">
-                        <span>Unit III: Society, Law and Ethics</span>
-                        <span id="prog3-text">20%</span>
+                <!-- School Information Section -->
+                <div class="profile-section">
+                    <div class="profile-section-title"><i class="fa-solid fa-school"></i> School Information</div>
+                    <div class="profile-grid">
+                        <div class="profile-field">
+                            <span class="field-label">Section</span>
+                            <span class="field-value">Class 11 Science</span>
+                        </div>
+                        <div class="profile-field">
+                            <span class="field-label">Roll Number</span>
+                            <span class="field-value">42</span>
+                        </div>
+                        <div class="profile-field">
+                            <span class="field-label">State</span>
+                            <span class="field-value">Odisha</span>
+                        </div>
+                        <div class="profile-field">
+                            <span class="field-label">City</span>
+                            <span class="field-value">Brahmapur</span>
+                        </div>
                     </div>
-                    <div class="progress-bar-bg">
-                        <div class="progress-bar-fill" id="prog3-bar" style="width: 20%;"></div>
+                </div>
+
+                <!-- Contact Section -->
+                <div class="profile-section">
+                    <div class="profile-section-title"><i class="fa-solid fa-address-book"></i> Contact</div>
+                    <div class="profile-grid">
+                        <div class="profile-field">
+                            <span class="field-label">Phone Number</span>
+                            <span class="field-value">+91 ----------</span>
+                        </div>
+                        <div class="profile-field">
+                            <span class="field-label">Email</span>
+                            <span class="field-value" id="profileEmail">swastik@example.com</span>
+                        </div>
+                        <div class="profile-field full-width">
+                            <span class="field-label">User Name</span>
+                            <span class="field-value" id="profileUserName">Swastik Sambhu Panda</span>
+                        </div>
                     </div>
+                </div>
+
+                <!-- Log Out Option -->
+                <div class="logout-container">
+                    <button class="logout-btn" onclick="handleLogout()">
+                        <i class="fa-solid fa-right-from-bracket"></i> Log Out
+                    </button>
                 </div>
             </div>
         </main>
     </div>
 
     <script>
-        // Theme Management
+        // Check saved theme preference
         if (localStorage.getItem('theme') === 'light') {
             document.body.classList.add('light-mode');
         }
 
         function toggleTheme() {
             document.body.classList.toggle('light-mode');
-            localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+            if (document.body.classList.contains('light-mode')) {
+                localStorage.setItem('theme', 'light');
+            } else {
+                localStorage.setItem('theme', 'dark');
+            }
         }
 
-        // Load Saved Profile Data & Stats on Page Load
+        // Sync profile data from localStorage (Name, Email, Google Avatar image)
         window.addEventListener('DOMContentLoaded', () => {
-            // Profile photo
+            const savedUser = localStorage.getItem('user_name');
+            const savedEmail = localStorage.getItem('user_email');
             const savedAvatar = localStorage.getItem('user_avatar');
-            if (savedAvatar) {
-                document.getElementById('profileAvatar').src = savedAvatar;
+
+            if (savedUser) {
+                document.getElementById('displayUsername').innerText = savedUser;
+                document.getElementById('profileUserName').innerText = savedUser;
             }
 
-            // Academic & Contact fields
-            if (localStorage.getItem('user_name')) document.getElementById('inputName').value = localStorage.getItem('user_name');
-            if (localStorage.getItem('user_academic')) document.getElementById('inputAcademic').value = localStorage.getItem('user_academic');
-            if (localStorage.getItem('user_email')) document.getElementById('inputEmail').value = localStorage.getItem('user_email');
-            if (localStorage.getItem('user_contact')) document.getElementById('inputContact').value = localStorage.getItem('user_contact');
+            if (savedEmail) {
+                document.getElementById('profileEmail').innerText = savedEmail;
+            }
 
-            // Stats
-            if (localStorage.getItem('tests_taken')) document.getElementById('testsTakenCount').innerText = localStorage.getItem('tests_taken');
-            if (localStorage.getItem('avg_score')) document.getElementById('avgScoreDisplay').innerText = localStorage.getItem('avg_score') + '%';
-            if (localStorage.getItem('topics_completed')) document.getElementById('topicsCompletedCount').innerText = localStorage.getItem('topics_completed');
-            if (localStorage.getItem('day_streak')) document.getElementById('streakCount').innerText = localStorage.getItem('day_streak');
+            if (savedAvatar) {
+                const avatarContainer = document.getElementById('profileAvatarContainer');
+                avatarContainer.innerHTML = `<img src="${savedAvatar}" alt="Google Profile Photo">`;
+            }
         });
 
-        // Auto-save form inputs as the user types
-        function saveProfileData() {
-            localStorage.setItem('user_name', document.getElementById('inputName').value);
-            localStorage.setItem('user_academic', document.getElementById('inputAcademic').value);
-            localStorage.setItem('user_email', document.getElementById('inputEmail').value);
-            localStorage.setItem('user_contact', document.getElementById('inputContact').value);
-        }
-
-        // Handle Profile Photo Upload & Save
-        function updateProfilePhoto(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const base64Image = e.target.result;
-                    document.getElementById('profileAvatar').src = base64Image;
-                    localStorage.setItem('user_avatar', base64Image);
-                };
-                reader.readAsDataURL(file);
-            }
+        // Log out handler (clears identity storage and returns to dashboard login state)
+        function handleLogout() {
+            localStorage.removeItem('user_name');
+            localStorage.removeItem('user_email');
+            localStorage.removeItem('user_avatar');
+            window.location.href = 'index.html';
         }
     </script>
 </body>
