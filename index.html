@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- This site is hosted on Netlify. Anyone can build and deploy a site like this one for free: https://netlify.new -->
-    <meta name="hosting-provider" content="Netlify">
-    <meta name="netlify-deploy" content="https://netlify.new/?utm_campaign=ai-legible&amp;utm_source=meta&amp;utm_medium=referral&amp;utm_id=e92451fc-872b-4a4a-beb5-fcacc6a78709">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | Swastik-Tech</title>
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Identity Services SDK for Sign-In -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    
     <style>
         :root {
             --bg-color: #03151c;
@@ -63,6 +63,7 @@
             transition: background-color 0.4s ease, color 0.4s ease;
         }
 
+        /* Sidebar */
         .sidebar {
             width: 64px;
             background-color: var(--sidebar-bg);
@@ -107,6 +108,7 @@
             box-shadow: 0 0 10px var(--border-glow);
         }
 
+        /* App Wrapper */
         .app-wrapper {
             margin-left: 64px;
             flex: 1;
@@ -166,130 +168,96 @@
             box-shadow: 0 0 10px var(--border-glow);
         }
 
-        .portal-container {
+        .container {
             padding: 2rem;
             max-width: 1200px;
             margin: 0 auto;
             width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 2.5rem;
         }
 
-        .section-header {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1rem;
-            color: var(--text-muted);
-            margin-bottom: 0.8rem;
-            letter-spacing: 0.8px;
-        }
-
-        /* Portals Grid */
-        .portals-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .portal-card {
+        .dashboard-welcome {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 8px;
-            padding: 1.8rem;
-            text-align: center;
-            text-decoration: none;
-            color: var(--text-main);
-            transition: all 0.3s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            padding: 2.5rem;
+            border-radius: 12px;
             backdrop-filter: blur(8px);
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
         }
 
-        .portal-card:hover {
-            border-color: var(--accent-cyan);
-            transform: translateY(-4px);
-            box-shadow: 0 0 20px var(--border-glow);
-            background: var(--input-bg);
-        }
-
-        .portal-card i.main-icon {
-            font-size: 2.4rem;
-            color: var(--accent-cyan);
-            margin-bottom: 1rem;
-        }
-
-        .portal-card h3 {
+        .dashboard-welcome h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
-            margin-bottom: 0.4rem;
+            color: var(--accent-cyan);
+            margin-bottom: 0.5rem;
         }
 
-        .portal-card p {
-            font-size: 0.9rem;
+        .dashboard-welcome p {
             color: var(--text-muted);
         }
 
-        /* Login Modal Overlay Styles */
+        /* --- MODAL STYLES (Login & Sign Up Overlays) --- */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(3, 21, 28, 0.88);
-            backdrop-filter: blur(10px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(3, 21, 28, 0.85);
+            backdrop-filter: blur(12px);
             z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
         }
 
         .login-modal {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 12px;
+            border-radius: 16px;
             padding: 2.5rem;
             width: 100%;
             max-width: 440px;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.6), 0 0 15px var(--border-glow);
+            box-shadow: 0 0 40px rgba(0, 243, 255, 0.15);
+            position: relative;
+        }
+
+        .signup-modal {
+            max-width: 480px;
         }
 
         .login-header {
-            margin-bottom: 1.5rem;
+            text-align: center;
+            margin-bottom: 1.8rem;
         }
 
         .login-header h2 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             color: var(--text-main);
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.5rem;
         }
 
         .login-header p {
             color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        .google-btn {
-            width: 100%;
-            background: #1a73e8;
-            border: none;
-            border-radius: 6px;
-            padding: 0.75rem;
-            color: white;
-            font-family: 'Orbitron', sans-serif;
             font-size: 0.9rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            cursor: pointer;
-            transition: opacity 0.3s;
         }
 
-        .google-btn:hover { opacity: 0.9; }
+        .free-account-tag {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            color: var(--accent-blue);
+            letter-spacing: 1.5px;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        /* Google button override wrapper */
+        .google-btn-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.2rem;
+        }
 
         .divider {
             display: flex;
@@ -299,6 +267,7 @@
             font-size: 0.8rem;
             font-family: 'Orbitron', sans-serif;
             margin: 1.2rem 0;
+            opacity: 0.7;
         }
 
         .divider::before, .divider::after {
@@ -306,37 +275,42 @@
             flex: 1;
             border-bottom: 1px solid var(--card-border);
         }
-        .divider::before { margin-right: 0.75rem; }
-        .divider::after { margin-left: 0.75rem; }
+
+        .divider::before { margin-right: .75em; }
+        .divider::after { margin-left: .75em; }
 
         .form-group {
-            margin-bottom: 1.1rem;
+            margin-bottom: 1rem;
             display: flex;
             flex-direction: column;
             gap: 0.3rem;
         }
 
         .form-group label {
-            font-family: 'Orbitron', sans-serif;
             font-size: 0.8rem;
             color: var(--text-muted);
+            font-family: 'Orbitron', sans-serif;
         }
 
-        .input-wrapper { position: relative; }
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
 
         .form-group input {
             width: 100%;
             background: var(--input-bg);
             border: 1px solid var(--card-border);
-            border-radius: 6px;
-            padding: 0.7rem 0.9rem;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
             color: var(--text-main);
             font-size: 0.95rem;
-            outline: none;
-            transition: border-color 0.3s;
+            transition: all 0.3s;
         }
 
         .form-group input:focus {
+            outline: none;
             border-color: var(--accent-cyan);
             box-shadow: 0 0 10px var(--border-glow);
         }
@@ -344,45 +318,61 @@
         .toggle-password {
             position: absolute;
             right: 12px;
-            top: 50%;
-            transform: translateY(-50%);
             color: var(--text-muted);
             cursor: pointer;
+            font-size: 0.9rem;
         }
 
-        .forgot-link {
-            display: block;
-            text-align: right;
-            font-size: 0.8rem;
+        .toggle-password:hover {
             color: var(--accent-cyan);
-            text-decoration: none;
-            margin-top: -0.5rem;
-            margin-bottom: 1.2rem;
+        }
+
+        .helper-text {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            opacity: 0.8;
+            margin-top: 0.2rem;
+            line-height: 1.4;
         }
 
         .submit-btn {
             width: 100%;
-            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            background: var(--accent-cyan);
+            color: #03151c;
             border: none;
-            border-radius: 6px;
-            padding: 0.75rem;
-            color: white;
+            padding: 0.8rem;
+            border-radius: 8px;
             font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
             font-size: 0.95rem;
-            font-weight: 600;
             cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 0.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            transition: opacity 0.3s;
         }
 
-        .submit-btn:hover { opacity: 0.9; }
+        .submit-btn:hover {
+            box-shadow: 0 0 15px var(--accent-cyan);
+            opacity: 0.9;
+        }
+
+        .continue-btn {
+            background: var(--accent-blue);
+            color: #ffffff;
+            margin-top: 1.2rem;
+        }
+
+        .continue-btn:hover {
+            background: #0284c7;
+            box-shadow: 0 0 15px rgba(2, 132, 199, 0.4);
+        }
 
         .modal-footer {
             text-align: center;
-            margin-top: 1.2rem;
+            margin-top: 1.5rem;
             font-size: 0.85rem;
             color: var(--text-muted);
         }
@@ -393,6 +383,15 @@
             font-weight: 600;
         }
 
+        .modal-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .next-step-text {
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
         @media(max-width: 768px) {
             .sidebar { display: none; }
             .app-wrapper { margin-left: 0; }
@@ -401,47 +400,7 @@
 </head>
 <body>
 
-    <!-- Login Pop-up Modal Overlay -->
-    <div id="loginModalOverlay" class="modal-overlay">
-        <div class="login-modal">
-            <div class="login-header">
-                <h2>Welcome back</h2>
-                <p>Log in to Swastik Tech</p>
-            </div>
-
-            <button class="google-btn" onclick="handleGoogleLogin()">
-                <i class="fa-brands fa-google"></i> Continue with Google
-            </button>
-
-            <div class="divider">OR</div>
-
-            <form id="loginForm" onsubmit="handleLoginSubmit(event)">
-                <div class="form-group">
-                    <label>Username or Email</label>
-                    <input type="text" id="loginUser" placeholder="Enter username or email" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Password</label>
-                    <div class="input-wrapper">
-                        <input type="password" id="loginPass" placeholder="••••••••••••" required>
-                        <i class="fa-regular fa-eye toggle-password" onclick="togglePasswordVisibility()"></i>
-                    </div>
-                </div>
-
-                <a href="#" class="forgot-link">Forgot password?</a>
-
-                <button type="submit" class="submit-btn">
-                    Log In <i class="fa-solid fa-arrow-right"></i>
-                </button>
-            </form>
-
-            <div class="modal-footer">
-                New to Swastik Tech ? <a href="#" onclick="toggleAuthMode(event)">Create an account</a>
-            </div>
-        </div>
-    </div>
-
+    <!-- SIDEBAR NAVIGATION -->
     <aside class="sidebar">
         <div class="brand-icon"><i class="fa-solid fa-microchip"></i></div>
         <nav class="sidebar-nav">
@@ -452,9 +411,10 @@
         </nav>
     </aside>
 
+    <!-- APP WRAPPER -->
     <div class="app-wrapper">
         <header>
-            <div class="header-title">| Swastik-Tech Dashboard</div>
+            <div class="header-title">| Dashboard Hub</div>
             <div class="header-actions">
                 <a href="profile.html" class="theme-toggle-btn">
                     <i class="fa-solid fa-user"></i> Profile
@@ -465,102 +425,225 @@
             </div>
         </header>
 
-        <main class="portal-container">
-            <div>
-                <h2 class="section-header">Select Academic Portal</h2>
-                <div class="portals-grid">
-                    <a href="class11/class11-hub.html" class="portal-card">
-                        <i class="fa-solid fa-atom main-icon"></i>
-                        <h3>Class 11 Science Portal</h3>
-                        <p>Physics, Chemistry, Maths, English & Computer Science study notes and tests.</p>
-                    </a>
-                    <a href="mains/pyqs.html" class="portal-card">
-                        <i class="fa-solid fa-graduation-cap main-icon"></i>
-                        <h3>JEE Main & Advance Portal</h3>
-                        <p>Subject-wise PYQ banks, mock tests, and full test suites.</p>
-                    </a>
-                    <a href="class10/class10-hub.html" class="portal-card">
-                        <i class="fa-solid fa-book-open main-icon"></i>
-                        <h3>Class 10 Board Portal</h3>
-                        <p>Board PYQs, comprehensive notes, and subject practice suites.</p>
-                    </a>
-                </div>
+        <main class="container">
+            <div class="dashboard-welcome">
+                <h1>Welcome to Swastik-Tech Portal</h1>
+                <p>Select a module from the sidebar to begin your sessions in physics, computer science, or exam practice.</p>
             </div>
         </main>
     </div>
 
+    <!-- 1. LOGIN MODAL OVERLAY -->
+    <div id="loginModalOverlay" class="modal-overlay" style="display: none;">
+        <div class="login-modal">
+            <div class="login-header">
+                <h2>Welcome Back</h2>
+                <p>Log in to access your dashboard & tracking</p>
+            </div>
+
+            <!-- Official Google Sign-In Integration -->
+            <div id="g_id_onload"
+                 data-client_id="YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com" 
+                 data-context="signin"
+                 data-ux_mode="popup"
+                 data-callback="handleGoogleSignIn"
+                 data-auto_prompt="false">
+            </div>
+            <div class="google-btn-wrapper">
+                <div class="g_id_signin"
+                     data-type="standard"
+                     data-size="large"
+                     data-theme="outline"
+                     data-text="continue_with"
+                     data-shape="rectangular"
+                     data-logo_alignment="left">
+                </div>
+            </div>
+
+            <div class="divider">OR</div>
+
+            <form id="loginForm" onsubmit="handleLoginSubmit(event)">
+                <div class="form-group">
+                    <label>Username or Email</label>
+                    <input type="text" id="loginUser" placeholder="Enter username" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="loginPass" placeholder="••••••••" required>
+                        <i class="fa-regular fa-eye toggle-password" onclick="togglePasswordVisibility('loginPass', this)"></i>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    Log In <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </form>
+
+            <div class="modal-footer">
+                New to Swastik Tech ? <a href="#" onclick="toggleModals('loginToSignup')">Create an account</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. SIGN UP MODAL OVERLAY -->
+    <div id="signupModalOverlay" class="modal-overlay" style="display: none;">
+        <div class="login-modal signup-modal">
+            <div class="login-header">
+                <span class="free-account-tag">FREE ACCOUNT</span>
+                <h2>Start learning with real exam questions.</h2>
+                <p>Join students preparing for CBSE Class 11–12 Computer Science & Informatics Practices.</p>
+            </div>
+
+            <!-- Google Sign-In for Signup as well -->
+            <div class="google-btn-wrapper">
+                <div class="g_id_signin"
+                     data-type="standard"
+                     data-size="large"
+                     data-theme="outline"
+                     data-text="continue_with"
+                     data-shape="rectangular"
+                     data-logo_alignment="left">
+                </div>
+            </div>
+
+            <div class="divider">OR</div>
+
+            <form id="signupForm" onsubmit="handleSignupSubmit(event)">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="signupName" placeholder="Your name" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="signupEmail" placeholder="you@example.com" required>
+                    <small class="helper-text">We'll send a verification code here.</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Create Password</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="signupPass" placeholder="••••••••" required minlength="8">
+                        <i class="fa-regular fa-eye toggle-password" onclick="togglePasswordVisibility('signupPass', this)"></i>
+                    </div>
+                    <small class="helper-text">At least 8 characters. Make it one you'll remember — you'll want quick access before exams.</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="signupConfirmPass" placeholder="••••••••" required minlength="8">
+                        <i class="fa-regular fa-eye toggle-password" onclick="togglePasswordVisibility('signupConfirmPass', this)"></i>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn continue-btn">
+                    Continue <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </form>
+
+            <div class="modal-footer">
+                <p class="next-step-text">Next: a quick email check — takes 10 seconds.</p>
+                Already have an account? <a href="#" onclick="toggleModals('signupToLogin')">Log in</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT CONTROLS -->
     <script>
-        // Check saved theme preference
+        // --- Theme Management ---
         if (localStorage.getItem('theme') === 'light') {
             document.body.classList.add('light-mode');
         }
 
         function toggleTheme() {
             document.body.classList.toggle('light-mode');
-            if (document.body.classList.contains('light-mode')) {
-                localStorage.setItem('theme', 'light');
-            } else {
-                localStorage.setItem('theme', 'dark');
-            }
+            localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
         }
 
-        // Check if user is already logged in on entry
+        // --- Authentication Modal Management ---
+        const loginOverlay = document.getElementById('loginModalOverlay');
+        const signupOverlay = document.getElementById('signupModalOverlay');
+
         window.addEventListener('DOMContentLoaded', () => {
             const savedUser = localStorage.getItem('user_name');
             if (savedUser) {
-                document.getElementById('loginModalOverlay').style.display = 'none';
+                // If logged in, ensure popups are hidden
+                loginOverlay.style.display = 'none';
+                signupOverlay.style.display = 'none';
+            } else {
+                // If not logged in, trigger Login modal view
+                loginOverlay.style.display = 'flex';
             }
         });
 
-        function handleLoginSubmit(event) {
-            event.preventDefault();
-            const username = document.getElementById('loginUser').value;
-            
-            // Save details directly to profile data storage
-            localStorage.setItem('user_name', username);
-            
-            // Hide popup modal
-            document.getElementById('loginModalOverlay').style.display = 'none';
-        }
-
-        function handleGoogleLogin() {
-            localStorage.setItem('user_name', 'Google User');
-            document.getElementById('loginModalOverlay').style.display = 'none';
-        }
-
-        function togglePasswordVisibility() {
-            const passInput = document.getElementById('loginPass');
-            const icon = document.querySelector('.toggle-password');
-            if (passInput.type === 'password') {
-                passInput.type = 'text';
-                icon.classList.remove('fa-eye');
-                icon.classList.add('fa-eye-slash');
-            } else {
-                passInput.type = 'password';
-                icon.classList.remove('fa-eye-slash');
-                icon.classList.add('fa-eye');
+        // Switcher logic between login and signup modals
+        function toggleModals(action) {
+            if (action === 'loginToSignup') {
+                loginOverlay.style.display = 'none';
+                signupOverlay.style.display = 'flex';
+            } else if (action === 'signupToLogin') {
+                signupOverlay.style.display = 'none';
+                loginOverlay.style.display = 'flex';
             }
         }
 
-        let isLoginMode = true;
-        function toggleAuthMode(event) {
+        // --- Standard Form Actions ---
+        function handleLoginSubmit(event) {
             event.preventDefault();
-            isLoginMode = !isLoginMode;
-            const headerP = document.querySelector('.login-header p');
-            const submitBtn = document.querySelector('.submit-btn');
-            const footerText = document.querySelector('.modal-footer');
+            const username = document.getElementById('loginUser').value;
+            localStorage.setItem('user_name', username);
+            loginOverlay.style.display = 'none';
+        }
 
-            if (!isLoginMode) {
-                headerP.innerText = 'Create your Swastik Tech account';
-                submitBtn.innerHTML = 'Sign Up <i class="fa-solid fa-arrow-right"></i>';
-                footerText.innerHTML = 'Already have an account? <a href="#" onclick="toggleAuthMode(event)">Log in</a>';
+        function handleSignupSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('signupName').value;
+            localStorage.setItem('user_name', name);
+            signupOverlay.style.display = 'none';
+        }
+
+        // --- Google Sign-In Handler ---
+        function handleGoogleSignIn(response) {
+            try {
+                const base64Url = response.credential.split('.')[1];
+                const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+                const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+                    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+                }).join(''));
+
+                const userData = JSON.parse(jsonPayload);
+
+                // Save info to local storage for profile page synchronization
+                localStorage.setItem('user_name', userData.name);
+                localStorage.setItem('user_email', userData.email);
+                if(userData.picture) {
+                    localStorage.setItem('user_avatar', userData.picture);
+                }
+
+                // Hide modals on successful token acquisition
+                loginOverlay.style.display = 'none';
+                signupOverlay.style.display = 'none';
+            } catch (error) {
+                console.error("Google authentication parsing failed", error);
+            }
+        }
+
+        // --- Utilities ---
+        function togglePasswordVisibility(inputId, iconElement) {
+            const passInput = document.getElementById(inputId);
+            if (passInput.type === 'password') {
+                passInput.type = 'text';
+                iconElement.classList.remove('fa-eye');
+                iconElement.classList.add('fa-eye-slash');
             } else {
-                headerP.innerText = 'Log in to Swastik Tech';
-                submitBtn.innerHTML = 'Log In <i class="fa-solid fa-arrow-right"></i>';
-                footerText.innerHTML = 'New to Swastik Tech ? <a href="#" onclick="toggleAuthMode(event)">Create an account</a>';
+                passInput.type = 'password';
+                iconElement.classList.remove('fa-eye-slash');
+                iconElement.classList.add('fa-eye');
             }
         }
     </script>
 </body>
 </html>
-<script async src="/.netlify/scripts/hud?variant=public" data-nf-variant="public" data-netlify-site-id="e92451fc-872b-4a4a-beb5-fcacc6a78709" data-app-host="app.netlify.com"></script>
