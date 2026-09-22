@@ -188,9 +188,13 @@
             gap: 1.5rem;
         }
 
+        .profile-avatar-wrapper {
+            position: relative;
+        }
+
         .profile-avatar {
-            width: 85px;
-            height: 85px;
+            width: 90px;
+            height: 90px;
             border: 2px solid var(--accent-cyan);
             border-radius: 50%;
             display: flex;
@@ -213,11 +217,32 @@
             font-family: 'Orbitron', sans-serif;
             font-size: 1.4rem;
             color: var(--text-main);
+            margin-bottom: 0.5rem;
         }
 
-        .profile-avatar-info p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
+        /* Upload photo button styling */
+        .upload-photo-label {
+            background: var(--input-bg);
+            border: 1px solid var(--card-border);
+            color: var(--accent-cyan);
+            padding: 0.4rem 0.9rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-family: 'Orbitron', sans-serif;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s;
+        }
+
+        .upload-photo-label:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 10px var(--border-glow);
+        }
+
+        #photoUploadInput {
+            display: none;
         }
 
         .profile-section {
@@ -257,7 +282,6 @@
             font-family: 'Orbitron', sans-serif;
         }
 
-        /* Interactive input text boxes for writing details */
         .editable-input {
             width: 100%;
             background: var(--input-bg);
@@ -276,7 +300,6 @@
             box-shadow: 0 0 10px var(--border-glow);
         }
 
-        /* Action Buttons (Save & Log Out) */
         .profile-actions-bar {
             border-top: 1px solid var(--card-border);
             padding-top: 1.5rem;
@@ -359,12 +382,17 @@
         <main class="container">
             <div class="profile-card">
                 <div class="profile-top">
-                    <div class="profile-avatar" id="profileAvatarContainer">
-                        <i class="fa-solid fa-user"></i>
+                    <div class="profile-avatar-wrapper">
+                        <div class="profile-avatar" id="profileAvatarContainer">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
                     </div>
                     <div class="profile-avatar-info">
                         <h2 id="displayUsername">Student Account</h2>
-                        <p>Manage your personal and academic credentials</p>
+                        <label for="photoUploadInput" class="upload-photo-label">
+                            <i class="fa-solid fa-camera"></i> Upload Photo
+                        </label>
+                        <input type="file" id="photoUploadInput" accept="image/*" onchange="handlePhotoUpload(event)">
                     </div>
                 </div>
 
@@ -445,6 +473,8 @@
             localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
         }
 
+        let uploadedAvatarBase64 = localStorage.getItem('user_avatar') || '';
+
         // Load profile data into input boxes on startup
         window.addEventListener('DOMContentLoaded', () => {
             if (localStorage.getItem('user_name')) {
@@ -455,8 +485,8 @@
             if (localStorage.getItem('user_email')) {
                 document.getElementById('inputEmail').value = localStorage.getItem('user_email');
             }
-            if (localStorage.getItem('user_avatar')) {
-                document.getElementById('profileAvatarContainer').innerHTML = `<img src="${localStorage.getItem('user_avatar')}" alt="Avatar">`;
+            if (uploadedAvatarBase64) {
+                document.getElementById('profileAvatarContainer').innerHTML = `<img src="${uploadedAvatarBase64}" alt="Avatar">`;
             }
 
             // Load extra fields if previously saved
@@ -466,18 +496,34 @@
             });
         });
 
-        // Save input values to localStorage
+        // Handle Photo Upload and convert to Base64
+        function handlePhotoUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    uploadedAvatarBase64 = e.target.result;
+                    document.getElementById('profileAvatarContainer').innerHTML = `<img src="${uploadedAvatarBase64}" alt="Avatar">`;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Save input values and uploaded photo to localStorage
         function saveProfileData() {
             const name = document.getElementById('inputUsername').value;
             localStorage.setItem('user_name', name);
             localStorage.setItem('user_email', document.getElementById('inputEmail').value);
+            if (uploadedAvatarBase64) {
+                localStorage.setItem('user_avatar', uploadedAvatarBase64);
+            }
             document.getElementById('displayUsername').innerText = name;
 
             ['Dob', 'Gender', 'Section', 'Roll', 'State', 'City', 'Phone'].forEach(field => {
                 localStorage.setItem('profile_' + field, document.getElementById('input' + field).value);
             });
 
-            alert('Profile details saved successfully!');
+            alert('Profile details and photo saved successfully!');
         }
 
         function handleLogout() {
