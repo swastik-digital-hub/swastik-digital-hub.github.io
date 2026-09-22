@@ -43,64 +43,61 @@
             color: var(--text-main);
             font-family: 'Rajdhani', sans-serif;
             min-height: 100vh;
-            padding: 2rem;
+            padding: 1rem;
             transition: background-color 0.4s ease, color 0.4s ease;
+            overflow-x: hidden;
         }
 
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-bottom: 1.5rem;
+            padding-bottom: 1rem;
             border-bottom: 1px solid var(--border-glow);
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .header-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: var(--accent-cyan);
             border-left: 3px solid var(--accent-cyan);
-            padding-left: 10px;
+            padding-left: 8px;
         }
 
         .back-btn {
             background: var(--card-bg);
             border: 1px solid var(--border-glow);
             color: var(--accent-cyan);
-            padding: 0.5rem 1rem;
+            padding: 0.4rem 0.8rem;
             border-radius: 6px;
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             transition: all 0.3s ease;
             backdrop-filter: blur(8px);
         }
 
-        .back-btn:hover {
-            border-color: var(--accent-cyan);
-            box-shadow: 0 0 10px var(--border-glow);
-        }
-
         .profile-container {
             max-width: 750px;
-            margin: 2rem auto;
+            width: 100%;
+            margin: 0 auto 2rem auto;
             background: var(--card-bg);
             border: 1px solid var(--border-glow);
             border-radius: 12px;
-            padding: 2.5rem;
+            padding: 1.5rem;
             backdrop-filter: blur(8px);
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
         }
 
         .profile-container h2 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: var(--accent-cyan);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
             border-bottom: 1px solid var(--border-glow);
             padding-bottom: 0.5rem;
         }
@@ -108,20 +105,21 @@
         .profile-header-section {
             display: flex;
             align-items: center;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
         }
 
         .profile-photo-box {
-            width: 90px;
-            height: 90px;
+            width: 80px;
+            height: 80px;
             border: 2px dashed var(--accent-cyan);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--text-muted);
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             background: rgba(0, 243, 255, 0.05);
             overflow: hidden;
             position: relative;
@@ -140,39 +138,44 @@
             background: rgba(3, 15, 24, 0.6);
             border: 1px solid var(--border-glow);
             color: var(--accent-cyan);
-            padding: 0.5rem 1rem;
+            padding: 0.4rem 0.8rem;
             border-radius: 6px;
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
-        .upload-label:hover {
-            background: var(--border-glow);
-            box-shadow: 0 0 10px var(--border-glow);
-        }
-
         .form-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.2rem;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        @media (min-width: 600px) {
+            .form-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            body { padding: 2rem; }
+            .profile-container { padding: 2.5rem; }
         }
 
         .form-group {
-            margin-bottom: 1rem;
+            width: 100%;
+            min-width: 0;
         }
 
         .form-group label {
             display: block;
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             margin-bottom: 0.4rem;
             color: var(--text-muted);
         }
 
         .form-group input, .form-group select {
             width: 100%;
+            max-width: 100%;
             padding: 0.7rem 1rem;
             background: rgba(3, 15, 24, 0.6);
             border: 1px solid var(--border-glow);
@@ -191,15 +194,15 @@
 
         .section-heading-text {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: var(--accent-cyan);
-            margin: 1.5rem 0 1rem 0;
+            margin: 1.2rem 0 0.8rem 0;
             border-left: 3px solid var(--accent-cyan);
             padding-left: 8px;
         }
 
         .save-btn {
-            margin-top: 2rem;
+            margin-top: 1.5rem;
             width: 100%;
             padding: 0.9rem;
             background: var(--accent-cyan);
@@ -235,7 +238,7 @@
                     <i class="fa-solid fa-user" id="defaultUserIcon"></i>
                 </div>
                 <div>
-                    <h3 style="font-family: 'Orbitron'; color: var(--accent-cyan); margin-bottom: 0.4rem;">Profile Photo</h3>
+                    <h3 style="font-family: 'Orbitron'; color: var(--accent-cyan); margin-bottom: 0.4rem; font-size: 0.95rem;">Profile Photo</h3>
                     <label for="photoInput" class="upload-label"><i class="fa-solid fa-upload"></i> Upload Photo</label>
                     <input type="file" id="photoInput" accept="image/*" style="display: none;">
                 </div>
