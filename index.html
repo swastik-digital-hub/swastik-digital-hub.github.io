@@ -230,6 +230,169 @@
             color: var(--text-muted);
         }
 
+        /* Login Modal Overlay Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(3, 21, 28, 0.88);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .login-modal {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.6), 0 0 15px var(--border-glow);
+        }
+
+        .login-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .login-header h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            color: var(--text-main);
+            margin-bottom: 0.4rem;
+        }
+
+        .login-header p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .google-btn {
+            width: 100%;
+            background: #1a73e8;
+            border: none;
+            border-radius: 6px;
+            padding: 0.75rem;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .google-btn:hover { opacity: 0.9; }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            font-family: 'Orbitron', sans-serif;
+            margin: 1.2rem 0;
+        }
+
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid var(--card-border);
+        }
+        .divider::before { margin-right: 0.75rem; }
+        .divider::after { margin-left: 0.75rem; }
+
+        .form-group {
+            margin-bottom: 1.1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .form-group label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .input-wrapper { position: relative; }
+
+        .form-group input {
+            width: 100%;
+            background: var(--input-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 6px;
+            padding: 0.7rem 0.9rem;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 10px var(--border-glow);
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        .forgot-link {
+            display: block;
+            text-align: right;
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+            text-decoration: none;
+            margin-top: -0.5rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            border: none;
+            border-radius: 6px;
+            padding: 0.75rem;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: opacity 0.3s;
+        }
+
+        .submit-btn:hover { opacity: 0.9; }
+
+        .modal-footer {
+            text-align: center;
+            margin-top: 1.2rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .modal-footer a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
         @media(max-width: 768px) {
             .sidebar { display: none; }
             .app-wrapper { margin-left: 0; }
@@ -237,6 +400,47 @@
     </style>
 </head>
 <body>
+
+    <!-- Login Pop-up Modal Overlay -->
+    <div id="loginModalOverlay" class="modal-overlay">
+        <div class="login-modal">
+            <div class="login-header">
+                <h2>Welcome back</h2>
+                <p>Log in to Swastik Tech</p>
+            </div>
+
+            <button class="google-btn" onclick="handleGoogleLogin()">
+                <i class="fa-brands fa-google"></i> Continue with Google
+            </button>
+
+            <div class="divider">OR</div>
+
+            <form id="loginForm" onsubmit="handleLoginSubmit(event)">
+                <div class="form-group">
+                    <label>Username or Email</label>
+                    <input type="text" id="loginUser" placeholder="Enter username or email" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="loginPass" placeholder="••••••••••••" required>
+                        <i class="fa-regular fa-eye toggle-password" onclick="togglePasswordVisibility()"></i>
+                    </div>
+                </div>
+
+                <a href="#" class="forgot-link">Forgot password?</a>
+
+                <button type="submit" class="submit-btn">
+                    Log In <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </form>
+
+            <div class="modal-footer">
+                New to Swastik Tech ? <a href="#" onclick="toggleAuthMode(event)">Create an account</a>
+            </div>
+        </div>
+    </div>
 
     <aside class="sidebar">
         <div class="brand-icon"><i class="fa-solid fa-microchip"></i></div>
@@ -297,6 +501,63 @@
                 localStorage.setItem('theme', 'light');
             } else {
                 localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Check if user is already logged in on entry
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedUser = localStorage.getItem('user_name');
+            if (savedUser) {
+                document.getElementById('loginModalOverlay').style.display = 'none';
+            }
+        });
+
+        function handleLoginSubmit(event) {
+            event.preventDefault();
+            const username = document.getElementById('loginUser').value;
+            
+            // Save details directly to profile data storage
+            localStorage.setItem('user_name', username);
+            
+            // Hide popup modal
+            document.getElementById('loginModalOverlay').style.display = 'none';
+        }
+
+        function handleGoogleLogin() {
+            localStorage.setItem('user_name', 'Google User');
+            document.getElementById('loginModalOverlay').style.display = 'none';
+        }
+
+        function togglePasswordVisibility() {
+            const passInput = document.getElementById('loginPass');
+            const icon = document.querySelector('.toggle-password');
+            if (passInput.type === 'password') {
+                passInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        let isLoginMode = true;
+        function toggleAuthMode(event) {
+            event.preventDefault();
+            isLoginMode = !isLoginMode;
+            const headerP = document.querySelector('.login-header p');
+            const submitBtn = document.querySelector('.submit-btn');
+            const footerText = document.querySelector('.modal-footer');
+
+            if (!isLoginMode) {
+                headerP.innerText = 'Create your Swastik Tech account';
+                submitBtn.innerHTML = 'Sign Up <i class="fa-solid fa-arrow-right"></i>';
+                footerText.innerHTML = 'Already have an account? <a href="#" onclick="toggleAuthMode(event)">Log in</a>';
+            } else {
+                headerP.innerText = 'Log in to Swastik Tech';
+                submitBtn.innerHTML = 'Log In <i class="fa-solid fa-arrow-right"></i>';
+                footerText.innerHTML = 'New to Swastik Tech ? <a href="#" onclick="toggleAuthMode(event)">Create an account</a>';
             }
         }
     </script>
