@@ -69,7 +69,7 @@
             color: var(--text-muted);
             text-decoration: none;
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.85srem;
+            font-size: 0.85rem;
             transition: color 0.3s;
         }
 
@@ -92,7 +92,6 @@
             padding-bottom: 0.5rem;
         }
 
-        /* PDF Cards Grid Layout */
         .pdf-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -109,6 +108,7 @@
             gap: 1.2rem;
             backdrop-filter: blur(8px);
             transition: all 0.3s ease;
+            max-width: 400px;
         }
 
         .pdf-card:hover {
@@ -199,58 +199,20 @@
 
         <div class="pdf-grid">
             
-            <!-- Note Item 1 -->
+            <!-- Atomic Structure Note Card -->
             <div class="pdf-card">
                 <div class="pdf-header-info">
                     <div class="pdf-icon-box"><i class="fa-solid fa-file-pdf"></i></div>
                     <div class="pdf-text-content">
-                        <h3>Scalar & Vector</h3>
-                        <p>Practice Question Bank & Concepts</p>
+                        <h3>Atomic Structure</h3>
+                        <p>Chemistry Comprehensive Revision Notes (2026)</p>
                     </div>
                 </div>
                 <div class="pdf-card-actions">
-                    <a href="pdfs/scalar-vector.pdf" target="_blank" class="action-btn view-action">
+                    <a href="pdfs/ATOMIC%20STRUCTURE-2026.pdf" target="_blank" class="action-btn view-action">
                         <i class="fa-regular fa-eye"></i> View
                     </a>
-                    <a href="pdfs/scalar-vector.pdf" download class="action-btn download-action">
-                        <i class="fa-solid fa-download"></i> Download
-                    </a>
-                </div>
-            </div>
-
-            <!-- Note Item 2 -->
-            <div class="pdf-card">
-                <div class="pdf-header-info">
-                    <div class="pdf-icon-box"><i class="fa-solid fa-file-pdf"></i></div>
-                    <div class="pdf-text-content">
-                        <h3>Structure of Atom</h3>
-                        <p>Chemistry Comprehensive Revision Notes</p>
-                    </div>
-                </div>
-                <div class="pdf-card-actions">
-                    <a href="pdfs/atomic-structure.pdf" target="_blank" class="action-btn view-action">
-                        <i class="fa-regular fa-eye"></i> View
-                    </a>
-                    <a href="pdfs/atomic-structure.pdf" download class="action-btn download-action">
-                        <i class="fa-solid fa-download"></i> Download
-                    </a>
-                </div>
-            </div>
-
-            <!-- Note Item 3 -->
-            <div class="pdf-card">
-                <div class="pdf-header-info">
-                    <div class="pdf-icon-box"><i class="fa-solid fa-file-pdf"></i></div>
-                    <div class="pdf-text-content">
-                        <h3>Python Basics</h3>
-                        <p>Computer Science Control Flow & Loops</p>
-                    </div>
-                </div>
-                <div class="pdf-card-actions">
-                    <a href="pdfs/python-basics.pdf" target="_blank" class="action-btn view-action">
-                        <i class="fa-regular fa-eye"></i> View
-                    </a>
-                    <a href="pdfs/python-basics.pdf" download class="action-btn download-action">
+                    <a href="pdfs/ATOMIC%20STRUCTURE-2026.pdf" download class="action-btn download-action">
                         <i class="fa-solid fa-download"></i> Download
                     </a>
                 </div>
