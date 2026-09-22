@@ -170,7 +170,6 @@
             width: 100%;
         }
 
-        /* Profile Card Layout */
         .profile-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
@@ -245,7 +244,7 @@
         .profile-field {
             display: flex;
             flex-direction: column;
-            gap: 0.2rem;
+            gap: 0.3rem;
         }
 
         .profile-field.full-width {
@@ -258,18 +257,52 @@
             font-family: 'Orbitron', sans-serif;
         }
 
-        .field-value {
-            font-size: 1.05rem;
+        /* Interactive input text boxes for writing details */
+        .editable-input {
+            width: 100%;
+            background: var(--input-bg);
+            border: 1px solid var(--card-border);
+            padding: 0.6rem 0.9rem;
+            border-radius: 6px;
             color: var(--text-main);
-            font-weight: 600;
+            font-size: 1rem;
+            font-family: 'Rajdhani', sans-serif;
+            transition: all 0.3s;
         }
 
-        /* Log out button styling */
-        .logout-container {
+        .editable-input:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 10px var(--border-glow);
+        }
+
+        /* Action Buttons (Save & Log Out) */
+        .profile-actions-bar {
             border-top: 1px solid var(--card-border);
             padding-top: 1.5rem;
             display: flex;
             justify-content: flex-end;
+            gap: 1rem;
+        }
+
+        .save-btn {
+            background: var(--accent-cyan);
+            border: none;
+            color: #03151c;
+            padding: 0.6rem 1.4rem;
+            border-radius: 6px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .save-btn:hover {
+            box-shadow: 0 0 15px var(--accent-cyan);
         }
 
         .logout-btn {
@@ -318,87 +351,85 @@
         <header>
             <div class="header-title">| Student Profile</div>
             <div class="header-actions">
-                <a href="index.html" class="theme-toggle-btn">
-                    <i class="fa-solid fa-house"></i> Dashboard
-                </a>
-                <button class="theme-toggle-btn" onclick="toggleTheme()">
-                    <i class="fa-solid fa-circle-half-stroke"></i> Theme
-                </button>
+                <a href="index.html" class="theme-toggle-btn"><i class="fa-solid fa-house"></i> Dashboard</a>
+                <button class="theme-toggle-btn" onclick="toggleTheme()"><i class="fa-solid fa-circle-half-stroke"></i> Theme</button>
             </div>
         </header>
 
         <main class="container">
             <div class="profile-card">
-                <!-- Top Row: Photo & Username -->
                 <div class="profile-top">
                     <div class="profile-avatar" id="profileAvatarContainer">
-                        <i class="fa-solid fa-user" id="defaultAvatarIcon"></i>
+                        <i class="fa-solid fa-user"></i>
                     </div>
                     <div class="profile-avatar-info">
-                        <h2 id="displayUsername">Swastik Sambhu Panda</h2>
-                        <p>Profile Photo / Student Account</p>
+                        <h2 id="displayUsername">Student Account</h2>
+                        <p>Manage your personal and academic credentials</p>
                     </div>
                 </div>
 
-                <!-- Academic Details Section -->
+                <!-- Academic Details -->
                 <div class="profile-section">
                     <div class="profile-section-title"><i class="fa-solid fa-graduation-cap"></i> Academic Details</div>
                     <div class="profile-grid">
                         <div class="profile-field">
                             <span class="field-label">Date of Birth</span>
-                            <span class="field-value">--/--/----</span>
+                            <input type="text" id="inputDob" class="editable-input" placeholder="DD/MM/YYYY">
                         </div>
                         <div class="profile-field">
                             <span class="field-label">Gender</span>
-                            <span class="field-value">Male</span>
+                            <input type="text" id="inputGender" class="editable-input" placeholder="Male / Female">
                         </div>
                     </div>
                 </div>
 
-                <!-- School Information Section -->
+                <!-- School Information -->
                 <div class="profile-section">
                     <div class="profile-section-title"><i class="fa-solid fa-school"></i> School Information</div>
                     <div class="profile-grid">
                         <div class="profile-field">
                             <span class="field-label">Section</span>
-                            <span class="field-value">Class 11 Science</span>
+                            <input type="text" id="inputSection" class="editable-input" placeholder="Class 11 Science">
                         </div>
                         <div class="profile-field">
                             <span class="field-label">Roll Number</span>
-                            <span class="field-value">42</span>
+                            <input type="text" id="inputRoll" class="editable-input" placeholder="Roll No">
                         </div>
                         <div class="profile-field">
                             <span class="field-label">State</span>
-                            <span class="field-value">Odisha</span>
+                            <input type="text" id="inputState" class="editable-input" placeholder="State">
                         </div>
                         <div class="profile-field">
                             <span class="field-label">City</span>
-                            <span class="field-value">Brahmapur</span>
+                            <input type="text" id="inputCity" class="editable-input" placeholder="City">
                         </div>
                     </div>
                 </div>
 
-                <!-- Contact Section -->
+                <!-- Contact Information -->
                 <div class="profile-section">
                     <div class="profile-section-title"><i class="fa-solid fa-address-book"></i> Contact</div>
                     <div class="profile-grid">
                         <div class="profile-field">
                             <span class="field-label">Phone Number</span>
-                            <span class="field-value">+91 ----------</span>
+                            <input type="text" id="inputPhone" class="editable-input" placeholder="+91 XXXXXXXXXX">
                         </div>
                         <div class="profile-field">
                             <span class="field-label">Email</span>
-                            <span class="field-value" id="profileEmail">swastik@example.com</span>
+                            <input type="email" id="inputEmail" class="editable-input" placeholder="you@example.com">
                         </div>
                         <div class="profile-field full-width">
                             <span class="field-label">User Name</span>
-                            <span class="field-value" id="profileUserName">Swastik Sambhu Panda</span>
+                            <input type="text" id="inputUsername" class="editable-input" placeholder="Your Name">
                         </div>
                     </div>
                 </div>
 
-                <!-- Log Out Option -->
-                <div class="logout-container">
+                <!-- Action Bar: Save Changes & Log Out -->
+                <div class="profile-actions-bar">
+                    <button class="save-btn" onclick="saveProfileData()">
+                        <i class="fa-solid fa-floppy-disk"></i> Save Changes
+                    </button>
                     <button class="logout-btn" onclick="handleLogout()">
                         <i class="fa-solid fa-right-from-bracket"></i> Log Out
                     </button>
@@ -408,46 +439,49 @@
     </div>
 
     <script>
-        // Check saved theme preference
-        if (localStorage.getItem('theme') === 'light') {
-            document.body.classList.add('light-mode');
-        }
-
+        if (localStorage.getItem('theme') === 'light') document.body.classList.add('light-mode');
         function toggleTheme() {
             document.body.classList.toggle('light-mode');
-            if (document.body.classList.contains('light-mode')) {
-                localStorage.setItem('theme', 'light');
-            } else {
-                localStorage.setItem('theme', 'dark');
-            }
+            localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
         }
 
-        // Sync profile data from localStorage (Name, Email, Google Avatar image)
+        // Load profile data into input boxes on startup
         window.addEventListener('DOMContentLoaded', () => {
-            const savedUser = localStorage.getItem('user_name');
-            const savedEmail = localStorage.getItem('user_email');
-            const savedAvatar = localStorage.getItem('user_avatar');
-
-            if (savedUser) {
-                document.getElementById('displayUsername').innerText = savedUser;
-                document.getElementById('profileUserName').innerText = savedUser;
+            if (localStorage.getItem('user_name')) {
+                const name = localStorage.getItem('user_name');
+                document.getElementById('displayUsername').innerText = name;
+                document.getElementById('inputUsername').value = name;
+            }
+            if (localStorage.getItem('user_email')) {
+                document.getElementById('inputEmail').value = localStorage.getItem('user_email');
+            }
+            if (localStorage.getItem('user_avatar')) {
+                document.getElementById('profileAvatarContainer').innerHTML = `<img src="${localStorage.getItem('user_avatar')}" alt="Avatar">`;
             }
 
-            if (savedEmail) {
-                document.getElementById('profileEmail').innerText = savedEmail;
-            }
-
-            if (savedAvatar) {
-                const avatarContainer = document.getElementById('profileAvatarContainer');
-                avatarContainer.innerHTML = `<img src="${savedAvatar}" alt="Google Profile Photo">`;
-            }
+            // Load extra fields if previously saved
+            ['Dob', 'Gender', 'Section', 'Roll', 'State', 'City', 'Phone'].forEach(field => {
+                const val = localStorage.getItem('profile_' + field);
+                if (val) document.getElementById('input' + field).value = val;
+            });
         });
 
-        // Log out handler (clears identity storage and returns to dashboard login state)
+        // Save input values to localStorage
+        function saveProfileData() {
+            const name = document.getElementById('inputUsername').value;
+            localStorage.setItem('user_name', name);
+            localStorage.setItem('user_email', document.getElementById('inputEmail').value);
+            document.getElementById('displayUsername').innerText = name;
+
+            ['Dob', 'Gender', 'Section', 'Roll', 'State', 'City', 'Phone'].forEach(field => {
+                localStorage.setItem('profile_' + field, document.getElementById('input' + field).value);
+            });
+
+            alert('Profile details saved successfully!');
+        }
+
         function handleLogout() {
-            localStorage.removeItem('user_name');
-            localStorage.removeItem('user_email');
-            localStorage.removeItem('user_avatar');
+            localStorage.clear();
             window.location.href = 'index.html';
         }
     </script>
