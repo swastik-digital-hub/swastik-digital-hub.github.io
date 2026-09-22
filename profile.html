@@ -113,16 +113,44 @@
         }
 
         .profile-photo-box {
-            width: 80px;
-            height: 80px;
+            width: 90px;
+            height: 90px;
             border: 2px dashed var(--accent-cyan);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--text-muted);
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             background: rgba(0, 243, 255, 0.05);
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .profile-photo-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .upload-label {
+            display: inline-block;
+            background: rgba(3, 15, 24, 0.6);
+            border: 1px solid var(--border-glow);
+            color: var(--accent-cyan);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .upload-label:hover {
+            background: var(--border-glow);
+            box-shadow: 0 0 10px var(--border-glow);
         }
 
         .form-grid {
@@ -203,12 +231,13 @@
         
         <form id="profileForm">
             <div class="profile-header-section">
-                <div class="profile-photo-box">
-                    <i class="fa-solid fa-user"></i>
+                <div class="profile-photo-box" id="photoPreviewBox">
+                    <i class="fa-solid fa-user" id="defaultUserIcon"></i>
                 </div>
                 <div>
-                    <h3 style="font-family: 'Orbitron'; color: var(--accent-cyan);">Profile Photo</h3>
-                    <p style="color: var(--text-muted); font-size: 0.9rem;">Configure your personal student metadata below.</p>
+                    <h3 style="font-family: 'Orbitron'; color: var(--accent-cyan); margin-bottom: 0.4rem;">Profile Photo</h3>
+                    <label for="photoInput" class="upload-label"><i class="fa-solid fa-upload"></i> Upload Photo</label>
+                    <input type="file" id="photoInput" accept="image/*" style="display: none;">
                 </div>
             </div>
 
@@ -275,6 +304,22 @@
             document.body.classList.add('light-mode');
         }
 
+        let uploadedImageBase64 = "";
+
+        // Handle Image Upload Preview & Conversion to Base64
+        document.getElementById('photoInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    uploadedImageBase64 = e.target.result;
+                    const previewBox = document.getElementById('photoPreviewBox');
+                    previewBox.innerHTML = `<img src="${uploadedImageBase64}" alt="Profile Photo">`;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
         // Load all saved profile details on page load
         window.addEventListener('DOMContentLoaded', () => {
             if (localStorage.getItem('userName')) document.getElementById('usernameInput').value = localStorage.getItem('userName');
@@ -286,9 +331,16 @@
             if (localStorage.getItem('userCity')) document.getElementById('cityInput').value = localStorage.getItem('userCity');
             if (localStorage.getItem('userPhone')) document.getElementById('phoneInput').value = localStorage.getItem('userPhone');
             if (localStorage.getItem('userEmail')) document.getElementById('emailInput').value = localStorage.getItem('userEmail');
+            
+            // Load saved profile photo if available
+            const savedPhoto = localStorage.getItem('userPhoto');
+            if (savedPhoto) {
+                uploadedImageBase64 = savedPhoto;
+                document.getElementById('photoPreviewBox').innerHTML = `<img src="${savedPhoto}" alt="Profile Photo">`;
+            }
         });
 
-        // Save profile data to localStorage on form submit and return to dashboard
+        // Save profile data & image to localStorage on form submit and return to dashboard
         document.getElementById('profileForm').addEventListener('submit', (e) => {
             e.preventDefault();
             
@@ -303,6 +355,10 @@
                 localStorage.setItem('userCity', document.getElementById('cityInput').value);
                 localStorage.setItem('userPhone', document.getElementById('phoneInput').value);
                 localStorage.setItem('userEmail', document.getElementById('emailInput').value);
+                
+                if (uploadedImageBase64) {
+                    localStorage.setItem('userPhoto', uploadedImageBase64);
+                }
 
                 alert('Profile details saved successfully!');
                 window.location.href = 'index.html';
