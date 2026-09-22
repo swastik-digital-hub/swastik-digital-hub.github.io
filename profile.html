@@ -86,8 +86,8 @@
         }
 
         .profile-container {
-            max-width: 500px;
-            margin: 3rem auto;
+            max-width: 750px;
+            margin: 2rem auto;
             background: var(--card-bg);
             border: 1px solid var(--border-glow);
             border-radius: 12px;
@@ -101,40 +101,77 @@
             font-size: 1.5rem;
             color: var(--accent-cyan);
             margin-bottom: 1.5rem;
-            text-align: center;
+            border-bottom: 1px solid var(--border-glow);
+            padding-bottom: 0.5rem;
+        }
+
+        .profile-header-section {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .profile-photo-box {
+            width: 80px;
+            height: 80px;
+            border: 2px dashed var(--accent-cyan);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            background: rgba(0, 243, 255, 0.05);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.2rem;
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .form-group label {
             display: block;
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            margin-bottom: 0.4rem;
             color: var(--text-muted);
         }
 
-        .form-group input {
+        .form-group input, .form-group select {
             width: 100%;
-            padding: 0.8rem 1rem;
+            padding: 0.7rem 1rem;
             background: rgba(3, 15, 24, 0.6);
             border: 1px solid var(--border-glow);
             border-radius: 8px;
             color: var(--text-main);
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-family: 'Rajdhani', sans-serif;
             outline: none;
             transition: border-color 0.3s ease;
         }
 
-        .form-group input:focus {
+        .form-group input:focus, .form-group select:focus {
             border-color: var(--accent-cyan);
             box-shadow: 0 0 10px var(--border-glow);
         }
 
+        .section-heading-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            color: var(--accent-cyan);
+            margin: 1.5rem 0 1rem 0;
+            border-left: 3px solid var(--accent-cyan);
+            padding-left: 8px;
+        }
+
         .save-btn {
+            margin-top: 2rem;
             width: 100%;
             padding: 0.9rem;
             background: var(--accent-cyan);
@@ -162,13 +199,73 @@
     </header>
 
     <div class="profile-container">
-        <h2>Configure Your Profile</h2>
+        <h2>Student Profile Dashboard</h2>
+        
         <form id="profileForm">
-            <div class="form-group">
-                <label for="usernameInput">Your Name</label>
-                <input type="text" id="usernameInput" placeholder="e.g. Swastik Sambhu Panda" required>
+            <div class="profile-header-section">
+                <div class="profile-photo-box">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div>
+                    <h3 style="font-family: 'Orbitron'; color: var(--accent-cyan);">Profile Photo</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Configure your personal student metadata below.</p>
+                </div>
             </div>
-            <button type="submit" class="save-btn"><i class="fa-solid fa-floppy-disk"></i> Save Profile</button>
+
+            <div class="section-heading-text">Academic Details</div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="dobInput">Date of Birth</label>
+                    <input type="date" id="dobInput">
+                </div>
+                <div class="form-group">
+                    <label for="genderInput">Gender</label>
+                    <select id="genderInput">
+                        <option value="">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="section-heading-text">School Information</div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="sectionInput">Section / Class</label>
+                    <input type="text" id="sectionInput" placeholder="e.g. Class 11 Science">
+                </div>
+                <div class="form-group">
+                    <label for="rollInput">Roll Number</label>
+                    <input type="text" id="rollInput" placeholder="e.g. 42">
+                </div>
+                <div class="form-group">
+                    <label for="stateInput">State</label>
+                    <input type="text" id="stateInput" placeholder="e.g. Odisha">
+                </div>
+                <div class="form-group">
+                    <label for="cityInput">City</label>
+                    <input type="text" id="cityInput" placeholder="e.g. Brahmapur">
+                </div>
+            </div>
+
+            <div class="section-heading-text">Contact & Account Info</div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="phoneInput">Phone Number</label>
+                    <input type="tel" id="phoneInput" placeholder="e.g. +91 XXXXXXXXXX">
+                </div>
+                <div class="form-group">
+                    <label for="emailInput">Email</label>
+                    <input type="email" id="emailInput" placeholder="e.g. name@domain.com">
+                </div>
+                <div class="form-group" style="grid-column: 1 / -1;">
+                    <label for="usernameInput">User Name</label>
+                    <input type="text" id="usernameInput" placeholder="e.g. Swastik Sambhu Panda" required>
+                </div>
+            </div>
+
+            <button type="submit" class="save-btn"><i class="fa-solid fa-floppy-disk"></i> Save Profile Details</button>
         </form>
     </div>
 
@@ -178,21 +275,36 @@
             document.body.classList.add('light-mode');
         }
 
-        // Pre-fill the input field with the saved username when opening profile settings
+        // Load all saved profile details on page load
         window.addEventListener('DOMContentLoaded', () => {
-            const savedName = localStorage.getItem('userName');
-            if (savedName) {
-                document.getElementById('usernameInput').value = savedName;
-            }
+            if (localStorage.getItem('userName')) document.getElementById('usernameInput').value = localStorage.getItem('userName');
+            if (localStorage.getItem('userDob')) document.getElementById('dobInput').value = localStorage.getItem('userDob');
+            if (localStorage.getItem('userGender')) document.getElementById('genderInput').value = localStorage.getItem('userGender');
+            if (localStorage.getItem('userSection')) document.getElementById('sectionInput').value = localStorage.getItem('userSection');
+            if (localStorage.getItem('userRoll')) document.getElementById('rollInput').value = localStorage.getItem('userRoll');
+            if (localStorage.getItem('userState')) document.getElementById('stateInput').value = localStorage.getItem('userState');
+            if (localStorage.getItem('userCity')) document.getElementById('cityInput').value = localStorage.getItem('userCity');
+            if (localStorage.getItem('userPhone')) document.getElementById('phoneInput').value = localStorage.getItem('userPhone');
+            if (localStorage.getItem('userEmail')) document.getElementById('emailInput').value = localStorage.getItem('userEmail');
         });
 
-        // Save username to localStorage and return to dashboard
+        // Save profile data to localStorage on form submit and return to dashboard
         document.getElementById('profileForm').addEventListener('submit', (e) => {
             e.preventDefault();
+            
             const nameValue = document.getElementById('usernameInput').value.trim();
             if (nameValue) {
                 localStorage.setItem('userName', nameValue);
-                alert('Profile saved successfully!');
+                localStorage.setItem('userDob', document.getElementById('dobInput').value);
+                localStorage.setItem('userGender', document.getElementById('genderInput').value);
+                localStorage.setItem('userSection', document.getElementById('sectionInput').value);
+                localStorage.setItem('userRoll', document.getElementById('rollInput').value);
+                localStorage.setItem('userState', document.getElementById('stateInput').value);
+                localStorage.setItem('userCity', document.getElementById('cityInput').value);
+                localStorage.setItem('userPhone', document.getElementById('phoneInput').value);
+                localStorage.setItem('userEmail', document.getElementById('emailInput').value);
+
+                alert('Profile details saved successfully!');
                 window.location.href = 'index.html';
             }
         });
