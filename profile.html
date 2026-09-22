@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile | Swastik-Tech Portal</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #03151c;
+            --card-bg: rgba(6, 32, 43, 0.85);
+            --card-border: #0e3746;
+            --accent-cyan: #00f3ff;
+            --accent-purple: #8b5cf6;
+            --accent-purple-hover: #7c3aed;
+            --accent-green: #10b981;
+            --accent-yellow: #f59e0b;
+            --text-main: #ffffff;
+            --text-muted: #83c5be;
+            --border-glow: rgba(0, 243, 255, 0.25);
+            --header-bg: rgba(3, 21, 28, 0.85);
+            --grid-color: rgba(0, 243, 255, 0.04);
+            --input-bg: rgba(0, 243, 255, 0.04);
+            --sidebar-bg: rgba(3, 18, 24, 0.9);
+        }
+
+        body.light-mode {
+            --bg-color: #f1f5f9;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --card-border: #cbd5e1;
+            --accent-cyan: #0284c7;
+            --accent-purple: #7c3aed;
+            --accent-purple-hover: #6d28d9;
+            --accent-green: #059669;
+            --accent-yellow: #d97706;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-glow: rgba(2, 132, 199, 0.3);
+            --header-bg: rgba(241, 245, 249, 0.85);
+            --grid-color: rgba(0, 0, 0, 0.04);
+            --input-bg: rgba(2, 132, 199, 0.04);
+            --sidebar-bg: rgba(226, 232, 240, 0.9);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Rajdhani', 'Orbitron', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 50% 20%, rgba(0, 180, 216, 0.12) 0%, transparent 70%),
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 100% 100%, 35px 35px, 35px 35px;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            overflow-x: hidden;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 64px;
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid var(--card-border);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.2rem 0;
+            gap: 1.8rem;
+            position: fixed;
+            height: 100vh;
+            z-index: 20;
+        }
+
+        .brand-icon {
+            font-size: 1.2rem;
+            color: var(--accent-cyan);
+        }
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 1.4rem;
+        }
+
+        .sidebar-link {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-link:hover, .sidebar-link.active {
+            color: var(--accent-cyan);
+            background: var(--input-bg);
+            box-shadow: 0 0 10px var(--border-glow);
+        }
+
+        .app-wrapper {
+            margin-left: 64px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            height: 60px;
+            padding: 0 2rem;
+            background: var(--header-bg);
+            border-bottom: 1px solid var(--card-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            border-left: 3px solid var(--accent-cyan);
+            padding-left: 10px;
+            letter-spacing: 1px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .theme-toggle-btn {
+            background: var(--input-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-muted);
+            padding: 0.4rem 0.9rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-family: 'Orbitron', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .theme-toggle-btn:hover {
+            color: var(--accent-cyan);
+            border-color: var(--accent-cyan);
+        }
+
+        /* Profile Content Container */
+        .content-container {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+        }
+
+        /* Profile Header Card */
+        .profile-banner {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .profile-avatar-container {
+            position: relative;
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 3px solid var(--accent-purple);
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .profile-avatar-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .avatar-edit-badge {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: var(--accent-purple);
+            color: #fff;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            cursor: pointer;
+            border: 2px solid var(--card-bg);
+        }
+
+        .profile-meta h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.6rem;
+            color: var(--text-main);
+            margin-bottom: 0.6rem;
+        }
+
+        .profile-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .badge {
+            background: var(--input-bg);
+            border: 1px solid var(--card-border);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-family: 'Orbitron', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .badge.streak {
+            background: rgba(245, 158, 11, 0.1);
+            border-color: rgba(245, 158, 11, 0.3);
+            color: var(--accent-yellow);
+        }
+
+        /* Learning Insights Box */
+        .insights-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            position: relative;
+            backdrop-filter: blur(8px);
+        }
+
+        .insights-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.05rem;
+            color: var(--text-main);
+        }
+
+        .insights-header i {
+            color: var(--accent-cyan);
+            margin-right: 0.5rem;
+        }
+
+        .status-pill {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: var(--accent-green);
+            padding: 0.2rem 0.7rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .insights-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .trend-text {
+            color: var(--accent-green);
+            margin-top: 0.5rem;
+            display: inline-block;
+            font-weight: 700;
+        }
+
+        /* Stats 4-Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            backdrop-filter: blur(8px);
+        }
+
+        .stat-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            margin-bottom: 0.3rem;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        /* Progress & Mastery Split */
+        .grid-split {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media(max-width: 900px) {
+            .grid-split { grid-template-columns: 1fr; }
+            .profile-banner { flex-direction: column; align-items: flex-start; gap: 1rem; }
+        }
+
+        .section-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            backdrop-filter: blur(8px);
+        }
+
+        .section-card-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.05rem;
+            color: var(--text-main);
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .section-card-title i {
+            color: var(--accent-purple);
+        }
+
+        /* Progress Bars */
+        .progress-item {
+            margin-bottom: 1.2rem;
+        }
+
+        .progress-item:last-child { margin-bottom: 0; }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-bottom: 0.4rem;
+            color: var(--text-main);
+        }
+
+        .progress-bar-bg {
+            width: 100%;
+            height: 8px;
+            background: var(--input-bg);
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid var(--card-border);
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: var(--accent-purple);
+            border-radius: 4px;
+        }
+
+        /* Subject Mastery Boxes */
+        .mastery-box {
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .mastery-box:last-child { margin-bottom: 0; }
+
+        .mastery-box.strong {
+            background: rgba(16, 185, 129, 0.05);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .mastery-box.revision {
+            background: rgba(245, 158, 11, 0.05);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .mastery-tag {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            display: block;
+        }
+
+        .strong .mastery-tag { color: var(--accent-green); }
+        .revision .mastery-tag { color: var(--accent-yellow); }
+
+        .mastery-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* History & Achievements */
+        .history-text {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .history-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .history-link:hover { text-decoration: underline; }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+        }
+
+        .achievement-badge {
+            background: var(--input-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 1.2rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .achievement-badge i {
+            font-size: 1.8rem;
+            color: var(--accent-purple);
+        }
+
+        .achievement-badge span {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-main);
+        }
+
+        /* Academic Form & Contact Sections */
+        .form-section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            color: var(--text-main);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .form-group input, .form-group select {
+            background: var(--input-bg);
+            border: 1px solid var(--card-border);
+            padding: 0.7rem 1rem;
+            border-radius: 8px;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 8px var(--border-glow);
+        }
+
+        .form-group select option {
+            background: var(--bg-color);
+            color: var(--text-main);
+        }
+
+        .btn-save {
+            background: var(--accent-purple);
+            color: #fff;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-save:hover {
+            background: var(--accent-purple-hover);
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.4);
+        }
+
+        .form-hint {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: -0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        @media(max-width: 768px) {
+            .sidebar { display: none; }
+            .app-wrapper { margin-left: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="brand-icon"><i class="fa-solid fa-atom"></i></div>
+        <nav class="sidebar-nav">
+            <a class="sidebar-link" href="class11-hub.html" title="Dashboard"><i class="fa-solid fa-house"></i></a>
+            <a class="sidebar-link active" href="profile.html" title="Profile"><i class="fa-solid fa-user"></i></a>
+        </nav>
+    </aside>
+
+    <div class="app-wrapper">
+        <!-- Header -->
+        <header>
+            <div class="header-title">| Student Profile & Dashboard</div>
+            <div class="header-actions">
+                <button class="theme-toggle-btn" onclick="toggleTheme()"><i class="fa-solid fa-circle-half-stroke"></i> Theme</button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="content-container">
+
+            <!-- 1. Profile Banner -->
+            <div class="profile-banner">
+                <div class="profile-avatar-container">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" alt="Avatar" id="avatarImg">
+                    <div class="avatar-edit-badge" title="Change Avatar"><i class="fa-solid fa-camera"></i></div>
+                </div>
+                <div class="profile-meta">
+                    <h1 id="displayName">Swastik Sambhu Panda</h1>
+                    <div class="profile-badges">
+                        <span class="badge"><i class="fa-solid fa-graduation-cap"></i> Class 11</span>
+                        <span class="badge"><i class="fa-solid fa-code"></i> CS</span>
+                        <span class="badge"><i class="fa-solid fa-school"></i> PM SHRI KENDRIYA VIDYALAYA BERHAMPUR</span>
+                        <span class="badge"><i class="fa-regular fa-calendar"></i> Member since Jun 2026</span>
+                        <span class="badge streak"><i class="fa-solid fa-fire"></i> 5-day streak</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Learning Insights -->
+            <div class="insights-card">
+                <div class="insights-header">
+                    <div><i class="fa-solid fa-lightbulb"></i> Learning Insights</div>
+                    <span class="status-pill">On Track</span>
+                </div>
+                <p>Your weakest area right now is Iterative Statements (82%) — worth another look.<br>
+                Your scores are up 34% over your recent attempts — nice progress.</p>
+                <span class="trend-text"><i class="fa-solid fa-arrow-trend-up"></i> Trend: 34% up over your recent attempts</span>
+            </div>
+
+            <!-- 3. Stat Cards Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">2</div>
+                    <div class="stat-label">Topics Completed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">7</div>
+                    <div class="stat-label">Tests Taken</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">77%</div>
+                    <div class="stat-label">Average Score</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">5</div>
+                    <div class="stat-label">Day Streak</div>
+                </div>
+            </div>
+
+            <!-- 4. Progress & Mastery Split -->
+            <div class="grid-split">
+                <!-- Learning Progress -->
+                <div class="section-card">
+                    <div class="section-card-title"><i class="fa-solid fa-chart-pie"></i> Learning Progress</div>
+                    
+                    <div class="progress-item">
+                        <div class="progress-info">
+                            <span>Unit 1: Computer Systems and Organisation</span>
+                            <span>15%</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" style="width: 15%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="progress-item">
+                        <div class="progress-info">
+                            <span>Unit II: Computational Thinking and Programming – I</span>
+                            <span>0%</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" style="width: 0%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="progress-item">
+                        <div class="progress-info">
+                            <span>Unit III: Society, Law and Ethics</span>
+                            <span>0%</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subject Mastery -->
+                <div class="section-card">
+                    <div class="section-card-title"><i class="fa-solid fa-award"></i> Subject Mastery</div>
+                    
+                    <div class="mastery-box strong">
+                        <span class="mastery-tag">STRONGEST</span>
+                        <div class="mastery-desc">Basic Computer Organisation — 100% (1 attempt)</div>
+                    </div>
+
+                    <div class="mastery-box revision">
+                        <span class="mastery-tag">NEEDS REVISION</span>
+                        <div class="mastery-desc">Iterative Statements — 82% (2 attempts)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. Test History & Achievements -->
+            <div class="section-card">
+                <div class="section-card-title"><i class="fa-solid fa-clock-rotate-left"></i> Test & Practice History</div>
+                <p class="history-text">7 attempts across live tests, MCQ, SQL Arena, and Output practice. Best score: <strong>100%</strong>.</p>
+                <a href="#" class="history-link">View full performance history <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+
+            <div class="section-card">
+                <div class="section-card-title"><i class="fa-solid fa-trophy"></i> Achievements</div>
+                <div class="achievements-grid">
+                    <div class="achievement-badge">
+                        <i class="fa-solid fa-pen-nib"></i>
+                        <span>First Test Attempted</span>
+                    </div>
+                    <div class="achievement-badge">
+                        <i class="fa-solid fa-book-open"></i>
+                        <span>First Topic Completed</span>
+                    </div>
+                    <div class="achievement-badge">
+                        <i class="fa-solid fa-star"></i>
+                        <span>90%+ Score Achieved</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="section-card-title"><i class="fa-solid fa-comments"></i> Community Activity</div>
+                <p class="history-text">0 questions asked · 0 answers given</p>
+                <p style="font-size: 0.9rem; color: var(--text-muted); text-align: center; padding: 1rem 0;">You haven't asked a question yet — the Community Wall is a good place to start.</p>
+            </div>
+
+            <!-- 6. Academic Details Form -->
+            <div class="section-card">
+                <div class="section-card-title"><i class="fa-solid id-card"></i> Academic Details</div>
+                
+                <div class="form-section-title">Personal Information</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Date of Birth</label>
+                        <input type="date" id="dobInput" value="2010-09-13">
+                    </div>
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <select id="genderInput">
+                            <option value="Male" selected>Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-section-title">School Information</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Section</label>
+                        <input type="text" id="sectionInput" value="A">
+                    </div>
+                    <div class="form-group">
+                        <label>School Roll Number</label>
+                        <input type="text" id="rollInput" value="41">
+                    </div>
+                    <div class="form-group">
+                        <label>State</label>
+                        <select id="stateInput">
+                            <option value="Odisha" selected>Odisha</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>City / Town</label>
+                        <input type="text" id="cityInput" value="Berhampur">
+                    </div>
+                </div>
+
+                <div class="form-section-title">Academic Goals</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Career Goal</label>
+                        <select id="goalInput">
+                            <option value="Engineering" selected>Engineering</option>
+                            <option value="Medical">Medical</option>
+                            <option value="Research">Research</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Target Board Exam Year</label>
+                        <select id="yearInput">
+                            <option value="2026" selected>2026</option>
+                            <option value="2027">2027</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Target Score (%)</label>
+                        <input type="number" id="scoreInput" value="95">
+                    </div>
+                </div>
+                <div class="form-hint">Your personal exam goal — used to show how close you are on the dashboard.</div>
+                
+                <button class="btn-save" onclick="saveDetails()">Save Details</button>
+            </div>
+
+            <!-- 7. Contact & Account Section -->
+            <div class="section-card">
+                <div class="section-card-title"><i class="fa-solid fa-lock"></i> Contact & Account</div>
+                
+                <div class="form-section-title">Contact Information</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="emailInput" value="swastiksambhu10@gmail.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Mobile</label>
+                        <input type="text" id="mobileInput" value="7008850711">
+                    </div>
+                </div>
+
+                <div class="form-section-title">Account</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" id="usernameInput" value="SwastikSambhu2468">
+                    </div>
+                </div>
+                <button class="btn-save" onclick="saveContact()">Update Account</button>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        // Load saved info on startup if available
+        window.onload = function() {
+            if(localStorage.getItem('user_dob')) document.getElementById('dobInput').value = localStorage.getItem('user_dob');
+            if(localStorage.getItem('user_section')) document.getElementById('sectionInput').value = localStorage.getItem('user_section');
+            if(localStorage.getItem('user_roll')) document.getElementById('rollInput').value = localStorage.getItem('user_roll');
+            if(localStorage.getItem('user_city')) document.getElementById('cityInput').value = localStorage.getItem('user_city');
+            if(localStorage.getItem('user_score')) document.getElementById('scoreInput').value = localStorage.getItem('user_score');
+            if(localStorage.getItem('user_email')) document.getElementById('emailInput').value = localStorage.getItem('user_email');
+            if(localStorage.getItem('user_mobile')) document.getElementById('mobileInput').value = localStorage.getItem('user_mobile');
+            if(localStorage.getItem('user_username')) {
+                let uname = localStorage.getItem('user_username');
+                document.getElementById('usernameInput').value = uname;
+                document.getElementById('displayName').innerText = uname.replace(/([A-Z])/g, ' $1').trim();
+            }
+        };
+
+        function saveDetails() {
+            localStorage.setItem('user_dob', document.getElementById('dobInput').value);
+            localStorage.setItem('user_section', document.getElementById('sectionInput').value);
+            localStorage.setItem('user_roll', document.getElementById('rollInput').value);
+            localStorage.setItem('user_city', document.getElementById('cityInput').value);
+            localStorage.setItem('user_score', document.getElementById('scoreInput').value);
+            alert('Academic details saved successfully!');
+        }
+
+        function saveContact() {
+            let uname = document.getElementById('usernameInput').value;
+            localStorage.setItem('user_email', document.getElementById('emailInput').value);
+            localStorage.setItem('user_mobile', document.getElementById('mobileInput').value);
+            localStorage.setItem('user_username', uname);
+            alert('Contact & Account details updated successfully!');
+        }
+
+        // Theme management
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-mode');
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            if (document.body.classList.contains('light-mode')) {
+                localStorage.setItem('theme', 'light');
+            } else {
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+    </script>
+</body>
+</html>
