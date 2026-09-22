@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Profile Settings | Swastik-Tech</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -13,7 +13,7 @@
     <style>
         :root {
             --bg-color: #080c14;
-            --card-bg: rgba(15, 23, 42, 0.85);
+            --card-bg: rgba(15, 23, 42, 0.95);
             --accent-cyan: #00f3ff;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
@@ -31,7 +31,7 @@
             --grid-color: rgba(0, 0, 0, 0.04);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             background-color: var(--bg-color);
@@ -43,8 +43,8 @@
             color: var(--text-main);
             font-family: 'Rajdhani', sans-serif;
             min-height: 100vh;
-            padding: 1rem;
-            transition: background-color 0.4s ease, color 0.4s ease;
+            padding: 0.75rem;
+            width: 100%;
             overflow-x: hidden;
         }
 
@@ -52,78 +52,76 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-bottom: 1rem;
+            padding-bottom: 0.75rem;
             border-bottom: 1px solid var(--border-glow);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
+            width: 100%;
         }
 
         .header-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: var(--accent-cyan);
             border-left: 3px solid var(--accent-cyan);
-            padding-left: 8px;
+            padding-left: 6px;
         }
 
         .back-btn {
             background: var(--card-bg);
             border: 1px solid var(--border-glow);
             color: var(--accent-cyan);
-            padding: 0.4rem 0.8rem;
+            padding: 0.4rem 0.7rem;
             border-radius: 6px;
             font-family: 'Orbitron', sans-serif;
             font-size: 0.75rem;
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 6px;
-            transition: all 0.3s ease;
+            gap: 5px;
             backdrop-filter: blur(8px);
         }
 
         .profile-container {
-            max-width: 750px;
             width: 100%;
-            margin: 0 auto 2rem auto;
+            max-width: 700px;
+            margin: 0 auto 1.5rem auto;
             background: var(--card-bg);
             border: 1px solid var(--border-glow);
             border-radius: 12px;
-            padding: 1.5rem;
+            padding: 1rem;
             backdrop-filter: blur(8px);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
         }
 
         .profile-container h2 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.3rem;
+            font-size: 1.15rem;
             color: var(--accent-cyan);
-            margin-bottom: 1.2rem;
+            margin-bottom: 1rem;
             border-bottom: 1px solid var(--border-glow);
-            padding-bottom: 0.5rem;
+            padding-bottom: 0.4rem;
         }
 
         .profile-header-section {
             display: flex;
             align-items: center;
             gap: 1rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
             flex-wrap: wrap;
         }
 
         .profile-photo-box {
-            width: 80px;
-            height: 80px;
+            width: 70px;
+            height: 70px;
             border: 2px dashed var(--accent-cyan);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--text-muted);
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             background: rgba(0, 243, 255, 0.05);
             overflow: hidden;
-            position: relative;
-            cursor: pointer;
             flex-shrink: 0;
         }
 
@@ -138,87 +136,82 @@
             background: rgba(3, 15, 24, 0.6);
             border: 1px solid var(--border-glow);
             color: var(--accent-cyan);
-            padding: 0.4rem 0.8rem;
+            padding: 0.4rem 0.7rem;
             border-radius: 6px;
             font-family: 'Orbitron', sans-serif;
             font-size: 0.75rem;
             cursor: pointer;
-            transition: all 0.3s ease;
         }
 
         .form-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            width: 100%;
         }
 
         @media (min-width: 600px) {
             .form-grid {
+                display: grid;
                 grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
             }
             body { padding: 2rem; }
-            .profile-container { padding: 2.5rem; }
+            .profile-container { padding: 2rem; }
         }
 
         .form-group {
             width: 100%;
-            min-width: 0;
         }
 
         .form-group label {
             display: block;
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.8rem;
-            margin-bottom: 0.4rem;
+            font-size: 0.75rem;
+            margin-bottom: 0.3rem;
             color: var(--text-muted);
         }
 
         .form-group input, .form-group select {
-            width: 100%;
-            max-width: 100%;
-            padding: 0.7rem 1rem;
-            background: rgba(3, 15, 24, 0.6);
+            width: 100% !important;
+            max-width: 100% !important;
+            padding: 0.65rem 0.8rem;
+            background: rgba(3, 15, 24, 0.8);
             border: 1px solid var(--border-glow);
             border-radius: 8px;
             color: var(--text-main);
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-family: 'Rajdhani', sans-serif;
             outline: none;
-            transition: border-color 0.3s ease;
         }
 
         .form-group input:focus, .form-group select:focus {
             border-color: var(--accent-cyan);
-            box-shadow: 0 0 10px var(--border-glow);
+            box-shadow: 0 0 8px var(--border-glow);
         }
 
         .section-heading-text {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: var(--accent-cyan);
-            margin: 1.2rem 0 0.8rem 0;
+            margin: 1rem 0 0.6rem 0;
             border-left: 3px solid var(--accent-cyan);
-            padding-left: 8px;
+            padding-left: 6px;
         }
 
         .save-btn {
-            margin-top: 1.5rem;
+            margin-top: 1.2rem;
             width: 100%;
-            padding: 0.9rem;
+            padding: 0.8rem;
             background: var(--accent-cyan);
             color: #080c14;
             border: none;
             border-radius: 8px;
             font-family: 'Orbitron', sans-serif;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .save-btn:hover {
-            opacity: 0.9;
-            box-shadow: 0 0 15px var(--border-glow);
+            box-shadow: 0 0 10px var(--border-glow);
         }
     </style>
 </head>
@@ -235,10 +228,10 @@
         <form id="profileForm">
             <div class="profile-header-section">
                 <div class="profile-photo-box" id="photoPreviewBox">
-                    <i class="fa-solid fa-user" id="defaultUserIcon"></i>
+                    <i class="fa-solid fa-user"></i>
                 </div>
                 <div>
-                    <h3 style="font-family: 'Orbitron'; color: var(--accent-cyan); margin-bottom: 0.4rem; font-size: 0.95rem;">Profile Photo</h3>
+                    <h3 style="font-family: 'Orbitron'; color: var(--accent-cyan); margin-bottom: 0.3rem; font-size: 0.9rem;">Profile Photo</h3>
                     <label for="photoInput" class="upload-label"><i class="fa-solid fa-upload"></i> Upload Photo</label>
                     <input type="file" id="photoInput" accept="image/*" style="display: none;">
                 </div>
@@ -302,28 +295,24 @@
     </div>
 
     <script>
-        // Theme persistence check
         if (localStorage.getItem('theme') === 'light') {
             document.body.classList.add('light-mode');
         }
 
         let uploadedImageBase64 = "";
 
-        // Handle Image Upload Preview & Conversion to Base64
         document.getElementById('photoInput').addEventListener('change', function(event) {
             const file = event.target.files[0];
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     uploadedImageBase64 = e.target.result;
-                    const previewBox = document.getElementById('photoPreviewBox');
-                    previewBox.innerHTML = `<img src="${uploadedImageBase64}" alt="Profile Photo">`;
+                    document.getElementById('photoPreviewBox').innerHTML = `<img src="${uploadedImageBase64}" alt="Profile Photo">`;
                 };
                 reader.readAsDataURL(file);
             }
         });
 
-        // Load all saved profile details on page load
         window.addEventListener('DOMContentLoaded', () => {
             if (localStorage.getItem('userName')) document.getElementById('usernameInput').value = localStorage.getItem('userName');
             if (localStorage.getItem('userDob')) document.getElementById('dobInput').value = localStorage.getItem('userDob');
@@ -335,7 +324,6 @@
             if (localStorage.getItem('userPhone')) document.getElementById('phoneInput').value = localStorage.getItem('userPhone');
             if (localStorage.getItem('userEmail')) document.getElementById('emailInput').value = localStorage.getItem('userEmail');
             
-            // Load saved profile photo if available
             const savedPhoto = localStorage.getItem('userPhoto');
             if (savedPhoto) {
                 uploadedImageBase64 = savedPhoto;
@@ -343,10 +331,8 @@
             }
         });
 
-        // Save profile data & image to localStorage on form submit and return to dashboard
         document.getElementById('profileForm').addEventListener('submit', (e) => {
             e.preventDefault();
-            
             const nameValue = document.getElementById('usernameInput').value.trim();
             if (nameValue) {
                 localStorage.setItem('userName', nameValue);
