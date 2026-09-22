@@ -178,15 +178,15 @@
             document.body.classList.add('light-mode');
         }
 
-        // Load existing saved name if available
+        // Pre-fill the input field with the saved username when opening profile settings
         window.addEventListener('DOMContentLoaded', () => {
-            const existingName = localStorage.getItem('userName');
-            if (existingName) {
-                document.getElementById('usernameInput').value = existingName;
+            const savedName = localStorage.getItem('userName');
+            if (savedName) {
+                document.getElementById('usernameInput').value = savedName;
             }
         });
 
-        // Save username to localStorage on form submit and return to dashboard
+        // Save username to localStorage and return to dashboard
         document.getElementById('profileForm').addEventListener('submit', (e) => {
             e.preventDefault();
             const nameValue = document.getElementById('usernameInput').value.trim();
