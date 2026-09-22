@@ -3,533 +3,199 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile | Swastik-Tech</title>
-    <!-- Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+    <title>Profile Settings | Swastik-Tech</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Self-Contained Browser Tab Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%2300f3ff%22><path d=%22M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5%22/></svg>">
+
     <style>
         :root {
-            --bg-color: #03151c;
-            --card-bg: rgba(6, 32, 43, 0.85);
-            --card-border: #0e3746;
+            --bg-color: #080c14;
+            --card-bg: rgba(15, 23, 42, 0.85);
             --accent-cyan: #00f3ff;
-            --accent-blue: #00b4d8;
-            --text-main: #ffffff;
-            --text-muted: #83c5be;
-            --border-glow: rgba(0, 243, 255, 0.25);
-            --header-bg: rgba(3, 21, 28, 0.85);
-            --grid-color: rgba(0, 243, 255, 0.04);
-            --input-bg: rgba(0, 243, 255, 0.04);
-            --sidebar-bg: rgba(3, 18, 24, 0.9);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-glow: rgba(0, 243, 255, 0.3);
+            --grid-color: rgba(255, 255, 255, 0.03);
         }
 
         body.light-mode {
             --bg-color: #f1f5f9;
             --card-bg: rgba(255, 255, 255, 0.95);
-            --card-border: #cbd5e1;
             --accent-cyan: #0284c7;
-            --accent-blue: #0369a1;
             --text-main: #0f172a;
             --text-muted: #475569;
             --border-glow: rgba(2, 132, 199, 0.3);
-            --header-bg: rgba(241, 245, 249, 0.85);
             --grid-color: rgba(0, 0, 0, 0.04);
-            --input-bg: rgba(2, 132, 199, 0.04);
-            --sidebar-bg: rgba(226, 232, 240, 0.9);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Rajdhani', 'Orbitron', sans-serif;
-            letter-spacing: 0.5px;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             background-color: var(--bg-color);
             background-image: 
-                radial-gradient(circle at 50% 20%, rgba(0, 180, 216, 0.12) 0%, transparent 70%),
+                radial-gradient(circle at 50% 50%, var(--border-glow) 0%, transparent 80%),
                 linear-gradient(var(--grid-color) 1px, transparent 1px),
                 linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-            background-size: 100% 100%, 35px 35px, 35px 35px;
+            background-size: 100% 100%, 40px 40px, 40px 40px;
             color: var(--text-main);
+            font-family: 'Rajdhani', sans-serif;
             min-height: 100vh;
-            display: flex;
-            overflow-x: hidden;
+            padding: 2rem;
             transition: background-color 0.4s ease, color 0.4s ease;
         }
 
-        .sidebar {
-            width: 64px;
-            background-color: var(--sidebar-bg);
-            border-right: 1px solid var(--card-border);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 1.2rem 0;
-            gap: 1.8rem;
-            position: fixed;
-            height: 100vh;
-            z-index: 20;
-        }
-
-        .brand-icon {
-            font-size: 1.2rem;
-            color: var(--accent-cyan);
-        }
-
-        .sidebar-nav {
-            display: flex;
-            flex-direction: column;
-            gap: 1.4rem;
-        }
-
-        .sidebar-link {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            text-decoration: none;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .sidebar-link:hover, .sidebar-link.active {
-            color: var(--accent-cyan);
-            background: var(--input-bg);
-            box-shadow: 0 0 10px var(--border-glow);
-        }
-
-        .app-wrapper {
-            margin-left: 64px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
         header {
-            height: 60px;
-            padding: 0 2rem;
-            background: var(--header-bg);
-            border-bottom: 1px solid var(--card-border);
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            backdrop-filter: blur(10px);
+            align-items: center;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-glow);
+            margin-bottom: 2rem;
         }
 
         .header-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 700;
+            font-size: 1.2rem;
             color: var(--accent-cyan);
             border-left: 3px solid var(--accent-cyan);
             padding-left: 10px;
-            letter-spacing: 1px;
         }
 
-        .header-actions {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .theme-toggle-btn {
-            background: var(--input-bg);
-            border: 1px solid var(--card-border);
-            color: var(--text-muted);
-            padding: 0.4rem 0.9rem;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            font-family: 'Orbitron', sans-serif;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.3s;
-        }
-
-        .theme-toggle-btn:hover {
+        .back-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow);
             color: var(--accent-cyan);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+        }
+
+        .back-btn:hover {
             border-color: var(--accent-cyan);
             box-shadow: 0 0 10px var(--border-glow);
         }
 
-        .container {
-            padding: 2rem;
-            max-width: 900px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .profile-card {
+        .profile-container {
+            max-width: 500px;
+            margin: 3rem auto;
             background: var(--card-bg);
-            border: 1px solid var(--card-border);
+            border: 1px solid var(--border-glow);
             border-radius: 12px;
             padding: 2.5rem;
             backdrop-filter: blur(8px);
-            box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
         }
 
-        .profile-top {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        .profile-avatar-wrapper {
-            position: relative;
-        }
-
-        .profile-avatar {
-            width: 90px;
-            height: 90px;
-            border: 2px solid var(--accent-cyan);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.2rem;
-            color: var(--accent-cyan);
-            background: var(--input-bg);
-            box-shadow: 0 0 15px var(--border-glow);
-            overflow: hidden;
-        }
-
-        .profile-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .profile-avatar-info h2 {
+        .profile-container h2 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.4rem;
-            color: var(--text-main);
+            font-size: 1.5rem;
+            color: var(--accent-cyan);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
             margin-bottom: 0.5rem;
-        }
-
-        /* Upload photo button styling */
-        .upload-photo-label {
-            background: var(--input-bg);
-            border: 1px solid var(--card-border);
-            color: var(--accent-cyan);
-            padding: 0.4rem 0.9rem;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            font-family: 'Orbitron', sans-serif;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.3s;
-        }
-
-        .upload-photo-label:hover {
-            border-color: var(--accent-cyan);
-            box-shadow: 0 0 10px var(--border-glow);
-        }
-
-        #photoUploadInput {
-            display: none;
-        }
-
-        .profile-section {
-            border-top: 1px solid var(--card-border);
-            padding-top: 1.5rem;
-        }
-
-        .profile-section-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1rem;
-            color: var(--accent-cyan);
-            margin-bottom: 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .profile-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.2rem 2rem;
-        }
-
-        .profile-field {
-            display: flex;
-            flex-direction: column;
-            gap: 0.3rem;
-        }
-
-        .profile-field.full-width {
-            grid-column: span 2;
-        }
-
-        .field-label {
-            font-size: 0.8rem;
             color: var(--text-muted);
-            font-family: 'Orbitron', sans-serif;
         }
 
-        .editable-input {
+        .form-group input {
             width: 100%;
-            background: var(--input-bg);
-            border: 1px solid var(--card-border);
-            padding: 0.6rem 0.9rem;
-            border-radius: 6px;
+            padding: 0.8rem 1rem;
+            background: rgba(3, 15, 24, 0.6);
+            border: 1px solid var(--border-glow);
+            border-radius: 8px;
             color: var(--text-main);
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-family: 'Rajdhani', sans-serif;
-            transition: all 0.3s;
+            outline: none;
+            transition: border-color 0.3s ease;
         }
 
-        .editable-input:focus {
-            outline: none;
+        .form-group input:focus {
             border-color: var(--accent-cyan);
             box-shadow: 0 0 10px var(--border-glow);
-        }
-
-        .profile-actions-bar {
-            border-top: 1px solid var(--card-border);
-            padding-top: 1.5rem;
-            display: flex;
-            justify-content: flex-end;
-            gap: 1rem;
         }
 
         .save-btn {
+            width: 100%;
+            padding: 0.9rem;
             background: var(--accent-cyan);
+            color: #080c14;
             border: none;
-            color: #03151c;
-            padding: 0.6rem 1.4rem;
-            border-radius: 6px;
+            border-radius: 8px;
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 700;
+            font-size: 1rem;
+            font-weight: bold;
             cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
             transition: all 0.3s ease;
         }
 
         .save-btn:hover {
-            box-shadow: 0 0 15px var(--accent-cyan);
-        }
-
-        .logout-btn {
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.4);
-            color: #ef4444;
-            padding: 0.6rem 1.4rem;
-            border-radius: 6px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .logout-btn:hover {
-            background: #ef4444;
-            color: #ffffff;
-            box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
-        }
-
-        @media(max-width: 768px) {
-            .sidebar { display: none; }
-            .app-wrapper { margin-left: 0; }
-            .profile-grid { grid-template-columns: 1fr; }
-            .profile-field.full-width { grid-column: span 1; }
+            opacity: 0.9;
+            box-shadow: 0 0 15px var(--border-glow);
         }
     </style>
 </head>
 <body>
 
-    <aside class="sidebar">
-        <div class="brand-icon"><i class="fa-solid fa-microchip"></i></div>
-        <nav class="sidebar-nav">
-            <a class="sidebar-link" href="index.html" title="Dashboard"><i class="fa-solid fa-house"></i></a>
-            <a class="sidebar-link active" href="profile.html" title="Profile"><i class="fa-solid fa-user"></i></a>
-            <a class="sidebar-link" href="class11/class11-physics.html" title="Class 11 Physics"><i class="fa-solid fa-atom"></i></a>
-            <a class="sidebar-link" href="mains/pyqs.html" title="JEE Portal"><i class="fa-solid fa-graduation-cap"></i></a>
-        </nav>
-    </aside>
+    <header>
+        <div class="header-title">| User Profile Settings</div>
+        <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Dashboard</a>
+    </header>
 
-    <div class="app-wrapper">
-        <header>
-            <div class="header-title">| Student Profile</div>
-            <div class="header-actions">
-                <a href="index.html" class="theme-toggle-btn"><i class="fa-solid fa-house"></i> Dashboard</a>
-                <button class="theme-toggle-btn" onclick="toggleTheme()"><i class="fa-solid fa-circle-half-stroke"></i> Theme</button>
+    <div class="profile-container">
+        <h2>Configure Your Profile</h2>
+        <form id="profileForm">
+            <div class="form-group">
+                <label for="usernameInput">Your Name</label>
+                <input type="text" id="usernameInput" placeholder="e.g. Swastik Sambhu Panda" required>
             </div>
-        </header>
-
-        <main class="container">
-            <div class="profile-card">
-                <div class="profile-top">
-                    <div class="profile-avatar-wrapper">
-                        <div class="profile-avatar" id="profileAvatarContainer">
-                            <i class="fa-solid fa-user"></i>
-                        </div>
-                    </div>
-                    <div class="profile-avatar-info">
-                        <h2 id="displayUsername">Student Account</h2>
-                        <label for="photoUploadInput" class="upload-photo-label">
-                            <i class="fa-solid fa-camera"></i> Upload Photo
-                        </label>
-                        <input type="file" id="photoUploadInput" accept="image/*" onchange="handlePhotoUpload(event)">
-                    </div>
-                </div>
-
-                <!-- Academic Details -->
-                <div class="profile-section">
-                    <div class="profile-section-title"><i class="fa-solid fa-graduation-cap"></i> Academic Details</div>
-                    <div class="profile-grid">
-                        <div class="profile-field">
-                            <span class="field-label">Date of Birth</span>
-                            <input type="text" id="inputDob" class="editable-input" placeholder="DD/MM/YYYY">
-                        </div>
-                        <div class="profile-field">
-                            <span class="field-label">Gender</span>
-                            <input type="text" id="inputGender" class="editable-input" placeholder="Male / Female">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- School Information -->
-                <div class="profile-section">
-                    <div class="profile-section-title"><i class="fa-solid fa-school"></i> School Information</div>
-                    <div class="profile-grid">
-                        <div class="profile-field">
-                            <span class="field-label">Section</span>
-                            <input type="text" id="inputSection" class="editable-input" placeholder="Class 11 Science">
-                        </div>
-                        <div class="profile-field">
-                            <span class="field-label">Roll Number</span>
-                            <input type="text" id="inputRoll" class="editable-input" placeholder="Roll No">
-                        </div>
-                        <div class="profile-field">
-                            <span class="field-label">State</span>
-                            <input type="text" id="inputState" class="editable-input" placeholder="State">
-                        </div>
-                        <div class="profile-field">
-                            <span class="field-label">City</span>
-                            <input type="text" id="inputCity" class="editable-input" placeholder="City">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Contact Information -->
-                <div class="profile-section">
-                    <div class="profile-section-title"><i class="fa-solid fa-address-book"></i> Contact</div>
-                    <div class="profile-grid">
-                        <div class="profile-field">
-                            <span class="field-label">Phone Number</span>
-                            <input type="text" id="inputPhone" class="editable-input" placeholder="+91 XXXXXXXXXX">
-                        </div>
-                        <div class="profile-field">
-                            <span class="field-label">Email</span>
-                            <input type="email" id="inputEmail" class="editable-input" placeholder="you@example.com">
-                        </div>
-                        <div class="profile-field full-width">
-                            <span class="field-label">User Name</span>
-                            <input type="text" id="inputUsername" class="editable-input" placeholder="Your Name">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Action Bar: Save Changes & Log Out -->
-                <div class="profile-actions-bar">
-                    <button class="save-btn" onclick="saveProfileData()">
-                        <i class="fa-solid fa-floppy-disk"></i> Save Changes
-                    </button>
-                    <button class="logout-btn" onclick="handleLogout()">
-                        <i class="fa-solid fa-right-from-bracket"></i> Log Out
-                    </button>
-                </div>
-            </div>
-        </main>
+            <button type="submit" class="save-btn"><i class="fa-solid fa-floppy-disk"></i> Save Profile</button>
+        </form>
     </div>
 
     <script>
-        if (localStorage.getItem('theme') === 'light') document.body.classList.add('light-mode');
-        function toggleTheme() {
-            document.body.classList.toggle('light-mode');
-            localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+        // Theme persistence check
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-mode');
         }
 
-        let uploadedAvatarBase64 = localStorage.getItem('user_avatar') || '';
-
-        // Load profile data into input boxes on startup
+        // Load existing saved name if available
         window.addEventListener('DOMContentLoaded', () => {
-            if (localStorage.getItem('user_name')) {
-                const name = localStorage.getItem('user_name');
-                document.getElementById('displayUsername').innerText = name;
-                document.getElementById('inputUsername').value = name;
+            const existingName = localStorage.getItem('userName');
+            if (existingName) {
+                document.getElementById('usernameInput').value = existingName;
             }
-            if (localStorage.getItem('user_email')) {
-                document.getElementById('inputEmail').value = localStorage.getItem('user_email');
-            }
-            if (uploadedAvatarBase64) {
-                document.getElementById('profileAvatarContainer').innerHTML = `<img src="${uploadedAvatarBase64}" alt="Avatar">`;
-            }
-
-            // Load extra fields if previously saved
-            ['Dob', 'Gender', 'Section', 'Roll', 'State', 'City', 'Phone'].forEach(field => {
-                const val = localStorage.getItem('profile_' + field);
-                if (val) document.getElementById('input' + field).value = val;
-            });
         });
 
-        // Handle Photo Upload and convert to Base64
-        function handlePhotoUpload(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    uploadedAvatarBase64 = e.target.result;
-                    document.getElementById('profileAvatarContainer').innerHTML = `<img src="${uploadedAvatarBase64}" alt="Avatar">`;
-                };
-                reader.readAsDataURL(file);
+        // Save username to localStorage on form submit and return to dashboard
+        document.getElementById('profileForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const nameValue = document.getElementById('usernameInput').value.trim();
+            if (nameValue) {
+                localStorage.setItem('userName', nameValue);
+                alert('Profile saved successfully!');
+                window.location.href = 'index.html';
             }
-        }
-
-        // Save input values and uploaded photo to localStorage
-        function saveProfileData() {
-            const name = document.getElementById('inputUsername').value;
-            localStorage.setItem('user_name', name);
-            localStorage.setItem('user_email', document.getElementById('inputEmail').value);
-            if (uploadedAvatarBase64) {
-                localStorage.setItem('user_avatar', uploadedAvatarBase64);
-            }
-            document.getElementById('displayUsername').innerText = name;
-
-            ['Dob', 'Gender', 'Section', 'Roll', 'State', 'City', 'Phone'].forEach(field => {
-                localStorage.setItem('profile_' + field, document.getElementById('input' + field).value);
-            });
-
-            alert('Profile details and photo saved successfully!');
-        }
-
-        function handleLogout() {
-            localStorage.clear();
-            window.location.href = 'index.html';
-        }
+        });
     </script>
 </body>
 </html>
