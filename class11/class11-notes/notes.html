@@ -1,1 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class 11 Notes | Swastik-Tech</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%2300f3ff%22><path d=%22M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5%22/></svg>">
 
+    <style>
+        :root {
+            --bg-color: #03151c;
+            --card-bg: rgba(6, 32, 43, 0.85);
+            --card-border: #0e3746;
+            --accent-cyan: #00f3ff;
+            --accent-red: #ff5e57;
+            --text-main: #ffffff;
+            --text-muted: #83c5be;
+            --border-glow: rgba(0, 243, 255, 0.25);
+            --header-bg: rgba(3, 21, 28, 0.85);
+            --grid-color: rgba(0, 243, 255, 0.04);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Rajdhani', 'Orbitron', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 50% 20%, rgba(0, 180, 216, 0.12) 0%, transparent 70%),
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 100% 100%, 35px 35px, 35px 35px;
+            color: var(--text-main);
+            min-height: 100vh;
+        }
+
+        header {
+            height: 60px;
+            padding: 0 2rem;
+            background: var(--header-bg);
+            border-bottom: 1px solid var(--card-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            border-left: 3px solid var(--accent-cyan);
+            padding-left: 10px;
+        }
+
+        .back-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85srem;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        .container {
+            padding: 2.5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-heading {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            color: var(--accent-cyan);
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 0.5rem;
+        }
+
+        /* PDF Cards Grid Layout */
+        .pdf-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .pdf-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+        }
+
+        .pdf-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px var(--border-glow);
+            transform: translateY(-3px);
+        }
+
+        .pdf-header-info {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .pdf-icon-box {
+            font-size: 2.2rem;
+            color: var(--accent-red);
+            line-height: 1;
+        }
+
+        .pdf-text-content h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.05rem;
+            color: var(--text-main);
+            margin-bottom: 0.2rem;
+        }
+
+        .pdf-text-content p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .pdf-card-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: auto;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 0.6rem;
+            border-radius: 8px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .view-action {
+            background: rgba(0, 243, 255, 0.05);
+            color: var(--accent-cyan);
+            border: 1px solid var(--card-border);
+        }
+
+        .view-action:hover {
+            background: var(--accent-cyan);
+            color: #03151c;
+            box-shadow: 0 0 10px var(--border-glow);
+        }
+
+        .download-action {
+            background: rgba(255, 94, 87, 0.05);
+            color: var(--accent-red);
+            border: 1px solid var(--card-border);
+        }
+
+        .download-action:hover {
+            background: var(--accent-red);
+            color: #ffffff;
+            box-shadow: 0 0 10px rgba(255, 94, 87, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-title">| Class 11 Notes Portal</div>
+        <a href="../class11-hub.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Hub</a>
+    </header>
+
+    <main class="container">
+        <h2 class="section-heading">Available Study Notes</h2>
+
+        <div class="pdf-grid">
+            
+            <!-- Note Item 1 -->
+            <div class="pdf-card">
+                <div class="pdf-header-info">
+                    <div class="pdf-icon-box"><i class="fa-solid fa-file-pdf"></i></div>
+                    <div class="pdf-text-content">
+                        <h3>Scalar & Vector</h3>
+                        <p>Practice Question Bank & Concepts</p>
+                    </div>
+                </div>
+                <div class="pdf-card-actions">
+                    <a href="pdfs/scalar-vector.pdf" target="_blank" class="action-btn view-action">
+                        <i class="fa-regular fa-eye"></i> View
+                    </a>
+                    <a href="pdfs/scalar-vector.pdf" download class="action-btn download-action">
+                        <i class="fa-solid fa-download"></i> Download
+                    </a>
+                </div>
+            </div>
+
+            <!-- Note Item 2 -->
+            <div class="pdf-card">
+                <div class="pdf-header-info">
+                    <div class="pdf-icon-box"><i class="fa-solid fa-file-pdf"></i></div>
+                    <div class="pdf-text-content">
+                        <h3>Structure of Atom</h3>
+                        <p>Chemistry Comprehensive Revision Notes</p>
+                    </div>
+                </div>
+                <div class="pdf-card-actions">
+                    <a href="pdfs/atomic-structure.pdf" target="_blank" class="action-btn view-action">
+                        <i class="fa-regular fa-eye"></i> View
+                    </a>
+                    <a href="pdfs/atomic-structure.pdf" download class="action-btn download-action">
+                        <i class="fa-solid fa-download"></i> Download
+                    </a>
+                </div>
+            </div>
+
+            <!-- Note Item 3 -->
+            <div class="pdf-card">
+                <div class="pdf-header-info">
+                    <div class="pdf-icon-box"><i class="fa-solid fa-file-pdf"></i></div>
+                    <div class="pdf-text-content">
+                        <h3>Python Basics</h3>
+                        <p>Computer Science Control Flow & Loops</p>
+                    </div>
+                </div>
+                <div class="pdf-card-actions">
+                    <a href="pdfs/python-basics.pdf" target="_blank" class="action-btn view-action">
+                        <i class="fa-regular fa-eye"></i> View
+                    </a>
+                    <a href="pdfs/python-basics.pdf" download class="action-btn download-action">
+                        <i class="fa-solid fa-download"></i> Download
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+</html>
