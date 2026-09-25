@@ -69,6 +69,12 @@
             text-decoration: none;
         }
 
+        .top-nav-right {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
         .nav-btn {
             background: var(--card-bg);
             border: 1px solid var(--border-glow);
@@ -100,7 +106,7 @@
 
         .dashboard-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
         }
 
@@ -138,7 +144,7 @@
 
         .card-text h3 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             line-height: 1.3;
             margin-bottom: 0.3rem;
         }
@@ -199,13 +205,16 @@
 
     <header>
         <a href="class11-hub.html" class="header-title">| Class 11 Physics Portal</a>
-        <button onclick="toggleTheme()" class="nav-btn"><i class="fa-solid fa-circle-half-stroke"></i> Theme</button>
+        <div class="top-nav-right">
+            <button onclick="toggleTheme()" class="nav-btn"><i class="fa-solid fa-circle-half-stroke"></i> Theme</button>
+            <a href="class11-hub.html" class="nav-btn"><i class="fa-solid fa-arrow-left"></i> Hub</a>
+        </div>
     </header>
 
     <div class="section-heading">Physics Practice Question Banks</div>
 
     <div class="dashboard-grid">
-        <!-- Card 1: Scalar & Vector -->
+        <!-- Scalar & Vector -->
         <div class="dash-card">
             <div class="card-header-content">
                 <i class="fa-solid fa-file-pdf"></i>
@@ -224,7 +233,7 @@
             </div>
         </div>
 
-        <!-- Card 2: Projectile Motion -->
+        <!-- Projectile Motion -->
         <div class="dash-card">
             <div class="card-header-content">
                 <i class="fa-solid fa-file-pdf"></i>
@@ -243,7 +252,7 @@
             </div>
         </div>
 
-        <!-- Card 3: Laws of Motion & Friction -->
+        <!-- Laws of Motion & Friction -->
         <div class="dash-card">
             <div class="card-header-content">
                 <i class="fa-solid fa-file-pdf"></i>
@@ -262,7 +271,7 @@
             </div>
         </div>
 
-        <!-- Card 4: Work, Energy and Power -->
+        <!-- Work, Energy and Power -->
         <div class="dash-card">
             <div class="card-header-content">
                 <i class="fa-solid fa-file-pdf"></i>
