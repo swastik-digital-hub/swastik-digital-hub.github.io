@@ -3,241 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Class 11 Physics | Swastik-Tech Portal</title>
-    <!-- Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+    <title>Class 11 Physics Portal | Swastik-Tech</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Self-Contained Browser Tab Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%2300f3ff%22><path d=%22M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5%22/></svg>">
+
     <style>
         :root {
-            --bg-color: #03151c;
-            --card-bg: rgba(6, 32, 43, 0.85);
-            --card-border: #0e3746;
+            --bg-color: #080c14;
+            --card-bg: rgba(15, 23, 42, 0.85);
             --accent-cyan: #00f3ff;
-            --accent-red: #ff5c5c;
-            --text-main: #ffffff;
-            --text-muted: #83c5be;
-            --border-glow: rgba(0, 243, 255, 0.25);
-            --header-bg: rgba(3, 21, 28, 0.85);
-            --grid-color: rgba(0, 243, 255, 0.04);
-            --input-bg: rgba(0, 243, 255, 0.04);
-            --sidebar-bg: rgba(3, 18, 24, 0.9);
+            --accent-red: #ff4d4d;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-glow: rgba(0, 243, 255, 0.3);
+            --border-glow-red: rgba(255, 77, 77, 0.3);
+            --grid-color: rgba(255, 255, 255, 0.03);
         }
 
         body.light-mode {
             --bg-color: #f1f5f9;
             --card-bg: rgba(255, 255, 255, 0.95);
-            --card-border: #cbd5e1;
             --accent-cyan: #0284c7;
             --accent-red: #dc2626;
             --text-main: #0f172a;
             --text-muted: #475569;
             --border-glow: rgba(2, 132, 199, 0.3);
-            --header-bg: rgba(241, 245, 249, 0.85);
+            --border-glow-red: rgba(220, 38, 38, 0.3);
             --grid-color: rgba(0, 0, 0, 0.04);
-            --input-bg: rgba(2, 132, 199, 0.04);
-            --sidebar-bg: rgba(226, 232, 240, 0.9);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Rajdhani', 'Orbitron', sans-serif;
-            letter-spacing: 0.5px;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             background-color: var(--bg-color);
             background-image: 
-                radial-gradient(circle at 50% 20%, rgba(0, 180, 216, 0.12) 0%, transparent 70%),
+                radial-gradient(circle at 50% 50%, var(--border-glow) 0%, transparent 80%),
                 linear-gradient(var(--grid-color) 1px, transparent 1px),
                 linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-            background-size: 100% 100%, 35px 35px, 35px 35px;
+            background-size: 100% 100%, 40px 40px, 40px 40px;
             color: var(--text-main);
+            font-family: 'Rajdhani', sans-serif;
             min-height: 100vh;
-            display: flex;
-            overflow-x: hidden;
+            padding: 2rem;
             transition: background-color 0.4s ease, color 0.4s ease;
         }
 
-        .sidebar {
-            width: 64px;
-            background-color: var(--sidebar-bg);
-            border-right: 1px solid var(--card-border);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 1.2rem 0;
-            gap: 1.8rem;
-            position: fixed;
-            height: 100vh;
-            z-index: 20;
-        }
-
-        .brand-icon {
-            font-size: 1.2rem;
-            color: var(--accent-cyan);
-        }
-
-        .sidebar-nav {
-            display: flex;
-            flex-direction: column;
-            gap: 1.4rem;
-        }
-
-        .sidebar-link {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            text-decoration: none;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .sidebar-link:hover, .sidebar-link.active {
-            color: var(--accent-cyan);
-            background: var(--input-bg);
-            box-shadow: 0 0 10px var(--border-glow);
-        }
-
-        .app-wrapper {
-            margin-left: 64px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
         header {
-            height: 60px;
-            padding: 0 2rem;
-            background: var(--header-bg);
-            border-bottom: 1px solid var(--card-border);
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            backdrop-filter: blur(10px);
+            align-items: center;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-glow);
+            margin-bottom: 2rem;
         }
 
         .header-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 700;
+            font-size: 1.2rem;
             color: var(--accent-cyan);
             border-left: 3px solid var(--accent-cyan);
             padding-left: 10px;
-            letter-spacing: 1px;
+            text-decoration: none;
         }
 
-        .theme-toggle-btn {
-            background: var(--input-bg);
-            border: 1px solid var(--card-border);
-            color: var(--text-muted);
-            padding: 0.4rem 0.9rem;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            font-family: 'Orbitron', sans-serif;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .theme-toggle-btn:hover {
+        .nav-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow);
             color: var(--accent-cyan);
-            border-color: var(--accent-cyan);
-        }
-
-        .content-container {
-            padding: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .section-header {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            margin-bottom: 1rem;
-            letter-spacing: 0.8px;
+            font-size: 0.85rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
         }
 
-        /* PDF Grid Layout */
-        .pdf-grid {
+        .nav-btn:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 10px var(--border-glow);
+        }
+
+        .section-heading {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            color: var(--text-main);
+            margin-bottom: 1.5rem;
+        }
+
+        .dashboard-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 1.5rem;
         }
 
-        .pdf-card {
+        .dash-card {
             background: var(--card-bg);
-            border: 1px solid var(--card-border);
+            border: 1px solid var(--border-glow);
             border-radius: 10px;
             padding: 1.5rem;
+            color: var(--text-main);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            gap: 1.5rem;
-            backdrop-filter: blur(8px);
-            transition: all 0.3s ease;
+            gap: 1.2rem;
         }
 
-        .pdf-card:hover {
+        .dash-card:hover {
             border-color: var(--accent-cyan);
-            box-shadow: 0 0 15px var(--border-glow);
+            box-shadow: 0 0 20px var(--border-glow);
             transform: translateY(-3px);
         }
 
-        .pdf-card-top {
+        .card-header-content {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 1rem;
         }
 
-        .pdf-icon {
+        .dash-card i.fa-file-pdf {
             font-size: 2.2rem;
             color: var(--accent-red);
+            flex-shrink: 0;
+            margin-top: 0.1rem;
         }
 
-        .pdf-info h3 {
+        .card-text h3 {
             font-family: 'Orbitron', sans-serif;
             font-size: 1.05rem;
-            color: var(--text-main);
-            margin-bottom: 0.2rem;
+            line-height: 1.3;
+            margin-bottom: 0.3rem;
         }
 
-        .pdf-info p {
+        .card-text p {
             font-size: 0.85rem;
             color: var(--text-muted);
         }
 
-        .pdf-actions {
-            display: flex;
-            gap: 0.8rem;
+        .card-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            border-top: 1px solid var(--border-glow);
+            padding-top: 1rem;
         }
 
-        .btn-action {
-            flex: 1;
-            padding: 0.5rem;
+        .action-btn {
+            padding: 0.5rem 0.8rem;
             border-radius: 6px;
             font-family: 'Orbitron', sans-serif;
             font-size: 0.8rem;
-            font-weight: 700;
             text-decoration: none;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.4rem;
-            transition: all 0.2s ease;
+            gap: 6px;
             cursor: pointer;
+            transition: all 0.3s ease;
         }
 
         .btn-view {
@@ -248,7 +178,8 @@
 
         .btn-view:hover {
             background: var(--accent-cyan);
-            color: #03151c;
+            color: var(--bg-color);
+            box-shadow: 0 0 10px var(--border-glow);
         }
 
         .btn-download {
@@ -260,99 +191,99 @@
         .btn-download:hover {
             background: var(--accent-red);
             color: #ffffff;
-        }
-
-        @media(max-width: 768px) {
-            .sidebar { display: none; }
-            .app-wrapper { margin-left: 0; }
+            box-shadow: 0 0 10px var(--border-glow-red);
         }
     </style>
 </head>
 <body>
 
-    <aside class="sidebar">
-        <div class="brand-icon"><i class="fa-solid fa-atom"></i></div>
-        <nav class="sidebar-nav">
-            <a class="sidebar-link" href="class11-hub.html" title="Dashboard"><i class="fa-solid fa-house"></i></a>
-            <a class="sidebar-link active" href="class11-physics.html" title="Class 11 Physics"><i class="fa-solid fa-atom"></i></a>
-        </nav>
-    </aside>
+    <header>
+        <a href="class11-hub.html" class="header-title">| Class 11 Physics Portal</a>
+        <button onclick="toggleTheme()" class="nav-btn"><i class="fa-solid fa-circle-half-stroke"></i> Theme</button>
+    </header>
 
-    <div class="app-wrapper">
-        <header>
-            <div class="header-title">| Class 11 Physics Portal</div>
-            <button class="theme-toggle-btn" onclick="toggleTheme()"><i class="fa-solid fa-circle-half-stroke"></i> Theme</button>
-        </header>
+    <div class="section-heading">Physics Practice Question Banks</div>
 
-        <main class="content-container">
-            <div>
-                <h2 class="section-header">Physics Practice Question Banks</h2>
-                <div class="pdf-grid">
-                    <!-- Scalar & Vector -->
-                    <div class="pdf-card">
-                        <div class="pdf-card-top">
-                            <i class="fa-solid fa-file-pdf pdf-icon"></i>
-                            <div class="pdf-info">
-                                <h3>Scalar & Vector</h3>
-                                <p>Practice Question Bank</p>
-                            </div>
-                        </div>
-                        <div class="pdf-actions">
-                            <a href="pdfs/scalar-vector.pdf" class="btn-action btn-view" target="_blank"><i class="fa-solid fa-eye"></i> View</a>
-                            <a href="pdfs/scalar-vector.pdf" class="btn-action btn-download" download="scalar-vector.pdf"><i class="fa-solid fa-download"></i> Download</a>
-                        </div>
-                    </div>
-
-                    <!-- Projectile Motion -->
-                    <div class="pdf-card">
-                        <div class="pdf-card-top">
-                            <i class="fa-solid fa-file-pdf pdf-icon"></i>
-                            <div class="pdf-info">
-                                <h3>Projectile Motion</h3>
-                                <p>Practice Question Bank</p>
-                            </div>
-                        </div>
-                        <div class="pdf-actions">
-                            <a href="pdfs/projectile-motion.pdf" class="btn-action btn-view" target="_blank"><i class="fa-solid fa-eye"></i> View</a>
-                            <a href="pdfs/projectile-motion.pdf" class="btn-action btn-download" download="projectile-motion.pdf"><i class="fa-solid fa-download"></i> Download</a>
-                        </div>
-                    </div>
-
-                    <!-- Laws of Motion & Friction -->
-                    <div class="pdf-card">
-                        <div class="pdf-card-top">
-                            <i class="fa-solid fa-file-pdf pdf-icon"></i>
-                            <div class="pdf-info">
-                                <h3>Laws of Motion & Friction</h3>
-                                <p>Practice Question Bank</p>
-                            </div>
-                        </div>
-                        <div class="pdf-actions">
-                            <a href="pdfs/laws-of-motion.pdf" class="btn-action btn-view" target="_blank"><i class="fa-solid fa-eye"></i> View</a>
-                            <a href="pdfs/laws-of-motion.pdf" class="btn-action btn-download" download="laws-of-motion.pdf"><i class="fa-solid fa-download"></i> Download</a>
-                        </div>
-                    </div>
-
-                    <!-- Work, Energy and Power -->
-                    <div class="pdf-card">
-                        <div class="pdf-card-top">
-                            <i class="fa-solid fa-file-pdf pdf-icon"></i>
-                            <div class="pdf-info">
-                                <h3>Work, Energy and Power</h3>
-                                <p>Practice Question Bank</p>
-                            </div>
-                        </div>
-                        <div class="pdf-actions">
-                            <a href="pdfs/work-energy-power.pdf" class="btn-action btn-view" target="_blank"><i class="fa-solid fa-eye"></i> View</a>
-                            <a href="pdfs/work-energy-power.pdf" class="btn-action btn-download" download="work-energy-power.pdf"><i class="fa-solid fa-download"></i> Download</a>
-                        </div>
-                    </div>
+    <div class="dashboard-grid">
+        <!-- Card 1: Scalar & Vector -->
+        <div class="dash-card">
+            <div class="card-header-content">
+                <i class="fa-solid fa-file-pdf"></i>
+                <div class="card-text">
+                    <h3>Scalar & Vector</h3>
+                    <p>Practice Question Bank</p>
                 </div>
             </div>
-        </main>
+            <div class="card-actions">
+                <a href="pdfs/Physics/Scalar_and_Vector_Class_11.pdf" target="_blank" class="action-btn btn-view">
+                    <i class="fa-solid fa-eye"></i> View
+                </a>
+                <a href="pdfs/Physics/Scalar_and_Vector_Class_11.pdf" download="Scalar_and_Vector_Class_11.pdf" class="action-btn btn-download">
+                    <i class="fa-solid fa-download"></i> Download
+                </a>
+            </div>
+        </div>
+
+        <!-- Card 2: Projectile Motion -->
+        <div class="dash-card">
+            <div class="card-header-content">
+                <i class="fa-solid fa-file-pdf"></i>
+                <div class="card-text">
+                    <h3>Projectile Motion</h3>
+                    <p>Practice Question Bank</p>
+                </div>
+            </div>
+            <div class="card-actions">
+                <a href="pdfs/Physics/Projectile_Motion_Class_11.pdf" target="_blank" class="action-btn btn-view">
+                    <i class="fa-solid fa-eye"></i> View
+                </a>
+                <a href="pdfs/Physics/Projectile_Motion_Class_11.pdf" download="Projectile_Motion_Class_11.pdf" class="action-btn btn-download">
+                    <i class="fa-solid fa-download"></i> Download
+                </a>
+            </div>
+        </div>
+
+        <!-- Card 3: Laws of Motion & Friction -->
+        <div class="dash-card">
+            <div class="card-header-content">
+                <i class="fa-solid fa-file-pdf"></i>
+                <div class="card-text">
+                    <h3>Laws of Motion & Friction</h3>
+                    <p>Practice Question Bank</p>
+                </div>
+            </div>
+            <div class="card-actions">
+                <a href="pdfs/Physics/Laws_of_Motion_and_Friction_Class_11.pdf" target="_blank" class="action-btn btn-view">
+                    <i class="fa-solid fa-eye"></i> View
+                </a>
+                <a href="pdfs/Physics/Laws_of_Motion_and_Friction_Class_11.pdf" download="Laws_of_Motion_and_Friction_Class_11.pdf" class="action-btn btn-download">
+                    <i class="fa-solid fa-download"></i> Download
+                </a>
+            </div>
+        </div>
+
+        <!-- Card 4: Work, Energy and Power -->
+        <div class="dash-card">
+            <div class="card-header-content">
+                <i class="fa-solid fa-file-pdf"></i>
+                <div class="card-text">
+                    <h3>Work, Energy and Power</h3>
+                    <p>Practice Question Bank</p>
+                </div>
+            </div>
+            <div class="card-actions">
+                <a href="pdfs/Physics/Work_Energy_and_Power_Class_11.pdf" target="_blank" class="action-btn btn-view">
+                    <i class="fa-solid fa-eye"></i> View
+                </a>
+                <a href="pdfs/Physics/Work_Energy_and_Power_Class_11.pdf" download="Work_Energy_and_Power_Class_11.pdf" class="action-btn btn-download">
+                    <i class="fa-solid fa-download"></i> Download
+                </a>
+            </div>
+        </div>
     </div>
 
     <script>
+        // Theme switcher logic
         if (localStorage.getItem('theme') === 'light') {
             document.body.classList.add('light-mode');
         }
