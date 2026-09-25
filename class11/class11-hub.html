@@ -15,6 +15,7 @@
             --bg-color: #080c14;
             --card-bg: rgba(15, 23, 42, 0.85);
             --accent-cyan: #00f3ff;
+            --accent-green: #10b981;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
             --border-glow: rgba(0, 243, 255, 0.3);
@@ -56,115 +57,193 @@
             margin-bottom: 2rem;
         }
 
-        .brand-container {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .brand-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
-            color: var(--accent-cyan);
-            text-decoration: none;
-        }
-
-        .logo-img { height: 45px; width: auto; }
-
-        .back-nav {
-            font-family: 'Orbitron', sans-serif;
-            color: var(--accent-cyan);
-            text-decoration: none;
-            font-weight: 600;
-            transition: opacity 0.3s ease;
-        }
-
-        .back-nav:hover { opacity: 0.8; }
-
-        .section-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
-            color: var(--accent-cyan);
-            margin: 2rem 0 1rem 0;
-            border-left: 4px solid var(--accent-cyan);
-            padding-left: 0.8rem;
-        }
-
-        h3 {
+        .header-title {
             font-family: 'Orbitron', sans-serif;
             font-size: 1.2rem;
+            color: var(--accent-cyan);
+            border-left: 3px solid var(--accent-cyan);
+            padding-left: 10px;
+            text-decoration: none;
+        }
+
+        .top-nav-right {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .nav-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow);
+            color: var(--accent-cyan);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+        }
+
+        .nav-btn:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 10px var(--border-glow);
+        }
+
+        .section-heading {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
             color: var(--text-muted);
-            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .subject-card {
+        .notes-banner {
             background: var(--card-bg);
             border: 1px solid var(--border-glow);
             border-radius: 10px;
             padding: 1.5rem;
-            text-align: center;
             text-decoration: none;
-            color: var(--text-main);
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(8px);
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
+            color: var(--text-main);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
         }
 
-        .subject-card:hover {
-            transform: translateY(-5px);
+        .notes-banner:hover {
             border-color: var(--accent-cyan);
             box-shadow: 0 0 20px var(--border-glow);
+            transform: translateY(-2px);
+            color: var(--accent-cyan);
         }
 
-        .notes-card {
-            background: rgba(0, 243, 255, 0.1);
-            border: 1px solid var(--accent-cyan);
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .hub-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow);
+            border-radius: 10px;
+            padding: 1.8rem;
+            text-decoration: none;
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+        }
+
+        .hub-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px var(--border-glow);
+            transform: translateY(-3px);
+        }
+
+        .hub-card i {
+            font-size: 2rem;
+            color: var(--accent-cyan);
+            margin-bottom: 0.5rem;
+        }
+
+        .hub-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.15rem;
+        }
+
+        .hub-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="brand-container">
-            <a href="../index.html" class="brand-title">Swastik-Tech</a>
-            <img src="../assets/logo.png" alt="Swastik-Tech Logo" class="logo-img" onerror="this.style.display='none'">
+        <a href="index.html" class="header-title">Swastik-Tech</a>
+        <div class="top-nav-right">
+            <button onclick="toggleTheme()" class="nav-btn"><i class="fa-solid fa-circle-half-stroke"></i> Theme</button>
+            <a href="index.html" class="nav-btn"><i class="fa-solid fa-arrow-left"></i> Main Menu</a>
         </div>
-        <a href="../index.html" class="back-nav">&larr; Main Menu</a>
     </header>
 
-    <h2 class="section-title">Class 11 Science Portal</h2>
+    <div class="section-heading">Study Notes</div>
+    <a href="class11-notes.html" class="notes-banner">
+        <i class="fa-solid fa-folder-open"></i> Class 11 Notes
+    </a>
 
-    <h3>Study Notes</h3>
-    <div class="grid-container" style="margin-top: 1rem;">
-        <a href="class11-notes/notes.html" class="subject-card notes-card">
-            <i class="fa-solid fa-folder-open"></i> Class 11 Notes
+    <div class="section-heading">Subject Practice & Test Suites</div>
+
+    <div class="dashboard-grid">
+        <!-- Physics Practice -->
+        <a href="class11-physics.html" class="hub-card">
+            <i class="fa-solid fa-atom"></i>
+            <h3>Physics Practice</h3>
+            <p>Access mechanics, vectors, motion modules & question banks.</p>
         </a>
-    </div>
 
-    <h3>Subject Practice & Test Suites</h3>
-    <div class="grid-container" style="margin-top: 1rem;">
-        <a href="class11-physics.html" class="subject-card">Physics Practice</a>
-        <a href="class11-chemistry.html" class="subject-card">Chemistry Practice</a>
-        <a href="../mains/practice-test.html?class=11&sub=maths" class="subject-card">Mathematics Practice</a>
-        <a href="../mains/practice-test.html?class=11&sub=english" class="subject-card">English Practice</a>
-        <a href="../mains/practice-test.html?class=11&sub=cs" class="subject-card">Computer Science Practice</a>
+        <!-- Chemistry Practice -->
+        <a href="class11-chemistry.html" class="hub-card">
+            <i class="fa-solid fa-flask"></i>
+            <h3>Chemistry Practice</h3>
+            <p>Explore physical, organic, and inorganic question sets.</p>
+        </a>
+
+        <!-- Biology Practice -->
+        <a href="class11-biology.html" class="hub-card">
+            <i class="fa-solid fa-dna"></i>
+            <h3>Biology Practice</h3>
+            <p>Review botany and zoology practice papers and test series.</p>
+        </a>
+
+        <!-- Mathematics Practice -->
+        <a href="class11-maths.html" class="hub-card">
+            <i class="fa-solid fa-square-root-variable"></i>
+            <h3>Mathematics Practice</h3>
+            <p>Solve algebra, calculus, and coordinate geometry problems.</p>
+        </a>
+
+        <!-- English Practice -->
+        <a href="class11-english.html" class="hub-card">
+            <i class="fa-solid fa-book-open"></i>
+            <h3>English Practice</h3>
+            <p>Read chapter summaries, grammar guides, and literature notes.</p>
+        </a>
+
+        <!-- Computer Science Practice -->
+        <a href="class11-cs.html" class="hub-card">
+            <i class="fa-solid fa-code"></i>
+            <h3>Computer Science Practice</h3>
+            <p>Practice Python programming, digital logic, and number systems.</p>
+        </a>
     </div>
 
     <script>
         if (localStorage.getItem('theme') === 'light') {
             document.body.classList.add('light-mode');
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            if (document.body.classList.contains('light-mode')) {
+                localStorage.setItem('theme', 'light');
+            } else {
+                localStorage.setItem('theme', 'dark');
+            }
         }
     </script>
 </body>
