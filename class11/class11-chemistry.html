@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemistry Practice | Swastik-Tech</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Self-Contained Browser Tab Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%2300f3ff%22><path d=%22M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5%22/></svg>">
+
+    <style>
+        :root {
+            --bg-color: #080c14;
+            --card-bg: rgba(15, 23, 42, 0.85);
+            --accent-cyan: #00f3ff;
+            --accent-red: #ff4d4d;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-glow: rgba(0, 243, 255, 0.3);
+            --border-glow-red: rgba(255, 77, 77, 0.3);
+            --grid-color: rgba(255, 255, 255, 0.03);
+        }
+
+        body.light-mode {
+            --bg-color: #f1f5f9;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --accent-cyan: #0284c7;
+            --accent-red: #dc2626;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-glow: rgba(2, 132, 199, 0.3);
+            --border-glow-red: rgba(220, 38, 38, 0.3);
+            --grid-color: rgba(0, 0, 0, 0.04);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 50% 50%, var(--border-glow) 0%, transparent 80%),
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 100% 100%, 40px 40px, 40px 40px;
+            color: var(--text-main);
+            font-family: 'Rajdhani', sans-serif;
+            min-height: 100vh;
+            padding: 2rem;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-glow);
+            margin-bottom: 2rem;
+        }
+
+        .header-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--accent-cyan);
+            border-left: 3px solid var(--accent-cyan);
+            padding-left: 10px;
+            text-decoration: none;
+        }
+
+        .top-nav-btns {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow);
+            color: var(--accent-cyan);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+        }
+
+        .nav-btn:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 10px var(--border-glow);
+        }
+
+        .welcome-banner {
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            backdrop-filter: blur(8px);
+        }
+
+        .welcome-banner h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            color: var(--accent-cyan);
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-banner p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .dash-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow);
+            border-radius: 10px;
+            padding: 1.8rem;
+            color: var(--text-main);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .dash-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px var(--border-glow);
+            transform: translateY(-3px);
+        }
+
+        .card-header-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .dash-card i.fa-file-pdf {
+            font-size: 2rem;
+            color: var(--accent-cyan);
+            margin-bottom: 0.2rem;
+        }
+
+        .dash-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.15rem;
+        }
+
+        .dash-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .card-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: auto;
+        }
+
+        .action-btn {
+            padding: 0.6rem 1rem;
+            border-radius: 6px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-view {
+            background: transparent;
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        .btn-view:hover {
+            background: var(--accent-cyan);
+            color: var(--bg-color);
+            box-shadow: 0 0 10px var(--border-glow);
+        }
+
+        .btn-download {
+            background: transparent;
+            border: 1px solid var(--accent-red);
+            color: var(--accent-red);
+        }
+
+        .btn-download:hover {
+            background: var(--accent-red);
+            color: #ffffff;
+            box-shadow: 0 0 10px var(--border-glow-red);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="class11-hub.html" class="header-title"><i class="fa-solid fa-arrow-left"></i> Back to Class 11 Hub</a>
+        <div class="top-nav-btns">
+            <a href="../profile.html" class="nav-btn"><i class="fa-solid fa-user"></i> Profile</a>
+            <button onclick="toggleTheme()" class="nav-btn"><i class="fa-solid fa-circle-half-stroke"></i> Theme</button>
+        </div>
+    </header>
+
+    <div class="welcome-banner">
+        <h1>Chemistry Practice Hub</h1>
+        <p>Access and download your Class 11 chemistry question banks and core study chapters.</p>
+    </div>
+
+    <div class="dashboard-grid">
+        <!-- Card 1: Some Basic Concepts of Chemistry -->
+        <div class="dash-card">
+            <div class="card-header-content">
+                <i class="fa-solid fa-file-pdf"></i>
+                <h3>Some Basic Concepts of Chemistry</h3>
+                <p>Includes mole concept, empirical formulas, stoichiometry, and quantitative calculations.</p>
+            </div>
+            <div class="card-actions">
+                <a href="../pdfs/Some_Basic_Concepts_of_Chemistry_Class_11.pdf" target="_blank" class="action-btn btn-view">
+                    <i class="fa-solid fa-eye"></i> View
+                </a>
+                <a href="../pdfs/Some_Basic_Concepts_of_Chemistry_Class_11.pdf" download class="action-btn btn-download">
+                    <i class="fa-solid fa-download"></i> Download
+                </a>
+            </div>
+        </div>
+
+        <!-- Card 2: Structure of Atom -->
+        <div class="dash-card">
+            <div class="card-header-content">
+                <i class="fa-solid fa-file-pdf"></i>
+                <h3>Structure of Atom</h3>
+                <p>Covers subatomic particles, atomic models, quantum numbers, and electronic configurations.</p>
+            </div>
+            <div class="card-actions">
+                <a href="../pdfs/Structure_of_Atom_Class_11.pdf" target="_blank" class="action-btn btn-view">
+                    <i class="fa-solid fa-eye"></i> View
+                </a>
+                <a href="../pdfs/Structure_of_Atom_Class_11.pdf" download class="action-btn btn-download">
+                    <i class="fa-solid fa-download"></i> Download
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Theme switcher logic
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-mode');
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            if (document.body.classList.contains('light-mode')) {
+                localStorage.setItem('theme', 'light');
+            } else {
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+    </script>
+</body>
+</html>
