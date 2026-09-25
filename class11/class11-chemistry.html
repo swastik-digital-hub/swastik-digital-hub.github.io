@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chemistry Practice | Swastik-Tech</title>
+    <title>Class 11 Chemistry Portal | Swastik-Tech</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -69,11 +69,6 @@
             text-decoration: none;
         }
 
-        .top-nav-btns {
-            display: flex;
-            gap: 1rem;
-        }
-
         .nav-btn {
             background: var(--card-bg);
             border: 1px solid var(--border-glow);
@@ -96,25 +91,11 @@
             box-shadow: 0 0 10px var(--border-glow);
         }
 
-        .welcome-banner {
-            background: var(--card-bg);
-            border: 1px solid var(--border-glow);
-            border-radius: 12px;
-            padding: 2rem;
-            margin-bottom: 2.5rem;
-            backdrop-filter: blur(8px);
-        }
-
-        .welcome-banner h1 {
+        .section-heading {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
-            color: var(--accent-cyan);
-            margin-bottom: 0.5rem;
-        }
-
-        .welcome-banner p {
-            color: var(--text-muted);
-            font-size: 1.05rem;
+            font-size: 1.4rem;
+            color: var(--text-main);
+            margin-bottom: 1.5rem;
         }
 
         .dashboard-grid {
@@ -127,7 +108,7 @@
             background: var(--card-bg);
             border: 1px solid var(--border-glow);
             border-radius: 10px;
-            padding: 1.8rem;
+            padding: 1.5rem;
             color: var(--text-main);
             transition: all 0.3s ease;
             backdrop-filter: blur(8px);
@@ -144,44 +125,47 @@
 
         .card-header-content {
             display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
+            align-items: flex-start;
+            gap: 1rem;
         }
 
         .dash-card i.fa-file-pdf {
-            font-size: 2rem;
-            color: var(--accent-cyan);
-            margin-bottom: 0.2rem;
+            font-size: 2.2rem;
+            color: var(--accent-red);
+            flex-shrink: 0;
+            margin-top: 0.1rem;
         }
 
-        .dash-card h3 {
+        .card-text h3 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.15rem;
+            font-size: 1.05rem;
+            line-height: 1.3;
+            margin-bottom: 0.3rem;
         }
 
-        .dash-card p {
-            font-size: 0.9rem;
+        .card-text p {
+            font-size: 0.85rem;
             color: var(--text-muted);
-            line-height: 1.4;
         }
 
         .card-actions {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1rem;
-            margin-top: auto;
+            border-top: 1px solid var(--border-glow);
+            padding-top: 1rem;
         }
 
         .action-btn {
-            padding: 0.6rem 1rem;
+            padding: 0.5rem 0.8rem;
             border-radius: 6px;
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             text-decoration: none;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 6px;
             cursor: pointer;
             transition: all 0.3s ease;
         }
@@ -214,31 +198,27 @@
 <body>
 
     <header>
-        <a href="class11-hub.html" class="header-title"><i class="fa-solid fa-arrow-left"></i> Back to Class 11 Hub</a>
-        <div class="top-nav-btns">
-            <a href="../profile.html" class="nav-btn"><i class="fa-solid fa-user"></i> Profile</a>
-            <button onclick="toggleTheme()" class="nav-btn"><i class="fa-solid fa-circle-half-stroke"></i> Theme</button>
-        </div>
+        <a href="class11-hub.html" class="header-title">| Class 11 Chemistry Portal</a>
+        <button onclick="toggleTheme()" class="nav-btn"><i class="fa-solid fa-circle-half-stroke"></i> Theme</button>
     </header>
 
-    <div class="welcome-banner">
-        <h1>Chemistry Practice Hub</h1>
-        <p>Access and download your Class 11 chemistry question banks and core study chapters.</p>
-    </div>
+    <div class="section-heading">Chemistry Practice Question Banks</div>
 
     <div class="dashboard-grid">
         <!-- Card 1: Some Basic Concepts of Chemistry -->
         <div class="dash-card">
             <div class="card-header-content">
                 <i class="fa-solid fa-file-pdf"></i>
-                <h3>Some Basic Concepts of Chemistry</h3>
-                <p>Includes mole concept, empirical formulas, stoichiometry, and quantitative calculations.</p>
+                <div class="card-text">
+                    <h3>Some Basic Concepts of Chemistry</h3>
+                    <p>Practice Question Bank</p>
+                </div>
             </div>
             <div class="card-actions">
                 <a href="../pdfs/Some_Basic_Concepts_of_Chemistry_Class_11.pdf" target="_blank" class="action-btn btn-view">
                     <i class="fa-solid fa-eye"></i> View
                 </a>
-                <a href="../pdfs/Some_Basic_Concepts_of_Chemistry_Class_11.pdf" download class="action-btn btn-download">
+                <a href="../pdfs/Some_Basic_Concepts_of_Chemistry_Class_11.pdf" download="Some_Basic_Concepts_of_Chemistry_Class_11.pdf" class="action-btn btn-download">
                     <i class="fa-solid fa-download"></i> Download
                 </a>
             </div>
@@ -248,14 +228,16 @@
         <div class="dash-card">
             <div class="card-header-content">
                 <i class="fa-solid fa-file-pdf"></i>
-                <h3>Structure of Atom</h3>
-                <p>Covers subatomic particles, atomic models, quantum numbers, and electronic configurations.</p>
+                <div class="card-text">
+                    <h3>Structure of Atom</h3>
+                    <p>Practice Question Bank</p>
+                </div>
             </div>
             <div class="card-actions">
                 <a href="../pdfs/Structure_of_Atom_Class_11.pdf" target="_blank" class="action-btn btn-view">
                     <i class="fa-solid fa-eye"></i> View
                 </a>
-                <a href="../pdfs/Structure_of_Atom_Class_11.pdf" download class="action-btn btn-download">
+                <a href="../pdfs/Structure_of_Atom_Class_11.pdf" download="Structure_of_Atom_Class_11.pdf" class="action-btn btn-download">
                     <i class="fa-solid fa-download"></i> Download
                 </a>
             </div>
