@@ -7,11 +7,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- CodeMirror Editor Styles -->
+    <!-- CodeMirror Editor & Dracula Theme for VS Code Syntax Highlighting -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/dracula.min.css">
 
-    <!-- Self-Contained Browser Tab Favicon -->
+    <!-- Browser Tab Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%2300f3ff%22><path d=%22M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5%22/></svg>">
 
     <style>
@@ -26,7 +26,6 @@
             overflow: hidden;
         }
 
-        /* IDE Top Navigation Header */
         .ide-header {
             background: rgba(15, 23, 42, 0.95);
             border-bottom: 1px solid rgba(0, 243, 255, 0.3);
@@ -62,6 +61,24 @@
             display: flex;
             gap: 1rem;
             align-items: center;
+        }
+
+        .user-profile-badge {
+            font-size: 0.85rem;
+            color: #00f3ff;
+            background: rgba(0, 243, 255, 0.1);
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            padding: 0.3rem 0.7rem;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .user-profile-badge:hover {
+            background: rgba(0, 243, 255, 0.2);
         }
 
         .status-badge {
@@ -114,7 +131,6 @@
             color: #080c14;
         }
 
-        /* Workspace Layout */
         .ide-workspace {
             flex: 1;
             display: grid;
@@ -160,7 +176,7 @@
         .CodeMirror {
             flex: 1;
             height: auto !important;
-            font-family: 'Courier New', Courier, monospace;
+            font-family: 'Fira Code', 'Courier New', Courier, monospace;
             font-size: 14px;
         }
 
@@ -176,6 +192,77 @@
             line-height: 1.4;
         }
 
+        /* Modal Overlay for Profile Name */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(4, 6, 10, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            display: none;
+        }
+
+        .modal-card {
+            background: #0f172a;
+            border: 1px solid rgba(0, 243, 255, 0.4);
+            border-radius: 12px;
+            padding: 2rem;
+            width: 350px;
+            text-align: center;
+            box-shadow: 0 0 25px rgba(0, 243, 255, 0.2);
+        }
+
+        .modal-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00f3ff;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .modal-card p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .modal-input {
+            width: 100%;
+            background: #1e293b;
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            color: #f8fafc;
+            padding: 0.6rem 1rem;
+            border-radius: 6px;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1rem;
+            margin-bottom: 1.2rem;
+            outline: none;
+        }
+
+        .modal-input:focus {
+            border-color: #00f3ff;
+            box-shadow: 0 0 8px rgba(0, 243, 255, 0.3);
+        }
+
+        .modal-btn {
+            background: #00f3ff;
+            color: #080c14;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            border-radius: 6px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-btn:hover {
+            box-shadow: 0 0 12px rgba(0, 243, 255, 0.6);
+        }
+
         @media(max-width: 768px) {
             .ide-workspace {
                 grid-template-columns: 1fr;
@@ -186,7 +273,16 @@
 </head>
 <body>
 
-    <!-- IDE Header matching user screenshot request -->
+    <!-- Profile Name Modal -->
+    <div id="profile-modal" class="modal-overlay">
+        <div class="modal-card">
+            <h3>Enter Your Name</h3>
+            <p>Please enter your profile name for your personalized session.</p>
+            <input type="text" id="username-input" class="modal-input" placeholder="e.g. Anita Madala" autocomplete="off">
+            <button class="modal-btn" onclick="saveUserName()">Save & Start</button>
+        </div>
+    </div>
+
     <header class="ide-header">
         <div style="display: flex; align-items: center; gap: 1.5rem;">
             <a href="class11-cs.html" class="brand-title">
@@ -197,6 +293,9 @@
             </div>
         </div>
         <div class="ide-actions">
+            <div id="profile-display" class="user-profile-badge" onclick="promptForName()" title="Click to change name">
+                <i class="fa-solid fa-user"></i> <span id="display-name">User</span>
+            </div>
             <span id="status-badge" class="status-badge">Loading Python...</span>
             <button id="run-btn" class="run-btn" disabled onclick="runPythonCode()">
                 <i class="fa-solid fa-play"></i> Run
@@ -205,11 +304,10 @@
         </div>
     </header>
 
-    <!-- Split Workspace: Code Editor & Console Output -->
     <div class="ide-workspace">
         <div class="editor-pane">
             <div class="pane-header">
-                <span>EDITOR</span>
+                <span>EDITOR (Press Ctrl+/ to comment lines)</span>
             </div>
             <textarea id="code-editor"># Write your Python code here
 print("Hello from Swastik-Tech Python IDE!")
@@ -223,25 +321,34 @@ print(f"Sum of {x} + {y} = {x + y}")</textarea>
                 <span>> CONSOLE</span>
                 <button class="clear-btn" onclick="clearConsole()">CLEAR</button>
             </div>
-            <div id="console-output" class="console-output">Initializing Python 3.11 environment...
-</div>
+            <div id="console-output" class="console-output"></div>
         </div>
     </div>
 
-    <!-- CodeMirror Script -->
+    <!-- CodeMirror Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/comment/comment.min.js"></script>
 
-    <!-- Pyodide Engine for In-Browser Python Execution -->
+    <!-- Pyodide Engine -->
     <script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
 
     <script>
+        // Initialize CodeMirror editor with VS Code Dracula syntax highlighting theme
         let editor = CodeMirror.fromTextArea(document.getElementById("code-editor"), {
             lineNumbers: true,
             mode: "python",
             theme: "dracula",
             indentUnit: 4,
-            autofocus: true
+            autofocus: true,
+            extraKeys: {
+                "Ctrl-/": function(cm) {
+                    cm.toggleComment();
+                },
+                "Cmd-/": function(cm) {
+                    cm.toggleComment();
+                }
+            }
         });
 
         let pyodideReady = false;
@@ -249,6 +356,43 @@ print(f"Sum of {x} + {y} = {x + y}")</textarea>
         const consoleOutput = document.getElementById("console-output");
         const statusBadge = document.getElementById("status-badge");
         const runBtn = document.getElementById("run-btn");
+        
+        let currentUserName = localStorage.getItem("swastik_tech_username");
+
+        function checkUserName() {
+            if (!currentUserName) {
+                document.getElementById("profile-modal").style.display = "flex";
+            } else {
+                document.getElementById("display-name").textContent = currentUserName;
+                printWelcomeMessage(currentUserName);
+            }
+        }
+
+        function promptForName() {
+            document.getElementById("username-input").value = currentUserName || "";
+            document.getElementById("profile-modal").style.display = "flex";
+        }
+
+        function saveUserName() {
+            const inputVal = document.getElementById("username-input").value.trim();
+            if (inputVal) {
+                currentUserName = inputVal;
+                localStorage.setItem("swastik_tech_username", currentUserName);
+                document.getElementById("display-name").textContent = currentUserName;
+                document.getElementById("profile-modal").style.display = "none";
+                consoleOutput.textContent = ""; // Reset console
+                printWelcomeMessage(currentUserName);
+            }
+        }
+
+        // Personalized startup greeting
+        function printWelcomeMessage(userName) {
+            consoleOutput.textContent += `Hello ${userName}\n`;
+            consoleOutput.textContent += "Welcome to Swastik-Tech\n";
+            consoleOutput.textContent += "----------------------------------------\n";
+        }
+
+        checkUserName();
 
         async function initPyodide() {
             try {
@@ -257,11 +401,11 @@ print(f"Sum of {x} + {y} = {x + y}")</textarea>
                 statusBadge.textContent = "Ready";
                 statusBadge.style.background = "rgba(16, 185, 129, 0.2)";
                 runBtn.disabled = false;
-                consoleOutput.textContent += "Python 3.11 Ready!\n----------------------------------------\n";
+                consoleOutput.textContent += "Python 3.11 Environment Initialized Successfully.\n----------------------------------------\n";
             } catch (err) {
                 statusBadge.textContent = "Error Loading";
                 statusBadge.style.color = "#ff4d4d";
-                consoleOutput.textContent += "\nFailed to load Python environment: " + err;
+                consoleOutput.textContent += "\nFailed to load Python environment: " + err + "\n";
             }
         }
 
@@ -273,7 +417,6 @@ print(f"Sum of {x} + {y} = {x + y}")</textarea>
             const code = editor.getValue();
             consoleOutput.textContent += `>>> Running main.py...\n`;
 
-            // Capture stdout
             pyodideInstance.runPython(`
                 import sys
                 import io
@@ -287,7 +430,6 @@ print(f"Sum of {x} + {y} = {x + y}")</textarea>
             } catch (err) {
                 consoleOutput.textContent += err + "\n";
             } finally {
-                // Reset stdout
                 pyodideInstance.runPython("sys.stdout = sys.__stdout__");
                 consoleOutput.scrollTop = consoleOutput.scrollHeight;
             }
@@ -295,6 +437,9 @@ print(f"Sum of {x} + {y} = {x + y}")</textarea>
 
         function clearConsole() {
             consoleOutput.textContent = "";
+            if (currentUserName) {
+                printWelcomeMessage(currentUserName);
+            }
         }
     </script>
 </body>
