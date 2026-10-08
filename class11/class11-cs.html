@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class 11 Computer Science Portal | Swastik-Tech</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Self-Contained Browser Tab Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%2300f3ff%22><path d=%22M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5%22/></svg>">
+
+    <style>
+        :root {
+            --bg-color: #080c14;
+            --card-bg: rgba(15, 23, 42, 0.85);
+            --accent-cyan: #00f3ff;
+            --accent-green: #10b981;
+            --accent-red: #ff4d4d;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-glow: rgba(0, 243, 255, 0.3);
+            --border-glow-green: rgba(16, 185, 129, 0.3);
+            --grid-color: rgba(255, 255, 255, 0.03);
+        }
+
+        body.light-mode {
+            --bg-color: #f1f5f9;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --accent-cyan: #0284c7;
+            --accent-green: #059669;
+            --accent-red: #dc2626;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-glow: rgba(2, 132, 199, 0.3);
+            --border-glow-green: rgba(5, 150, 105, 0.3);
+            --grid-color: rgba(0, 0, 0, 0.04);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 50% 50%, var(--border-glow) 0%, transparent 80%),
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 100% 100%, 40px 40px, 40px 40px;
+            color: var(--text-main);
+            font-family: 'Rajdhani', sans-serif;
+            min-height: 100vh;
+            padding: 2rem;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-glow);
+            margin-bottom: 2rem;
+        }
+
+        .header-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--accent-cyan);
+            border-left: 3px solid var(--accent-cyan);
+            padding-left: 10px;
+            text-decoration: none;
+        }
+
+        .top-nav-right {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .nav-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow);
+            color: var(--accent-cyan);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+        }
+
+        .nav-btn:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 10px var(--border-glow);
+        }
+
+        .section-heading {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            color: var(--text-main);
+            margin-bottom: 1.5rem;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .dash-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow);
+            border-radius: 10px;
+            padding: 1.5rem;
+            color: var(--text-main);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .dash-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px var(--border-glow);
+            transform: translateY(-3px);
+        }
+
+        .dash-card.ide-card:hover {
+            border-color: var(--accent-green);
+            box-shadow: 0 0 20px var(--border-glow-green);
+        }
+
+        .card-header-content {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .dash-card i.fa-file-pdf {
+            font-size: 2.2rem;
+            color: var(--accent-red);
+            flex-shrink: 0;
+            margin-top: 0.1rem;
+        }
+
+        .dash-card i.fa-code {
+            font-size: 2.2rem;
+            color: var(--accent-green);
+            flex-shrink: 0;
+            margin-top: 0.1rem;
+        }
+
+        .card-text h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            line-height: 1.3;
+            margin-bottom: 0.3rem;
+        }
+
+        .card-text p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .card-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            border-top: 1px solid var(--border-glow);
+            padding-top: 1rem;
+        }
+
+        .card-actions.single {
+            grid-template-columns: 1fr;
+        }
+
+        .action-btn {
+            padding: 0.5rem 0.8rem;
+            border-radius: 6px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-view {
+            background: transparent;
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        .btn-view:hover {
+            background: var(--accent-cyan);
+            color: var(--bg-color);
+            box-shadow: 0 0 10px var(--border-glow);
+        }
+
+        .btn-download {
+            background: transparent;
+            border: 1px solid var(--accent-red);
+            color: var(--accent-red);
+        }
+
+        .btn-download:hover {
+            background: var(--accent-red);
+            color: #ffffff;
+            box-shadow: 0 0 10px rgba(255, 77, 77, 0.4);
+        }
+
+        .btn-ide {
+            background: transparent;
+            border: 1px solid var(--accent-green);
+            color: var(--accent-green);
+        }
+
+        .btn-ide:hover {
+            background: var(--accent-green);
+            color: var(--bg-color);
+            box-shadow: 0 0 10px var(--border-glow-green);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="class11-hub.html" class="header-title">| Class 11 Computer Science Portal</a>
+        <div class="top-nav-right">
+            <button onclick="toggleTheme()" class="nav-btn"><i class="fa-solid fa-circle-half-stroke"></i> Theme</button>
+            <a href="class11-hub.html" class="nav-btn"><i class="fa-solid fa-arrow-left"></i> Hub</a>
+        </div>
+    </header>
+
+    <div class="section-heading">Computer Science Modules & Practice</div>
+
+    <div class="dashboard-grid">
+        <!-- Python Notes -->
+        <div class="dash-card">
+            <div class="card-header-content">
+                <i class="fa-solid fa-file-pdf"></i>
+                <div class="card-text">
+                    <h3>Python Fundamentals</h3>
+                    <p>Notes & Chapter Handouts</p>
+                </div>
+            </div>
+            <div class="card-actions">
+                <a href="./pdfs/CS/python-notes.pdf" target="_blank" class="action-btn btn-view">
+                    <i class="fa-solid fa-eye"></i> View
+                </a>
+                <a href="./pdfs/CS/python-notes.pdf" download="python-notes.pdf" class="action-btn btn-download">
+                    <i class="fa-solid fa-download"></i> Download
+                </a>
+            </div>
+        </div>
+
+        <!-- Python Code Practice / IDE -->
+        <div class="dash-card ide-card">
+            <div class="card-header-content">
+                <i class="fa-solid fa-code"></i>
+                <div class="card-text">
+                    <h3>Python IDE</h3>
+                    <p>Interactive In-Browser Code Practice</p>
+                </div>
+            </div>
+            <div class="card-actions single">
+                <a href="python-ide.html" class="action-btn btn-ide">
+                    <i class="fa-solid fa-terminal"></i> Open Python IDE
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-mode');
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            if (document.body.classList.contains('light-mode')) {
+                localStorage.setItem('theme', 'light');
+            } else {
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+    </script>
+</body>
+</html>
