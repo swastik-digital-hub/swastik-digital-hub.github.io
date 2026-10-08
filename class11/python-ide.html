@@ -309,11 +309,7 @@
             <div class="pane-header">
                 <span>EDITOR (Press Ctrl+/ to comment lines)</span>
             </div>
-            <textarea id="code-editor"># Write your Python code here
-print("Hello from Swastik-Tech Python IDE!")
-x = 10
-y = 20
-print(f"Sum of {x} + {y} = {x + y}")</textarea>
+            <textarea id="code-editor"></textarea>
         </div>
 
         <div class="console-pane">
@@ -325,21 +321,36 @@ print(f"Sum of {x} + {y} = {x + y}")</textarea>
         </div>
     </div>
 
-    <!-- CodeMirror Scripts -->
+    <!-- CodeMirror Scripts & AutoCloseBrackets Addon -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/comment/comment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/closebrackets.min.js"></script>
 
     <!-- Pyodide Engine -->
     <script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
 
     <script>
-        // Initialize CodeMirror editor with VS Code Dracula syntax highlighting theme
+        let currentUserName = localStorage.getItem("swastik_tech_username");
+
+        // Set default dynamic greeting code template inside the editor
+        function getInitialCode(name) {
+            return `# Write your Python code here
+print("Hello, ${name || 'User'}")
+print("Welcome to Swastik Tech")
+
+x = 10
+y = 20
+print(f"Sum of {x} + {y} = {x + y}")`;
+        }
+
+        // Initialize CodeMirror editor with VS Code Dracula theme, comment shortcut, and auto-closing brackets
         let editor = CodeMirror.fromTextArea(document.getElementById("code-editor"), {
             lineNumbers: true,
             mode: "python",
             theme: "dracula",
             indentUnit: 4,
+            autoCloseBrackets: true,
             autofocus: true,
             extraKeys: {
                 "Ctrl-/": function(cm) {
@@ -356,15 +367,14 @@ print(f"Sum of {x} + {y} = {x + y}")</textarea>
         const consoleOutput = document.getElementById("console-output");
         const statusBadge = document.getElementById("status-badge");
         const runBtn = document.getElementById("run-btn");
-        
-        let currentUserName = localStorage.getItem("swastik_tech_username");
 
         function checkUserName() {
             if (!currentUserName) {
                 document.getElementById("profile-modal").style.display = "flex";
             } else {
                 document.getElementById("display-name").textContent = currentUserName;
-                printWelcomeMessage(currentUserName);
+                editor.setValue(getInitialCode(currentUserName));
+                printConsoleWelcome(currentUserName);
             }
         }
 
@@ -380,13 +390,13 @@ print(f"Sum of {x} + {y} = {x + y}")</textarea>
                 localStorage.setItem("swastik_tech_username", currentUserName);
                 document.getElementById("display-name").textContent = currentUserName;
                 document.getElementById("profile-modal").style.display = "none";
-                consoleOutput.textContent = ""; // Reset console
-                printWelcomeMessage(currentUserName);
+                editor.setValue(getInitialCode(currentUserName));
+                consoleOutput.textContent = "";
+                printConsoleWelcome(currentUserName);
             }
         }
 
-        // Personalized startup greeting
-        function printWelcomeMessage(userName) {
+        function printConsoleWelcome(userName) {
             consoleOutput.textContent += `Hello ${userName}\n`;
             consoleOutput.textContent += "Welcome to Swastik-Tech\n";
             consoleOutput.textContent += "----------------------------------------\n";
@@ -438,7 +448,7 @@ print(f"Sum of {x} + {y} = {x + y}")</textarea>
         function clearConsole() {
             consoleOutput.textContent = "";
             if (currentUserName) {
-                printWelcomeMessage(currentUserName);
+                printConsoleWelcome(currentUserName);
             }
         }
     </script>
