@@ -358,14 +358,12 @@
     <script>
         let currentUserName = localStorage.getItem("swastik_tech_username");
 
-        // Set default dynamic greeting code template inside the editor using the user login name
         function getInitialCode(name) {
             return `# Write your Python code here
 print("Hello, ${name || 'User'}")
 print("Welcome to Swastik Tech")`;
         }
 
-        // Initialize CodeMirror editor with VS Code Dracula theme, comment shortcut, and auto-closing brackets
         let editor = CodeMirror.fromTextArea(document.getElementById("code-editor"), {
             lineNumbers: true,
             mode: "python",
@@ -444,7 +442,6 @@ print("Welcome to Swastik Tech")`;
         async function runPythonCode() {
             if (!pyodideReady) return;
             
-            // Set running state visuals
             runBtn.disabled = true;
             runIcon.className = "fa-solid fa-spinner fa-spin";
             runText.textContent = "Running...";
@@ -452,10 +449,40 @@ print("Welcome to Swastik Tech")`;
 
             const code = editor.getValue();
 
-            // Setup capture for both stdout and stderr
-            pyodideInstance.runPython(`
+            // Register custom JS input handler and standard stream redirects in Pyodide
+            window.pyodidePrompt = function(promptText) {
+                return prompt(promptText || "Enter input:") || "";
+            };
+
+            await pyodideInstance.runPythonAsync(`
                 import sys
                 import io
+                import js
+
+                class BrowserInput:
+                    def write(self, s):
+                        pass
+                    def flush(self):
+                        pass
+                    def readline(self):
+                        return ""
+
+                class BrowserOutput(io.TextIOBase):
+                    def __init__(self):
+                        self.buffer = []
+                    def write(self, s):
+                        js.console.log(s)
+                        return len(s)
+
+                # Custom input function replacement for browser environment
+                def custom_input(prompt_text=""):
+                    if prompt_text:
+                        print(prompt_text, end="")
+                    val = js.window.pyodidePrompt(str(prompt_text))
+                    print(val)
+                    return val
+
+                __builtins__.input = custom_input
                 sys.stdout = io.StringIO()
                 sys.stderr = sys.stdout
             `);
@@ -473,7 +500,6 @@ print("Welcome to Swastik Tech")`;
                 `);
                 consoleOutput.scrollTop = consoleOutput.scrollHeight;
                 
-                // Restore run button state
                 runBtn.disabled = false;
                 runIcon.className = "fa-solid fa-play";
                 runText.textContent = "Run";
