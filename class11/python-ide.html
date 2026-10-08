@@ -321,7 +321,7 @@
         </div>
     </div>
 
-    <!-- CodeMirror Scripts & AutoCloseBrackets Addon -->
+    <!-- CodeMirror Scripts & Addons -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/comment/comment.min.js"></script>
@@ -333,15 +333,11 @@
     <script>
         let currentUserName = localStorage.getItem("swastik_tech_username");
 
-        // Set default dynamic greeting code template inside the editor
+        // Set default dynamic greeting code template inside the editor using the user login name
         function getInitialCode(name) {
             return `# Write your Python code here
 print("Hello, ${name || 'User'}")
-print("Welcome to Swastik Tech")
-
-x = 10
-y = 20
-print(f"Sum of {x} + {y} = {x + y}")`;
+print("Welcome to Swastik Tech")`;
         }
 
         // Initialize CodeMirror editor with VS Code Dracula theme, comment shortcut, and auto-closing brackets
@@ -374,7 +370,7 @@ print(f"Sum of {x} + {y} = {x + y}")`;
             } else {
                 document.getElementById("display-name").textContent = currentUserName;
                 editor.setValue(getInitialCode(currentUserName));
-                printConsoleWelcome(currentUserName);
+                consoleOutput.textContent = "Ready. Click 'Run' to execute code.\n";
             }
         }
 
@@ -391,15 +387,8 @@ print(f"Sum of {x} + {y} = {x + y}")`;
                 document.getElementById("display-name").textContent = currentUserName;
                 document.getElementById("profile-modal").style.display = "none";
                 editor.setValue(getInitialCode(currentUserName));
-                consoleOutput.textContent = "";
-                printConsoleWelcome(currentUserName);
+                consoleOutput.textContent = "Ready. Click 'Run' to execute code.\n";
             }
-        }
-
-        function printConsoleWelcome(userName) {
-            consoleOutput.textContent += `Hello ${userName}\n`;
-            consoleOutput.textContent += "Welcome to Swastik-Tech\n";
-            consoleOutput.textContent += "----------------------------------------\n";
         }
 
         checkUserName();
@@ -411,7 +400,6 @@ print(f"Sum of {x} + {y} = {x + y}")`;
                 statusBadge.textContent = "Ready";
                 statusBadge.style.background = "rgba(16, 185, 129, 0.2)";
                 runBtn.disabled = false;
-                consoleOutput.textContent += "Python 3.11 Environment Initialized Successfully.\n----------------------------------------\n";
             } catch (err) {
                 statusBadge.textContent = "Error Loading";
                 statusBadge.style.color = "#ff4d4d";
@@ -424,8 +412,9 @@ print(f"Sum of {x} + {y} = {x + y}")`;
         async function runPythonCode() {
             if (!pyodideReady) return;
             
+            // Clear console before executing the current input code
+            consoleOutput.textContent = "";
             const code = editor.getValue();
-            consoleOutput.textContent += `>>> Running main.py...\n`;
 
             pyodideInstance.runPython(`
                 import sys
@@ -447,9 +436,6 @@ print(f"Sum of {x} + {y} = {x + y}")`;
 
         function clearConsole() {
             consoleOutput.textContent = "";
-            if (currentUserName) {
-                printConsoleWelcome(currentUserName);
-            }
         }
     </script>
 </body>
