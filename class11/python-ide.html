@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python IDE | Swastik-Tech</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CodeMirror Editor Styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/dracula.min.css">
+
+    <!-- Self-Contained Browser Tab Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%2300f3ff%22><path d=%22M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5%22/></svg>">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: #080c14;
+            color: #f8fafc;
+            font-family: 'Rajdhani', sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* IDE Top Navigation Header */
+        .ide-header {
+            background: rgba(15, 23, 42, 0.95);
+            border-bottom: 1px solid rgba(0, 243, 255, 0.3);
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            color: #00f3ff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .file-tab {
+            background: #1e293b;
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .ide-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .status-badge {
+            font-size: 0.8rem;
+            background: rgba(16, 185, 129, 0.15);
+            color: #10b981;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .run-btn {
+            background: #10b981;
+            color: #ffffff;
+            border: none;
+            padding: 0.4rem 1.2rem;
+            border-radius: 6px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .run-btn:hover {
+            background: #059669;
+            box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+        }
+
+        .back-btn {
+            background: transparent;
+            border: 1px solid rgba(0, 243, 255, 0.4);
+            color: #00f3ff;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #00f3ff;
+            color: #080c14;
+        }
+
+        /* Workspace Layout */
+        .ide-workspace {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            height: calc(100vh - 61px);
+        }
+
+        .editor-pane, .console-pane {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .editor-pane {
+            border-right: 1px solid rgba(0, 243, 255, 0.2);
+        }
+
+        .pane-header {
+            background: #0f172a;
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            color: #94a3b8;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .clear-btn {
+            background: transparent;
+            border: none;
+            color: #ff4d4d;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+        }
+
+        .clear-btn:hover {
+            text-decoration: underline;
+        }
+
+        .CodeMirror {
+            flex: 1;
+            height: auto !important;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+        }
+
+        .console-output {
+            flex: 1;
+            background: #04060a;
+            color: #10b981;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 1rem;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        @media(max-width: 768px) {
+            .ide-workspace {
+                grid-template-columns: 1fr;
+                grid-template-rows: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- IDE Header matching user screenshot request -->
+    <header class="ide-header">
+        <div style="display: flex; align-items: center; gap: 1.5rem;">
+            <a href="class11-cs.html" class="brand-title">
+                <i class="fa-solid fa-code"></i> Swastik-Tech
+            </a>
+            <div class="file-tab">
+                <i class="fa-regular fa-file-code"></i> main.py
+            </div>
+        </div>
+        <div class="ide-actions">
+            <span id="status-badge" class="status-badge">Loading Python...</span>
+            <button id="run-btn" class="run-btn" disabled onclick="runPythonCode()">
+                <i class="fa-solid fa-play"></i> Run
+            </button>
+            <a href="class11-cs.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back</a>
+        </div>
+    </header>
+
+    <!-- Split Workspace: Code Editor & Console Output -->
+    <div class="ide-workspace">
+        <div class="editor-pane">
+            <div class="pane-header">
+                <span>EDITOR</span>
+            </div>
+            <textarea id="code-editor"># Write your Python code here
+print("Hello from Swastik-Tech Python IDE!")
+x = 10
+y = 20
+print(f"Sum of {x} + {y} = {x + y}")</textarea>
+        </div>
+
+        <div class="console-pane">
+            <div class="pane-header">
+                <span>> CONSOLE</span>
+                <button class="clear-btn" onclick="clearConsole()">CLEAR</button>
+            </div>
+            <div id="console-output" class="console-output">Initializing Python 3.11 environment...
+</div>
+        </div>
+    </div>
+
+    <!-- CodeMirror Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+
+    <!-- Pyodide Engine for In-Browser Python Execution -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
+
+    <script>
+        let editor = CodeMirror.fromTextArea(document.getElementById("code-editor"), {
+            lineNumbers: true,
+            mode: "python",
+            theme: "dracula",
+            indentUnit: 4,
+            autofocus: true
+        });
+
+        let pyodideReady = false;
+        let pyodideInstance = null;
+        const consoleOutput = document.getElementById("console-output");
+        const statusBadge = document.getElementById("status-badge");
+        const runBtn = document.getElementById("run-btn");
+
+        async function initPyodide() {
+            try {
+                pyodideInstance = await loadPyodide();
+                pyodideReady = true;
+                statusBadge.textContent = "Ready";
+                statusBadge.style.background = "rgba(16, 185, 129, 0.2)";
+                runBtn.disabled = false;
+                consoleOutput.textContent += "Python 3.11 Ready!\n----------------------------------------\n";
+            } catch (err) {
+                statusBadge.textContent = "Error Loading";
+                statusBadge.style.color = "#ff4d4d";
+                consoleOutput.textContent += "\nFailed to load Python environment: " + err;
+            }
+        }
+
+        initPyodide();
+
+        async function runPythonCode() {
+            if (!pyodideReady) return;
+            
+            const code = editor.getValue();
+            consoleOutput.textContent += `>>> Running main.py...\n`;
+
+            // Capture stdout
+            pyodideInstance.runPython(`
+                import sys
+                import io
+                sys.stdout = io.StringIO()
+            `);
+
+            try {
+                await pyodideInstance.runPythonAsync(code);
+                let stdout = pyodideInstance.runPython("sys.stdout.getvalue()");
+                consoleOutput.textContent += stdout;
+            } catch (err) {
+                consoleOutput.textContent += err + "\n";
+            } finally {
+                // Reset stdout
+                pyodideInstance.runPython("sys.stdout = sys.__stdout__");
+                consoleOutput.scrollTop = consoleOutput.scrollHeight;
+            }
+        }
+
+        function clearConsole() {
+            consoleOutput.textContent = "";
+        }
+    </script>
+</body>
+</html>
