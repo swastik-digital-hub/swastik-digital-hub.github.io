@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Hub | Swastik-Tech</title>
+    
+    <!-- Google AdSense Code -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9509706674270233" crossorigin="anonymous"></script>
+
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -44,7 +48,13 @@
             font-family: 'Rajdhani', sans-serif;
             min-height: 100vh;
             padding: 2rem;
+            display: flex;
+            flex-direction: column;
             transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        .main-container {
+            flex: 1;
         }
 
         header {
@@ -154,42 +164,82 @@
             color: var(--text-muted);
             line-height: 1.4;
         }
+
+        /* Footer Section for Legal Pages Compliance */
+        footer {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-glow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.2rem;
+        }
+
+        .footer-links a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="header-title" id="welcomeUserTitle">| Dashboard Hub</div>
-        <div class="top-nav-btns">
-            <a href="profile.html" class="nav-btn"><i class="fa-solid fa-user"></i> Profile</a>
-            <button onclick="toggleTheme()" class="nav-btn"><i class="fa-solid fa-circle-half-stroke"></i> Theme</button>
+    <div class="main-container">
+        <header>
+            <div class="header-title" id="welcomeUserTitle">| Dashboard Hub</div>
+            <div class="top-nav-btns">
+                <a href="profile.html" class="nav-btn"><i class="fa-solid fa-user"></i> Profile</a>
+                <button onclick="toggleTheme()" class="nav-btn"><i class="fa-solid fa-circle-half-stroke"></i> Theme</button>
+            </div>
+        </header>
+
+        <div class="welcome-banner">
+            <h1>Welcome to Swastik-Tech Portal</h1>
+            <p>Select a module from the sidebar to begin your sessions in physics, computer science, or exam practice.</p>
         </div>
-    </header>
 
-    <div class="welcome-banner">
-        <h1>Welcome to Swastik-Tech Portal</h1>
-        <p>Select a module from the sidebar to begin your sessions in physics, computer science, or exam practice.</p>
+        <div class="dashboard-grid">
+            <a href="class11/class11-hub.html" class="dash-card">
+                <i class="fa-solid fa-atom"></i>
+                <h3>Class 11th Section</h3>
+                <p>Physics, Chemistry, Computer Science & CS materials.</p>
+            </a>
+
+            <a href="jee-physics-mocktest.html" class="dash-card">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <h3>JEE Portal</h3>
+                <p>Previous year questions, mechanics & engineering tests.</p>
+            </a>
+
+            <a href="neet/neet-hub.html" class="dash-card">
+                <i class="fa-solid fa-heart-pulse"></i>
+                <h3>NEET Section</h3>
+                <p>Medical entrance biology, chemistry & physics practice.</p>
+            </a>
+        </div>
     </div>
 
-    <div class="dashboard-grid">
-        <a href="class11/class11-hub.html" class="dash-card">
-            <i class="fa-solid fa-atom"></i>
-            <h3>Class 11th Section</h3>
-            <p>Physics, Chemistry, Computer Science & CS materials.</p>
-        </a>
-
-        <a href="jee-physics-mocktest.html" class="dash-card">
-            <i class="fa-solid fa-graduation-cap"></i>
-            <h3>JEE Portal</h3>
-            <p>Previous year questions, mechanics & engineering tests.</p>
-        </a>
-
-        <a href="neet/neet-hub.html" class="dash-card">
-            <i class="fa-solid fa-heart-pulse"></i>
-            <h3>NEET Section</h3>
-            <p>Medical entrance biology, chemistry & physics practice.</p>
-        </a>
-    </div>
+    <footer>
+        <div>&copy; Swastik-Tech Educational Portal. All rights reserved.</div>
+        <div class="footer-links">
+            <a href="about.html">About Us</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+        </div>
+    </footer>
 
     <script>
         // Theme switcher logic
