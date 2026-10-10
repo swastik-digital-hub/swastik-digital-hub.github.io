@@ -202,17 +202,9 @@
             font-size: 14px;
         }
 
-        .console-container {
-            flex: 1;
-            background: #04060a;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            overflow: hidden;
-        }
-
         .console-output {
             flex: 1;
+            background: #04060a;
             color: #10b981;
             font-family: 'Courier New', Courier, monospace;
             padding: 1rem;
@@ -220,38 +212,6 @@
             white-space: pre-wrap;
             font-size: 13px;
             line-height: 1.4;
-        }
-
-        /* Inline Input Bar for Compiler Style Input */
-        .console-input-bar {
-            display: none;
-            background: #0f172a;
-            border-top: 1px solid rgba(0, 243, 255, 0.2);
-            padding: 0.5rem 1rem;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .console-input-bar span {
-            color: #00f3ff;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 13px;
-        }
-
-        .console-input-field {
-            flex: 1;
-            background: #1e293b;
-            border: 1px solid rgba(0, 243, 255, 0.4);
-            color: #f8fafc;
-            padding: 0.3rem 0.6rem;
-            border-radius: 4px;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 13px;
-            outline: none;
-        }
-
-        .console-input-field:focus {
-            border-color: #10b981;
         }
 
         /* Modal Overlay for Profile Name */
@@ -382,14 +342,7 @@
                     <button class="action-text-btn clear-btn" onclick="clearConsole()">CLEAR</button>
                 </div>
             </div>
-            <div class="console-container">
-                <div id="console-output" class="console-output"></div>
-                <!-- Compiler-like interactive input box at bottom of console -->
-                <div id="console-input-bar" class="console-input-bar">
-                    <span id="input-prompt-label">Input:</span>
-                    <input type="text" id="console-input-field" class="console-input-field" placeholder="Type input here and press Enter..." autocomplete="off">
-                </div>
-            </div>
+            <div id="console-output" class="console-output"></div>
         </div>
     </div>
 
@@ -408,8 +361,7 @@
         function getInitialCode(name) {
             return `# Write your Python code here
 print("Hello, ${name || 'Swastik Sambhu Panda'}")
-s = input("Enter a string : ")
-print("You entered:", s)`;
+print("Welcome to Swastik Tech")`;
         }
 
         let editor = CodeMirror.fromTextArea(document.getElementById("code-editor"), {
@@ -436,11 +388,6 @@ print("You entered:", s)`;
         const runBtn = document.getElementById("run-btn");
         const runIcon = document.getElementById("run-icon");
         const runText = document.getElementById("run-text");
-        const consoleInputBar = document.getElementById("console-input-bar");
-        const consoleInputField = document.getElementById("console-input-field");
-        const inputPromptLabel = document.getElementById("input-prompt-label");
-
-        let inputResolveCallback = null;
 
         function checkUserName() {
             if (!localStorage.getItem("swastik_tech_username")) {
@@ -491,32 +438,6 @@ print("You entered:", s)`;
 
         initPyodide();
 
-        // Promise-based input helper for Python execution
-        window.requestWebInput = function(promptText) {
-            return new Promise((resolve) => {
-                inputPromptLabel.textContent = promptText || "Input:";
-                consoleInputBar.style.display = "flex";
-                consoleInputField.value = "";
-                consoleInputField.focus();
-                
-                inputResolveCallback = (val) => {
-                    consoleInputBar.style.display = "none";
-                    consoleOutput.textContent += promptText + val + "\n";
-                    consoleOutput.scrollTop = consoleOutput.scrollHeight;
-                    resolve(val);
-                };
-            });
-        };
-
-        consoleInputField.addEventListener("keydown", function(e) {
-            if (e.key === "Enter" && inputResolveCallback) {
-                let val = consoleInputField.value;
-                let cb = inputResolveCallback;
-                inputResolveCallback = null;
-                cb(val);
-            }
-        });
-
         async function runPythonCode() {
             if (!pyodideReady) return;
             
@@ -524,71 +445,7 @@ print("You entered:", s)`;
             runIcon.className = "fa-solid fa-spinner fa-spin";
             runText.textContent = "Running...";
             consoleOutput.textContent = "";
-            consoleInputBar.style.display = "none";
 
             const code = editor.getValue();
 
-            await pyodideInstance.runPythonAsync(`
-                import sys
-                import io
-                import js
-                import asyncio
-
-                async def browser_input(prompt_text=""):
-                    val = await js.window.requestWebInput(str(prompt_text))
-                    return str(val)
-
-                # Custom input function binding with async handling
-                def custom_input(prompt_text=""):
-                    # Run async web input synchronously inside Pyodide event loop
-                    loop = asyncio.get_event_loop()
-                    if loop.is_running():
-                        # For synchronous contexts wrapped in async executor
-                        fut = asyncio.ensure_future(browser_input(prompt_text))
-                        # Yield control until input is received
-                        while not fut.done():
-                            pass
-                        return fut.result()
-                    else:
-                        return loop.run_until_complete(browser_input(prompt_text))
-
-                __builtins__.input = custom_input
-                sys.stdout = io.StringIO()
-                sys.stderr = sys.stdout
-            `);
-
-            try {
-                // Execute user code asynchronously so await/input loops work seamlessly
-                await pyodideInstance.runPythonAsync(`
-async def __run_user_code():
-${code.split('\n').map(line => '    ' + line).join('\n')}
-
-await __run_user_code()
-                `);
-                let output = pyodideInstance.runPython("sys.stdout.getvalue()");
-                if (output) {
-                    consoleOutput.textContent += output;
-                }
-            } catch (err) {
-                consoleOutput.textContent += err + "\n";
-            } finally {
-                pyodideInstance.runPython(`
-                    sys.stdout = sys.__stdout__
-                    sys.stderr = sys.__stderr__
-                `);
-                consoleInputBar.style.display = "none";
-                consoleOutput.scrollTop = consoleOutput.scrollHeight;
-                
-                runBtn.disabled = false;
-                runIcon.className = "fa-solid fa-play";
-                runText.textContent = "Run";
-            }
-        }
-
-        function clearConsole() {
-            consoleOutput.textContent = "";
-            consoleInputBar.style.display = "none";
-        }
-    </script>
-</body>
-</html>
+            // Set up fast I/O redirection with
