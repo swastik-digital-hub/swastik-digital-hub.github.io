@@ -170,7 +170,6 @@
             tab-size: 4;
         }
 
-        /* Console Output Container */
         .terminal-screen {
             flex-grow: 1;
             background: var(--output-bg);
@@ -184,28 +183,10 @@
             display: flex;
             flex-direction: column;
             min-height: 250px;
-            cursor: text;
         }
 
         #terminalOutput {
             flex-grow: 1;
-        }
-
-        .active-input-row {
-            display: inline-flex;
-            align-items: center;
-            width: 100%;
-        }
-
-        .inline-input {
-            background: transparent;
-            border: none;
-            color: #38bdf8;
-            font-family: 'Fira Code', monospace;
-            font-size: 14px;
-            outline: none;
-            flex-grow: 1;
-            caret-color: #38bdf8;
         }
 
         .status-bar {
@@ -257,7 +238,7 @@ print("Second largest digit is:", s)</textarea>
                 <span><i class="fa-solid fa-terminal"></i> Output</span>
                 <button onclick="clearTerminal()" class="nav-btn" style="padding: 3px 8px; font-size: 0.75rem;">Clear</button>
             </div>
-            <div class="terminal-screen" id="terminalScreen" onclick="focusActiveInput()">
+            <div class="terminal-screen" id="terminalScreen">
                 <div id="terminalOutput">Terminal ready. Click 'Run' to execute code...</div>
             </div>
             <div class="status-bar">Status: Ready</div>
@@ -287,10 +268,6 @@ print("Second largest digit is:", s)</textarea>
         function appendText(text) {
             const out = document.getElementById('terminalOutput');
             out.innerText += text;
-            scrollToBottom();
-        }
-
-        function scrollToBottom() {
             const screen = document.getElementById('terminalScreen');
             screen.scrollTop = screen.scrollHeight;
         }
@@ -299,47 +276,14 @@ print("Second largest digit is:", s)</textarea>
             document.getElementById('terminalOutput').innerText = "";
         }
 
-        function focusActiveInput() {
-            const activeInput = document.getElementById('currentInput');
-            if (activeInput) {
-                activeInput.focus();
+        // Synchronous input handler for browser Python execution
+        function syncInput(promptText = "") {
+            const result = window.prompt(promptText || "Enter value:");
+            if (result !== null) {
+                appendText(promptText + result + "\n");
+                return result;
             }
-        }
-
-        // Custom inline input handler matching standard terminal behavior
-        async function terminalInput(promptText = "") {
-            if (promptText) {
-                appendText(promptText);
-            }
-
-            return new Promise((resolve) => {
-                const out = document.getElementById('terminalOutput');
-                
-                // Create inline input row
-                const row = document.createElement('div');
-                row.className = 'active-input-row';
-
-                const inputElem = document.createElement('input');
-                inputElem.type = 'text';
-                inputElem.id = 'currentInput';
-                inputElem.className = 'inline-input';
-                inputElem.autocomplete = 'off';
-
-                row.appendChild(inputElem);
-                out.appendChild(row);
-                scrollToBottom();
-                inputElem.focus();
-
-                inputElem.addEventListener('keydown', function(e) {
-                    if (e.key === 'Enter') {
-                        const val = inputElem.value;
-                        // Lock input and convert to static text
-                        row.remove();
-                        appendText(val + "\n");
-                        resolve(val);
-                    }
-                });
-            });
+            return "";
         }
 
         async function runPythonCode() {
@@ -351,15 +295,15 @@ print("Second largest digit is:", s)</textarea>
             const code = document.getElementById('codeEditor').value;
             clearTerminal();
 
-            // Redirect Python stdout to our terminal screen
+            // Redirect Python stdout to our output screen
             pyodide.setStdout({
                 batched: (msg) => {
                     appendText(msg + "\n");
                 }
             });
 
-            // Bind python's input() function to our inline terminal handler
-            pyodide.globals.set("input", terminalInput);
+            // Bind synchronous input function so int(input(...)) works correctly without Futures
+            pyodide.globals.set("input", syncInput);
 
             try {
                 await pyodide.runPythonAsync(code);
