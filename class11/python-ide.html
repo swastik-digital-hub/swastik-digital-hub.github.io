@@ -3,449 +3,378 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Python IDE | Swastik-Tech</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <title>Interactive Python IDE & Terminal | Swastik-Tech</title>
+    
+    <!-- Google AdSense Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9509706674270233" crossorigin="anonymous"></script>
+
+    <!-- Pyodide for running Python in browser -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@500;600;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- CodeMirror Editor & Dracula Theme for VS Code Syntax Highlighting -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/dracula.min.css">
-
-    <!-- Browser Tab Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%2300f3ff%22><path d=%22M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5%22/></svg>">
 
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            background-color: #080c14;
-            color: #f8fafc;
-            font-family: 'Rajdhani', sans-serif;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
+        :root {
+            --bg-color: #080c14;
+            --card-bg: rgba(15, 23, 42, 0.9);
+            --accent-green: #10b981;
+            --accent-hover: #059669;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-glow-green: rgba(16, 185, 129, 0.3);
+            --code-bg: #0f172a;
+            --output-bg: #020617;
         }
 
-        .ide-header {
-            background: rgba(15, 23, 42, 0.95);
-            border-bottom: 1px solid rgba(0, 243, 255, 0.3);
-            padding: 0.75rem 1.5rem;
+        body.light-mode {
+            --bg-color: #f1f5f9;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --accent-green: #059669;
+            --accent-hover: #047857;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-glow-green: rgba(5, 150, 105, 0.3);
+            --code-bg: #ffffff;
+            --output-bg: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Rajdhani', sans-serif;
+            min-height: 100vh;
+            padding: 1.5rem;
+            transition: background-color 0.4s ease, color 0.4s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-glow-green);
+            margin-bottom: 1.5rem;
         }
 
-        .brand-title {
+        .header-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.1rem;
-            color: #00f3ff;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            font-size: 1.2rem;
+            color: var(--accent-green);
+            border-left: 3px solid var(--accent-green);
+            padding-left: 10px;
             text-decoration: none;
         }
 
-        .file-tab {
-            background: #1e293b;
-            border: 1px solid rgba(0, 243, 255, 0.2);
-            padding: 0.3rem 0.8rem;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            color: #94a3b8;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .ide-actions {
+        .top-nav-right {
             display: flex;
             gap: 1rem;
             align-items: center;
         }
 
-        .user-profile-badge {
-            font-size: 0.85rem;
-            color: #00f3ff;
-            background: rgba(0, 243, 255, 0.1);
-            border: 1px solid rgba(0, 243, 255, 0.3);
-            padding: 0.3rem 0.7rem;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            cursor: pointer;
-            font-family: 'Orbitron', sans-serif;
-        }
-
-        .user-profile-badge:hover {
-            background: rgba(0, 243, 255, 0.2);
-        }
-
-        .status-badge {
-            font-size: 0.8rem;
-            background: rgba(16, 185, 129, 0.15);
-            color: #10b981;
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            font-family: 'Orbitron', sans-serif;
-        }
-
-        .run-btn {
-            background: #10b981;
-            color: #ffffff;
-            border: none;
-            padding: 0.4rem 1.2rem;
+        .nav-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow-green);
+            color: var(--accent-green);
+            padding: 0.5rem 1rem;
             border-radius: 6px;
             font-family: 'Orbitron', sans-serif;
             font-size: 0.85rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.3s ease;
-        }
-
-        .run-btn:hover:not(:disabled) {
-            background: #059669;
-            box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
-        }
-
-        .run-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        .back-btn {
-            background: transparent;
-            border: 1px solid rgba(0, 243, 255, 0.4);
-            color: #00f3ff;
-            padding: 0.4rem 0.8rem;
-            border-radius: 6px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.8rem;
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
+            cursor: pointer;
             transition: all 0.3s ease;
         }
 
-        .back-btn:hover {
-            background: #00f3ff;
-            color: #080c14;
+        .nav-btn:hover {
+            box-shadow: 0 0 10px var(--border-glow-green);
         }
 
-        .ide-workspace {
-            flex: 1;
+        .ide-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            height: calc(100vh - 61px);
+            gap: 1.5rem;
+            flex-grow: 1;
         }
 
-        .editor-pane, .console-pane {
+        @media (max-width: 900px) {
+            .ide-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .pane {
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow-green);
+            border-radius: 10px;
             display: flex;
             flex-direction: column;
-            height: 100%;
-        }
-
-        .editor-pane {
-            border-right: 1px solid rgba(0, 243, 255, 0.2);
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
         }
 
         .pane-header {
-            background: #0f172a;
-            padding: 0.5rem 1rem;
-            font-size: 0.85rem;
-            color: #94a3b8;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(16, 185, 129, 0.1);
+            padding: 10px 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-bottom: 1px solid var(--border-glow-green);
             font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            color: var(--accent-green);
         }
 
-        .pane-actions {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-        }
-
-        .action-text-btn {
-            background: transparent;
+        .run-btn {
+            background: var(--accent-green);
+            color: #000;
             border: none;
-            cursor: pointer;
+            padding: 6px 14px;
+            border-radius: 4px;
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.75rem;
+            font-weight: bold;
+            font-size: 0.8rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
         }
 
-        .reset-btn {
-            color: #00f3ff;
+        .run-btn:hover {
+            background: var(--accent-hover);
+            color: #fff;
+            box-shadow: 0 0 10px var(--accent-green);
         }
 
-        .reset-btn:hover {
-            text-decoration: underline;
-        }
-
-        .clear-btn {
-            color: #ff4d4d;
-        }
-
-        .clear-btn:hover {
-            text-decoration: underline;
-        }
-
-        .CodeMirror {
-            flex: 1;
-            height: auto !important;
-            font-family: 'Fira Code', 'Courier New', Courier, monospace;
+        textarea {
+            flex-grow: 1;
+            background: var(--code-bg);
+            color: var(--text-main);
+            font-family: 'Fira Code', monospace;
             font-size: 14px;
+            padding: 15px;
+            border: none;
+            resize: none;
+            outline: none;
+            line-height: 1.5;
+            tab-size: 4;
         }
 
-        .console-output {
-            flex: 1;
-            background: #04060a;
-            color: #10b981;
-            font-family: 'Courier New', Courier, monospace;
-            padding: 1rem;
+        /* Interactive Terminal Styling */
+        .terminal-screen {
+            flex-grow: 1;
+            background: var(--output-bg);
+            color: #38bdf8;
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
+            padding: 15px;
             overflow-y: auto;
             white-space: pre-wrap;
-            font-size: 13px;
-            line-height: 1.4;
-        }
-
-        /* Modal Overlay for Profile Name */
-        .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(4, 6, 10, 0.85);
+            word-break: break-all;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            min-height: 250px;
+        }
+
+        #terminalOutput {
+            flex-grow: 1;
+        }
+
+        .terminal-input-line {
+            display: flex;
             align-items: center;
-            z-index: 1000;
-            backdrop-filter: blur(5px);
-            display: none;
+            gap: 5px;
+            margin-top: 5px;
         }
 
-        .modal-card {
-            background: #0f172a;
-            border: 1px solid rgba(0, 243, 255, 0.4);
-            border-radius: 12px;
-            padding: 2rem;
-            width: 350px;
-            text-align: center;
-            box-shadow: 0 0 25px rgba(0, 243, 255, 0.2);
-        }
-
-        .modal-card h3 {
-            font-family: 'Orbitron', sans-serif;
-            color: #00f3ff;
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
-        }
-
-        .modal-card p {
-            color: #94a3b8;
-            font-size: 0.9rem;
-            margin-bottom: 1.2rem;
-        }
-
-        .modal-input {
-            width: 100%;
-            background: #1e293b;
-            border: 1px solid rgba(0, 243, 255, 0.3);
-            color: #f8fafc;
-            padding: 0.6rem 1rem;
-            border-radius: 6px;
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 1rem;
-            margin-bottom: 1.2rem;
-            outline: none;
-        }
-
-        .modal-input:focus {
-            border-color: #00f3ff;
-            box-shadow: 0 0 8px rgba(0, 243, 255, 0.3);
-        }
-
-        .modal-btn {
-            background: #00f3ff;
-            color: #080c14;
+        .terminal-input {
+            background: transparent;
             border: none;
-            padding: 0.6rem 1.5rem;
-            border-radius: 6px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.85rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            color: #38bdf8;
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
+            outline: none;
+            flex-grow: 1;
         }
 
-        .modal-btn:hover {
-            box-shadow: 0 0 12px rgba(0, 243, 255, 0.6);
-        }
-
-        @media(max-width: 768px) {
-            .ide-workspace {
-                grid-template-columns: 1fr;
-                grid-template-rows: 1fr 1fr;
-            }
+        .status-bar {
+            padding: 6px 15px;
+            font-size: 0.8rem;
+            background: rgba(0,0,0,0.2);
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-glow-green);
         }
     </style>
 </head>
 <body>
 
-    <!-- Profile Name Modal -->
-    <div id="profile-modal" class="modal-overlay">
-        <div class="modal-card">
-            <h3>Enter Your Name</h3>
-            <p>Please enter your profile name for your personalized session.</p>
-            <input type="text" id="username-input" class="modal-input" placeholder="e.g. Swastik Sambhu Panda" autocomplete="off" value="Swastik Sambhu Panda">
-            <button class="modal-btn" onclick="saveUserName()">Save & Start</button>
-        </div>
-    </div>
-
-    <header class="ide-header">
-        <div style="display: flex; align-items: center; gap: 1.5rem;">
-            <a href="class11-cs.html" class="brand-title">
-                <i class="fa-solid fa-code"></i> Swastik-Tech
-            </a>
-            <div class="file-tab">
-                <i class="fa-regular fa-file-code"></i> main.py
-            </div>
-        </div>
-        <div class="ide-actions">
-            <div id="profile-display" class="user-profile-badge" onclick="promptForName()" title="Click to change name">
-                <i class="fa-solid fa-user"></i> <span id="display-name">Swastik Sambhu Panda</span>
-            </div>
-            <span id="status-badge" class="status-badge">Loading Python...</span>
-            <button id="run-btn" class="run-btn" disabled onclick="runPythonCode()">
-                <i class="fa-solid fa-play" id="run-icon"></i> <span id="run-text">Run</span>
-            </button>
-            <a href="class11-cs.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back</a>
+    <header>
+        <a href="class11-cs.html" class="header-title">| Swastik-Tech Advanced Python IDE</a>
+        <div class="top-nav-right">
+            <button onclick="toggleTheme()" class="nav-btn"><i class="fa-solid fa-circle-half-stroke"></i> Theme</button>
+            <a href="class11-cs.html" class="nav-btn"><i class="fa-solid fa-arrow-left"></i> CS Hub</a>
         </div>
     </header>
 
-    <div class="ide-workspace">
-        <div class="editor-pane">
+    <div class="ide-container">
+        <!-- Editor Pane -->
+        <div class="pane">
             <div class="pane-header">
-                <span>EDITOR (Press Ctrl+/ to comment lines)</span>
-                <button class="action-text-btn reset-btn" onclick="resetCodeTemplate()">RESET CODE</button>
+                <span><i class="fa-solid fa-code"></i> code.py</span>
+                <button onclick="runPythonCode()" id="runBtn" class="run-btn" disabled>
+                    <i class="fa-solid fa-play"></i> Loading Python...
+                </button>
             </div>
-            <textarea id="code-editor"></textarea>
+            <textarea id="codeEditor" placeholder="# Write your Python code here...
+# Example with input():
+name = input('Enter your name: ')
+print('Hello, ' + name + '!')"># Write your Python code here...
+name = input('Enter your name: ')
+print('Hello, ' + name + '!')</textarea>
+            <div class="status-bar" id="engineStatus">Initializing Pyodide WebAssembly Engine...</div>
         </div>
 
-        <div class="console-pane">
+        <!-- Terminal Pane -->
+        <div class="pane">
             <div class="pane-header">
-                <span>> CONSOLE</span>
-                <div class="pane-actions">
-                    <button class="action-text-btn clear-btn" onclick="clearConsole()">CLEAR</button>
+                <span><i class="fa-solid fa-terminal"></i> Interactive Terminal</span>
+                <button onclick="clearTerminal()" class="nav-btn" style="padding: 3px 8px; font-size: 0.75rem;">Clear</button>
+            </div>
+            <div class="terminal-screen" id="terminalScreen" onclick="focusTerminalInput()">
+                <div id="terminalOutput">Terminal ready. Click 'Run Code' to start...</div>
+                <div id="inputContainer" style="display: none;" class="terminal-input-line">
+                    <span id="inputPromptText">></span>
+                    <input type="text" id="terminalInput" class="terminal-input" autofocus autocomplete="off">
                 </div>
             </div>
-            <div id="console-output" class="console-output"></div>
+            <div class="status-bar">Status: Ready</div>
         </div>
     </div>
 
-    <!-- CodeMirror Scripts & Addons -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/comment/comment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/closebrackets.min.js"></script>
-
-    <!-- Pyodide Engine -->
-    <script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
-
     <script>
-        let currentUserName = localStorage.getItem("swastik_tech_username") || "Swastik Sambhu Panda";
+        let pyodideReady = false;
+        let pyodide = null;
+        let waitingForInput = false;
+        let inputResolve = null;
 
-        function getInitialCode(name) {
-            return `# Write your Python code here
-print("Hello, ${name || 'Swastik Sambhu Panda'}")
-print("Welcome to Swastik Tech")`;
+        async function initPyodide() {
+            const statusElem = document.getElementById('engineStatus');
+            const runBtn = document.getElementById('runBtn');
+            try {
+                pyodide = await loadPyodide();
+                pyodideReady = true;
+                statusElem.innerText = "Python Engine Ready (Pyodide v0.25)";
+                runBtn.disabled = false;
+                runBtn.innerHTML = '<i class="fa-solid fa-play"></i> Run Code';
+            } catch (error) {
+                statusElem.innerText = "Failed to load Python engine.";
+                console.error(error);
+            }
+        }
+        initPyodide();
+
+        function appendOutput(text) {
+            const out = document.getElementById('terminalOutput');
+            out.innerText += text;
+            const screen = document.getElementById('terminalScreen');
+            screen.scrollTop = screen.scrollHeight;
         }
 
-        let editor = CodeMirror.fromTextArea(document.getElementById("code-editor"), {
-            lineNumbers: true,
-            mode: "python",
-            theme: "dracula",
-            indentUnit: 4,
-            autoCloseBrackets: true,
-            autofocus: true,
-            extraKeys: {
-                "Ctrl-/": function(cm) {
-                    cm.toggleComment();
-                },
-                "Cmd-/": function(cm) {
-                    cm.toggleComment();
+        function clearTerminal() {
+            document.getElementById('terminalOutput').innerText = "";
+            document.getElementById('inputContainer').style.display = 'none';
+        }
+
+        // Custom in-terminal input handler
+        async function customInput(promptText = "") {
+            if (promptText) {
+                appendOutput(promptText);
+            }
+            const inputContainer = document.getElementById('inputContainer');
+            const inputField = document.getElementById('terminalInput');
+            
+            inputContainer.style.display = 'flex';
+            inputField.value = '';
+            inputField.focus();
+
+            return new Promise((resolve) => {
+                waitingForInput = true;
+                inputResolve = (val) => {
+                    waitingForInput = false;
+                    inputContainer.style.display = 'none';
+                    appendOutput(val + "\n");
+                    resolve(val);
+                };
+            });
+        }
+
+        // Handle Enter key for terminal input
+        document.getElementById('terminalInput').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && waitingForInput) {
+                const val = this.value;
+                if (inputResolve) {
+                    inputResolve(val);
                 }
             }
         });
 
-        let pyodideReady = false;
-        let pyodideInstance = null;
-        const consoleOutput = document.getElementById("console-output");
-        const statusBadge = document.getElementById("status-badge");
-        const runBtn = document.getElementById("run-btn");
-        const runIcon = document.getElementById("run-icon");
-        const runText = document.getElementById("run-text");
-
-        function checkUserName() {
-            if (!localStorage.getItem("swastik_tech_username")) {
-                localStorage.setItem("swastik_tech_username", "Swastik Sambhu Panda");
-            }
-            document.getElementById("display-name").textContent = currentUserName;
-            editor.setValue(getInitialCode(currentUserName));
-            consoleOutput.textContent = "Ready. Click 'Run' to execute code.\n";
-        }
-
-        function promptForName() {
-            document.getElementById("username-input").value = currentUserName;
-            document.getElementById("profile-modal").style.display = "flex";
-        }
-
-        function saveUserName() {
-            const inputVal = document.getElementById("username-input").value.trim();
-            if (inputVal) {
-                currentUserName = inputVal;
-                localStorage.setItem("swastik_tech_username", currentUserName);
-                document.getElementById("display-name").textContent = currentUserName;
-                document.getElementById("profile-modal").style.display = "none";
-                editor.setValue(getInitialCode(currentUserName));
-                consoleOutput.textContent = "Ready. Click 'Run' to execute code.\n";
+        function focusTerminalInput() {
+            if (waitingForInput) {
+                document.getElementById('terminalInput').focus();
             }
         }
-
-        function resetCodeTemplate() {
-            editor.setValue(getInitialCode(currentUserName));
-            consoleOutput.textContent = "Editor reset to default template.\n";
-        }
-
-        checkUserName();
-
-        async function initPyodide() {
-            try {
-                pyodideInstance = await loadPyodide();
-                pyodideReady = true;
-                statusBadge.textContent = "Ready";
-                statusBadge.style.background = "rgba(16, 185, 129, 0.2)";
-                runBtn.disabled = false;
-            } catch (err) {
-                statusBadge.textContent = "Error Loading";
-                statusBadge.style.color = "#ff4d4d";
-                consoleOutput.textContent += "\nFailed to load Python environment: " + err + "\n";
-            }
-        }
-
-        initPyodide();
 
         async function runPythonCode() {
-            if (!pyodideReady) return;
-            
-            runBtn.disabled = true;
-            runIcon.className = "fa-solid fa-spinner fa-spin";
-            runText.textContent = "Running...";
-            consoleOutput.textContent = "";
+            if (!pyodideReady) {
+                alert("Python engine is still loading. Please wait a moment!");
+                return;
+            }
 
-            const code = editor.getValue();
+            const code = document.getElementById('codeEditor').value;
+            clearTerminal();
+            appendOutput("Running script...\n");
 
-            // Set up fast I/O redirection with
+            // Setup Python stdout redirection
+            pyodide.setStdout({
+                batched: (msg) => {
+                    appendOutput(msg + "\n");
+                }
+            });
+
+            // Bind python input() to our custom terminal input box
+            pyodide.globals.set("input", customInput);
+
+            try {
+                await pyodide.runPythonAsync(code);
+                appendOutput("\n[Program finished execution]\n");
+            } catch (err) {
+                appendOutput("\n[Error]: " + err.message + "\n");
+            }
+        }
+
+        // Theme Toggle
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-mode');
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            if (document.body.classList.contains('light-mode')) {
+                localStorage.setItem('theme', 'light');
+            } else {
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+    </script>
+</body>
+</html>
