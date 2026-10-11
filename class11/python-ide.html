@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Python IDE & Terminal | Swastik-Tech</title>
+    <title>Python IDE | Swastik-Tech</title>
     
     <!-- Google AdSense Script -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9509706674270233" crossorigin="anonymous"></script>
@@ -170,7 +170,7 @@
             tab-size: 4;
         }
 
-        /* Interactive Terminal Styling */
+        /* Console Output Container */
         .terminal-screen {
             flex-grow: 1;
             background: var(--output-bg);
@@ -184,20 +184,20 @@
             display: flex;
             flex-direction: column;
             min-height: 250px;
+            cursor: text;
         }
 
         #terminalOutput {
             flex-grow: 1;
         }
 
-        .terminal-input-line {
-            display: flex;
+        .active-input-row {
+            display: inline-flex;
             align-items: center;
-            gap: 5px;
-            margin-top: 5px;
+            width: 100%;
         }
 
-        .terminal-input {
+        .inline-input {
             background: transparent;
             border: none;
             color: #38bdf8;
@@ -205,6 +205,7 @@
             font-size: 14px;
             outline: none;
             flex-grow: 1;
+            caret-color: #38bdf8;
         }
 
         .status-bar {
@@ -219,7 +220,7 @@
 <body>
 
     <header>
-        <a href="class11-cs.html" class="header-title">| Swastik-Tech Advanced Python IDE</a>
+        <a href="class11-cs.html" class="header-title">| Swastik-Tech Python IDE</a>
         <div class="top-nav-right">
             <button onclick="toggleTheme()" class="nav-btn"><i class="fa-solid fa-circle-half-stroke"></i> Theme</button>
             <a href="class11-cs.html" class="nav-btn"><i class="fa-solid fa-arrow-left"></i> CS Hub</a>
@@ -230,32 +231,34 @@
         <!-- Editor Pane -->
         <div class="pane">
             <div class="pane-header">
-                <span><i class="fa-solid fa-code"></i> code.py</span>
+                <span><i class="fa-solid fa-code"></i> main.py</span>
                 <button onclick="runPythonCode()" id="runBtn" class="run-btn" disabled>
                     <i class="fa-solid fa-play"></i> Loading Python...
                 </button>
             </div>
-            <textarea id="codeEditor" placeholder="# Write your Python code here...
-# Example with input():
-name = input('Enter your name: ')
-print('Hello, ' + name + '!')"># Write your Python code here...
-name = input('Enter your name: ')
-print('Hello, ' + name + '!')</textarea>
+            <textarea id="codeEditor" placeholder="# Write your Python code here...">n = int(input("Enter a number : "))
+s = 0
+l = 0
+for a in range(n):
+    x = n % 10
+    if x > l:
+        s = l
+        l = x
+    elif x > s and x != l:
+        s = x
+    n = n // 10
+print("Second largest digit is:", s)</textarea>
             <div class="status-bar" id="engineStatus">Initializing Pyodide WebAssembly Engine...</div>
         </div>
 
-        <!-- Terminal Pane -->
+        <!-- Output Pane -->
         <div class="pane">
             <div class="pane-header">
-                <span><i class="fa-solid fa-terminal"></i> Interactive Terminal</span>
+                <span><i class="fa-solid fa-terminal"></i> Output</span>
                 <button onclick="clearTerminal()" class="nav-btn" style="padding: 3px 8px; font-size: 0.75rem;">Clear</button>
             </div>
-            <div class="terminal-screen" id="terminalScreen" onclick="focusTerminalInput()">
-                <div id="terminalOutput">Terminal ready. Click 'Run Code' to start...</div>
-                <div id="inputContainer" style="display: none;" class="terminal-input-line">
-                    <span id="inputPromptText">></span>
-                    <input type="text" id="terminalInput" class="terminal-input" autofocus autocomplete="off">
-                </div>
+            <div class="terminal-screen" id="terminalScreen" onclick="focusActiveInput()">
+                <div id="terminalOutput">Terminal ready. Click 'Run' to execute code...</div>
             </div>
             <div class="status-bar">Status: Ready</div>
         </div>
@@ -264,8 +267,6 @@ print('Hello, ' + name + '!')</textarea>
     <script>
         let pyodideReady = false;
         let pyodide = null;
-        let waitingForInput = false;
-        let inputResolve = null;
 
         async function initPyodide() {
             const statusElem = document.getElementById('engineStatus');
@@ -273,9 +274,9 @@ print('Hello, ' + name + '!')</textarea>
             try {
                 pyodide = await loadPyodide();
                 pyodideReady = true;
-                statusElem.innerText = "Python Engine Ready (Pyodide v0.25)";
+                statusElem.innerText = "Python Engine Ready";
                 runBtn.disabled = false;
-                runBtn.innerHTML = '<i class="fa-solid fa-play"></i> Run Code';
+                runBtn.innerHTML = '<i class="fa-solid fa-play"></i> Run';
             } catch (error) {
                 statusElem.innerText = "Failed to load Python engine.";
                 console.error(error);
@@ -283,86 +284,91 @@ print('Hello, ' + name + '!')</textarea>
         }
         initPyodide();
 
-        function appendOutput(text) {
+        function appendText(text) {
             const out = document.getElementById('terminalOutput');
             out.innerText += text;
+            scrollToBottom();
+        }
+
+        function scrollToBottom() {
             const screen = document.getElementById('terminalScreen');
             screen.scrollTop = screen.scrollHeight;
         }
 
         function clearTerminal() {
             document.getElementById('terminalOutput').innerText = "";
-            document.getElementById('inputContainer').style.display = 'none';
         }
 
-        // Custom in-terminal input handler
-        async function customInput(promptText = "") {
-            if (promptText) {
-                appendOutput(promptText);
+        function focusActiveInput() {
+            const activeInput = document.getElementById('currentInput');
+            if (activeInput) {
+                activeInput.focus();
             }
-            const inputContainer = document.getElementById('inputContainer');
-            const inputField = document.getElementById('terminalInput');
-            
-            inputContainer.style.display = 'flex';
-            inputField.value = '';
-            inputField.focus();
+        }
+
+        // Custom inline input handler matching standard terminal behavior
+        async function terminalInput(promptText = "") {
+            if (promptText) {
+                appendText(promptText);
+            }
 
             return new Promise((resolve) => {
-                waitingForInput = true;
-                inputResolve = (val) => {
-                    waitingForInput = false;
-                    inputContainer.style.display = 'none';
-                    appendOutput(val + "\n");
-                    resolve(val);
-                };
+                const out = document.getElementById('terminalOutput');
+                
+                // Create inline input row
+                const row = document.createElement('div');
+                row.className = 'active-input-row';
+
+                const inputElem = document.createElement('input');
+                inputElem.type = 'text';
+                inputElem.id = 'currentInput';
+                inputElem.className = 'inline-input';
+                inputElem.autocomplete = 'off';
+
+                row.appendChild(inputElem);
+                out.appendChild(row);
+                scrollToBottom();
+                inputElem.focus();
+
+                inputElem.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') {
+                        const val = inputElem.value;
+                        // Lock input and convert to static text
+                        row.remove();
+                        appendText(val + "\n");
+                        resolve(val);
+                    }
+                });
             });
-        }
-
-        // Handle Enter key for terminal input
-        document.getElementById('terminalInput').addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' && waitingForInput) {
-                const val = this.value;
-                if (inputResolve) {
-                    inputResolve(val);
-                }
-            }
-        });
-
-        function focusTerminalInput() {
-            if (waitingForInput) {
-                document.getElementById('terminalInput').focus();
-            }
         }
 
         async function runPythonCode() {
             if (!pyodideReady) {
-                alert("Python engine is still loading. Please wait a moment!");
+                alert("Python engine is still loading. Please wait a second!");
                 return;
             }
 
             const code = document.getElementById('codeEditor').value;
             clearTerminal();
-            appendOutput("Running script...\n");
 
-            // Setup Python stdout redirection
+            // Redirect Python stdout to our terminal screen
             pyodide.setStdout({
                 batched: (msg) => {
-                    appendOutput(msg + "\n");
+                    appendText(msg + "\n");
                 }
             });
 
-            // Bind python input() to our custom terminal input box
-            pyodide.globals.set("input", customInput);
+            // Bind python's input() function to our inline terminal handler
+            pyodide.globals.set("input", terminalInput);
 
             try {
                 await pyodide.runPythonAsync(code);
-                appendOutput("\n[Program finished execution]\n");
             } catch (err) {
-                appendOutput("\n[Error]: " + err.message + "\n");
+                appendText("\n[Error]: " + err.message + "\n");
             }
         }
 
-        // Theme Toggle
+        // Theme Support
         if (localStorage.getItem('theme') === 'light') {
             document.body.classList.add('light-mode');
         }
