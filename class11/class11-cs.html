@@ -3,244 +3,420 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Computer Science Python Practice | Swastik-Tech</title>
+    <title>Python Lists & Tuples Masterclass | Swastik Digital Hub</title>
     
-    <!-- Google AdSense Script -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9509706674270233" crossorigin="anonymous"></script>
-
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%2300f3ff%22><path d=%22M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5%22/></svg>">
 
     <style>
         :root {
-            --bg-color: #080c14;
-            --card-bg: rgba(15, 23, 42, 0.85);
-            --accent-green: #10b981;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-glow-green: rgba(16, 185, 129, 0.3);
-            --grid-color: rgba(255, 255, 255, 0.03);
+            --primary-green: #2f855a;
+            --primary-hover: #276749;
+            --bg-body: #f7fafc;
+            --text-dark: #2d3748;
+            --code-bg: #1a202c;
+            --output-bg: #edf2f7;
+            --border-color: #e2e8f0;
         }
-
-        body.light-mode {
-            --bg-color: #f1f5f9;
-            --card-bg: rgba(255, 255, 255, 0.95);
-            --accent-green: #059669;
-            --text-main: #0f172a;
-            --text-muted: #475569;
-            --border-glow-green: rgba(5, 150, 105, 0.3);
-            --grid-color: rgba(0, 0, 0, 0.04);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: var(--bg-color);
-            background-image: 
-                radial-gradient(circle at 50% 50%, var(--border-glow-green) 0%, transparent 80%),
-                linear-gradient(var(--grid-color) 1px, transparent 1px),
-                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-            background-size: 100% 100%, 40px 40px, 40px 40px;
-            color: var(--text-main);
-            font-family: 'Rajdhani', sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            background-color: var(--bg-body);
+            color: var(--text-dark);
+            display: flex;
             min-height: 100vh;
-            padding: 2rem;
-            transition: background-color 0.4s ease, color 0.4s ease;
         }
 
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid var(--border-glow-green);
-            margin-bottom: 2rem;
+        sidebar {
+            width: 270px;
+            background: #ffffff;
+            border-right: 1px solid var(--border-color);
+            padding: 20px;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            box-sizing: border-box;
         }
 
-        .header-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
-            color: var(--accent-green);
-            border-left: 3px solid var(--accent-green);
-            padding-left: 10px;
+        sidebar h3 {
+            color: var(--primary-green);
+            font-size: 18px;
+            margin-top: 0;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 8px;
+        }
+
+        sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        sidebar li {
+            margin-bottom: 8px;
+        }
+
+        sidebar a {
             text-decoration: none;
+            color: #4a5568;
+            font-size: 14px;
+            display: block;
+            padding: 6px 10px;
+            border-radius: 5px;
+            transition: all 0.2s ease;
         }
 
-        .top-nav-right {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
+        sidebar a:hover, sidebar a.active {
+            background: #e6fffa;
+            color: var(--primary-green);
+            font-weight: 600;
         }
 
-        .nav-btn {
-            background: var(--card-bg);
-            border: 1px solid var(--border-glow-green);
-            color: var(--accent-green);
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.85rem;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(8px);
+        .main-wrapper {
+            margin-left: 290px;
+            padding: 30px 30px;
+            width: 100%;
+            max-width: 950px;
         }
 
-        .nav-btn:hover {
-            box-shadow: 0 0 10px var(--border-glow-green);
-        }
-
-        .section-heading {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.4rem;
-            color: var(--text-main);
-            margin-bottom: 1.5rem;
-        }
-
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .dash-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-glow-green);
+        .container {
+            background: #ffffff;
+            padding: 40px;
             border-radius: 10px;
-            padding: 1.5rem;
-            color: var(--text-main);
-            transition: all 0.3s ease;
-            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        h1 {
+            color: #1a202c;
+            font-size: 30px;
+            margin-top: 0;
+            border-bottom: 3px solid var(--primary-green);
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #2b6cb0;
+            margin-top: 40px;
+            font-size: 22px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 6px;
+        }
+
+        h3 {
+            color: #2d3748;
+            font-size: 18px;
+            margin-top: 25px;
+        }
+
+        p, li {
+            font-size: 15.5px;
+        }
+
+        .code-box {
+            background: var(--code-bg);
+            border-radius: 8px 8px 0 0;
+            margin: 15px 0 0 0;
+            overflow: hidden;
+            border: 1px solid #2d3748;
+        }
+
+        .code-header {
+            background: #2d3748;
+            color: #a0aec0;
+            padding: 8px 15px;
+            font-size: 12px;
             display: flex;
-            flex-direction: column;
             justify-content: space-between;
-            gap: 1.2rem;
-        }
-
-        .dash-card:hover {
-            box-shadow: 0 0 20px var(--border-glow-green);
-            transform: translateY(-3px);
-        }
-
-        .card-header-content {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-        }
-
-        .dash-card i.fa-code, .dash-card i.fa-terminal, .dash-card i.fa-list-check {
-            font-size: 2.2rem;
-            color: var(--accent-green);
-            flex-shrink: 0;
-            margin-top: 0.1rem;
-        }
-
-        .card-text h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.1rem;
-            line-height: 1.3;
-            margin-bottom: 0.3rem;
-        }
-
-        .card-text p {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        .card-actions {
-            display: grid;
-            grid-template-columns: 1fr;
-            border-top: 1px solid var(--border-glow-green);
-            padding-top: 1rem;
-        }
-
-        .action-btn {
-            padding: 0.6rem 0.8rem;
-            border-radius: 6px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.85rem;
-            text-decoration: none;
-            display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 6px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: transparent;
-            border: 1px solid var(--accent-green);
-            color: var(--accent-green);
+            font-weight: bold;
         }
 
-        .action-btn:hover {
-            background: var(--accent-green);
-            color: var(--bg-color);
-            box-shadow: 0 0 10px var(--border-glow-green);
+        pre {
+            margin: 0;
+            padding: 15px;
+            color: #f8f8f2;
+            font-family: Consolas, Monaco, monospace;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+
+        .copy-btn {
+            background: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 4px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary-hover);
+        }
+
+        .output-box {
+            background: var(--output-bg);
+            border-left: 4px solid var(--primary-green);
+            padding: 12px 15px;
+            margin: 0 0 25px 0;
+            font-family: Consolas, Monaco, monospace;
+            font-size: 13.5px;
+            color: #2d3748;
+            border-radius: 0 0 8px 8px;
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .output-title {
+            font-weight: bold;
+            color: #718096;
+            font-size: 11px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: var(--primary-green);
+            color: white;
+        }
+
+        .nav-links {
+            margin-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            background: var(--primary-green);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            background: var(--primary-hover);
+        }
+
+        @media (max-width: 768px) {
+            sidebar { display: none; }
+            .main-wrapper { margin-left: 0; padding: 15px; }
+            .container { padding: 20px; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <a href="class11-hub.html" class="header-title">| Computer Science Python Practice</a>
-        <div class="top-nav-right">
-            <button onclick="toggleTheme()" class="nav-btn"><i class="fa-solid fa-circle-half-stroke"></i> Theme</button>
-            <a href="class11-hub.html" class="nav-btn"><i class="fa-solid fa-arrow-left"></i> Hub</a>
-        </div>
-    </header>
+    <sidebar>
+        <h3>Class 11 CS Topics</h3>
+        <ul>
+            <li><a href="class11-cs.html">🏠 CS Hub Main</a></li>
+            <li><a href="python-tuples-and-lists.html" class="active">📦 Lists & Tuples</a></li>
+            <li><a href="#lists-intro" style="padding-left: 20px;">1. Python Lists</a></li>
+            <li><a href="#list-indexing" style="padding-left: 30px;">1.1 Indexing & Slicing</a></li>
+            <li><a href="#list-methods" style="padding-left: 30px;">1.2 List Methods</a></li>
+            <li><a href="#tuples-intro" style="padding-left: 20px;">2. Python Tuples</a></li>
+            <li><a href="#tuple-single" style="padding-left: 30px;">2.1 Single Element Tuples</a></li>
+            <li><a href="#tuple-packing" style="padding-left: 30px;">2.2 Packing & Unpacking</a></li>
+            <li><a href="#comparison" style="padding-left: 20px;">3. List vs Tuple Summary</a></li>
+            <li><a href="python-loops.html">🔄 Python Loops</a></li>
+        </ul>
+    </sidebar>
 
-    <div class="section-heading">Computer Science Python Practice & Notes</div>
+    <div class="main-wrapper">
+        <div class="container">
+            <h1>Python Lists and Tuples: Zero-to-Hero Masterclass</h1>
+            <p>Welcome! In Python, when you need to store multiple items inside a single variable, you use compound data structures like <strong>Lists</strong> or <strong>Tuples</strong>.</p>
 
-    <div class="dashboard-grid">
-        <!-- Card 1: CS Topics with Single "Detailed Topics" Button -->
-        <div class="dash-card">
-            <div class="card-header-content">
-                <i class="fa-solid fa-list-check"></i>
-                <div class="card-text">
-                    <h3>CS Topics</h3>
-                    <p>Explore detailed chapter tutorials for Class 11 Computer Science.</p>
+            <!-- SECTION 1 -->
+            <h2 id="lists-intro">1. Python Lists (Mutable Sequences)</h2>
+            <p>A list is a sequence of values separated by commas and wrapped in square brackets <code>[ ]</code>. Lists are <strong>Mutable</strong>, meaning you can edit, add, or delete elements after creating the list.</p>
+
+            <div class="code-box">
+                <div class="code-header">
+                    <span>PYTHON 3</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
                 </div>
-            </div>
-            <div class="card-actions">
-                <a href="python-tuples-and-lists.html" class="action-btn">
-                    <i class="fa-solid fa-book-open"></i> Detailed Topics
-                </a>
-            </div>
-        </div>
+                <pre><code># Creating a list with multiple data types
+my_list = [10, "Swastik", 95.5, True]
+print("Original List:", my_list)
 
-        <!-- Card 2: Python IDE -->
-        <div class="dash-card">
-            <div class="card-header-content">
-                <i class="fa-solid fa-terminal"></i>
-                <div class="card-text">
-                    <h3>Online Python IDE</h3>
-                    <p>Practice Python programming, write scripts, and test logic interactively.</p>
-                </div>
+# Modifying a list element (Mutability in action)
+my_list[0] = 100
+print("Modified List:", my_list)</code></pre>
             </div>
-            <div class="card-actions">
-                <a href="python-ide.html" class="action-btn">
-                    <i class="fa-solid fa-code"></i> Open Python IDE
-                </a>
+            <div class="output-box">
+                <div class="output-title">Output</div>
+                Original List: [10, 'Swastik', 95.5, True]<br>
+                Modified List: [100, 'Swastik', 95.5, True]
+            </div>
+
+            <!-- INDEXING & SLICING -->
+            <h3 id="list-indexing">1.1 Indexing & Slicing Demystified</h3>
+            <p><strong>Positive Indexing:</strong> Starts at <code>0</code> from left to right.<br>
+            <strong>Negative Indexing:</strong> Starts at <code>-1</code> from right to left.</p>
+
+            <div class="code-box">
+                <div class="code-header">
+                    <span>PYTHON 3</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                </div>
+                <pre><code>fruits = ["Apple", "Banana", "Cherry", "Date", "Elderberry"]
+
+# Indexing
+print("First fruit [0]:", fruits[0])
+print("Last fruit [-1]:", fruits[-1])
+
+# Slicing syntax: list[start : stop : step]
+print("Slice [1:4]:", fruits[1:4])
+print("Reverse list [::-1]:", fruits[::-1])</code></pre>
+            </div>
+            <div class="output-box">
+                <div class="output-title">Output</div>
+                First fruit [0]: Apple<br>
+                Last fruit [-1]: Elderberry<br>
+                Slice [1:4]: ['Banana', 'Cherry', 'Date']<br>
+                Reverse list [::-1]: ['Elderberry', 'Date', 'Cherry', 'Banana', 'Apple']
+            </div>
+
+            <!-- LIST METHODS -->
+            <h3 id="list-methods">1.2 Essential Built-in List Methods</h3>
+            <ul>
+                <li><code>append(x)</code>: Adds item <code>x</code> to the end.</li>
+                <li><code>insert(index, x)</code>: Inserts item <code>x</code> at position <code>index</code>.</li>
+                <li><code>remove(x)</code>: Deletes the first occurrence of <code>x</code>.</li>
+                <li><code>pop(index)</code>: Removes and returns the item at position <code>index</code>.</li>
+                <li><code>sort()</code>: Rearranges the list in ascending order.</li>
+            </ul>
+
+            <div class="code-box">
+                <div class="code-header">
+                    <span>PYTHON 3</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                </div>
+                <pre><code>nums = [40, 10, 30, 20]
+nums.append(50)
+nums.insert(1, 15)
+print("After append & insert:", nums)
+
+nums.sort()
+print("Sorted List:", nums)</code></pre>
+            </div>
+            <div class="output-box">
+                <div class="output-title">Output</div>
+                After append & insert: [40, 15, 10, 30, 20, 50]<br>
+                Sorted List: [10, 15, 20, 30, 40, 50]
+            </div>
+
+            <!-- SECTION 2 -->
+            <h2 id="tuples-intro">2. Python Tuples (Immutable Sequences)</h2>
+            <p>A tuple is a sequence wrapped in parentheses <code>( )</code>. Tuples are <strong>Immutable</strong>, meaning once created, elements cannot be altered or deleted.</p>
+
+            <h3 id="tuple-single">2.1 Single Element Tuple Rule</h3>
+            <p>To create a tuple with only 1 item, you <strong>must</strong> place a trailing comma after the element. Otherwise, Python treats it as a regular parenthesis grouping expression.</p>
+
+            <div class="code-box">
+                <div class="code-header">
+                    <span>PYTHON 3</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                </div>
+                <pre><code># Incorrect single item tuple
+not_a_tuple = (5)
+print("Type of (5):", type(not_a_tuple))
+
+# Correct single item tuple
+correct_tuple = (5,)
+print("Type of (5,):", type(correct_tuple))</code></pre>
+            </div>
+            <div class="output-box">
+                <div class="output-title">Output</div>
+                Type of (5): &lt;class 'int'&gt;<br>
+                Type of (5,): &lt;class 'tuple'&gt;
+            </div>
+
+            <h3 id="tuple-packing">2.2 Tuple Packing and Unpacking</h3>
+            <div class="code-box">
+                <div class="code-header">
+                    <span>PYTHON 3</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                </div>
+                <pre><code># Packing
+student_data = ("Swastik", 16, "Class 11")
+
+# Unpacking
+name, age, grade = student_data
+print(f"Name: {name}, Age: {age}, Grade: {grade}")</code></pre>
+            </div>
+            <div class="output-box">
+                <div class="output-title">Output</div>
+                Name: Swastik, Age: 16, Grade: Class 11
+            </div>
+
+            <!-- SECTION 3 -->
+            <h2 id="comparison">3. Key Differences: List vs Tuple</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Property</th>
+                        <th>Python List</th>
+                        <th>Python Tuple</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Mutability</strong></td>
+                        <td>Mutable (Can be edited)</td>
+                        <td>Immutable (Cannot be edited)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Syntax</strong></td>
+                        <td>Square brackets <code>[ ]</code></td>
+                        <td>Parentheses <code>( )</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Performance</strong></td>
+                        <td>Slower iteration</td>
+                        <td>Faster execution & memory efficient</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- NAV LINKS -->
+            <div class="nav-links">
+                <a href="class11-cs.html">← CS Hub Main</a>
+                <a href="python-loops.html">Next: Loops Masterclass →</a>
             </div>
         </div>
     </div>
 
     <script>
-        if (localStorage.getItem('theme') === 'light') {
-            document.body.classList.add('light-mode');
-        }
-
-        function toggleTheme() {
-            document.body.classList.toggle('light-mode');
-            if (document.body.classList.contains('light-mode')) {
-                localStorage.setItem('theme', 'light');
-            } else {
-                localStorage.setItem('theme', 'dark');
-            }
+        function copyCode(button) {
+            const preTag = button.parentElement.nextElementSibling;
+            navigator.clipboard.writeText(preTag.innerText).then(() => {
+                button.innerText = "Copied!";
+                setTimeout(() => { button.innerText = "Copy Code"; }, 2000);
+            });
         }
     </script>
 </body>
