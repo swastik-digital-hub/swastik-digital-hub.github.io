@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Tuples and Lists - Class 11 CS Notes | Swastik Digital Hub</title>
+    
+    <!-- Google AdSense Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9509706674270233" crossorigin="anonymous"></script>
+
+    <!-- Custom Styling -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #0056b3;
+        }
+        .code-box {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: monospace;
+            position: relative;
+            margin: 15px 0;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #0056b3;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .copy-btn:hover {
+            background: #004085;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #0056b3;
+            color: white;
+        }
+        .nav-links {
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .nav-links a {
+            text-decoration: none;
+            background: #0056b3;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+        }
+        .nav-links a:hover {
+            background: #004085;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Python Lists and Tuples</h1>
+        <p>Welcome to Class 11 Computer Science revision notes. In this chapter, we explore two core collection data types in Python: <strong>Lists</strong> and <strong>Tuples</strong>.</p>
+
+        <h2>1. Python Lists</h2>
+        <p>A list is a <strong>mutable</strong> (modifiable) ordered sequence of elements. Elements can be of any data type and are enclosed in square brackets <code>[]</code>.</p>
+        
+        <h3>Example: Creating and Modifying a List</h3>
+        <div class="code-box">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre><code># Creating a list of marks
+marks = [85, 90, 78, 92, 88]
+
+# Modifying an element (Lists are mutable)
+marks[2] = 80
+print("Updated Marks:", marks)
+
+# Adding an element using append()
+marks.append(95)
+print("After Append:", marks)</code></pre>
+        </div>
+
+        <h2>2. Python Tuples</h2>
+        <p>A tuple is an <strong>immutable</strong> (unchangeable) ordered sequence of elements enclosed in parentheses <code>()</code>. Once created, its values cannot be modified.</p>
+
+        <h3>Example: Creating a Tuple</h3>
+        <div class="code-box">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre><code># Creating a tuple of coordinates
+point = (10, 20)
+
+print("X coordinate:", point[0])
+print("Y coordinate:", point[1])
+
+# Attempting to change a value will result in a TypeError:
+# point[0] = 15 (Error!)</code></pre>
+        </div>
+
+        <h2>3. Key Differences: List vs Tuple</h2>
+        <table>
+            <tr>
+                <th>Feature</th>
+                <th>Python List</th>
+                <th>Python Tuple</th>
+            </tr>
+            <tr>
+                <td><strong>Mutability</strong></td>
+                <td>Mutable (Can be changed)</td>
+                <td>Immutable (Cannot be changed)</td>
+            </tr>
+            <tr>
+                <td><strong>Syntax</strong></td>
+                <td>Square brackets <code>[ ]</code></td>
+                <td>Parentheses <code>( )</code></td>
+            </tr>
+            <tr>
+                <td><strong>Performance</strong></td>
+                <td>Slightly slower due to dynamic sizing</td>
+                <td>Faster execution speed</td>
+            </tr>
+            <tr>
+                <td><strong>Built-in Methods</strong></td>
+                <td>Many methods (<code>append()</code>, <code>remove()</code>, etc.)</td>
+                <td>Fewer methods (<code>count()</code>, <code>index()</code>)</td>
+            </tr>
+        </table>
+
+        <!-- Navigation Links -->
+        <div class="nav-links">
+            <a href="class11-cs.html">← Back to CS Hub</a>
+            <a href="class11-physics.html">Next Subject: Physics →</a>
+        </div>
+    </div>
+
+    <!-- Simple JavaScript for the Copy Button -->
+    <script>
+        function copyCode(button) {
+            const codeBlock = button.nextElementSibling.innerText;
+            navigator.clipboard.writeText(codeBlock).then(() => {
+                button.innerText = "Copied!";
+                setTimeout(() => {
+                    button.innerText = "Copy";
+                }, 2000);
+            });
+        }
+    </script>
+
+</body>
+</html>
