@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Computer Science Python Practice | Swastik-Tech</title>
+    
+    <!-- Google AdSense Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9509706674270233" crossorigin="anonymous"></script>
+
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -114,6 +118,7 @@
             backdrop-filter: blur(8px);
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
             gap: 1.2rem;
         }
 
@@ -128,7 +133,7 @@
             gap: 1rem;
         }
 
-        .dash-card i.fa-code {
+        .dash-card i.fa-code, .dash-card i.fa-terminal, .dash-card i.fa-list-check {
             font-size: 2.2rem;
             color: var(--accent-green);
             flex-shrink: 0;
@@ -188,20 +193,37 @@
         </div>
     </header>
 
-    <div class="section-heading">Computer Science Python Practice</div>
+    <div class="section-heading">Computer Science Python Practice & Notes</div>
 
     <div class="dashboard-grid">
+        <!-- Card 1: Python Lists & Tuples Notes -->
         <div class="dash-card">
             <div class="card-header-content">
-                <i class="fa-solid fa-code"></i>
+                <i class="fa-solid fa-list-check"></i>
                 <div class="card-text">
-                    <h3>Computer Science Python Practice</h3>
-                    <p>Practice Python programming, digital logic, and number systems[cite: 14].</p>
+                    <h3>Python Lists & Tuples</h3>
+                    <p>Read tutorial notes, syntax rules, mutability comparison tables, and code snippets.</p>
+                </div>
+            </div>
+            <div class="card-actions">
+                <a href="python-tuples-and-lists.html" class="action-btn">
+                    <i class="fa-solid fa-book-open"></i> Read Tutorial
+                </a>
+            </div>
+        </div>
+
+        <!-- Card 2: Python IDE -->
+        <div class="dash-card">
+            <div class="card-header-content">
+                <i class="fa-solid fa-terminal"></i>
+                <div class="card-text">
+                    <h3>Online Python IDE</h3>
+                    <p>Practice Python programming, write scripts, and test logic interactively.</p>
                 </div>
             </div>
             <div class="card-actions">
                 <a href="python-ide.html" class="action-btn">
-                    <i class="fa-solid fa-terminal"></i> Open Python IDE
+                    <i class="fa-solid fa-code"></i> Open Python IDE
                 </a>
             </div>
         </div>
