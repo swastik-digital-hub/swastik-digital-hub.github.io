@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Python Lists, Tuples & Loops - Class 11 CS Notes | Swastik Digital Hub</title>
+    <title>Python Lists & Tuples - Class 11 CS Notes | Swastik Digital Hub</title>
     
-    <!-- Google AdSense Script -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9509706674270233" crossorigin="anonymous"></script>
 
     <style>
@@ -30,7 +29,7 @@
         }
 
         sidebar {
-            width: 250px;
+            width: 260px;
             background: #ffffff;
             border-right: 1px solid var(--border-color);
             padding: 20px;
@@ -75,15 +74,15 @@
         }
 
         .main-wrapper {
-            margin-left: 270px;
-            padding: 30px 20px;
+            margin-left: 280px;
+            padding: 30px 30px;
             width: 100%;
-            max-width: 900px;
+            max-width: 950px;
         }
 
         .container {
             background: #ffffff;
-            padding: 35px;
+            padding: 40px;
             border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
             border: 1px solid var(--border-color);
@@ -91,23 +90,28 @@
 
         h1 {
             color: #1a202c;
-            font-size: 28px;
+            font-size: 30px;
             margin-top: 0;
             border-bottom: 3px solid var(--primary-green);
-            padding-bottom: 8px;
-            display: inline-block;
+            padding-bottom: 10px;
         }
 
         h2 {
             color: #2b6cb0;
-            margin-top: 35px;
+            margin-top: 40px;
             font-size: 22px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 6px;
         }
 
         h3 {
             color: #2d3748;
             font-size: 17px;
-            margin-top: 20px;
+            margin-top: 25px;
+        }
+
+        p, li {
+            font-size: 15.5px;
         }
 
         .code-box {
@@ -194,7 +198,7 @@
         .nav-links {
             margin-top: 40px;
             display: flex;
-            justify-content: flex-start;
+            justify-content: space-between;
             border-top: 1px solid var(--border-color);
             padding-top: 20px;
         }
@@ -223,209 +227,76 @@
 <body>
 
     <sidebar>
-        <h3>Class 11 CS Topics</h3>
+        <h3>Class 11 CS Tutorials</h3>
         <ul>
             <li><a href="class11-cs.html">🏠 CS Hub Main</a></li>
-            <li><a href="#">Python Fundamentals</a></li>
-            <li><a href="#">Conditional Statements</a></li>
-            <li><a href="#" class="active">Lists, Tuples & Loops</a></li>
-            <li><a href="#">Dictionary & Sets</a></li>
-            <li><a href="#">Functions</a></li>
+            <li><a href="python-lists-and-tuples.html" class="active">📦 Lists & Tuples</a></li>
+            <li><a href="python-loops.html">🔄 Python Loops</a></li>
         </ul>
     </sidebar>
 
     <div class="main-wrapper">
         <div class="container">
-            <h1>Python Lists, Tuples & Loops</h1>
-            <p>Welcome to Class 11 Computer Science revision notes. This comprehensive guide covers Python <strong>Lists</strong>, <strong>Tuples</strong>, and control structures like <strong>Loops</strong>.</p>
+            <h1>Python Lists & Tuples (In-Depth Guide)</h1>
+            <p>Welcome to the Class 11 Computer Science reference guide on compound data types. Explore Python Lists and Tuples in detail below.</p>
 
-            <!-- SECTION 1: LISTS -->
-            <h2>1. Python Lists in Detail</h2>
-            <p>A list is a sequence of comma-separated items enclosed within square brackets <code>[ ]</code>. Lists are <strong>mutable</strong>, meaning elements can be modified, added, or removed after creation.</p>
-            
-            <h3>Key List Operations & Methods:</h3>
-            <ul>
-                <li><code>append(x)</code>: Adds an item at the end of the list.</li>
-                <li><code>insert(i, x)</code>: Inserts an item at index <code>i</code>.</li>
-                <li><code>remove(x)</code>: Removes the first occurrence of item <code>x</code>.</li>
-                <li><code>pop([i])</code>: Removes and returns the item at index <code>i</code>.</li>
-            </ul>
-
-            <h3>Example Code: Advanced List Manipulation</h3>
+            <h2>1. Python Lists</h2>
+            <p>A list is a mutable, ordered sequence enclosed in square brackets <code>[ ]</code>.</p>
             <div class="code-box">
                 <div class="code-header">
                     <span>PYTHON 3</span>
                     <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
                 </div>
-                <pre><code># Initializing a list
-my_list = [10, 20, 30, 40, 50]
-
-# Slicing lists
-print("Elements from index 1 to 3:", my_list[1:4])
-
-# Modifying elements
+                <pre><code># Creating and modifying lists
+my_list = [10, 20, 30, 40]
+my_list.append(50)
 my_list[0] = 99
-print("After Modification:", my_list)
-
-# Using built-in methods
-my_list.append(60)
-my_list.pop(2) # Removes element at index 2 (30)
-print("Final List:", my_list)</code></pre>
+print("Updated List:", my_list)</code></pre>
             </div>
             <div class="output-box">
                 <div class="output-title">Output</div>
-                Elements from index 1 to 3: [20, 30, 40]<br>
-                After Modification: [99, 20, 30, 40, 50]<br>
-                Final List: [99, 20, 40, 50, 60]
+                Updated List: [99, 20, 30, 40, 50]
             </div>
 
-            <!-- SECTION 2: TUPLES -->
-            <h2>2. Python Tuples in Detail</h2>
-            <p>A tuple is an ordered sequence of elements separated by commas and enclosed in parentheses <code>( )</code>. Unlike lists, tuples are <strong>immutable</strong>—they cannot be changed once defined.</p>
-
-            <h3>Example Code: Tuple Packing and Unpacking</h3>
+            <h2>2. Python Tuples</h2>
+            <p>A tuple is an immutable, ordered sequence enclosed in parentheses <code>( )</code>.</p>
             <div class="code-box">
                 <div class="code-header">
                     <span>PYTHON 3</span>
                     <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
                 </div>
-                <pre><code># Tuple Packing
-student_info = ("Swastik", 16, "Class 11")
-
-# Tuple Unpacking
-name, age, grade = student_info
-print("Name:", name)
-print("Age:", age)
-print("Grade:", grade)
-
-# Tuple functions: count() and index()
-numbers = (1, 2, 3, 2, 4, 2)
-print("Count of 2:", numbers.count(2))
-print("Index of first 4:", numbers.index(4))</code></pre>
+                <pre><code># Tuples are immutable
+point = (10, 20)
+print("X:", point[0], "Y:", point[1])
+# point[0] = 15  # Raises TypeError!</code></pre>
             </div>
             <div class="output-box">
                 <div class="output-title">Output</div>
-                Name: Swastik<br>
-                Age: 16<br>
-                Grade: Class 11<br>
-                Count of 2: 3<br>
-                Index of first 4: 4
+                X: 10 Y: 20
             </div>
 
-            <!-- SECTION 3: LOOPS -->
-            <h2>3. Python Loops (Iterative Statements)</h2>
-            <p>Loops are used to execute a block of code repeatedly until a specific condition is met or through a sequence of items. Python provides two main types of loops: <strong>for loop</strong> and <strong>while loop</strong>.</p>
-
-            <h3>A. The `for` Loop</h3>
-            <p>A <code>for</code> loop is used for iterating over a sequence (such as a list, tuple, string, or range).</p>
-            <div class="code-box">
-                <div class="code-header">
-                    <span>PYTHON 3</span>
-                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
-                </div>
-                <pre><code># Iterating using range()
-print("Range loop:")
-for i in range(1, 4):
-    print(i, end=" ")
-
-# Iterating through a list
-print("\nList iteration:")
-fruits = ["Apple", "Banana", "Mango"]
-for fruit in fruits:
-    print(fruit)</code></pre>
-            </div>
-            <div class="output-box">
-                <div class="output-title">Output</div>
-                Range loop:<br>
-                1 2 3 <br>
-                List iteration:<br>
-                Apple<br>
-                Banana<br>
-                Mango
-            </div>
-
-            <h3>B. The `while` Loop</h3>
-            <p>A <code>while</code> loop executes statements as long as the given condition remains <code>True</code>.</p>
-            <div class="code-box">
-                <div class="code-header">
-                    <span>PYTHON 3</span>
-                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
-                </div>
-                <pre><code># Countdown using while loop
-count = 3
-while count > 0:
-    print("Countdown:", count)
-    count -= 1
-print("Liftoff!")</code></pre>
-            </div>
-            <div class="output-box">
-                <div class="output-title">Output</div>
-                Countdown: 3<br>
-                Countdown: 2<br>
-                Countdown: 1<br>
-                Liftoff!
-            </div>
-
-            <h3>C. Loop Control Statements: `break` and `continue`</h3>
-            <ul>
-                <li><code>break</code>: Terminates the loop entirely when a condition is met.</li>
-                <li><code>continue</code>: Skips the current iteration and moves to the next one.</li>
-            </ul>
-            <div class="code-box">
-                <div class="code-header">
-                    <span>PYTHON 3</span>
-                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
-                </div>
-                <pre><code># Using break and continue
-for num in range(1, 6):
-    if num == 3:
-        continue # Skips printing 3
-    if num == 5:
-        break    # Stops loop at 5
-    print(num, end=" ")</code></pre>
-            </div>
-            <div class="output-box">
-                <div class="output-title">Output</div>
-                1 2 4 
-            </div>
-
-            <!-- SECTION 4: COMPARISON TABLE -->
-            <h2>4. Key Differences: List vs Tuple</h2>
+            <h2>3. List vs Tuple Comparison</h2>
             <table>
-                <thead>
-                    <tr>
-                        <th>Feature</th>
-                        <th>Python List</th>
-                        <th>Python Tuple</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Mutability</strong></td>
-                        <td>Mutable (Can be changed/modified)</td>
-                        <td>Immutable (Cannot be altered)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Syntax</strong></td>
-                        <td>Enclosed in square brackets <code>[ ]</code></td>
-                        <td>Enclosed in parentheses <code>( )</code></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Size & Memory</strong></td>
-                        <td>Consumes more memory</td>
-                        <td>Consumes less memory</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Speed</strong></td>
-                        <td>Slower iteration and operations</td>
-                        <td>Faster execution speed</td>
-                    </tr>
-                </tbody>
+                <tr>
+                    <th>Feature</th>
+                    <th>List</th>
+                    <th>Tuple</th>
+                </tr>
+                <tr>
+                    <td>Mutability</td>
+                    <td>Mutable (Modifiable)</td>
+                    <td>Immutable (Unchangeable)</td>
+                </tr>
+                <tr>
+                    <td>Syntax</td>
+                    <td>Square brackets <code>[ ]</code></td>
+                    <td>Parentheses <code>( )</code></td>
+                </tr>
             </table>
 
-            <!-- Navigation Links -->
             <div class="nav-links">
                 <a href="class11-cs.html">← Back to CS Hub</a>
+                <a href="python-loops.html">Next: Python Loops →</a>
             </div>
         </div>
     </div>
@@ -435,12 +306,9 @@ for num in range(1, 6):
             const preTag = button.parentElement.nextElementSibling;
             navigator.clipboard.writeText(preTag.innerText).then(() => {
                 button.innerText = "Copied!";
-                setTimeout(() => {
-                    button.innerText = "Copy Code";
-                }, 2000);
+                setTimeout(() => { button.innerText = "Copy Code"; }, 2000);
             });
         }
     </script>
-
 </body>
 </html>
