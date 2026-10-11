@@ -8,96 +8,272 @@
     <!-- Google AdSense Script -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9509706674270233" crossorigin="anonymous"></script>
 
-    <!-- Custom Styling -->
+    <!-- Upgraded GeeksforGeeks-Style Layout & Design -->
     <style>
+        :root {
+            --primary-green: #2f855a;
+            --primary-hover: #276749;
+            --bg-body: #f7fafc;
+            --text-dark: #2d3748;
+            --code-bg: #1a202c;
+            --output-bg: #edf2f7;
+            --border-color: #e2e8f0;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.7;
             margin: 0;
+            background-color: var(--bg-body);
+            color: var(--text-dark);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sticky Left Sidebar (GfG Navigation) */
+        sidebar {
+            width: 250px;
+            background: #ffffff;
+            border-right: 1px solid var(--border-color);
             padding: 20px;
-            background-color: #f4f7f6;
-            color: #333;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            box-sizing: border-box;
         }
-        .container {
-            max-width: 800px;
-            margin: auto;
-            background: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+
+        sidebar h3 {
+            color: var(--primary-green);
+            font-size: 18px;
+            margin-top: 0;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 8px;
         }
-        h1, h2 {
-            color: #0056b3;
+
+        sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
         }
-        .code-box {
-            background: #2d2d2d;
-            color: #f8f8f2;
-            padding: 15px;
+
+        sidebar li {
+            margin-bottom: 8px;
+        }
+
+        sidebar a {
+            text-decoration: none;
+            color: #4a5568;
+            font-size: 14px;
+            display: block;
+            padding: 6px 10px;
             border-radius: 5px;
-            overflow-x: auto;
-            font-family: monospace;
-            position: relative;
-            margin: 15px 0;
+            transition: all 0.2s ease;
         }
+
+        sidebar a:hover, sidebar a.active {
+            background: #e6fffa;
+            color: var(--primary-green);
+            font-weight: 600;
+        }
+
+        /* Main Reading Area */
+        .main-wrapper {
+            margin-left: 270px;
+            padding: 30px 20px;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 35px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        h1 {
+            color: #1a202c;
+            font-size: 28px;
+            margin-top: 0;
+            border-bottom: 3px solid var(--primary-green);
+            padding-bottom: 8px;
+            display: inline-block;
+        }
+
+        h2 {
+            color: #2b6cb0;
+            margin-top: 35px;
+            font-size: 22px;
+        }
+
+        h3 {
+            color: #2d3748;
+            font-size: 17px;
+            margin-top: 20px;
+        }
+
+        /* Enhanced Code Container */
+        .code-box {
+            background: var(--code-bg);
+            border-radius: 8px;
+            margin: 15px 0 0 0;
+            overflow: hidden;
+            border: 1px solid #2d3748;
+        }
+
+        .code-header {
+            background: #2d3748;
+            color: #a0aec0;
+            padding: 8px 15px;
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+
+        pre {
+            margin: 0;
+            padding: 15px;
+            color: #f8f8f2;
+            font-family: Consolas, Monaco, 'Courier New', monospace;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+
         .copy-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #0056b3;
+            background: var(--primary-green);
             color: white;
             border: none;
-            padding: 5px 10px;
-            border-radius: 3px;
+            padding: 4px 12px;
+            border-radius: 4px;
             cursor: pointer;
             font-size: 12px;
+            font-weight: 600;
+            transition: background 0.2s;
         }
+
         .copy-btn:hover {
-            background: #004085;
+            background: var(--primary-hover);
         }
+
+        /* GfG-style Output Box */
+        .output-box {
+            background: var(--output-bg);
+            border-left: 4px solid var(--primary-green);
+            padding: 12px 15px;
+            margin: 0 0 20px 0;
+            font-family: Consolas, Monaco, monospace;
+            font-size: 13.5px;
+            color: #2d3748;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .output-title {
+            font-weight: bold;
+            color: #718096;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        /* Modernized Table */
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
+            margin: 25px 0;
+            overflow: hidden;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
         }
-        table, th, td {
-            border: 1px solid #ddd;
-            padding: 10px;
+
+        th, td {
+            padding: 12px 15px;
             text-align: left;
         }
+
         th {
-            background-color: #0056b3;
+            background-color: var(--primary-green);
             color: white;
+            font-size: 15px;
         }
+
+        tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        tr:border-bottom {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* Navigation Links */
         .nav-links {
-            margin-top: 30px;
+            margin-top: 40px;
             display: flex;
             justify-content: space-between;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
         }
+
         .nav-links a {
             text-decoration: none;
-            background: #0056b3;
+            background: var(--primary-green);
             color: white;
-            padding: 10px 15px;
-            border-radius: 5px;
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: background 0.2s;
         }
+
         .nav-links a:hover {
-            background: #004085;
+            background: var(--primary-hover);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            sidebar { display: none; }
+            .main-wrapper { margin-left: 0; padding: 15px; }
+            .container { padding: 20px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>Python Lists and Tuples</h1>
-        <p>Welcome to Class 11 Computer Science revision notes. In this chapter, we explore two core collection data types in Python: <strong>Lists</strong> and <strong>Tuples</strong>.</p>
+    <!-- Left Index Navigation (GfG Style) -->
+    <sidebar>
+        <h3>Class 11 CS Topics</h3>
+        <ul>
+            <li><a href="class11-cs.html">🏠 CS Hub Main</a></li>
+            <li><a href="#">Python Fundamentals</a></li>
+            <li><a href="#">Conditional Statements</a></li>
+            <li><a href="#">Loops in Python</a></li>
+            <li><a href="#" class="active">Lists & Tuples</a></li>
+            <li><a href="#">Dictionary & Sets</a></li>
+            <li><a href="#">Functions</a></li>
+            <li><a href="#">Class 11 Sample Papers</a></li>
+        </ul>
+    </sidebar>
 
-        <h2>1. Python Lists</h2>
-        <p>A list is a <strong>mutable</strong> (modifiable) ordered sequence of elements. Elements can be of any data type and are enclosed in square brackets <code>[]</code>.</p>
-        
-        <h3>Example: Creating and Modifying a List</h3>
-        <div class="code-box">
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <pre><code># Creating a list of marks
+    <!-- Main Content Body -->
+    <div class="main-wrapper">
+        <div class="container">
+            <h1>Python Lists and Tuples</h1>
+            <p>Welcome to Class 11 Computer Science revision notes. In this chapter, we explore two core collection data types in Python: <strong>Lists</strong> and <strong>Tuples</strong>.</p>
+
+            <h2>1. Python Lists</h2>
+            <p>A list is a <strong>mutable</strong> (modifiable) ordered sequence of elements. Elements can be of any data type and are enclosed in square brackets <code>[]</code>.</p>
+            
+            <h3>Example: Creating and Modifying a List</h3>
+            <div class="code-box">
+                <div class="code-header">
+                    <span>PYTHON 3</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                </div>
+                <pre><code># Creating a list of marks
 marks = [85, 90, 78, 92, 88]
 
 # Modifying an element (Lists are mutable)
@@ -107,15 +283,23 @@ print("Updated Marks:", marks)
 # Adding an element using append()
 marks.append(95)
 print("After Append:", marks)</code></pre>
-        </div>
+            </div>
+            <div class="output-box">
+                <div class="output-title">Output</div>
+                Updated Marks: [85, 90, 80, 92, 88]<br>
+                After Append: [85, 90, 80, 92, 88, 95]
+            </div>
 
-        <h2>2. Python Tuples</h2>
-        <p>A tuple is an <strong>immutable</strong> (unchangeable) ordered sequence of elements enclosed in parentheses <code>()</code>. Once created, its values cannot be modified.</p>
+            <h2>2. Python Tuples</h2>
+            <p>A tuple is an <strong>immutable</strong> (unchangeable) ordered sequence of elements enclosed in parentheses <code>()</code>. Once created, its values cannot be modified.</p>
 
-        <h3>Example: Creating a Tuple</h3>
-        <div class="code-box">
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <pre><code># Creating a tuple of coordinates
+            <h3>Example: Creating a Tuple</h3>
+            <div class="code-box">
+                <div class="code-header">
+                    <span>PYTHON 3</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                </div>
+                <pre><code># Creating a tuple of coordinates
 point = (10, 20)
 
 print("X coordinate:", point[0])
@@ -123,52 +307,62 @@ print("Y coordinate:", point[1])
 
 # Attempting to change a value will result in a TypeError:
 # point[0] = 15 (Error!)</code></pre>
-        </div>
+            </div>
+            <div class="output-box">
+                <div class="output-title">Output</div>
+                X coordinate: 10<br>
+                Y coordinate: 20
+            </div>
 
-        <h2>3. Key Differences: List vs Tuple</h2>
-        <table>
-            <tr>
-                <th>Feature</th>
-                <th>Python List</th>
-                <th>Python Tuple</th>
-            </tr>
-            <tr>
-                <td><strong>Mutability</strong></td>
-                <td>Mutable (Can be changed)</td>
-                <td>Immutable (Cannot be changed)</td>
-            </tr>
-            <tr>
-                <td><strong>Syntax</strong></td>
-                <td>Square brackets <code>[ ]</code></td>
-                <td>Parentheses <code>( )</code></td>
-            </tr>
-            <tr>
-                <td><strong>Performance</strong></td>
-                <td>Slightly slower due to dynamic sizing</td>
-                <td>Faster execution speed</td>
-            </tr>
-            <tr>
-                <td><strong>Built-in Methods</strong></td>
-                <td>Many methods (<code>append()</code>, <code>remove()</code>, etc.)</td>
-                <td>Fewer methods (<code>count()</code>, <code>index()</code>)</td>
-            </tr>
-        </table>
+            <h2>3. Key Differences: List vs Tuple</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Python List</th>
+                        <th>Python Tuple</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Mutability</strong></td>
+                        <td>Mutable (Can be changed)</td>
+                        <td>Immutable (Cannot be changed)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Syntax</strong></td>
+                        <td>Square brackets <code>[ ]</code></td>
+                        <td>Parentheses <code>( )</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Performance</strong></td>
+                        <td>Slightly slower due to dynamic sizing</td>
+                        <td>Faster execution speed</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Built-in Methods</strong></td>
+                        <td>Many methods (<code>append()</code>, <code>remove()</code>, etc.)</td>
+                        <td>Fewer methods (<code>count()</code>, <code>index()</code>)</td>
+                    </tr>
+                </tbody>
+            </table>
 
-        <!-- Navigation Links -->
-        <div class="nav-links">
-            <a href="class11-cs.html">← Back to CS Hub</a>
-            <a href="class11-physics.html">Next Subject: Physics →</a>
+            <!-- Navigation Links -->
+            <div class="nav-links">
+                <a href="class11-cs.html">← Back to CS Hub</a>
+                <a href="class11-physics.html">Next Subject: Physics →</a>
+            </div>
         </div>
     </div>
 
-    <!-- Simple JavaScript for the Copy Button -->
+    <!-- JavaScript for Interactive Copy Button -->
     <script>
         function copyCode(button) {
-            const codeBlock = button.nextElementSibling.innerText;
-            navigator.clipboard.writeText(codeBlock).then(() => {
+            const preTag = button.parentElement.nextElementSibling;
+            navigator.clipboard.writeText(preTag.innerText).then(() => {
                 button.innerText = "Copied!";
                 setTimeout(() => {
-                    button.innerText = "Copy";
+                    button.innerText = "Copy Code";
                 }, 2000);
             });
         }
