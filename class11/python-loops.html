@@ -219,18 +219,20 @@
 <body>
 
     <sidebar>
-        <h3>Loop Masterclass</h3>
+        <h3>Class 11 CS Topics</h3>
         <ul>
             <li><a href="class11-cs.html">🏠 CS Hub Main</a></li>
-            <li><a href="#intro">1. What is a Loop?</a></li>
-            <li><a href="#range">2. The range() Function</a></li>
-            <li><a href="#for-loop">3. The for Loop</a></li>
-            <li><a href="#while-loop">4. The while Loop</a></li>
-            <li><a href="#nested-loops">5. Nested Loops Overview</a></li>
-            <li><a href="#nested-for-for">5.1 Nested For - For</a></li>
-            <li><a href="#nested-while-while">5.2 Nested While - While</a></li>
-            <li><a href="#nested-for-while">5.3 Nested For - While</a></li>
-            <li><a href="#nested-while-for">5.4 Nested While - For</a></li>
+            <li><a href="python-lists-and-tuples.html">📦 Lists & Tuples</a></li>
+            <li><a href="python-loops.html" class="active">🔄 Python Loops</a></li>
+            <li><a href="#intro" style="padding-left: 20px;">1. What is a Loop?</a></li>
+            <li><a href="#range" style="padding-left: 20px;">2. The range() Function</a></li>
+            <li><a href="#for-loop" style="padding-left: 20px;">3. The for Loop</a></li>
+            <li><a href="#while-loop" style="padding-left: 20px;">4. The while Loop</a></li>
+            <li><a href="#nested-loops" style="padding-left: 20px;">5. Nested Loops Overview</a></li>
+            <li><a href="#nested-for-for" style="padding-left: 30px;">5.1 Nested For - For</a></li>
+            <li><a href="#nested-while-while" style="padding-left: 30px;">5.2 Nested While - While</a></li>
+            <li><a href="#nested-for-while" style="padding-left: 30px;">5.3 Nested For - While</a></li>
+            <li><a href="#nested-while-for" style="padding-left: 30px;">5.4 Nested While - For</a></li>
         </ul>
     </sidebar>
 
@@ -321,4 +323,96 @@ while condition:
             <h3>Example: Countdown Timer</h3>
             <div class="code-box">
                 <div class="code-header">
-                    <span>
+                    <span>PYTHON 3</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                </div>
+                <pre><code>count = 3
+while count > 0:
+    print("Countdown:", count)
+    count -= 1  # Equivalent to: count = count - 1
+
+print("Blast off!")</code></pre>
+            </div>
+            <div class="output-box">
+                <div class="output-title">Output</div>
+                Countdown: 3<br>
+                Countdown: 2<br>
+                Countdown: 1<br>
+                Blast off!
+            </div>
+
+            <div class="note-box">
+                <strong>Warning (Infinite Loops):</strong> If you forget to update the variable (e.g., omitting <code>count -= 1</code>), the condition <code>count > 0</code> will remain <code>True</code> forever, causing an infinite loop that freezes your script!
+            </div>
+
+            <!-- SECTION 5 -->
+            <h2 id="nested-loops">5. Nested Loops Explained</h2>
+            <p>A <strong>Nested Loop</strong> is simply a loop placed inside another loop. Think of an analog clock: the <em>minute hand</em> (inner loop) must complete a full 60-minute circle before the <em>hour hand</em> (outer loop) moves forward by 1 step.</p>
+
+            <!-- 5.1 FOR - FOR -->
+            <h3 id="nested-for-for">5.1 Nested For - For Loop</h3>
+            <p>Both outer and inner loops are <code>for</code> loops. This structure is commonly used for matrix calculations and pattern printing.</p>
+
+            <div class="code-box">
+                <div class="code-header">
+                    <span>PYTHON 3</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                </div>
+                <pre><code># Outer loop: Rows
+for row in range(1, 4):
+    # Inner loop: Columns
+    for col in range(1, 4):
+        print(f"({row},{col})", end=" ")
+    print()  # Moves to next line after completing inner loop</code></pre>
+            </div>
+            <div class="output-box">
+                <div class="output-title">Output</div>
+                (1,1) (1,2) (1,3) <br>
+                (2,1) (2,2) (2,3) <br>
+                (3,1) (3,2) (3,3) 
+            </div>
+
+            <!-- 5.2 WHILE - WHILE -->
+            <h3 id="nested-while-while">5.2 Nested While - While Loop</h3>
+            <p>Both outer and inner loops are <code>while</code> loops. Remember to reset the inner loop's counter inside the outer loop!</p>
+
+            <div class="code-box">
+                <div class="code-header">
+                    <span>PYTHON 3</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                </div>
+                <pre><code>i = 1
+while i <= 2:
+    j = 1  # Reset inner counter for each outer iteration
+    while j <= 3:
+        print(f"Outer i={i}, Inner j={j}")
+        j += 1
+    i += 1</code></pre>
+            </div>
+            <div class="output-box">
+                <div class="output-title">Output</div>
+                Outer i=1, Inner j=1<br>
+                Outer i=1, Inner j=2<br>
+                Outer i=1, Inner j=3<br>
+                Outer i=2, Inner j=1<br>
+                Outer i=2, Inner j=2<br>
+                Outer i=2, Inner j=3
+            </div>
+
+            <!-- 5.3 FOR - WHILE -->
+            <h3 id="nested-for-while">5.3 Nested For - While Loop</h3>
+            <p>The outer loop is a <code>for</code> loop, while the inner loop is a <code>while</code> loop.</p>
+
+            <div class="code-box">
+                <div class="code-header">
+                    <span>PYTHON 3</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                </div>
+                <pre><code>for student in range(1, 3):
+    print(f"Student #{student} Attempting Quiz:")
+    attempts = 1
+    while attempts <= 2:
+        print(f"  - Attempt {attempts} submitted.")
+        attempts += 1</code></pre>
+            </div>
+            <div class="output-box
