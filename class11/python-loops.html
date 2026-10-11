@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Loops - Class 11 CS Notes | Swastik Digital Hub</title>
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9509706674270233" crossorigin="anonymous"></script>
+
+    <style>
+        :root {
+            --primary-green: #2f855a;
+            --primary-hover: #276749;
+            --bg-body: #f7fafc;
+            --text-dark: #2d3748;
+            --code-bg: #1a202c;
+            --output-bg: #edf2f7;
+            --border-color: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            background-color: var(--bg-body);
+            color: var(--text-dark);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        sidebar {
+            width: 260px;
+            background: #ffffff;
+            border-right: 1px solid var(--border-color);
+            padding: 20px;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+
+        sidebar h3 {
+            color: var(--primary-green);
+            font-size: 18px;
+            margin-top: 0;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 8px;
+        }
+
+        sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        sidebar li {
+            margin-bottom: 8px;
+        }
+
+        sidebar a {
+            text-decoration: none;
+            color: #4a5568;
+            font-size: 14px;
+            display: block;
+            padding: 6px 10px;
+            border-radius: 5px;
+            transition: all 0.2s ease;
+        }
+
+        sidebar a:hover, sidebar a.active {
+            background: #e6fffa;
+            color: var(--primary-green);
+            font-weight: 600;
+        }
+
+        .main-wrapper {
+            margin-left: 280px;
+            padding: 30px 30px;
+            width: 100%;
+            max-width: 950px;
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        h1 {
+            color: #1a202c;
+            font-size: 30px;
+            margin-top: 0;
+            border-bottom: 3px solid var(--primary-green);
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #2b6cb0;
+            margin-top: 40px;
+            font-size: 22px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 6px;
+        }
+
+        p, li {
+            font-size: 15.5px;
+        }
+
+        .code-box {
+            background: var(--code-bg);
+            border-radius: 8px;
+            margin: 15px 0 0 0;
+            overflow: hidden;
+            border: 1px solid #2d3748;
+        }
+
+        .code-header {
+            background: #2d3748;
+            color: #a0aec0;
+            padding: 8px 15px;
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        pre {
+            margin: 0;
+            padding: 15px;
+            color: #f8f8f2;
+            font-family: Consolas, Monaco, monospace;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+
+        .copy-btn {
+            background: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 4px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary-hover);
+        }
+
+        .output-box {
+            background: var(--output-bg);
+            border-left: 4px solid var(--primary-green);
+            padding: 12px 15px;
+            margin: 0 0 20px 0;
+            font-family: Consolas, Monaco, monospace;
+            font-size: 13.5px;
+            color: #2d3748;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .output-title {
+            font-weight: bold;
+            color: #718096;
+            font-size: 11px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .nav-links {
+            margin-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            background: var(--primary-green);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            background: var(--primary-hover);
+        }
+
+        @media (max-width: 768px) {
+            sidebar { display: none; }
+            .main-wrapper { margin-left: 0; padding: 15px; }
+            .container { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <sidebar>
+        <h3>Class 11 CS Tutorials</h3>
+        <ul>
+            <li><a href="class11-cs.html">🏠 CS Hub Main</a></li>
+            <li><a href="python-lists-and-tuples.html">📦 Lists & Tuples</a></li>
+            <li><a href="python-loops.html" class="active">🔄 Python Loops</a></li>
+        </ul>
+    </sidebar>
+
+    <div class="main-wrapper">
+        <div class="container">
+            <h1>Python Loops (In-Depth Guide)</h1>
+            <p>Welcome to the Class 11 Computer Science reference guide on iterative control structures (`for` and `while` loops).</p>
+
+            <h2>1. The `for` Loop</h2>
+            <p>Used for iterating over sequences like lists, strings, or ranges.</p>
+            <div class="code-box">
+                <div class="code-header">
+                    <span>PYTHON 3</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                </div>
+                <pre><code># Range loop example
+for i in range(1, 4):
+    print("Iteration:", i)</code></pre>
+            </div>
+            <div class="output-box">
+                <div class="output-title">Output</div>
+                Iteration: 1<br>
+                Iteration: 2<br>
+                Iteration: 3
+            </div>
+
+            <h2>2. The `while` Loop</h2>
+            <p>Executes blocks of code repeatedly as long as the condition evaluates to `True`.</p>
+            <div class="code-box">
+                <div class="code-header">
+                    <span>PYTHON 3</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                </div>
+                <pre><code>count = 3
+while count > 0:
+    print("Countdown:", count)
+    count -= 1</code></pre>
+            </div>
+            <div class="output-box">
+                <div class="output-title">Output</div>
+                Countdown: 3<br>
+                Countdown: 2<br>
+                Countdown: 1
+            </div>
+
+            <div class="nav-links">
+                <a href="python-lists-and-tuples.html">← Previous: Lists & Tuples</a>
+                <a href="class11-cs.html">Back to CS Hub →</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function copyCode(button) {
+            const preTag = button.parentElement.nextElementSibling;
+            navigator.clipboard.writeText(preTag.innerText).then(() => {
+                button.innerText = "Copied!";
+                setTimeout(() => { button.innerText = "Copy Code"; }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
