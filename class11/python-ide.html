@@ -11,6 +11,11 @@
     <!-- Pyodide for running Python in browser -->
     <script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
 
+    <!-- CodeMirror CSS & Theme -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/dracula.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/fold/foldgutter.min.css">
+
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@500;600;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -25,7 +30,6 @@
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
             --border-glow-green: rgba(16, 185, 129, 0.3);
-            --code-bg: #0f172a;
             --output-bg: #020617;
         }
 
@@ -37,7 +41,6 @@
             --text-main: #0f172a;
             --text-muted: #475569;
             --border-glow-green: rgba(5, 150, 105, 0.3);
-            --code-bg: #ffffff;
             --output-bg: #e2e8f0;
         }
 
@@ -156,18 +159,14 @@
             box-shadow: 0 0 10px var(--accent-green);
         }
 
-        textarea {
+        /* CodeMirror Editor Styling overrides */
+        .CodeMirror {
             flex-grow: 1;
-            background: var(--code-bg);
-            color: var(--text-main);
+            height: auto !important;
             font-family: 'Fira Code', monospace;
             font-size: 14px;
-            padding: 15px;
-            border: none;
-            resize: none;
-            outline: none;
-            line-height: 1.5;
-            tab-size: 4;
+            line-height: 1.6;
+            padding: 5px 0;
         }
 
         .terminal-screen {
@@ -217,7 +216,8 @@
                     <i class="fa-solid fa-play"></i> Loading Python...
                 </button>
             </div>
-            <textarea id="codeEditor" placeholder="# Write your Python code here...">n = int(input("Enter a number : "))
+            
+            <textarea id="codeEditor">n = int(input("Enter a number : "))
 s = 0
 l = 0
 for a in range(n):
@@ -229,6 +229,7 @@ for a in range(n):
         s = x
     n = n // 10
 print("Second largest digit is:", s)</textarea>
+
             <div class="status-bar" id="engineStatus">Initializing Pyodide WebAssembly Engine...</div>
         </div>
 
@@ -245,9 +246,31 @@ print("Second largest digit is:", s)</textarea>
         </div>
     </div>
 
+    <!-- CodeMirror JS Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/closebrackets.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/matchbrackets.min.js"></script>
+
     <script>
         let pyodideReady = false;
         let pyodide = null;
+        let editor = null;
+
+        // Initialize CodeMirror Editor
+        window.addEventListener('DOMContentLoaded', () => {
+            editor = CodeMirror.fromTextArea(document.getElementById('codeEditor'), {
+                mode: "python",
+                theme: "dracula",
+                lineNumbers: true,
+                indentUnit: 4,
+                tabSize: 4,
+                indentWithTabs: false,
+                autoCloseBrackets: true,
+                matchBrackets: true,
+                lineWrapping: true
+            });
+        });
 
         async function initPyodide() {
             const statusElem = document.getElementById('engineStatus');
@@ -292,7 +315,7 @@ print("Second largest digit is:", s)</textarea>
                 return;
             }
 
-            const code = document.getElementById('codeEditor').value;
+            const code = editor.getValue();
             clearTerminal();
 
             // Redirect Python stdout to our output screen
