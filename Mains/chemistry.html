@@ -105,12 +105,10 @@
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 10px;
-            padding: 1.2rem 1.8rem;
+            padding: 1.5rem;
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            text-decoration: none;
-            color: var(--text-main);
+            flex-direction: column;
+            gap: 1.2rem;
             backdrop-filter: blur(8px);
             transition: all 0.3s ease;
         }
@@ -118,25 +116,52 @@
         .pdf-card:hover {
             border-color: var(--accent-cyan);
             box-shadow: 0 0 15px var(--border-glow);
-            transform: translateX(4px);
         }
 
-        .pdf-info { display: flex; align-items: center; gap: 1rem; }
-        .pdf-info i { font-size: 1.8rem; color: #ff4d4d; }
-        .pdf-details h4 { font-family: 'Orbitron', sans-serif; font-size: 1rem; color: var(--text-main); margin-bottom: 4px; }
-        .pdf-details p { font-size: 0.85rem; color: var(--text-muted); }
+        .pdf-top { display: flex; align-items: center; gap: 1rem; }
+        .pdf-top i { font-size: 2rem; color: #ff4d4d; }
+        .pdf-details h4 { font-family: 'Orbitron', sans-serif; font-size: 1.05rem; color: var(--text-main); margin-bottom: 4px; }
+        .pdf-details p { font-size: 0.9rem; color: var(--text-muted); }
 
-        .download-btn {
-            background: var(--input-bg);
-            border: 1px solid var(--card-border);
-            color: var(--accent-cyan);
-            padding: 0.5rem 1rem;
+        .card-divider { width: 100%; height: 1px; background: var(--card-border); }
+
+        .action-buttons { display: flex; gap: 1rem; }
+
+        .btn-view, .btn-download {
+            flex: 1;
+            padding: 0.6rem 1rem;
             border-radius: 6px;
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
+            text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 6px;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-view {
+            background: var(--input-bg);
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        .btn-view:hover {
+            background: rgba(0, 243, 255, 0.1);
+            box-shadow: 0 0 10px var(--border-glow);
+        }
+
+        .btn-download {
+            background: var(--input-bg);
+            border: 1px solid #ff4d4d;
+            color: #ff6b6b;
+        }
+
+        .btn-download:hover {
+            background: rgba(255, 77, 77, 0.1);
+            box-shadow: 0 0 10px rgba(255, 77, 77, 0.3);
         }
     </style>
 </head>
@@ -154,16 +179,24 @@
         <div class="section-heading">Available Chemistry Books & Handbooks</div>
 
         <!-- 1. Chemistry Arihant Handbook -->
-        <a href="books-pdf/Chemistry/Chemistry_arihant_handbook.pdf" target="_blank" class="pdf-card">
-            <div class="pdf-info">
+        <div class="pdf-card">
+            <div class="pdf-top">
                 <i class="fa-solid fa-file-pdf"></i>
                 <div class="pdf-details">
                     <h4>Arihant Chemistry Handbook</h4>
                     <p>Quick revision key points, formulas, reaction mechanisms & key notes</p>
                 </div>
             </div>
-            <div class="download-btn"><i class="fa-solid fa-download"></i> Download PDF</div>
-        </a>
+            <div class="card-divider"></div>
+            <div class="action-buttons">
+                <a href="books-pdf/Chemistry/Chemistry_arihant_handbook.pdf" target="_blank" class="btn-view">
+                    <i class="fa-solid fa-eye"></i> View
+                </a>
+                <a href="books-pdf/Chemistry/Chemistry_arihant_handbook.pdf" download class="btn-download">
+                    <i class="fa-solid fa-download"></i> Download
+                </a>
+            </div>
+        </div>
     </main>
 
     <script>
