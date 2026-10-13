@@ -165,7 +165,6 @@
             line-height: 1.4;
         }
 
-        /* Footer Section for Legal Pages Compliance */
         footer {
             margin-top: 3rem;
             padding-top: 1.5rem;
@@ -218,10 +217,11 @@
                 <p>Physics, Chemistry, Computer Science & CS materials.</p>
             </a>
 
-            <a href="jee-physics-mocktest.html" class="dash-card">
+            <!-- Updated link pointing to mains-hub.html -->
+            <a href="mains-hub.html" class="dash-card">
                 <i class="fa-solid fa-graduation-cap"></i>
                 <h3>JEE Portal</h3>
-                <p>Previous year questions, mechanics & engineering tests.</p>
+                <p>Previous year questions, reference books & engineering tests.</p>
             </a>
 
             <a href="neet/neet-hub.html" class="dash-card">
@@ -242,7 +242,6 @@
     </footer>
 
     <script>
-        // Theme switcher logic
         if (localStorage.getItem('theme') === 'light') {
             document.body.classList.add('light-mode');
         }
@@ -256,7 +255,6 @@
             }
         }
 
-        // Dynamic User Name Loader for top-left title on page reload
         window.addEventListener('DOMContentLoaded', () => {
             const savedName = localStorage.getItem('userName') || localStorage.getItem('profileName');
             const titleEl = document.getElementById('welcomeUserTitle');
