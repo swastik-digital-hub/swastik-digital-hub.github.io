@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reference Books Hub | Swastik-Tech</title>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9509706674270233" crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Browser Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%2300f3ff%22><path d=%22M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5%22/></svg>">
+
+    <style>
+        :root {
+            --bg-color: #03151c;
+            --card-bg: rgba(6, 32, 43, 0.85);
+            --card-border: #0e3746;
+            --accent-cyan: #00f3ff;
+            --text-main: #ffffff;
+            --text-muted: #83c5be;
+            --border-glow: rgba(0, 243, 255, 0.25);
+            --header-bg: rgba(3, 21, 28, 0.85);
+            --grid-color: rgba(0, 243, 255, 0.04);
+            --input-bg: rgba(0, 243, 255, 0.04);
+        }
+
+        body.light-mode {
+            --bg-color: #f1f5f9;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --card-border: #cbd5e1;
+            --accent-cyan: #0284c7;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-glow: rgba(2, 132, 199, 0.3);
+            --header-bg: rgba(255, 255, 255, 0.85);
+            --grid-color: rgba(0, 0, 0, 0.04);
+            --input-bg: rgba(2, 132, 199, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Rajdhani', 'Orbitron', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 50% 20%, rgba(0, 180, 216, 0.12) 0%, transparent 70%),
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 100% 100%, 35px 35px, 35px 35px;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--card-border);
+            margin-bottom: 2.5rem;
+        }
+
+        .header-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            border-left: 3px solid var(--accent-cyan);
+            padding-left: 10px;
+            letter-spacing: 1px;
+            text-decoration: none;
+        }
+
+        .top-nav-right {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .nav-btn {
+            background: var(--input-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-muted);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-family: 'Orbitron', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+        }
+
+        .nav-btn:hover {
+            color: var(--accent-cyan);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 10px var(--border-glow);
+        }
+
+        .portal-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            flex: 1;
+        }
+
+        .section-heading {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .subject-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 1.8rem;
+            text-decoration: none;
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+        }
+
+        .subject-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px var(--border-glow);
+            transform: translateY(-3px);
+        }
+
+        .subject-card i.main-icon {
+            font-size: 2rem;
+            color: var(--accent-cyan);
+            margin-bottom: 0.5rem;
+        }
+
+        .subject-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.15rem;
+        }
+
+        .subject-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .explore-tag {
+            margin-top: 0.5rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="mains-hub.html" class="header-title">| Reference Books Hub</a>
+        <div class="top-nav-right">
+            <button onclick="toggleTheme()" class="nav-btn"><i class="fa-solid fa-circle-half-stroke"></i> Theme</button>
+            <a href="mains-hub.html" class="nav-btn"><i class="fa-solid fa-arrow-left"></i> JEE Portal</a>
+        </div>
+    </header>
+
+    <main class="portal-container">
+        <div class="section-heading">Select Subject Library</div>
+
+        <div class="subjects-grid">
+            <!-- 1. Physics Books Sub-Section -->
+            <a href="physics.html" class="subject-card">
+                <i class="fa-solid fa-atom main-icon"></i>
+                <h3>Physics Books</h3>
+                <p>Mechanics, Electrodynamics, Thermodynamics & JEE Advanced Problem Modules.</p>
+                <div class="explore-tag">Open Library <i class="fa-solid fa-arrow-right"></i></div>
+            </a>
+
+            <!-- 2. Chemistry Books Sub-Section -->
+            <a href="chemistry.html" class="subject-card">
+                <i class="fa-solid fa-flask main-icon"></i>
+                <h3>Chemistry Books</h3>
+                <p>Physical, Organic & Inorganic reference study manuals and reaction sets.</p>
+                <div class="explore-tag">Open Library <i class="fa-solid fa-arrow-right"></i></div>
+            </a>
+
+            <!-- 3. Mathematics Books Sub-Section -->
+            <a href="mathematics.html" class="subject-card">
+                <i class="fa-solid fa-square-root-variable main-icon"></i>
+                <h3>Mathematics Books</h3>
+                <p>Calculus, Algebra & Coordinate Geometry problem sets and reference volumes.</p>
+                <div class="explore-tag">Open Library <i class="fa-solid fa-arrow-right"></i></div>
+            </a>
+        </div>
+    </main>
+
+    <script>
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-mode');
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            if (document.body.classList.contains('light-mode')) {
+                localStorage.setItem('theme', 'light');
+            } else {
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+    </script>
+</body>
+</html>
