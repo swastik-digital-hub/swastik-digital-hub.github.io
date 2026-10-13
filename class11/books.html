@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reference Books Hub | Swastik-Tech</title>
+    
+    <!-- Google AdSense Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9509706674270233" crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@500;600;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%2300f3ff%22><path d=%22M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5%22/></svg>">
+
+    <style>
+        :root {
+            --bg-color: #080c14;
+            --card-bg: rgba(15, 23, 42, 0.9);
+            --accent-green: #10b981;
+            --accent-hover: #059669;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-glow-green: rgba(16, 185, 129, 0.3);
+        }
+
+        body.light-mode {
+            --bg-color: #f1f5f9;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --accent-green: #059669;
+            --accent-hover: #047857;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-glow-green: rgba(5, 150, 105, 0.3);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Rajdhani', sans-serif;
+            min-height: 100vh;
+            padding: 1.5rem;
+            transition: background-color 0.4s ease, color 0.4s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-glow-green);
+            margin-bottom: 2rem;
+        }
+
+        .header-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--accent-green);
+            border-left: 3px solid var(--accent-green);
+            padding-left: 10px;
+            text-decoration: none;
+        }
+
+        .top-nav-right {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .nav-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow-green);
+            color: var(--accent-green);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            box-shadow: 0 0 10px var(--border-glow-green);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            color: var(--accent-green);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .book-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow-green);
+            border-radius: 10px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .book-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0 15px var(--border-glow-green);
+        }
+
+        .book-card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            color: var(--accent-green);
+        }
+
+        .book-card-header i {
+            font-size: 1.4rem;
+        }
+
+        .book-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .book-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: auto;
+        }
+
+        .book-link-btn {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--border-glow-green);
+            color: var(--text-main);
+            padding: 8px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+        }
+
+        .book-link-btn:hover {
+            background: var(--accent-green);
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="header-title">| Swastik-Tech Books</a>
+        <div class="top-nav-right">
+            <button onclick="toggleTheme()" class="nav-btn"><i class="fa-solid fa-circle-half-stroke"></i> Theme</button>
+            <a href="index.html" class="nav-btn"><i class="fa-solid fa-arrow-left"></i> Main Menu</a>
+        </div>
+    </header>
+
+    <main>
+        <div class="section-title"><i class="fa-solid fa-book-bookmark"></i> Academic Reference Books & Modules</div>
+        
+        <div class="books-grid">
+            <!-- Physics Books Card -->
+            <div class="book-card">
+                <div class="book-card-header">
+                    <i class="fa-solid fa-atom"></i>
+                    <span>Physics Books</span>
+                </div>
+                <p>Access comprehensive textbooks, complete mechanics modules, formula sheets, and solved question banks for higher secondary and competitive exam preparation.</p>
+                <div class="book-links">
+                    <a href="#" class="book-link-btn"><span>Mechanics & Kinematics Module</span> <i class="fa-solid fa-download"></i></a>
+                    <a href="#" class="book-link-btn"><span>Electrodynamics Reference</span> <i class="fa-solid fa-download"></i></a>
+                </div>
+            </div>
+
+            <!-- Chemistry Books Card -->
+            <div class="book-card">
+                <div class="book-card-header">
+                    <i class="fa-solid fa-flask"></i>
+                    <span>Chemistry Books</span>
+                </div>
+                <p>Explore physical, organic, and inorganic reference books complete with reaction mechanisms, nomenclature guides, and structured practice chapters.</p>
+                <div class="book-links">
+                    <a href="#" class="book-link-btn"><span>Organic Reaction Mechanisms</span> <i class="fa-solid fa-download"></i></a>
+                    <a href="#" class="book-link-btn"><span>Physical Chemistry Question Sets</span> <i class="fa-solid fa-download"></i></a>
+                </div>
+            </div>
+
+            <!-- Mathematics Books Card -->
+            <div class="book-card">
+                <div class="book-card-header">
+                    <i class="fa-solid fa-square-root-variable"></i>
+                    <span>Mathematics Books</span>
+                </div>
+                <p>Dive into algebra, calculus, coordinate geometry reference books, theorem proofs, and extensive problem sets with step-by-step solutions.</p>
+                <div class="book-links">
+                    <a href="#" class="book-link-btn"><span>Algebra & Trigonometry Handbook</span> <i class="fa-solid fa-download"></i></a>
+                    <a href="#" class="book-link-btn"><span>Calculus Problem Companion</span> <i class="fa-solid fa-download"></i></a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Theme Support
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-mode');
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            if (document.body.classList.contains('light-mode')) {
+                localStorage.setItem('theme', 'light');
+            } else {
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+    </script>
+</body>
+</html>
