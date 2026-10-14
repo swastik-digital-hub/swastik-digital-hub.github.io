@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics Reference Books | Swastik-Tech</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #03151c;
+            --card-bg: rgba(6, 32, 43, 0.85);
+            --card-border: #0e3746;
+            --accent-cyan: #00f3ff;
+            --accent-blue: #00b4d8;
+            --text-main: #ffffff;
+            --text-muted: #83c5be;
+            --border-glow: rgba(0, 243, 255, 0.25);
+            --header-bg: rgba(3, 21, 28, 0.85);
+            --grid-color: rgba(0, 243, 255, 0.04);
+            --input-bg: rgba(0, 243, 255, 0.04);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Rajdhani', 'Orbitron', sans-serif; letter-spacing: 0.5px; }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 50% 20%, rgba(0, 180, 216, 0.12) 0%, transparent 70%),
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 100% 100%, 35px 35px, 35px 35px;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            height: 60px; padding: 0 2rem; background: var(--header-bg);
+            border-bottom: 1px solid var(--card-border); display: flex;
+            align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 10;
+        }
+
+        .header-title {
+            font-family: 'Orbitron', sans-serif; font-size: 1.1rem; font-weight: 700;
+            color: var(--accent-cyan); border-left: 3px solid var(--accent-cyan); padding-left: 10px;
+        }
+
+        .back-btn {
+            background: var(--input-bg); border: 1px solid var(--card-border); color: var(--text-muted);
+            padding: 0.4rem 0.9rem; border-radius: 6px; text-decoration: none; font-size: 0.85rem; font-family: 'Orbitron', sans-serif; transition: all 0.3s;
+        }
+        .back-btn:hover { color: var(--accent-cyan); border-color: var(--accent-cyan); }
+
+        .portal-container { padding: 2.5rem; max-width: 1200px; margin: 0 auto; width: 100%; display: flex; flex-direction: column; gap: 1.5rem; }
+        .section-tag { font-family: 'Orbitron', sans-serif; font-size: 0.9rem; color: var(--text-muted); letter-spacing: 1.5px; text-transform: uppercase; }
+
+        .books-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+
+        .book-card {
+            background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px;
+            padding: 1.8rem; display: flex; flex-direction: column; gap: 1rem; transition: all 0.3s ease;
+        }
+        .book-card:hover { border-color: var(--accent-cyan); box-shadow: 0 0 20px var(--border-glow); transform: translateY(-2px); }
+
+        .book-info { display: flex; align-items: flex-start; gap: 1rem; }
+        .book-icon { font-size: 2rem; color: #ff4d4d; }
+        .book-details h3 { font-family: 'Orbitron', sans-serif; font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; }
+        .pdf-badge { background: rgba(255, 77, 77, 0.15); color: #ff6b6b; font-size: 0.65rem; padding: 2px 6px; border-radius: 4px; font-family: 'Orbitron', sans-serif; }
+        .book-meta { font-size: 0.85rem; color: var(--text-muted); }
+
+        .download-btn {
+            background: var(--input-bg); border: 1px solid var(--card-border); color: var(--accent-cyan);
+            padding: 0.6rem 1rem; border-radius: 6px; font-size: 0.85rem; font-family: 'Orbitron', sans-serif;
+            text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: auto; transition: all 0.3s;
+        }
+        .download-btn:hover { background: rgba(0, 243, 255, 0.1); border-color: var(--accent-cyan); box-shadow: 0 0 10px var(--border-glow); }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-title">| Physics Library</div>
+        <a href="books.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Books Hub</a>
+    </header>
+
+    <main class="portal-container">
+        <div class="section-tag">Physics Reference Materials</div>
+        <div class="books-grid">
+            <div class="book-card">
+                <div class="book-info">
+                    <i class="fa-solid fa-file-pdf book-icon"></i>
+                    <div class="book-details">
+                        <h3>Mechanics Volume 1 <span class="pdf-badge">PDF</span></h3>
+                        <div class="book-meta">Kinematics & Laws of Motion</div>
+                    </div>
+                </div>
+                <a href="book-pdf/physics-mechanics.pdf" class="download-btn" download><i class="fa-solid fa-download"></i> Download PDF</a>
+            </div>
+            <div class="book-card">
+                <div class="book-info">
+                    <i class="fa-solid fa-file-pdf book-icon"></i>
+                    <div class="book-details">
+                        <h3>Electrodynamics & Optics <span class="pdf-badge">PDF</span></h3>
+                        <div class="book-meta">High-Yield NEET Problem Modules</div>
+                    </div>
+                </div>
+                <a href="book-pdf/physics-electrodynamics.pdf" class="download-btn" download><i class="fa-solid fa-download"></i> Download PDF</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
