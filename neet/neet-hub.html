@@ -91,18 +91,18 @@
             width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
-        .section-header {
+        .section-tag {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
-            color: var(--accent-cyan);
-            margin-bottom: 1rem;
-            border-left: 3px solid var(--accent-cyan);
-            padding-left: 10px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
         }
 
+        /* 4-Card Grid Layout */
         .subjects-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -120,8 +120,6 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            position: relative;
-            overflow: hidden;
         }
 
         .subject-card:hover {
@@ -133,21 +131,21 @@
         .subject-card i.main-icon {
             font-size: 2.2rem;
             color: var(--accent-cyan);
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
         }
 
         .subject-card h3 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.25rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+            margin-bottom: 0.6rem;
             font-weight: 700;
         }
 
         .subject-card p {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: var(--text-muted);
             margin-bottom: 1.5rem;
-            line-height: 1.4;
+            line-height: 1.5;
         }
 
         .card-link {
@@ -156,7 +154,7 @@
             color: var(--accent-cyan);
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             margin-top: auto;
         }
 
@@ -173,39 +171,39 @@
     </header>
 
     <main class="portal-container">
-        <h2 class="section-header">Select Subject Section</h2>
+        <div class="section-tag">SELECT SUBJECT LIBRARY</div>
         
         <div class="subjects-grid">
             <!-- Physics -->
             <a href="physics-books.html" class="subject-card">
                 <i class="fa-solid fa-atom main-icon"></i>
-                <h3>Physics</h3>
-                <p>Mechanics, Electrodynamics, Optics, and Modern Physics reference modules and problem banks.</p>
-                <div class="card-link">Access Library <i class="fa-solid fa-arrow-right"></i></div>
+                <h3>Physics Books</h3>
+                <p>Mechanics, Electrodynamics, Thermodynamics & NEET Advanced Problem Modules.</p>
+                <div class="card-link">Open Library <i class="fa-solid fa-arrow-right"></i></div>
             </a>
 
             <!-- Chemistry -->
             <a href="chemistry-books.html" class="subject-card">
                 <i class="fa-solid fa-flask main-icon"></i>
-                <h3>Chemistry</h3>
-                <p>Physical chemistry numericals, Organic reaction mechanisms, and Inorganic NCERT shortcuts.</p>
-                <div class="card-link">Access Library <i class="fa-solid fa-arrow-right"></i></div>
+                <h3>Chemistry Books</h3>
+                <p>Physical, Organic & Inorganic reference study manuals and reaction sets.</p>
+                <div class="card-link">Open Library <i class="fa-solid fa-arrow-right"></i></div>
             </a>
 
             <!-- Botany -->
             <a href="botany-books.html" class="subject-card">
                 <i class="fa-solid fa-seedling main-icon"></i>
-                <h3>Botany</h3>
-                <p>Plant physiology, Genetics, Cell biology, and comprehensive NCERT line-by-line question books.</p>
-                <div class="card-link">Access Library <i class="fa-solid fa-arrow-right"></i></div>
+                <h3>Botany Books</h3>
+                <p>Plant Physiology, Cell Biology, Genetics & NCERT line-by-line question volumes.</p>
+                <div class="card-link">Open Library <i class="fa-solid fa-arrow-right"></i></div>
             </a>
 
             <!-- Zoology -->
             <a href="zoology-books.html" class="subject-card">
                 <i class="fa-solid fa-dna main-icon"></i>
-                <h3>Zoology</h3>
-                <p>Human physiology, Animal kingdom, Biotechnology, and high-yield conceptual modules.</p>
-                <div class="card-link">Access Library <i class="fa-solid fa-arrow-right"></i></div>
+                <h3>Zoology Books</h3>
+                <p>Human Physiology, Animal Kingdom, Biotechnology & high-yield medical modules.</p>
+                <div class="card-link">Open Library <i class="fa-solid fa-arrow-right"></i></div>
             </a>
         </div>
     </main>
