@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEET Reference Books | Swastik-Tech</title>
+    <title>NEET Portal | Swastik-Tech</title>
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -91,7 +91,7 @@
             width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 2rem;
         }
 
         .section-tag {
@@ -102,109 +102,86 @@
             text-transform: uppercase;
         }
 
-        /* 4-Card Grid Layout */
-        .subjects-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-        }
-
-        .subject-card {
+        .resource-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 12px;
-            padding: 2rem;
-            text-decoration: none;
-            color: var(--text-main);
+            padding: 1.8rem;
             transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
         }
 
-        .subject-card:hover {
+        .resource-card:hover {
             border-color: var(--accent-cyan);
-            transform: translateY(-3px);
             box-shadow: 0 0 20px var(--border-glow);
+            transform: translateY(-2px);
         }
 
-        .subject-card i.main-icon {
-            font-size: 2.2rem;
+        .resource-card-header {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .resource-card-icon {
+            font-size: 1.8rem;
             color: var(--accent-cyan);
-            margin-bottom: 1.2rem;
         }
 
-        .subject-card h3 {
+        .resource-card-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
-            margin-bottom: 0.6rem;
+            font-size: 1.15rem;
             font-weight: 700;
+            color: var(--text-main);
         }
 
-        .subject-card p {
-            font-size: 0.9rem;
+        .resource-card-desc {
             color: var(--text-muted);
+            font-size: 0.95rem;
             margin-bottom: 1.5rem;
             line-height: 1.5;
         }
 
-        .card-link {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.85rem;
+        .action-btn {
+            background: var(--input-bg);
+            border: 1px solid var(--card-border);
             color: var(--accent-cyan);
-            display: flex;
+            padding: 0.5rem 1.2rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-family: 'Orbitron', sans-serif;
+            text-decoration: none;
+            display: inline-flex;
             align-items: center;
             gap: 8px;
-            margin-top: auto;
+            transition: all 0.3s;
         }
 
-        @media(max-width: 768px) {
-            .subjects-grid { grid-template-columns: 1fr; }
+        .action-btn:hover {
+            background: rgba(0, 243, 255, 0.1);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 10px var(--border-glow);
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="header-title">| NEET Reference Books</div>
-        <a href="neet-hub.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> NEET Hub</a>
+        <div class="header-title">| NEET Medical Portal</div>
+        <a href="../index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Dashboard</a>
     </header>
 
     <main class="portal-container">
-        <div class="section-tag">SELECT SUBJECT LIBRARY</div>
+        <div class="section-tag">Study Resources</div>
         
-        <div class="subjects-grid">
-            <!-- Physics -->
-            <a href="physics-books.html" class="subject-card">
-                <i class="fa-solid fa-atom main-icon"></i>
-                <h3>Physics Books</h3>
-                <p>Mechanics, Electrodynamics, Thermodynamics & NEET Advanced Problem Modules.</p>
-                <div class="card-link">Open Library <i class="fa-solid fa-arrow-right"></i></div>
-            </a>
-
-            <!-- Chemistry -->
-            <a href="chemistry-books.html" class="subject-card">
-                <i class="fa-solid fa-flask main-icon"></i>
-                <h3>Chemistry Books</h3>
-                <p>Physical, Organic & Inorganic reference study manuals and reaction sets.</p>
-                <div class="card-link">Open Library <i class="fa-solid fa-arrow-right"></i></div>
-            </a>
-
-            <!-- Botany -->
-            <a href="botany-books.html" class="subject-card">
-                <i class="fa-solid fa-seedling main-icon"></i>
-                <h3>Botany Books</h3>
-                <p>Plant Physiology, Cell Biology, Genetics & NCERT line-by-line question volumes.</p>
-                <div class="card-link">Open Library <i class="fa-solid fa-arrow-right"></i></div>
-            </a>
-
-            <!-- Zoology -->
-            <a href="zoology-books.html" class="subject-card">
-                <i class="fa-solid fa-dna main-icon"></i>
-                <h3>Zoology Books</h3>
-                <p>Human Physiology, Animal Kingdom, Biotechnology & high-yield medical modules.</p>
-                <div class="card-link">Open Library <i class="fa-solid fa-arrow-right"></i></div>
-            </a>
+        <!-- Reference Books Section -->
+        <div class="resource-card">
+            <div class="resource-card-header">
+                <i class="fa-solid fa-book-bookmark resource-card-icon"></i>
+                <div class="resource-card-title">Reference Books</div>
+            </div>
+            <p class="resource-card-desc">Access subject libraries for Physics, Chemistry, Botany, and Zoology reference materials and problem modules.</p>
+            <a href="books-neet.html" class="action-btn">Open Books Section <i class="fa-solid fa-arrow-right"></i></a>
         </div>
     </main>
 
