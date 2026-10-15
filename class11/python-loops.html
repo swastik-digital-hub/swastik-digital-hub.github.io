@@ -9,42 +9,101 @@
 
     <style>
         :root {
-            --primary-green: #2f855a;
-            --primary-hover: #276749;
-            --bg-body: #f7fafc;
-            --text-dark: #2d3748;
+            --bg-dark: #050b14;
+            --card-bg: rgba(11, 23, 39, 0.85);
+            --sidebar-bg: rgba(7, 16, 29, 0.9);
+            --cyan-accent: #00f2ff;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --border-glow: rgba(0, 242, 255, 0.3);
+            --code-bg: #030810;
+            --output-bg: rgba(0, 242, 255, 0.03);
+            --hover-bg: rgba(0, 242, 255, 0.1);
+            --note-bg: rgba(0, 242, 255, 0.05);
+            --note-border: #00f2ff;
+        }
+
+        /* Light Theme Overrides */
+        body.light-mode {
+            --bg-dark: #f8fafc;
+            --card-bg: #ffffff;
+            --sidebar-bg: #ffffff;
+            --cyan-accent: #059669;
+            --text-primary: #334155;
+            --text-secondary: #64748b;
+            --border-glow: #cbd5e1;
             --code-bg: #1a202c;
             --output-bg: #edf2f7;
-            --border-color: #e2e8f0;
+            --hover-bg: #e6fffa;
+            --note-bg: #ebf8ff;
+            --note-border: #3182ce;
         }
 
         body {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             line-height: 1.7;
             margin: 0;
-            background-color: var(--bg-body);
-            color: var(--text-dark);
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(0, 242, 255, 0.08) 0%, transparent 80%),
+                linear-gradient(rgba(0, 242, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 242, 255, 0.05) 1px, transparent 1px);
+            background-size: 100% 100%, 30px 30px, 30px 30px;
+            color: var(--text-primary);
             display: flex;
             min-height: 100vh;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        /* Top-Right Theme Toggle Button Bar */
+        .top-header-bar {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            z-index: 100;
+        }
+
+        .theme-toggle-btn {
+            background: var(--card-bg);
+            color: var(--cyan-accent);
+            border: 1px solid var(--border-glow);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            transition: all 0.2s ease;
+        }
+
+        .theme-toggle-btn:hover {
+            background: var(--cyan-accent);
+            color: #000;
+            box-shadow: 0 0 15px var(--cyan-accent);
         }
 
         sidebar {
             width: 270px;
-            background: #ffffff;
-            border-right: 1px solid var(--border-color);
+            background: var(--sidebar-bg);
+            border-right: 1px solid var(--border-glow);
             padding: 20px;
             position: fixed;
             height: 100vh;
             overflow-y: auto;
             box-sizing: border-box;
+            backdrop-filter: blur(10px);
+            transition: background 0.3s ease, border-color 0.3s ease;
         }
 
         sidebar h3 {
-            color: var(--primary-green);
+            color: var(--cyan-accent);
             font-size: 18px;
             margin-top: 0;
-            border-bottom: 2px solid var(--border-color);
+            border-bottom: 2px solid var(--border-glow);
             padding-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         sidebar ul {
@@ -59,18 +118,21 @@
 
         sidebar a {
             text-decoration: none;
-            color: #4a5568;
+            color: var(--text-secondary);
             font-size: 14px;
             display: block;
             padding: 6px 10px;
             border-radius: 5px;
             transition: all 0.2s ease;
+            border: 1px solid transparent;
         }
 
         sidebar a:hover, sidebar a.active {
-            background: #e6fffa;
-            color: var(--primary-green);
+            background: var(--hover-bg);
+            color: var(--cyan-accent);
             font-weight: 600;
+            border-color: var(--border-glow);
+            box-shadow: 0 0 8px rgba(0, 242, 255, 0.15);
         }
 
         .main-wrapper {
@@ -81,46 +143,54 @@
         }
 
         .container {
-            background: #ffffff;
+            background: var(--card-bg);
             padding: 40px;
             border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            border: 1px solid var(--border-color);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(0, 242, 255, 0.02);
+            border: 1px solid var(--border-glow);
+            backdrop-filter: blur(8px);
+            transition: background 0.3s ease, border-color 0.3s ease;
         }
 
         h1 {
-            color: #1a202c;
+            color: var(--cyan-accent);
             font-size: 30px;
             margin-top: 0;
-            border-bottom: 3px solid var(--primary-green);
+            border-bottom: 3px solid var(--cyan-accent);
             padding-bottom: 10px;
+            text-shadow: 0 0 8px rgba(0, 242, 255, 0.2);
         }
 
         h2 {
-            color: #2b6cb0;
+            color: var(--cyan-accent);
             margin-top: 40px;
             font-size: 22px;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid var(--border-glow);
             padding-bottom: 6px;
         }
 
         h3 {
-            color: #2d3748;
+            color: var(--text-primary);
             font-size: 18px;
             margin-top: 25px;
         }
 
         p, li {
             font-size: 15.5px;
+            color: var(--text-primary);
         }
 
         .note-box {
-            background: #ebf8ff;
-            border-left: 4px solid #3182ce;
+            background: var(--note-bg);
+            border-left: 4px solid var(--note-border);
             padding: 12px 18px;
             margin: 15px 0;
             border-radius: 0 6px 6px 0;
             font-size: 14.5px;
+            color: var(--text-primary);
+            border-top: 1px solid var(--border-glow);
+            border-right: 1px solid var(--border-glow);
+            border-bottom: 1px solid var(--border-glow);
         }
 
         .code-box {
@@ -128,60 +198,64 @@
             border-radius: 8px 8px 0 0;
             margin: 15px 0 0 0;
             overflow: hidden;
-            border: 1px solid #2d3748;
+            border: 1px solid var(--border-glow);
         }
 
         .code-header {
-            background: #2d3748;
-            color: #a0aec0;
+            background: rgba(0, 242, 255, 0.05);
+            color: var(--cyan-accent);
             padding: 8px 15px;
             font-size: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-weight: bold;
+            border-bottom: 1px solid var(--border-glow);
         }
 
         pre {
             margin: 0;
             padding: 15px;
-            color: #f8f8f2;
+            color: #38bdf8;
             font-family: Consolas, Monaco, monospace;
             overflow-x: auto;
             font-size: 14px;
         }
 
         .copy-btn {
-            background: var(--primary-green);
-            color: white;
-            border: none;
+            background: rgba(0, 242, 255, 0.15);
+            color: var(--cyan-accent);
+            border: 1px solid var(--border-glow);
             padding: 4px 12px;
             border-radius: 4px;
             cursor: pointer;
             font-size: 12px;
             font-weight: 600;
+            transition: all 0.2s ease;
         }
 
         .copy-btn:hover {
-            background: var(--primary-hover);
+            background: var(--cyan-accent);
+            color: #000;
+            box-shadow: 0 0 10px rgba(0, 242, 255, 0.4);
         }
 
         .output-box {
             background: var(--output-bg);
-            border-left: 4px solid var(--primary-green);
+            border-left: 4px solid var(--cyan-accent);
             padding: 12px 15px;
             margin: 0 0 25px 0;
             font-family: Consolas, Monaco, monospace;
             font-size: 13.5px;
-            color: #2d3748;
+            color: var(--text-primary);
             border-radius: 0 0 8px 8px;
-            border-right: 1px solid var(--border-color);
-            border-bottom: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-glow);
+            border-bottom: 1px solid var(--border-glow);
         }
 
         .output-title {
             font-weight: bold;
-            color: #718096;
+            color: var(--text-secondary);
             font-size: 11px;
             text-transform: uppercase;
             margin-bottom: 4px;
@@ -191,32 +265,42 @@
             margin-top: 40px;
             display: flex;
             justify-content: space-between;
-            border-top: 1px solid var(--border-color);
+            border-top: 1px solid var(--border-glow);
             padding-top: 20px;
         }
 
         .nav-links a {
             text-decoration: none;
-            background: var(--primary-green);
-            color: white;
+            background: rgba(0, 242, 255, 0.15);
+            color: var(--cyan-accent);
+            border: 1px solid var(--border-glow);
             padding: 10px 18px;
             border-radius: 6px;
             font-weight: 600;
             font-size: 14px;
+            transition: all 0.2s ease;
         }
 
         .nav-links a:hover {
-            background: var(--primary-hover);
+            background: var(--cyan-accent);
+            color: #000;
+            box-shadow: 0 0 12px rgba(0, 242, 255, 0.4);
         }
 
         @media (max-width: 768px) {
             sidebar { display: none; }
             .main-wrapper { margin-left: 0; padding: 15px; }
             .container { padding: 20px; }
+            .top-header-bar { top: 10px; right: 15px; }
         }
     </style>
 </head>
 <body>
+
+    <!-- Top Right Theme Toggle Button -->
+    <div class="top-header-bar">
+        <button class="theme-toggle-btn" onclick="toggleTheme()">⚡ Theme</button>
+    </div>
 
     <sidebar>
         <h3>Class 11 CS Topics</h3>
@@ -474,6 +558,23 @@ while i <= 2:
                 setTimeout(() => { button.innerText = "Copy Code"; }, 2000);
             });
         }
+
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            if (document.body.classList.contains('light-mode')) {
+                localStorage.setItem('portal-theme', 'light');
+            } else {
+                localStorage.setItem('portal-theme', 'dark');
+            }
+        }
+
+        // Load saved theme preference on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('portal-theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-mode');
+            }
+        });
     </script>
 </body>
 </html>
