@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Tuples Masterclass | Swastik Digital Hub</title>
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9509706674270233" crossorigin="anonymous"></script>
+
+    <style>
+        :root {
+            --primary-green: #2f855a;
+            --primary-hover: #276749;
+            --bg-body: #f7fafc;
+            --text-dark: #2d3748;
+            --code-bg: #1a202c;
+            --output-bg: #edf2f7;
+            --border-color: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            background-color: var(--bg-body);
+            color: var(--text-dark);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        sidebar {
+            width: 270px;
+            background: #ffffff;
+            border-right: 1px solid var(--border-color);
+            padding: 20px;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+
+        sidebar h3 {
+            color: var(--primary-green);
+            font-size: 18px;
+            margin-top: 0;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 8px;
+        }
+
+        sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        sidebar li {
+            margin-bottom: 8px;
+        }
+
+        sidebar a {
+            text-decoration: none;
+            color: #4a5568;
+            font-size: 14px;
+            display: block;
+            padding: 6px 10px;
+            border-radius: 5px;
+            transition: all 0.2s ease;
+        }
+
+        sidebar a:hover, sidebar a.active {
+            background: #e6fffa;
+            color: var(--primary-green);
+            font-weight: 600;
+        }
+
+        .main-wrapper {
+            margin-left: 290px;
+            padding: 30px 30px;
+            width: 100%;
+            max-width: 950px;
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        h1 {
+            color: #1a202c;
+            font-size: 30px;
+            margin-top: 0;
+            border-bottom: 3px solid var(--primary-green);
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #2b6cb0;
+            margin-top: 40px;
+            font-size: 22px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 6px;
+        }
+
+        h3 {
+            color: #2d3748;
+            font-size: 18px;
+            margin-top: 25px;
+        }
+
+        p, li {
+            font-size: 15.5px;
+        }
+
+        .code-box {
+            background: var(--code-bg);
+            border-radius: 8px 8px 0 0;
+            margin: 15px 0 0 0;
+            overflow: hidden;
+            border: 1px solid #2d3748;
+        }
+
+        .code-header {
+            background: #2d3748;
+            color: #a0aec0;
+            padding: 8px 15px;
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        pre {
+            margin: 0;
+            padding: 15px;
+            color: #f8f8f2;
+            font-family: Consolas, Monaco, monospace;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+
+        .copy-btn {
+            background: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 4px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary-hover);
+        }
+
+        .output-box {
+            background: var(--output-bg);
+            border-left: 4px solid var(--primary-green);
+            padding: 12px 15px;
+            margin: 0 0 25px 0;
+            font-family: Consolas, Monaco, monospace;
+            font-size: 13.5px;
+            color: #2d3748;
+            border-radius: 0 0 8px 8px;
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .output-title {
+            font-weight: bold;
+            color: #718096;
+            font-size: 11px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: var(--primary-green);
+            color: white;
+        }
+
+        .nav-links {
+            margin-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            background: var(--primary-green);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            background: var(--primary-hover);
+        }
+
+        @media (max-width: 768px) {
+            sidebar { display: none; }
+            .main-wrapper { margin-left: 0; padding: 15px; }
+            .container { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <sidebar>
+        <h3>Class 11 CS Topics</h3>
+        <ul>
+            <li><a href="class11-cs.html">🏠 CS Hub Main</a></li>
+            
+            <!-- Lists Section -->
+            <li><a href="python-lists.html">📦 Lists</a></li>
+
+            <!-- Tuples Section -->
+            <li><a href="python-tuples.html" class="active">🔗 Tuples</a></li>
+            <li><a href="#tuples-intro" style="padding-left: 20px;">1. Python Tuples</a></li>
+            <li><a href="#tuple-single" style="padding-left: 20px;">2. Single Element Tuples</a></li>
+            <li><a href="#tuple-packing" style="padding-left: 20px;">3. Packing & Unpacking</a></li>
+            <li><a href="#comparison" style="padding-left: 20px;">4. List vs Tuple Summary</a></li>
+
+            <li><a href="python-loops.html">🔄 Python Loops</a></li>
+        </ul>
+    </sidebar>
+
+    <div class="main-wrapper">
+        <div class="container">
+            <h1>Python Tuples Masterclass</h1>
+
+            <!-- SECTION 1 -->
+            <h2 id="tuples-intro">1. Python Tuples (Immutable Sequences)</h2>
+            <p>A tuple is a sequence wrapped in parentheses <code>( )</code>. Tuples are <strong>Immutable</strong>, meaning once created, elements cannot be altered or deleted.</p>
+
+            <div class="code-box">
+                <div class="code-header">
+                    <span>PYTHON 3</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                </div>
+                <pre><code># Creating a tuple
+my_tuple = (10, "Swastik", 95.5, True)
+print("Tuple:", my_tuple)
+print("First Element:", my_tuple[0])</code></pre>
+            </div>
+            <div class="output-box">
+                <div class="output-title">Output</div>
+                Tuple: (10, 'Swastik', 95.5, True)<br>
+                First Element: 10
+            </div>
+
+            <!-- SECTION 2 -->
+            <h2 id="tuple-single">2. Single Element Tuple Rule</h2>
+            <p>To create a tuple with only 1 item, you <strong>must</strong> place a trailing comma after the element. Otherwise, Python treats it as a regular parenthesis grouping expression.</p>
+
+            <div class="code-box">
+                <div class="code-header">
+                    <span>PYTHON 3</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                </div>
+                <pre><code># Incorrect single item tuple
+not_a_tuple = (5)
+print("Type of (5):", type(not_a_tuple))
+
+# Correct single item tuple
+correct_tuple = (5,)
+print("Type of (5,):", type(correct_tuple))</code></pre>
+            </div>
+            <div class="output-box">
+                <div class="output-title">Output</div>
+                Type of (5): &lt;class 'int'&gt;<br>
+                Type of (5,): &lt;class 'tuple'&gt;
+            </div>
+
+            <!-- SECTION 3 -->
+            <h2 id="tuple-packing">3. Tuple Packing and Unpacking</h2>
+            <div class="code-box">
+                <div class="code-header">
+                    <span>PYTHON 3</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                </div>
+                <pre><code># Packing
+student_data = ("Swastik", 16, "Class 11")
+
+# Unpacking
+name, age, grade = student_data
+print(f"Name: {name}, Age: {age}, Grade: {grade}")</code></pre>
+            </div>
+            <div class="output-box">
+                <div class="output-title">Output</div>
+                Name: Swastik, Age: 16, Grade: Class 11
+            </div>
+
+            <!-- SECTION 4 -->
+            <h2 id="comparison">4. Key Differences: List vs Tuple</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Property</th>
+                        <th>Python List</th>
+                        <th>Python Tuple</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Mutability</strong></td>
+                        <td>Mutable (Can be edited)</td>
+                        <td>Immutable (Cannot be edited)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Syntax</strong></td>
+                        <td>Square brackets <code>[ ]</code></td>
+                        <td>Parentheses <code>( )</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Performance</strong></td>
+                        <td>Slower iteration</td>
+                        <td>Faster execution & memory efficient</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- NAV LINKS -->
+            <div class="nav-links">
+                <a href="python-lists.html">← Previous: Python Lists</a>
+                <a href="python-loops.html">Next: Loops Masterclass →</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function copyCode(button) {
+            const preTag = button.parentElement.nextElementSibling;
+            navigator.clipboard.writeText(preTag.innerText).then(() => {
+                button.innerText = "Copied!";
+                setTimeout(() => { button.innerText = "Copy Code"; }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
