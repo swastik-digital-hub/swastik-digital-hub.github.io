@@ -246,12 +246,12 @@
         let pyodide = null;
         let editor = null;
 
-        // Initialize CodeMirror Editor & Set Personalized User Template
+        // Initialize CodeMirror Editor & Set Personalized User Template from Dashboard Login
         window.addEventListener('DOMContentLoaded', () => {
             // Retrieve username from localStorage (falls back to 'User' if not logged in)
             const userName = localStorage.getItem('username') || localStorage.getItem('user_name') || localStorage.getItem('name') || 'User';
 
-            // Construct personalized greeting template matching your requirement
+            // Construct personalized greeting template using the exact name entered during dashboard login
             const templateCode = `#Write your code from here
 print("hello " + "${userName}")
 print("welcome to python ide")`;
