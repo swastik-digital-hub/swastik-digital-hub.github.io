@@ -217,7 +217,6 @@
                 </button>
             </div>
             
-            <!-- Textarea placeholder value will be overridden dynamically by JS script below -->
             <textarea id="codeEditor"></textarea>
 
             <div class="status-bar" id="engineStatus">Initializing Pyodide WebAssembly Engine...</div>
@@ -247,20 +246,20 @@
         let pyodide = null;
         let editor = null;
 
-        // Initialize CodeMirror Editor & Set Dynamic User Template
+        // Initialize CodeMirror Editor & Set Personalized User Template
         window.addEventListener('DOMContentLoaded', () => {
-            // Retrieve username from localStorage (checks common keys, falls back to 'User')
+            // Retrieve username from localStorage (falls back to 'User' if not logged in)
             const userName = localStorage.getItem('username') || localStorage.getItem('user_name') || localStorage.getItem('name') || 'User';
 
-            // Construct the requested startup code template
+            // Construct personalized greeting template matching your requirement
             const templateCode = `#Write your code from here
-print("hello ${userName}")
+print("hello " + "${userName}")
 print("welcome to python ide")`;
 
             // Assign template to textarea before instantiating CodeMirror
             document.getElementById('codeEditor').value = templateCode;
 
-            // Instantiate CodeMirror with Ctrl+/ comment shortcut support
+            // Instantiate CodeMirror with formatting options
             editor = CodeMirror.fromTextArea(document.getElementById('codeEditor'), {
                 mode: "python",
                 theme: "dracula",
@@ -291,11 +290,9 @@ print("welcome to python ide")`;
                 for (let i = from.line; i <= to.line; i++) {
                     let lineText = cm.getLine(i);
                     if (lineText.trim().startsWith("#")) {
-                        // Uncomment line
                         let updatedText = lineText.replace(/^(\s*)#\s?/, '$1');
                         cm.replaceRange(updatedText, {line: i, ch: 0}, {line: i, ch: lineText.length});
                     } else {
-                        // Comment line
                         cm.replaceRange("# " + lineText, {line: i, ch: 0}, {line: i, ch: lineText.length});
                     }
                 }
@@ -329,7 +326,6 @@ print("welcome to python ide")`;
             document.getElementById('terminalOutput').innerText = "";
         }
 
-        // Synchronous input handler for browser Python execution
         function syncInput(promptText = "") {
             const result = window.prompt(promptText || "Enter value:");
             if (result !== null) {
@@ -348,14 +344,12 @@ print("welcome to python ide")`;
             const code = editor.getValue();
             clearTerminal();
 
-            // Redirect Python stdout to our output screen
             pyodide.setStdout({
                 batched: (msg) => {
                     appendText(msg + "\n");
                 }
             });
 
-            // Bind synchronous input function so int(input(...)) works correctly without Futures
             pyodide.globals.set("input", syncInput);
 
             try {
