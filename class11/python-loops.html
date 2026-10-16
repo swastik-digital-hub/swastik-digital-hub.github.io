@@ -21,9 +21,14 @@
             --hover-bg: rgba(0, 242, 255, 0.1);
             --note-bg: rgba(0, 242, 255, 0.05);
             --note-border: #00f2ff;
+
+            --syntax-kw: #ff79c6;
+            --syntax-str: #f1fa8c;
+            --syntax-num: #bd93f9;
+            --syntax-func: #50fa7b;
+            --syntax-comment: #6272a4;
         }
 
-        /* Light Theme Overrides */
         body.light-mode {
             --bg-dark: #f8fafc;
             --card-bg: #ffffff;
@@ -37,6 +42,12 @@
             --hover-bg: #e6fffa;
             --note-bg: #ebf8ff;
             --note-border: #3182ce;
+
+            --syntax-kw: #d73a49;
+            --syntax-str: #032f62;
+            --syntax-num: #005cc5;
+            --syntax-func: #6f42c1;
+            --syntax-comment: #6a737d;
         }
 
         body {
@@ -55,7 +66,6 @@
             transition: background 0.3s ease, color 0.3s ease;
         }
 
-        /* Top-Right Theme Toggle Button Bar */
         .top-header-bar {
             position: fixed;
             top: 20px;
@@ -93,7 +103,6 @@
             overflow-y: auto;
             box-sizing: border-box;
             backdrop-filter: blur(10px);
-            transition: background 0.3s ease, border-color 0.3s ease;
         }
 
         sidebar h3 {
@@ -103,18 +112,10 @@
             border-bottom: 2px solid var(--border-glow);
             padding-bottom: 8px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
-        sidebar ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        sidebar li {
-            margin-bottom: 8px;
-        }
+        sidebar ul { list-style: none; padding: 0; margin: 0; }
+        sidebar li { margin-bottom: 8px; }
 
         sidebar a {
             text-decoration: none;
@@ -149,7 +150,6 @@
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(0, 242, 255, 0.02);
             border: 1px solid var(--border-glow);
             backdrop-filter: blur(8px);
-            transition: background 0.3s ease, border-color 0.3s ease;
         }
 
         h1 {
@@ -169,16 +169,8 @@
             padding-bottom: 6px;
         }
 
-        h3 {
-            color: var(--text-primary);
-            font-size: 18px;
-            margin-top: 25px;
-        }
-
-        p, li {
-            font-size: 15.5px;
-            color: var(--text-primary);
-        }
+        h3 { color: var(--text-primary); font-size: 18px; margin-top: 25px; }
+        p, li { font-size: 15.5px; color: var(--text-primary); }
 
         .note-box {
             background: var(--note-bg);
@@ -191,6 +183,23 @@
             border-top: 1px solid var(--border-glow);
             border-right: 1px solid var(--border-glow);
             border-bottom: 1px solid var(--border-glow);
+        }
+
+        .diagram-container {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(0, 242, 255, 0.02);
+            border: 1px solid var(--border-glow);
+            border-radius: 8px;
+        }
+
+        .diagram-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            border: 1px solid var(--border-glow);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
         }
 
         .code-box {
@@ -213,14 +222,12 @@
             border-bottom: 1px solid var(--border-glow);
         }
 
-        pre {
-            margin: 0;
-            padding: 15px;
-            color: #38bdf8;
-            font-family: Consolas, Monaco, monospace;
-            overflow-x: auto;
-            font-size: 14px;
-        }
+        pre { margin: 0; padding: 15px; font-family: Consolas, Monaco, monospace; font-size: 14px; }
+        .kw { color: var(--syntax-kw); font-weight: bold; }
+        .str { color: var(--syntax-str); }
+        .num { color: var(--syntax-num); }
+        .fn { color: var(--syntax-func); }
+        .com { color: var(--syntax-comment); font-style: italic; }
 
         .copy-btn {
             background: rgba(0, 242, 255, 0.15);
@@ -253,13 +260,7 @@
             border-bottom: 1px solid var(--border-glow);
         }
 
-        .output-title {
-            font-weight: bold;
-            color: var(--text-secondary);
-            font-size: 11px;
-            text-transform: uppercase;
-            margin-bottom: 4px;
-        }
+        .output-title { font-weight: bold; color: var(--text-secondary); font-size: 11px; text-transform: uppercase; margin-bottom: 4px; }
 
         .nav-links {
             margin-top: 40px;
@@ -297,7 +298,6 @@
 </head>
 <body>
 
-    <!-- Top Right Theme Toggle Button -->
     <div class="top-header-bar">
         <button class="theme-toggle-btn" onclick="toggleTheme()">⚡ Theme</button>
     </div>
@@ -306,243 +306,118 @@
         <h3>Class 11 CS Topics</h3>
         <ul>
             <li><a href="class11-cs.html">🏠 CS Hub Main</a></li>
-            
-            <!-- Separated Lists & Tuples in Sidebar -->
             <li><a href="python-lists.html">📦 Lists</a></li>
             <li><a href="python-tuples.html">🔗 Tuples</a></li>
-            
-            <!-- Python Loops Active Section -->
             <li><a href="python-loops.html" class="active">🔄 Python Loops</a></li>
-            <li><a href="#intro" style="padding-left: 15px;">1. What is a Loop?</a></li>
-            <li><a href="#range" style="padding-left: 15px;">2. The range() Function</a></li>
-            <li><a href="#for-loop" style="padding-left: 15px;">3. The for Loop</a></li>
-            <li><a href="#while-loop" style="padding-left: 15px;">4. The while Loop</a></li>
-            <li><a href="#nested-loops" style="padding-left: 15px;">5. Nested Loops</a></li>
-            <li><a href="#nested-while-for" style="padding-left: 25px;">5.1 Nested While-For</a></li>
-            <li><a href="#nested-for-for" style="padding-left: 25px;">5.2 Nested For-For</a></li>
-            <li><a href="#nested-for-while" style="padding-left: 25px;">5.3 Nested For-While</a></li>
-            <li><a href="#nested-while-while" style="padding-left: 25px;">5.4 Nested While-While</a></li>
+            <li><a href="#intro" style="padding-left: 15px;">1. Overview</a></li>
+            <li><a href="#for-loop" style="padding-left: 15px;">2. For Loop</a></li>
+            <li><a href="#while-loop" style="padding-left: 15px;">3. While Loop</a></li>
+            <li><a href="#nested-loops" style="padding-left: 15px;">4. Nested Loops</a></li>
         </ul>
     </sidebar>
 
     <div class="main-wrapper">
         <div class="container">
-            <h1>Python Loops: Zero-to-Hero Masterclass</h1>
-            <p>Welcome! This guide assumes zero prior programming knowledge. By the end of this page, you will understand how loops work, how computers repeat instructions automatically, and how to combine loops inside loops (Nested Loops) with complete confidence.</p>
+            <h1>Python Loops Masterclass</h1>
+            <p id="intro">Loops are used to execute a block of code repeatedly until a condition is met or all items in a sequence are processed. The main types are For loops (iterating over sequences) and While loops (executing code based on a condition).</p>
 
-            <!-- SECTION 1 -->
-            <h2 id="intro">1. What is a Loop?</h2>
-            <p>Imagine your teacher tells you to write <em>"I will practice Python"</em> 100 times on a piece of paper. Writing it manually takes time and causes fatigue. In programming, a <strong>Loop</strong> is an automated instruction that tells the computer to run a block of code repeatedly until a condition is met.</p>
-            <div class="note-box">
-                <strong>Key Concept:</strong> Loops eliminate code duplication, make scripts shorter, and handle dynamic amounts of data automatically.
+            <h2>For Loop</h2>
+            <p id="for-loop">For loops is used to iterate over a sequence such as a list, tuple, string or range. It executes a block of code once for each item in the sequence.</p>
+
+            <div class="code-box">
+                <div class="code-header"><span>PYTHON 3</span><button class="copy-btn" onclick="copyCode(this)">Copy Code</button></div>
+                <pre><code>n = <span class="num">4</span>
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">0</span>, n):
+    <span class="fn">print</span>(i)</code></pre>
             </div>
-
-            <!-- SECTION 2 -->
-            <h2 id="range">2. The `range()` Function in Detail</h2>
-            <p>Before understanding the <code>for</code> loop, you must master the built-in <code>range()</code> function. It generates a sequence of numbers.</p>
-            <p><strong>Syntax:</strong> <code>range(start, stop, step)</code></p>
-            <ul>
-                <li><code>start</code> (Optional): The starting integer (default is <code>0</code>).</li>
-                <li><code>stop</code> (Required): The upper bound. <strong>Important:</strong> The loop stops <em>before</em> reaching this number (i.e., <code>stop - 1</code>).</li>
-                <li><code>step</code> (Optional): The increment or decrement value (default is <code>1</code>).</li>
-            </ul>
-
-            <h3>Visual Examples:</h3>
-            <ul>
-                <li><code>range(5)</code> produces: <code>0, 1, 2, 3, 4</code></li>
-                <li><code>range(2, 6)</code> produces: <code>2, 3, 4, 5</code></li>
-                <li><code>range(1, 10, 2)</code> produces: <code>1, 3, 5, 7, 9</code></li>
-                <li><code>range(5, 0, -1)</code> produces: <code>5, 4, 3, 2, 1</code> (Backward count)</li>
-            </ul>
-
-            <!-- SECTION 3 -->
-            <h2 id="for-loop">3. The `for` Loop</h2>
-            <p>A <code>for</code> loop is used when you know in advance how many times you want to repeat a task, or when you want to iterate over a sequence (such as a string, list, or tuple).</p>
+            <div class="output-box"><div class="output-title">Output</div>0<br>1<br>2<br>3</div>
             
-            <p><strong>Syntax:</strong></p>
+            <p><strong>Explanation:</strong></p>
+            <ul>
+                <li><code>n = 4</code> stores the ending value for the loop.</li>
+                <li><code>range(0, n)</code> generates numbers from 0 to 3.</li>
+                <li><code>for i in range(0, n):</code> iterates through each number in the range.</li>
+            </ul>
+
+            <p>Below is the flowchart of For loop:</p>
+            <div class="diagram-container">
+                <img src="https://media.geeksforgeeks.org/wp-content/uploads/20260831111347662189/image_180.webp" alt="For Loop Flowchart">
+            </div>
+
             <div class="code-box">
-                <div class="code-header">
-                    <span>SYNTAX</span>
-                </div>
-                <pre><code>for variable in sequence:
-    # Code block to execute repeatedly (Indented)</code></pre>
+                <div class="code-header"><span>PYTHON 3</span><button class="copy-btn" onclick="copyCode(this)">Copy Code</button></div>
+                <pre><code>a = [<span class="str">"swastik"</span>, <span class="str">"tech"</span>, <span class="str">"hub"</span>]
+<span class="kw">for</span> idx <span class="kw">in</span> <span class="fn">range</span>(<span class="fn">len</span>(a)):
+    <span class="fn">print</span>(a[idx])</code></pre>
             </div>
+            <div class="output-box"><div class="output-title">Output</div>swastik<br>tech<br>hub</div>
 
-            <h3>Example 1: Printing numbers 1 to 5</h3>
+            <p><strong>Explanation:</strong></p>
+            <ul>
+                <li><code>len(a)</code> returns the total number of elements in the list.</li>
+                <li><code>range(len(a))</code> generates index values from 0 to 2.</li>
+                <li><code>a[idx]</code> accesses list elements using their index.</li>
+            </ul>
+
+            <h2>While Loop</h2>
+            <p id="while-loop">While loop repeatedly executes a block of code as long as the given condition remains true. When the condition becomes false, the line immediately after the loop in the program is executed.</p>
+
             <div class="code-box">
-                <div class="code-header">
-                    <span>PYTHON 3</span>
-                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
-                </div>
-                <pre><code>for i in range(1, 6):
-    print("Current Count:", i)</code></pre>
+                <div class="code-header"><span>PYTHON 3</span><button class="copy-btn" onclick="copyCode(this)">Copy Code</button></div>
+                <pre><code>cnt = <span class="num">0</span>
+<span class="kw">while</span> (cnt &lt; <span class="num">3</span>):
+    cnt = cnt + <span class="num">1</span>
+    <span class="fn">print</span>(<span class="str">"Hello Student!"</span>)</code></pre>
             </div>
-            <div class="output-box">
-                <div class="output-title">Output</div>
-                Current Count: 1<br>
-                Current Count: 2<br>
-                Current Count: 3<br>
-                Current Count: 4<br>
-                Current Count: 5
+            <div class="output-box"><div class="output-title">Output</div>Hello Student!<br>Hello Student!<br>Hello Student!</div>
+
+            <p><strong>Explanation:</strong></p>
+            <ul>
+                <li><code>cnt = 0</code> initializes the counter variable.</li>
+                <li><code>while (cnt &lt; 3):</code> runs the loop while the condition is true.</li>
+                <li><code>cnt = cnt + 1</code> increases the counter value by 1.</li>
+            </ul>
+
+            <p>Below is the flowchart of While loop:</p>
+            <div class="diagram-container">
+                <img src="https://media.geeksforgeeks.org/wp-content/uploads/20260318151954555876/ff.webp" alt="While Loop Flowchart">
             </div>
 
-            <h3>Step-by-Step Logic Trace:</h3>
-            <ol>
-                <li><code>range(1, 6)</code> prepares numbers <code>[1, 2, 3, 4, 5]</code>.</li>
-                <li><strong>Iteration 1:</strong> <code>i</code> becomes <code>1</code>. Prints "Current Count: 1".</li>
-                <li><strong>Iteration 2:</strong> <code>i</code> becomes <code>2</code>. Prints "Current Count: 2".</li>
-                <li>This repeats until <code>i</code> reaches <code>5</code>. Once the range ends, the loop terminates.</li>
-            </ol>
-
-            <!-- SECTION 4 -->
-            <h2 id="while-loop">4. The `while` Loop</h2>
-            <p>A <code>while</code> loop is a <strong>condition-controlled loop</strong>. It keeps executing as long as a specified condition remains <code>True</code>. Use it when you don't know the exact number of iterations beforehand.</p>
-
-            <p><strong>Syntax:</strong></p>
             <div class="code-box">
-                <div class="code-header">
-                    <span>SYNTAX</span>
-                </div>
-                <pre><code>initialization
-while condition:
-    # Code block
-    # Increment / Decrement (Change state)</code></pre>
+                <div class="code-header"><span>PYTHON 3</span><button class="copy-btn" onclick="copyCode(this)">Copy Code</button></div>
+                <pre><code><span class="kw">while</span> (<span class="kw">True</span>):
+    <span class="fn">print</span>(<span class="str">"Hello Student!"</span>)</code></pre>
             </div>
-
-            <h3>Example: Countdown Timer</h3>
-            <div class="code-box">
-                <div class="code-header">
-                    <span>PYTHON 3</span>
-                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
-                </div>
-                <pre><code>count = 3
-while count > 0:
-    print("Countdown:", count)
-    count -= 1  # Equivalent to: count = count - 1
-
-print("Blast off!")</code></pre>
-            </div>
-            <div class="output-box">
-                <div class="output-title">Output</div>
-                Countdown: 3<br>
-                Countdown: 2<br>
-                Countdown: 1<br>
-                Blast off!
-            </div>
-
+            
+            <p><strong>Explanation:</strong></p>
+            <ul>
+                <li><code>while(True):</code> creates a loop with a condition that is always true.</li>
+                <li><code>print("Hello Student!")</code> keeps executing repeatedly inside the loop.</li>
+            </ul>
             <div class="note-box">
-                <strong>Warning (Infinite Loops):</strong> If you forget to update the variable (e.g., omitting <code>count -= 1</code>), the condition <code>count > 0</code> will remain <code>True</code> forever, causing an infinite loop that freezes your script!
+                <strong>Note:</strong> It is suggested not to use this type of loop as it is a never-ending infinite loop where the condition is always true and we have to forcefully terminate the program (or loop execution).
             </div>
 
-            <!-- SECTION 5 -->
-            <h2 id="nested-loops">5. Nested Loops Explained</h2>
-            <p>A <strong>Nested Loop</strong> is simply a loop placed inside another loop. Think of an analog clock: the <em>minute hand</em> (inner loop) must complete a full 60-minute circle before the <em>hour hand</em> (outer loop) moves forward by 1 step.</p>
-
-            <!-- 5.1 NESTED WHILE - FOR -->
-            <h3 id="nested-while-for">5.1 Nested While-For Loop</h3>
-            <p>The outer loop is a <code>while</code> loop, while the inner loop is a <code>for</code> loop. For every single iteration of the outer <code>while</code> loop, the inner <code>for</code> loop runs through its entire sequence.</p>
+            <h2 id="nested-loops">Nested Loops</h2>
+            <p>A nested loop is a loop inside another loop. The inner loop executes completely for every iteration of the outer loop.</p>
 
             <div class="code-box">
-                <div class="code-header">
-                    <span>PYTHON 3</span>
-                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
-                </div>
-                <pre><code>day = 1
-while day <= 2:
-    print(f"--- Day {day} Schedule ---")
-    for period in ["Math", "Physics", "Computer Science"]:
-        print(f"  * Attending {period}")
-    day += 1</code></pre>
+                <div class="code-header"><span>PYTHON 3</span><button class="copy-btn" onclick="copyCode(this)">Copy Code</button></div>
+                <pre><code><span class="com"># Outer loop for rows</span>
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1</span>, <span class="num">5</span>):
+    <span class="com"># Inner loop for columns</span>
+    <span class="kw">for</span> j <span class="kw">in</span> <span class="fn">range</span>(i):
+        <span class="fn">print</span>(i, end=<span class="str">' '</span>)
+    <span class="fn">print</span>()</code></pre>
             </div>
-            <div class="output-box">
-                <div class="output-title">Output</div>
-                --- Day 1 Schedule ---<br>
-                &nbsp;&nbsp;* Attending Math<br>
-                &nbsp;&nbsp;* Attending Physics<br>
-                &nbsp;&nbsp;* Attending Computer Science<br>
-                --- Day 2 Schedule ---<br>
-                &nbsp;&nbsp;* Attending Math<br>
-                &nbsp;&nbsp;* Attending Physics<br>
-                &nbsp;&nbsp;* Attending Computer Science
-            </div>
+            <div class="output-box"><div class="output-title">Output</div>1 <br>2 2 <br>3 3 3 <br>4 4 4 4 </div>
 
-            <!-- 5.2 NESTED FOR - FOR -->
-            <h3 id="nested-for-for">5.2 Nested For-For Loop</h3>
-            <p>Both outer and inner loops are <code>for</code> loops. This structure is heavily used for 2D grids, matrices, and pattern printing.</p>
+            <p><strong>Explanation:</strong></p>
+            <ul>
+                <li>Outer loop <code>for i in range(1, 5)</code> controls the number of rows and Inner loop <code>for j in range(i)</code> runs <code>i</code> times for each row.</li>
+                <li><code>print(i, end=' ')</code> prints the value of <code>i</code> on the same line and <code>print()</code> moves output to the next line after each row.</li>
+            </ul>
 
-            <div class="code-box">
-                <div class="code-header">
-                    <span>PYTHON 3</span>
-                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
-                </div>
-                <pre><code># Outer loop controls rows
-for row in range(1, 4):
-    # Inner loop controls columns
-    for col in range(1, 4):
-        print(f"({row},{col})", end=" ")
-    print()  # New line after inner loop completes</code></pre>
-            </div>
-            <div class="output-box">
-                <div class="output-title">Output</div>
-                (1,1) (1,2) (1,3) <br>
-                (2,1) (2,2) (2,3) <br>
-                (3,1) (3,2) (3,3) 
-            </div>
-
-            <!-- 5.3 NESTED FOR - WHILE -->
-            <h3 id="nested-for-while">5.3 Nested For-While Loop</h3>
-            <p>The outer loop is a <code>for</code> loop, while the inner loop is a <code>while</code> loop.</p>
-
-            <div class="code-box">
-                <div class="code-header">
-                    <span>PYTHON 3</span>
-                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
-                </div>
-                <pre><code>for student in range(1, 3):
-    print(f"Student #{student} Quiz Phase:")
-    attempts = 1
-    while attempts <= 2:
-        print(f"  - Attempt {attempts} evaluated.")
-        attempts += 1</code></pre>
-            </div>
-            <div class="output-box">
-                <div class="output-title">Output</div>
-                Student #1 Quiz Phase:<br>
-                &nbsp;&nbsp;- Attempt 1 evaluated.<br>
-                &nbsp;&nbsp;- Attempt 2 evaluated.<br>
-                Student #2 Quiz Phase:<br>
-                &nbsp;&nbsp;- Attempt 1 evaluated.<br>
-                &nbsp;&nbsp;- Attempt 2 evaluated.
-            </div>
-
-            <!-- 5.4 NESTED WHILE - WHILE -->
-            <h3 id="nested-while-while">5.4 Nested While-While Loop</h3>
-            <p>Both outer and inner loops are <code>while</code> loops. You must initialize and increment variables for both levels, making sure to reset the inner loop's variable before entering it again.</p>
-
-            <div class="code-box">
-                <div class="code-header">
-                    <span>PYTHON 3</span>
-                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
-                </div>
-                <pre><code>i = 1
-while i <= 2:
-    j = 1  # Reset inner counter for each outer cycle
-    while j <= 3:
-        print(f"Outer i={i}, Inner j={j}")
-        j += 1
-    i += 1</code></pre>
-            </div>
-            <div class="output-box">
-                <div class="output-title">Output</div>
-                Outer i=1, Inner j=1<br>
-                Outer i=1, Inner j=2<br>
-                Outer i=1, Inner j=3<br>
-                Outer i=2, Inner j=1<br>
-                Outer i=2, Inner j=2<br>
-                Outer i=2, Inner j=3
-            </div>
-
-            <!-- NAV LINKS -->
             <div class="nav-links">
                 <a href="python-tuples.html">← Previous: Python Tuples</a>
                 <a href="class11-cs.html">Back to CS Hub →</a>
@@ -568,7 +443,6 @@ while i <= 2:
             }
         }
 
-        // Load saved theme preference on page load
         window.addEventListener('DOMContentLoaded', () => {
             const savedTheme = localStorage.getItem('portal-theme');
             if (savedTheme === 'light') {
