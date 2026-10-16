@@ -3,245 +3,271 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Computer Science Python Practice | Swastik-Tech</title>
+    <title>CS Hub | Swastik-Tech Portal</title>
     
-    <!-- Google AdSense Script -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9509706674270233" crossorigin="anonymous"></script>
-
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%2300f3ff%22><path d=%22M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5%22/></svg>">
 
     <style>
         :root {
-            --bg-color: #080c14;
-            --card-bg: rgba(15, 23, 42, 0.85);
-            --accent-green: #10b981;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-glow-green: rgba(16, 185, 129, 0.3);
-            --grid-color: rgba(255, 255, 255, 0.03);
+            --bg-dark: #050b14;
+            --card-bg: rgba(11, 23, 39, 0.85);
+            --cyan-accent: #00f2ff;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --border-glow: rgba(0, 242, 255, 0.3);
+            --hover-bg: rgba(0, 242, 255, 0.1);
         }
 
         body.light-mode {
-            --bg-color: #f1f5f9;
-            --card-bg: rgba(255, 255, 255, 0.95);
-            --accent-green: #059669;
-            --text-main: #0f172a;
-            --text-muted: #475569;
-            --border-glow-green: rgba(5, 150, 105, 0.3);
-            --grid-color: rgba(0, 0, 0, 0.04);
+            --bg-dark: #f8fafc;
+            --card-bg: #ffffff;
+            --cyan-accent: #059669;
+            --text-primary: #334155;
+            --text-secondary: #64748b;
+            --border-glow: #cbd5e1;
+            --hover-bg: #e6fffa;
         }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: var(--bg-color);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-dark);
             background-image: 
-                radial-gradient(circle at 50% 50%, var(--border-glow-green) 0%, transparent 80%),
-                linear-gradient(var(--grid-color) 1px, transparent 1px),
-                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-            background-size: 100% 100%, 40px 40px, 40px 40px;
-            color: var(--text-main);
-            font-family: 'Rajdhani', sans-serif;
-            min-height: 100vh;
-            padding: 2rem;
-            transition: background-color 0.4s ease, color 0.4s ease;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid var(--border-glow-green);
-            margin-bottom: 2rem;
-        }
-
-        .header-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
-            color: var(--accent-green);
-            border-left: 3px solid var(--accent-green);
-            padding-left: 10px;
-            text-decoration: none;
-        }
-
-        .top-nav-right {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-
-        .nav-btn {
-            background: var(--card-bg);
-            border: 1px solid var(--border-glow-green);
-            color: var(--accent-green);
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.85rem;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(8px);
-        }
-
-        .nav-btn:hover {
-            box-shadow: 0 0 10px var(--border-glow-green);
-        }
-
-        .section-heading {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.4rem;
-            color: var(--text-main);
-            margin-bottom: 1.5rem;
-        }
-
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .dash-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-glow-green);
-            border-radius: 10px;
-            padding: 1.5rem;
-            color: var(--text-main);
-            transition: all 0.3s ease;
-            backdrop-filter: blur(8px);
+                radial-gradient(circle at 50% 50%, rgba(0, 242, 255, 0.08) 0%, transparent 80%),
+                linear-gradient(rgba(0, 242, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 242, 255, 0.05) 1px, transparent 1px);
+            background-size: 100% 100%, 30px 30px, 30px 30px;
+            color: var(--text-primary);
+            margin: 0;
+            padding: 40px 20px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            gap: 1.2rem;
+            align-items: center;
+            min-height: 100vh;
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
-        .dash-card:hover {
-            box-shadow: 0 0 20px var(--border-glow-green);
-            transform: translateY(-3px);
+        .top-header-bar {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            z-index: 100;
         }
 
-        .card-header-content {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-        }
-
-        .dash-card i.fa-code, .dash-card i.fa-terminal, .dash-card i.fa-list-check {
-            font-size: 2.2rem;
-            color: var(--accent-green);
-            flex-shrink: 0;
-            margin-top: 0.1rem;
-        }
-
-        .card-text h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.1rem;
-            line-height: 1.3;
-            margin-bottom: 0.3rem;
-        }
-
-        .card-text p {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        .card-actions {
-            display: grid;
-            grid-template-columns: 1fr;
-            border-top: 1px solid var(--border-glow-green);
-            padding-top: 1rem;
-        }
-
-        .action-btn {
-            padding: 0.6rem 0.8rem;
+        .theme-toggle-btn {
+            background: var(--card-bg);
+            color: var(--cyan-accent);
+            border: 1px solid var(--border-glow);
+            padding: 8px 16px;
             border-radius: 6px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.85rem;
-            text-decoration: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            transition: all 0.2s ease;
+        }
+
+        .theme-toggle-btn:hover {
+            background: var(--cyan-accent);
+            color: #000;
+            box-shadow: 0 0 15px var(--cyan-accent);
+        }
+
+        .hub-container {
+            width: 100%;
+            max-width: 800px;
+        }
+
+        /* Main Card */
+        .topic-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+        }
+
+        .topic-header h2 {
+            color: var(--cyan-accent);
+            font-size: 1.5rem;
+            margin: 0 0 8px 0;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 6px;
+            gap: 10px;
+        }
+
+        .topic-header p {
+            color: var(--text-secondary);
+            margin: 0 0 20px 0;
+            font-size: 0.95rem;
+        }
+
+        /* Action Buttons */
+        .action-btn {
+            display: block;
+            width: 100%;
+            background: rgba(0, 242, 255, 0.05);
+            color: var(--cyan-accent);
+            border: 1px solid var(--border-glow);
+            padding: 12px;
+            text-align: center;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            background: transparent;
-            border: 1px solid var(--accent-green);
-            color: var(--accent-green);
+            transition: all 0.2s ease;
         }
 
         .action-btn:hover {
-            background: var(--accent-green);
-            color: var(--bg-color);
-            box-shadow: 0 0 10px var(--border-glow-green);
+            background: var(--cyan-accent);
+            color: #000;
+            box-shadow: 0 0 12px var(--cyan-accent);
+        }
+
+        /* Subsections Container (Hidden by default) */
+        .subsections-wrapper {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, opacity 0.3s ease-out;
+            opacity: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .subsections-wrapper.open {
+            max-height: 500px;
+            opacity: 1;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-glow);
+        }
+
+        .sub-card {
+            background: rgba(0, 242, 255, 0.02);
+            border: 1px solid var(--border-glow);
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+
+        .sub-card:hover {
+            background: var(--hover-bg);
+            border-color: var(--cyan-accent);
+        }
+
+        .sub-info h3 {
+            color: var(--cyan-accent);
+            margin: 0 0 4px 0;
+            font-size: 1.1rem;
+        }
+
+        .sub-info p {
+            color: var(--text-secondary);
+            margin: 0;
+            font-size: 0.85rem;
+        }
+
+        .sub-btn {
+            background: var(--cyan-accent);
+            color: #000;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            box-shadow: 0 0 8px rgba(0, 242, 255, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .sub-btn:hover {
+            box-shadow: 0 0 15px var(--cyan-accent);
+            transform: translateY(-1px);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: var(--cyan-accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <a href="class11-hub.html" class="header-title">| Computer Science Python Practice</a>
-        <div class="top-nav-right">
-            <button onclick="toggleTheme()" class="nav-btn"><i class="fa-solid fa-circle-half-stroke"></i> Theme</button>
-            <a href="class11-hub.html" class="nav-btn"><i class="fa-solid fa-arrow-left"></i> Hub</a>
-        </div>
-    </header>
+    <div class="top-header-bar">
+        <button class="theme-toggle-btn" onclick="toggleTheme()">⚡ Theme</button>
+    </div>
 
-    <div class="section-heading">Computer Science Python Practice & Notes</div>
+    <div class="hub-container">
+        <a href="index.html" class="back-link">← Back to Portal Main</a>
 
-    <div class="dashboard-grid">
-        <!-- Card 1: CS Topics pointing to python-lists.html -->
-        <div class="dash-card">
-            <div class="card-header-content">
-                <i class="fa-solid fa-list-check"></i>
-                <div class="card-text">
-                    <h3>CS Topics</h3>
-                    <p>Explore detailed chapter tutorials for Class 11 Computer Science.</p>
+        <div class="topic-card">
+            <div class="topic-header">
+                <h2>📋 CS Topics</h2>
+                <p>Explore detailed chapter tutorials for Class 11 Computer Science.</p>
+            </div>
+
+            <!-- Main Detailed Topics Button that toggles subsections -->
+            <button class="action-btn" onclick="toggleSubsections()">📖 Detailed Topics</button>
+
+            <!-- Python & HTML Subsections -->
+            <div id="subSections" class="subsections-wrapper">
+                
+                <!-- Python Sub-card -->
+                <div class="sub-card">
+                    <div class="sub-info">
+                        <h2>🐍 Python Programming</h2>
+                        <p>Lists, Tuples, Loops, and string manipulation masterclass.</p>
+                    </div>
+                    <a href="python-lists.html" class="sub-btn">Detailed Topics →</a>
                 </div>
-            </div>
-            <div class="card-actions">
-                <a href="python-lists.html" class="action-btn">
-                    <i class="fa-solid fa-book-open"></i> Detailed Topics
-                </a>
-            </div>
-        </div>
 
-        <!-- Card 2: Python IDE -->
-        <div class="dash-card">
-            <div class="card-header-content">
-                <i class="fa-solid fa-terminal"></i>
-                <div class="card-text">
-                    <h3>Online Python IDE</h3>
-                    <p>Practice Python programming, write scripts, and test logic interactively.</p>
+                <!-- HTML Sub-card -->
+                <div class="sub-card">
+                    <div class="sub-info">
+                        <h2>🌐 HTML & Web Design</h2>
+                        <p>Web structure, tags, forms, and formatting elements.</p>
+                    </div>
+                    <a href="html-topics.html" class="sub-btn">Detailed Topics →</a>
                 </div>
-            </div>
-            <div class="card-actions">
-                <a href="python-ide.html" class="action-btn">
-                    <i class="fa-solid fa-code"></i> Open Python IDE
-                </a>
+
             </div>
         </div>
     </div>
 
     <script>
-        if (localStorage.getItem('theme') === 'light') {
-            document.body.classList.add('light-mode');
+        function toggleSubsections() {
+            const wrapper = document.getElementById('subSections');
+            wrapper.classList.toggle('open');
         }
 
         function toggleTheme() {
             document.body.classList.toggle('light-mode');
             if (document.body.classList.contains('light-mode')) {
-                localStorage.setItem('theme', 'light');
+                localStorage.setItem('portal-theme', 'light');
             } else {
-                localStorage.setItem('theme', 'dark');
+                localStorage.setItem('portal-theme', 'dark');
             }
         }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('portal-theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-mode');
+            }
+        });
     </script>
 </body>
 </html>
