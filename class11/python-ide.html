@@ -159,7 +159,7 @@
             box-shadow: 0 0 10px var(--accent-green);
         }
 
-        /* CodeMirror Editor Styling overrides */
+        /* CodeMirror Editor Styling */
         .CodeMirror {
             flex-grow: 1;
             height: auto !important;
@@ -185,7 +185,30 @@
         }
 
         #terminalOutput {
+            margin-bottom: 5px;
+        }
+
+        /* In-Terminal Active Input Line */
+        .input-line-wrapper {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .input-prompt-label {
+            color: #38bdf8;
+            white-space: pre;
+        }
+
+        .terminal-input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #f8fafc;
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
             flex-grow: 1;
+            caret-color: var(--accent-green);
         }
 
         .status-bar {
@@ -228,10 +251,14 @@
                 <span><i class="fa-solid fa-terminal"></i> Output</span>
                 <button onclick="clearTerminal()" class="nav-btn" style="padding: 3px 8px; font-size: 0.75rem;">Clear</button>
             </div>
-            <div class="terminal-screen" id="terminalScreen">
+            <div class="terminal-screen" id="terminalScreen" onclick="focusTerminalInput()">
                 <div id="terminalOutput">Terminal ready. Click 'Run' to execute code...</div>
+                <div class="input-line-wrapper" id="inputWrapper" style="display: none;">
+                    <span class="input-prompt-label" id="promptLabel"></span>
+                    <input type="text" id="terminalInput" class="terminal-input" autocomplete="off" spellcheck="false">
+                </div>
             </div>
-            <div class="status-bar">Status: Ready</div>
+            <div class="status-bar" id="terminalStatus">Status: Ready</div>
         </div>
     </div>
 
@@ -245,21 +272,17 @@
         let pyodideReady = false;
         let pyodide = null;
         let editor = null;
+        let inputResolver = null;
 
-        // Initialize CodeMirror Editor & Set Personalized User Template from Dashboard Login
         window.addEventListener('DOMContentLoaded', () => {
-            // Retrieve username from localStorage (falls back to 'User' if not logged in)
             const userName = localStorage.getItem('username') || localStorage.getItem('user_name') || localStorage.getItem('name') || 'User';
 
-            // Construct personalized greeting template using the exact name entered during dashboard login
-            const templateCode = `#Write your code from here
-print("hello " + "${userName}")
-print("welcome to python ide")`;
+            const templateCode = `# Write your code from here
+n = input("Enter you number : ")
+print("You entered:", n)`;
 
-            // Assign template to textarea before instantiating CodeMirror
             document.getElementById('codeEditor').value = templateCode;
 
-            // Instantiate CodeMirror with formatting options
             editor = CodeMirror.fromTextArea(document.getElementById('codeEditor'), {
                 mode: "python",
                 theme: "dracula",
@@ -271,17 +294,33 @@ print("welcome to python ide")`;
                 matchBrackets: true,
                 lineWrapping: true,
                 extraKeys: {
-                    "Ctrl-/": function(cm) {
-                        toggleComment(cm);
-                    },
-                    "Cmd-/": function(cm) {
-                        toggleComment(cm);
+                    "Ctrl-/": function(cm) { toggleComment(cm); },
+                    "Cmd-/": function(cm) { toggleComment(cm); }
+                }
+            });
+
+            // Handle ENTER key in terminal input
+            document.getElementById('terminalInput').addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    const value = this.value;
+                    const promptText = document.getElementById('promptLabel').innerText;
+                    
+                    // Commit typed text to stdout screen
+                    appendText(promptText + value + "\n");
+                    
+                    // Hide input line & reset
+                    this.value = '';
+                    document.getElementById('inputWrapper').style.display = 'none';
+                    
+                    if (inputResolver) {
+                        const resolve = inputResolver;
+                        inputResolver = null;
+                        resolve(value);
                     }
                 }
             });
         });
 
-        // Toggle comment handler for Ctrl + / shortcut
         function toggleComment(cm) {
             const from = cm.getCursor(true);
             const to = cm.getCursor(false);
@@ -324,15 +363,31 @@ print("welcome to python ide")`;
 
         function clearTerminal() {
             document.getElementById('terminalOutput').innerText = "";
+            document.getElementById('inputWrapper').style.display = 'none';
         }
 
-        function syncInput(promptText = "") {
-            const result = window.prompt(promptText || "Enter value:");
-            if (result !== null) {
-                appendText(promptText + result + "\n");
-                return result;
+        function focusTerminalInput() {
+            const inputWrapper = document.getElementById('inputWrapper');
+            if (inputWrapper.style.display !== 'none') {
+                document.getElementById('terminalInput').focus();
             }
-            return "";
+        }
+
+        // Custom In-Terminal input function (Replaces browser popup alert)
+        function customTerminalInput(promptText = "") {
+            return new Promise((resolve) => {
+                inputResolver = resolve;
+                const wrapper = document.getElementById('inputWrapper');
+                const label = document.getElementById('promptLabel');
+                const inputField = document.getElementById('terminalInput');
+
+                label.innerText = promptText;
+                wrapper.style.display = 'flex';
+                inputField.focus();
+
+                const screen = document.getElementById('terminalScreen');
+                screen.scrollTop = screen.scrollHeight;
+            });
         }
 
         async function runPythonCode() {
@@ -343,6 +398,7 @@ print("welcome to python ide")`;
 
             const code = editor.getValue();
             clearTerminal();
+            document.getElementById('terminalStatus').innerText = "Status: Running...";
 
             pyodide.setStdout({
                 batched: (msg) => {
@@ -350,12 +406,15 @@ print("welcome to python ide")`;
                 }
             });
 
-            pyodide.globals.set("input", syncInput);
+            // Override Python's builtin input() to use our in-terminal prompt
+            pyodide.globals.set("input", customTerminalInput);
 
             try {
                 await pyodide.runPythonAsync(code);
+                document.getElementById('terminalStatus').innerText = "Status: Finished";
             } catch (err) {
                 appendText("\n[Error]: " + err.message + "\n");
+                document.getElementById('terminalStatus').innerText = "Status: Error";
             }
         }
 
