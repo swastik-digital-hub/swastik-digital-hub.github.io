@@ -216,7 +216,6 @@
             font-size: 14px;
         }
 
-        /* Syntax coloring classes */
         .kw { color: var(--syntax-kw); font-weight: bold; }
         .str { color: var(--syntax-str); }
         .num { color: var(--syntax-num); }
@@ -274,7 +273,9 @@
         .diagram-container img {
             max-width: 100%;
             height: auto;
-            border-radius: 4px;
+            border-radius: 6px;
+            border: 1px solid var(--border-glow);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
         }
 
         table {
@@ -384,7 +385,7 @@
 <span class="fn">print</span>(tup)
 
 <span class="com"># Using String</span>
-tup = (<span class="str">'Geeks'</span>, <span class="str">'For'</span>)
+tup = (<span class="str">'Swastik'</span>, <span class="str">'Tech'</span>)
 <span class="fn">print</span>(tup)
 
 <span class="com"># Using List</span>
@@ -392,15 +393,15 @@ li = [<span class="num">1</span>, <span class="num">2</span>, <span class="num">
 <span class="fn">print</span>(<span class="kw">tuple</span>(li))
 
 <span class="com"># Using Built-in Function</span>
-tup = <span class="kw">tuple</span>(<span class="str">'Geeks'</span>)
+tup = <span class="kw">tuple</span>(<span class="str">'Hub'</span>)
 <span class="fn">print</span>(tup)</code></pre>
             </div>
             <div class="output-box">
                 <div class="output-title">Output</div>
                 ()<br>
-                ('Geeks', 'For')<br>
+                ('Swastik', 'Tech')<br>
                 (1, 2, 4, 5, 6)<br>
-                ('G', 'e', 'e', 'k', 's')
+                ('H', 'u', 'b')
             </div>
 
             <!-- SECTION 3 -->
@@ -429,13 +430,13 @@ tup = <span class="kw">tuple</span>(<span class="str">'Geeks'</span>)
                     <span>PYTHON 3</span>
                     <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
                 </div>
-                <pre><code>tup = <span class="kw">tuple</span>(<span class="str">"Geeks"</span>)
+                <pre><code>tup = <span class="kw">tuple</span>(<span class="str">"Swastik"</span>)
 <span class="fn">print</span>(tup[<span class="num">0</span>])
 <span class="fn">print</span>(tup[<span class="num">1</span>:<span class="num">4</span>])  
 <span class="fn">print</span>(tup[:<span class="num">3</span>])
 
 <span class="com"># Tuple unpacking</span>
-tup = (<span class="str">"Geeks"</span>, <span class="str">"For"</span>, <span class="str">"Geeks"</span>)
+tup = (<span class="str">"Swastik"</span>, <span class="str">"Tech"</span>, <span class="str">"Hub"</span>)
 a, b, c = tup
 <span class="fn">print</span>(a)
 <span class="fn">print</span>(b)
@@ -443,12 +444,12 @@ a, b, c = tup
             </div>
             <div class="output-box">
                 <div class="output-title">Output</div>
-                G<br>
-                ('e', 'e', 'k')<br>
-                ('G', 'e', 'e')<br>
-                Geeks<br>
-                For<br>
-                Geeks
+                S<br>
+                ('w', 'a', 's')<br>
+                ('S', 'w', 'a')<br>
+                Swastik<br>
+                Tech<br>
+                Hub
             </div>
 
             <!-- SECTION 5 -->
@@ -457,7 +458,7 @@ a, b, c = tup
             <p><em>Note: Only tuples can be concatenated with tuples. Combining a tuple with other types like lists will raise an error.</em></p>
 
             <div class="diagram-container">
-                <img src="assets/tuple-concatenation.png" alt="Tuple Concatenation Diagram">
+                <img src="https://media.geeksforgeeks.org/wp-content/uploads/20260312162158417664/409843041.webp" alt="Tuple Concatenation Diagram">
             </div>
 
             <div class="code-box">
@@ -466,13 +467,13 @@ a, b, c = tup
                     <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
                 </div>
                 <pre><code>tup1 = (<span class="num">0</span>, <span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>)
-tup2 = (<span class="str">'Geeks'</span>, <span class="str">'For'</span>, <span class="str">'Geeks'</span>)
+tup2 = (<span class="str">'Swastik'</span>, <span class="str">'Tech'</span>, <span class="str">'Hub'</span>)
 tup3 = tup1 + tup2
 <span class="fn">print</span>(tup3)</code></pre>
             </div>
             <div class="output-box">
                 <div class="output-title">Output</div>
-                (0, 1, 2, 3, 'Geeks', 'For', 'Geeks')
+                (0, 1, 2, 3, 'Swastik', 'Tech', 'Hub')
             </div>
 
             <!-- SECTION 6 -->
@@ -481,7 +482,7 @@ tup3 = tup1 + tup2
             <p><em>Note: Negative increment values can be used to reverse tuples. <code>[:]</code> returns all elements, and <code>[::-1]</code> reverses the sequence.</em></p>
 
             <div class="diagram-container">
-                <img src="assets/tuple-slicing.png" alt="Tuple Slicing and Indexing Diagram">
+                <img src="https://media.geeksforgeeks.org/wp-content/uploads/20260312161921023322/409843040.webp" alt="Tuple Slicing and Indexing Diagram">
             </div>
 
             <div class="code-box">
@@ -489,16 +490,16 @@ tup3 = tup1 + tup2
                     <span>PYTHON 3</span>
                     <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
                 </div>
-                <pre><code>tup = <span class="kw">tuple</span>(<span class="str">'GEEKSFORGEEKS'</span>)
+                <pre><code>tup = <span class="kw">tuple</span>(<span class="str">'SWASTIKHUB'</span>)
 <span class="fn">print</span>(tup[<span class="num">1</span>:])
 <span class="fn">print</span>(tup[::<span class="num">-1</span>])
 <span class="fn">print</span>(tup[<span class="num">4</span>:<span class="num">9</span>])</code></pre>
             </div>
             <div class="output-box">
                 <div class="output-title">Output</div>
-                ('E', 'E', 'K', 'S', 'F', 'O', 'R', 'G', 'E', 'E', 'K', 'S')<br>
-                ('S', 'K', 'E', 'E', 'G', 'R', 'O', 'F', 'S', 'K', 'E', 'E', 'G')<br>
-                ('S', 'F', 'O', 'R', 'G')
+                ('W', 'A', 'S', 'T', 'I', 'K', 'H', 'U', 'B')<br>
+                ('B', 'U', 'H', 'K', 'I', 'T', 'S', 'A', 'W', 'S')<br>
+                ('T', 'I', 'K', 'H', 'U')
             </div>
 
             <!-- SECTION 7 -->
@@ -524,7 +525,7 @@ tup3 = tup1 + tup2
 
             <!-- SECTION 8 -->
             <h2 id="asterisk">8. Tuple Unpacking with Asterisk (*)</h2>
-            <p>The <code>*</code> operator is used in tuple unpacking to grab multiple items into a list. This is useful to extract specific elements and collect the rest together.</p>
+            <p>The <code>*</code> operator is used in tuple unpacking to grab multiple items into a list. This is useful to extract specific elements and collect the rest together[cite: 4].</p>
 
             <div class="code-box">
                 <div class="code-header">
