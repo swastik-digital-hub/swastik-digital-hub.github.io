@@ -226,7 +226,7 @@
         <a href="class11-cs.html" class="header-title">| Swastik-Tech Python IDE</a>
         <div class="top-nav-right">
             <button onclick="toggleTheme()" class="nav-btn"><i class="fa-solid fa-circle-half-stroke"></i> Theme</button>
-            <a href="class11-cs.html" class="nav-btn"><i class="fa-solid fa-arrow-left"></i> CS Hub</a>
+            <a href="class11-cs.html" class="nav-btn"><i class="fa-solid fa-arrow-left"></i> Hub</a>
         </div>
     </header>
 
@@ -275,11 +275,8 @@
         let inputResolver = null;
 
         window.addEventListener('DOMContentLoaded', () => {
-            const userName = localStorage.getItem('username') || localStorage.getItem('user_name') || localStorage.getItem('name') || 'User';
-
-            const templateCode = `# Write your code from here
-n = input("Enter you number : ")
-print("You entered:", n)`;
+            // Default template containing only '#Write your code from here'
+            const templateCode = `#Write your code from here`;
 
             document.getElementById('codeEditor').value = templateCode;
 
@@ -305,10 +302,8 @@ print("You entered:", n)`;
                     const value = this.value;
                     const promptText = document.getElementById('promptLabel').innerText;
                     
-                    // Commit typed text to stdout screen
                     appendText(promptText + value + "\n");
                     
-                    // Hide input line & reset
                     this.value = '';
                     document.getElementById('inputWrapper').style.display = 'none';
                     
@@ -344,6 +339,16 @@ print("You entered:", n)`;
             try {
                 pyodide = await loadPyodide();
                 pyodideReady = true;
+                
+                // Define async input function inside Python environment
+                await pyodide.runPythonAsync(`
+import js
+
+async def input(prompt=""):
+    print(prompt, end="", flush=True)
+    return await js.customTerminalInput(prompt)
+                `);
+
                 statusElem.innerText = "Python Engine Ready";
                 runBtn.disabled = false;
                 runBtn.innerHTML = '<i class="fa-solid fa-play"></i> Run';
@@ -373,7 +378,6 @@ print("You entered:", n)`;
             }
         }
 
-        // Custom In-Terminal input function (Replaces browser popup alert)
         function customTerminalInput(promptText = "") {
             return new Promise((resolve) => {
                 inputResolver = resolve;
@@ -396,7 +400,7 @@ print("You entered:", n)`;
                 return;
             }
 
-            const code = editor.getValue();
+            const rawCode = editor.getValue();
             clearTerminal();
             document.getElementById('terminalStatus').innerText = "Status: Running...";
 
@@ -406,11 +410,17 @@ print("You entered:", n)`;
                 }
             });
 
-            // Override Python's builtin input() to use our in-terminal prompt
-            pyodide.globals.set("input", customTerminalInput);
-
             try {
-                await pyodide.runPythonAsync(code);
+                // Transform user code to properly await input() calls and wrap in async function
+                const indentedCode = rawCode.split('\n').map(line => '    ' + line.replace(/\binput\s*\(/g, 'await input(')).join('\n');
+                const wrappedCode = `
+async def __user_main():
+${indentedCode}
+
+await __user_main()
+                `;
+
+                await pyodide.runPythonAsync(wrappedCode);
                 document.getElementById('terminalStatus').innerText = "Status: Finished";
             } catch (err) {
                 appendText("\n[Error]: " + err.message + "\n");
