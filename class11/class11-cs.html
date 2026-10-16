@@ -119,6 +119,7 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s ease;
+            box-sizing: border-box;
         }
 
         .action-btn:hover {
@@ -127,7 +128,7 @@
             box-shadow: 0 0 12px var(--cyan-accent);
         }
 
-        /* Subsections Container (Hidden by default) */
+        /* Subsections Container */
         .subsections-wrapper {
             max-height: 0;
             overflow: hidden;
@@ -191,13 +192,18 @@
             transform: translateY(-1px);
         }
 
-        /* Python IDE Section Styling */
-        .ide-container {
-            width: 100%;
-            height: 420px;
-            border: none;
+        /* Modern Python IDE Playground Box */
+        .ide-preview-box {
+            background: #030810;
+            border: 1px solid var(--border-glow);
             border-radius: 8px;
-            margin-top: 15px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .ide-preview-box p {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
         }
 
         .back-link {
@@ -256,14 +262,17 @@
             </div>
         </div>
 
-        <!-- Python IDE / Live Console Card -->
+        <!-- Python Online IDE Card (Replaced broken Trinket embed with a clean runner link & playground) -->
         <div class="topic-card">
             <div class="topic-header">
                 <h2>💻 Python Online IDE</h2>
-                <p>Test and run your Python code snippets directly inside the browser.</p>
+                <p>Test and run your Python code snippets instantly in a secure browser environment.</p>
             </div>
-            <!-- Embedded Python Online Compiler / IDE -->
-            <iframe src="https://trinket.io/embed/python3/2592994cfc" width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen class="ide-container"></iframe>
+            
+            <div class="ide-preview-box">
+                <p>Click below to open the fully featured live Python compiler in a new window or workspace:</p>
+                <a href="https://www.onlinegdb.com/online_python_compiler" target="_blank" class="action-btn">🚀 Launch Python Compiler (OnlineGDB)</a>
+            </div>
         </div>
     </div>
 
