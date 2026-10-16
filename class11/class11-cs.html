@@ -39,7 +39,7 @@
             background-size: 100% 100%, 30px 30px, 30px 30px;
             color: var(--text-primary);
             margin: 0;
-            padding: 80px 20px 40px 20px; /* Added top padding to prevent content overlapping header bar */
+            padding: 80px 20px 40px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -196,25 +196,13 @@
             box-shadow: 0 0 15px var(--cyan-accent);
             transform: translateY(-1px);
         }
-
-        .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
-            color: var(--cyan-accent);
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .back-link:hover {
-            text-decoration: underline;
-        }
     </style>
 </head>
 <body>
 
-    <!-- Top Right Navigation Bar with Dashboard Icon & Theme Toggle -->
+    <!-- Top Right Navigation Bar with Dashboard Button & Theme Toggle -->
     <div class="top-header-bar">
-        <a href="dashboard.html" class="top-nav-btn" title="Go to Dashboard">
+        <a href="index.html" class="top-nav-btn" title="Go to Dashboard">
             <i class="fa-solid fa-gauge-high"></i> Dashboard
         </a>
         <button class="top-nav-btn" onclick="toggleTheme()">
@@ -223,8 +211,6 @@
     </div>
 
     <div class="hub-container">
-        <a href="index.html" class="back-link">← Back to Portal Main</a>
-
         <!-- CS Topics Card with Interactive Detailed Topics Subsections (Python & HTML) -->
         <div class="topic-card">
             <div class="topic-header">
