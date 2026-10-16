@@ -19,9 +19,14 @@
             --code-bg: #030810;
             --output-bg: rgba(0, 242, 255, 0.03);
             --hover-bg: rgba(0, 242, 255, 0.1);
+
+            --syntax-kw: #ff79c6;
+            --syntax-str: #f1fa8c;
+            --syntax-num: #bd93f9;
+            --syntax-func: #50fa7b;
+            --syntax-comment: #6272a4;
         }
 
-        /* Light Theme Overrides */
         body.light-mode {
             --bg-dark: #f8fafc;
             --card-bg: #ffffff;
@@ -33,6 +38,12 @@
             --code-bg: #1a202c;
             --output-bg: #edf2f7;
             --hover-bg: #e6fffa;
+
+            --syntax-kw: #d73a49;
+            --syntax-str: #032f62;
+            --syntax-num: #005cc5;
+            --syntax-func: #6f42c1;
+            --syntax-comment: #6a737d;
         }
 
         body {
@@ -51,7 +62,6 @@
             transition: background 0.3s ease, color 0.3s ease;
         }
 
-        /* Top-Right Theme Toggle Button Bar */
         .top-header-bar {
             position: fixed;
             top: 20px;
@@ -89,7 +99,6 @@
             overflow-y: auto;
             box-sizing: border-box;
             backdrop-filter: blur(10px);
-            transition: background 0.3s ease, border-color 0.3s ease;
         }
 
         sidebar h3 {
@@ -99,18 +108,10 @@
             border-bottom: 2px solid var(--border-glow);
             padding-bottom: 8px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
-        sidebar ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        sidebar li {
-            margin-bottom: 8px;
-        }
+        sidebar ul { list-style: none; padding: 0; margin: 0; }
+        sidebar li { margin-bottom: 8px; }
 
         sidebar a {
             text-decoration: none;
@@ -145,7 +146,6 @@
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(0, 242, 255, 0.02);
             border: 1px solid var(--border-glow);
             backdrop-filter: blur(8px);
-            transition: background 0.3s ease, border-color 0.3s ease;
         }
 
         h1 {
@@ -165,16 +165,8 @@
             padding-bottom: 6px;
         }
 
-        h3 {
-            color: var(--text-primary);
-            font-size: 18px;
-            margin-top: 25px;
-        }
-
-        p, li {
-            font-size: 15.5px;
-            color: var(--text-primary);
-        }
+        h3 { color: var(--text-primary); font-size: 18px; margin-top: 25px; }
+        p, li { font-size: 15.5px; color: var(--text-primary); }
 
         .code-box {
             background: var(--code-bg);
@@ -196,14 +188,12 @@
             border-bottom: 1px solid var(--border-glow);
         }
 
-        pre {
-            margin: 0;
-            padding: 15px;
-            color: #38bdf8;
-            font-family: Consolas, Monaco, monospace;
-            overflow-x: auto;
-            font-size: 14px;
-        }
+        pre { margin: 0; padding: 15px; font-family: Consolas, Monaco, monospace; font-size: 14px; }
+        .kw { color: var(--syntax-kw); font-weight: bold; }
+        .str { color: var(--syntax-str); }
+        .num { color: var(--syntax-num); }
+        .fn { color: var(--syntax-func); }
+        .com { color: var(--syntax-comment); font-style: italic; }
 
         .copy-btn {
             background: rgba(0, 242, 255, 0.15);
@@ -236,13 +226,7 @@
             border-bottom: 1px solid var(--border-glow);
         }
 
-        .output-title {
-            font-weight: bold;
-            color: var(--text-secondary);
-            font-size: 11px;
-            text-transform: uppercase;
-            margin-bottom: 4px;
-        }
+        .output-title { font-weight: bold; color: var(--text-secondary); font-size: 11px; text-transform: uppercase; margin-bottom: 4px; }
 
         .nav-links {
             margin-top: 40px;
@@ -280,7 +264,6 @@
 </head>
 <body>
 
-    <!-- Top Right Theme Toggle Button -->
     <div class="top-header-bar">
         <button class="theme-toggle-btn" onclick="toggleTheme()">⚡ Theme</button>
     </div>
@@ -289,8 +272,6 @@
         <h3>Class 11 CS Topics</h3>
         <ul>
             <li><a href="class11-cs.html">🏠 CS Hub Main</a></li>
-            
-            <!-- Lists Section -->
             <li><a href="python-lists.html" class="active">📦 Lists</a></li>
             <li><a href="#creation" style="padding-left: 20px;">1. Creating a List</a></li>
             <li><a href="#internal" style="padding-left: 20px;">2. Internal Representation</a></li>
@@ -300,11 +281,7 @@
             <li><a href="#removing" style="padding-left: 20px;">6. Removing Elements</a></li>
             <li><a href="#iterating" style="padding-left: 20px;">7. Iterating Over Lists</a></li>
             <li><a href="#nested" style="padding-left: 20px;">8. Nested Lists</a></li>
-
-            <!-- Tuples Section -->
             <li><a href="python-tuples.html">🔗 Tuples</a></li>
-
-            <!-- Loops Section -->
             <li><a href="python-loops.html">🔄 Python Loops</a></li>
         </ul>
     </sidebar>
@@ -324,282 +301,155 @@
             <p>Lists can be created in several ways, such as using square brackets <code>[]</code>, the <code>list()</code> constructor, or by repeating elements.</p>
             
             <h3>1. Using Square Brackets:</h3>
-            <p>Square brackets <code>[]</code> are used to create a list directly.</p>
             <div class="code-box">
-                <div class="code-header">
-                    <span>PYTHON 3</span>
-                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
-                </div>
-                <pre><code>a = [1, 2, 3]
-print(a)
+                <div class="code-header"><span>PYTHON 3</span><button class="copy-btn" onclick="copyCode(this)">Copy Code</button></div>
+                <pre><code>a = [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>]
+<span class="fn">print</span>(a)
 
-b = ["apple", "banana"]
-print(b)</code></pre>
+b = [<span class="str">"apple"</span>, <span class="str">"banana"</span>]
+<span class="fn">print</span>(b)</code></pre>
             </div>
-            <div class="output-box">
-                <div class="output-title">Output</div>
-                [1, 2, 3]<br>
-                ['apple', 'banana']
-            </div>
+            <div class="output-box"><div class="output-title">Output</div>[1, 2, 3]<br>['apple', 'banana']</div>
 
             <h3>2. Using list() Constructor:</h3>
-            <p>A list can also be created by passing an iterable (such as tuple, string, or another list) to the <code>list()</code> constructor.</p>
             <div class="code-box">
-                <div class="code-header">
-                    <span>PYTHON 3</span>
-                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
-                </div>
-                <pre><code>a = list((1, 2, 3, 'apple', 4.5))  
-print(a)
+                <div class="code-header"><span>PYTHON 3</span><button class="copy-btn" onclick="copyCode(this)">Copy Code</button></div>
+                <pre><code>a = <span class="kw">list</span>((<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="str">'apple'</span>, <span class="num">4.5</span>))  
+<span class="fn">print</span>(a)
 
-b = list("GFG")
-print(b)</code></pre>
+b = <span class="kw">list</span>(<span class="str">"GFG"</span>)
+<span class="fn">print</span>(b)</code></pre>
             </div>
-            <div class="output-box">
-                <div class="output-title">Output</div>
-                [1, 2, 3, 'apple', 4.5]<br>
-                ['G', 'F', 'G']
-            </div>
+            <div class="output-box"><div class="output-title">Output</div>[1, 2, 3, 'apple', 4.5]<br>['G', 'F', 'G']</div>
 
             <h3>3. Creating List with Repeated Elements:</h3>
-            <p>A list with repeated elements can be created using the multiplication (<code>*</code>) operator.</p>
             <div class="code-box">
-                <div class="code-header">
-                    <span>PYTHON 3</span>
-                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
-                </div>
-                <pre><code>a = [2] * 5
-b = [0] * 7
+                <div class="code-header"><span>PYTHON 3</span><button class="copy-btn" onclick="copyCode(this)">Copy Code</button></div>
+                <pre><code>a = [<span class="num">2</span>] * <span class="num">5</span>
+b = [<span class="num">0</span>] * <span class="num">7</span>
 
-print(a)
-print(b)</code></pre>
+<span class="fn">print</span>(a)
+<span class="fn">print</span>(b)</code></pre>
             </div>
-            <div class="output-box">
-                <div class="output-title">Output</div>
-                [2, 2, 2, 2, 2]<br>
-                [0, 0, 0, 0, 0, 0, 0]
-            </div>
+            <div class="output-box"><div class="output-title">Output</div>[2, 2, 2, 2, 2]<br>[0, 0, 0, 0, 0, 0, 0]</div>
 
             <!-- INTERNAL REPRESENTATION -->
             <h2 id="internal">2. Internal Representation of Lists</h2>
-            <p>Python list stores references to objects, not the actual values directly.</p>
-            <ul>
-                <li>The list keeps memory addresses of objects like integers, strings, or booleans.</li>
-                <li>Actual objects exist separately in memory.</li>
-                <li>Modifying a mutable object inside a list changes the original object.</li>
-                <li>Reassigning an immutable object creates a new object instead of changing the old one.</li>
-            </ul>
             <div class="code-box">
-                <div class="code-header">
-                    <span>PYTHON 3</span>
-                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
-                </div>
-                <pre><code>a = [1, 2, 2, "Python"]
-print(a[0])    # index-based
-print(a)</code></pre>
+                <div class="code-header"><span>PYTHON 3</span><button class="copy-btn" onclick="copyCode(this)">Copy Code</button></div>
+                <pre><code>a = [<span class="num">1</span>, <span class="num">2</span>, <span class="num">2</span>, <span class="str">"Python"</span>]
+<span class="fn">print</span>(a[<span class="num">0</span>])    <span class="com"># index-based</span>
+<span class="fn">print</span>(a)</code></pre>
             </div>
-            <div class="output-box">
-                <div class="output-title">Output</div>
-                1<br>
-                [1, 2, 2, 'Python']
-            </div>
-            <p><strong>Explanation:</strong></p>
-            <ul>
-                <li><code>a[0]</code> accesses the first element of the list.</li>
-                <li>The list contains integers and a string, showing that Python lists can store multiple data types.</li>
-            </ul>
+            <div class="output-box"><div class="output-title">Output</div>1<br>[1, 2, 2, 'Python']</div>
 
             <!-- ACCESSING ELEMENTS -->
             <h2 id="accessing">3. Accessing Elements</h2>
-            <p>Elements in a list are accessed using indexing. Python uses zero-based indexing, meaning <code>a[0]</code> represents the first element. Negative indexing is also supported, where <code>-1</code> accesses the last element.</p>
             <div class="code-box">
-                <div class="code-header">
-                    <span>PYTHON 3</span>
-                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
-                </div>
-                <pre><code>a = [10, 20, 30]
-print(a[0])
-print(a[-1])</code></pre>
+                <div class="code-header"><span>PYTHON 3</span><button class="copy-btn" onclick="copyCode(this)">Copy Code</button></div>
+                <pre><code>a = [<span class="num">10</span>, <span class="num">20</span>, <span class="num">30</span>]
+<span class="fn">print</span>(a[<span class="num">0</span>])
+<span class="fn">print</span>(a[<span class="num">-1</span>])</code></pre>
             </div>
-            <div class="output-box">
-                <div class="output-title">Output</div>
-                10<br>
-                30
-            </div>
+            <div class="output-box"><div class="output-title">Output</div>10<br>30</div>
 
             <!-- ADDING ELEMENTS -->
             <h2 id="adding">4. Adding Elements</h2>
-            <p>Elements can be added to a list using the following methods:</p>
             <h3>1. append():</h3>
-            <p>Adds an element at the end of the list.</p>
             <div class="code-box">
-                <div class="code-header">
-                    <span>PYTHON 3</span>
-                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
-                </div>
-                <pre><code>a = [1, 2]
-a.append(3)
-print(a)</code></pre>
+                <div class="code-header"><span>PYTHON 3</span><button class="copy-btn" onclick="copyCode(this)">Copy Code</button></div>
+                <pre><code>a = [<span class="num">1</span>, <span class="num">2</span>]
+a.<span class="fn">append</span>(<span class="num">3</span>)
+<span class="fn">print</span>(a)</code></pre>
             </div>
-            <div class="output-box">
-                <div class="output-title">Output</div>
-                [1, 2, 3]
-            </div>
+            <div class="output-box"><div class="output-title">Output</div>[1, 2, 3]</div>
 
             <h3>2. insert():</h3>
-            <p>Adds an element at a specific position.</p>
             <div class="code-box">
-                <div class="code-header">
-                    <span>PYTHON 3</span>
-                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
-                </div>
-                <pre><code>a = [1, 3]
-a.insert(1, 2)
-print(a)</code></pre>
+                <div class="code-header"><span>PYTHON 3</span><button class="copy-btn" onclick="copyCode(this)">Copy Code</button></div>
+                <pre><code>a = [<span class="num">1</span>, <span class="num">3</span>]
+a.<span class="fn">insert</span>(<span class="num">1</span>, <span class="num">2</span>)
+<span class="fn">print</span>(a)</code></pre>
             </div>
-            <div class="output-box">
-                <div class="output-title">Output</div>
-                [1, 2, 3]
-            </div>
+            <div class="output-box"><div class="output-title">Output</div>[1, 2, 3]</div>
 
             <h3>3. extend():</h3>
-            <p>Adds multiple elements to the end of the list.</p>
             <div class="code-box">
-                <div class="code-header">
-                    <span>PYTHON 3</span>
-                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
-                </div>
-                <pre><code>a = [1, 2]
-a.extend([3, 4])
-print(a)</code></pre>
+                <div class="code-header"><span>PYTHON 3</span><button class="copy-btn" onclick="copyCode(this)">Copy Code</button></div>
+                <pre><code>a = [<span class="num">1</span>, <span class="num">2</span>]
+a.<span class="fn">extend</span>([<span class="num">3</span>, <span class="num">4</span>])
+<span class="fn">print</span>(a)</code></pre>
             </div>
-            <div class="output-box">
-                <div class="output-title">Output</div>
-                [1, 2, 3, 4]
-            </div>
+            <div class="output-box"><div class="output-title">Output</div>[1, 2, 3, 4]</div>
 
             <!-- UPDATING ELEMENTS -->
             <h2 id="updating">5. Updating Elements</h2>
-            <p>Since lists are mutable, elements can be updated by assigning new values using their index.</p>
             <div class="code-box">
-                <div class="code-header">
-                    <span>PYTHON 3</span>
-                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
-                </div>
-                <pre><code>a = [10, 20, 30, 40, 50]
-a[1] = 25 
-print(a)</code></pre>
+                <div class="code-header"><span>PYTHON 3</span><button class="copy-btn" onclick="copyCode(this)">Copy Code</button></div>
+                <pre><code>a = [<span class="num">10</span>, <span class="num">20</span>, <span class="num">30</span>, <span class="num">40</span>, <span class="num">50</span>]
+a[<span class="num">1</span>] = <span class="num">25</span> 
+<span class="fn">print</span>(a)</code></pre>
             </div>
-            <div class="output-box">
-                <div class="output-title">Output</div>
-                [10, 25, 30, 40, 50]
-            </div>
+            <div class="output-box"><div class="output-title">Output</div>[10, 25, 30, 40, 50]</div>
 
             <!-- REMOVING ELEMENTS -->
             <h2 id="removing">6. Removing Elements</h2>
-            <p>Elements can be removed from a list using the following methods:</p>
             <h3>1. remove():</h3>
-            <p>Removes the first occurrence of an element.</p>
             <div class="code-box">
-                <div class="code-header">
-                    <span>PYTHON 3</span>
-                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
-                </div>
-                <pre><code>a = [1, 2, 3]
-a.remove(2)
-print(a)</code></pre>
+                <div class="code-header"><span>PYTHON 3</span><button class="copy-btn" onclick="copyCode(this)">Copy Code</button></div>
+                <pre><code>a = [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>]
+a.<span class="fn">remove</span>(<span class="num">2</span>)
+<span class="fn">print</span>(a)</code></pre>
             </div>
-            <div class="output-box">
-                <div class="output-title">Output</div>
-                [1, 3]
-            </div>
+            <div class="output-box"><div class="output-title">Output</div>[1, 3]</div>
 
             <h3>2. pop():</h3>
-            <p>Removes the element at a specific index or the last element if no index is specified.</p>
             <div class="code-box">
-                <div class="code-header">
-                    <span>PYTHON 3</span>
-                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
-                </div>
-                <pre><code>a = [1, 2, 3]
-a.pop()
-print(a)</code></pre>
+                <div class="code-header"><span>PYTHON 3</span><button class="copy-btn" onclick="copyCode(this)">Copy Code</button></div>
+                <pre><code>a = [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>]
+a.<span class="fn">pop</span>()
+<span class="fn">print</span>(a)</code></pre>
             </div>
-            <div class="output-box">
-                <div class="output-title">Output</div>
-                [1, 2]
-            </div>
+            <div class="output-box"><div class="output-title">Output</div>[1, 2]</div>
 
             <h3>3. del statement:</h3>
-            <p>Deletes an element at a specified index.</p>
             <div class="code-box">
-                <div class="code-header">
-                    <span>PYTHON 3</span>
-                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
-                </div>
-                <pre><code>a = [1, 2, 3]
-del a[1]
-print(a)</code></pre>
+                <div class="code-header"><span>PYTHON 3</span><button class="copy-btn" onclick="copyCode(this)">Copy Code</button></div>
+                <pre><code>a = [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>]
+<span class="kw">del</span> a[<span class="num">1</span>]
+<span class="fn">print</span>(a)</code></pre>
             </div>
-            <div class="output-box">
-                <div class="output-title">Output</div>
-                [1, 3]
-            </div>
+            <div class="output-box"><div class="output-title">Output</div>[1, 3]</div>
 
             <h3>4. clear():</h3>
-            <p>Removes all items from the list.</p>
             <div class="code-box">
-                <div class="code-header">
-                    <span>PYTHON 3</span>
-                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
-                </div>
-                <pre><code>a = [1, 2, 3]
-a.clear()
-print(a)</code></pre>
+                <div class="code-header"><span>PYTHON 3</span><button class="copy-btn" onclick="copyCode(this)">Copy Code</button></div>
+                <pre><code>a = [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>]
+a.<span class="fn">clear</span>()
+<span class="fn">print</span>(a)</code></pre>
             </div>
-            <div class="output-box">
-                <div class="output-title">Output</div>
-                []
-            </div>
+            <div class="output-box"><div class="output-title">Output</div>[]</div>
 
             <!-- ITERATING OVER LISTS -->
             <h2 id="iterating">7. Iterating Over Lists</h2>
-            <p>We can use a loop to iterate over a list, allowing operations to be performed on each element.</p>
             <div class="code-box">
-                <div class="code-header">
-                    <span>PYTHON 3</span>
-                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
-                </div>
-                <pre><code>a = ['apple', 'banana', 'cherry']
-for item in a:
-    print(item)</code></pre>
+                <div class="code-header"><span>PYTHON 3</span><button class="copy-btn" onclick="copyCode(this)">Copy Code</button></div>
+                <pre><code>a = [<span class="str">'apple'</span>, <span class="str">'banana'</span>, <span class="str">'cherry'</span>]
+<span class="kw">for</span> item <span class="kw">in</span> a:
+    <span class="fn">print</span>(item)</code></pre>
             </div>
-            <div class="output-box">
-                <div class="output-title">Output</div>
-                apple<br>
-                banana<br>
-                cherry
-            </div>
+            <div class="output-box"><div class="output-title">Output</div>apple<br>banana<br>cherry</div>
 
             <!-- NESTED LISTS -->
             <h2 id="nested">8. Nested Lists</h2>
-            <p>A nested list is a list that contains another list as its element. It is commonly used to represent matrices or tabular data. Nested elements can be accessed by chaining multiple indexes.</p>
             <div class="code-box">
-                <div class="code-header">
-                    <span>PYTHON 3</span>
-                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
-                </div>
-                <pre><code>a = [[1, 2], [3, 4]]
-print(a[0])
-print(a[1][0])</code></pre>
+                <div class="code-header"><span>PYTHON 3</span><button class="copy-btn" onclick="copyCode(this)">Copy Code</button></div>
+                <pre><code>a = [[<span class="num">1</span>, <span class="num">2</span>], [<span class="num">3</span>, <span class="num">4</span>]]
+<span class="fn">print</span>(a[<span class="num">0</span>])
+<span class="fn">print</span>(a[<span class="num">1</span>][<span class="num">0</span>])</code></pre>
             </div>
-            <div class="output-box">
-                <div class="output-title">Output</div>
-                [1, 2]<br>
-                3
-            </div>
+            <div class="output-box"><div class="output-title">Output</div>[1, 2]<br>3</div>
 
-            <!-- NAV LINKS -->
             <div class="nav-links">
                 <a href="class11-cs.html">← CS Hub Main</a>
                 <a href="python-tuples.html">Next: Python Tuples →</a>
@@ -625,7 +475,6 @@ print(a[1][0])</code></pre>
             }
         }
 
-        // Load saved theme preference on page load
         window.addEventListener('DOMContentLoaded', () => {
             const savedTheme = localStorage.getItem('portal-theme');
             if (savedTheme === 'light') {
