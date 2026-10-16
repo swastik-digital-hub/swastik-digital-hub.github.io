@@ -78,7 +78,6 @@
             max-width: 800px;
         }
 
-        /* Main Card */
         .topic-card {
             background: var(--card-bg);
             border: 1px solid var(--border-glow);
@@ -105,7 +104,6 @@
             font-size: 0.95rem;
         }
 
-        /* Action Buttons */
         .action-btn {
             display: block;
             width: 100%;
@@ -128,7 +126,6 @@
             box-shadow: 0 0 12px var(--cyan-accent);
         }
 
-        /* Subsections Container */
         .subsections-wrapper {
             max-height: 0;
             overflow: hidden;
@@ -192,18 +189,13 @@
             transform: translateY(-1px);
         }
 
-        /* Modern Python IDE Playground Box */
-        .ide-preview-box {
-            background: #030810;
+        .ide-container {
+            width: 100%;
+            height: 420px;
             border: 1px solid var(--border-glow);
             border-radius: 8px;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .ide-preview-box p {
-            color: var(--text-secondary);
-            margin-bottom: 15px;
+            margin-top: 15px;
+            background: #1e1e1e;
         }
 
         .back-link {
@@ -235,13 +227,9 @@
                 <p>Explore detailed chapter tutorials for Class 11 Computer Science.</p>
             </div>
 
-            <!-- Main Detailed Topics Button that toggles subsections -->
             <button class="action-btn" onclick="toggleSubsections()">📖 Detailed Topics</button>
 
-            <!-- Python & HTML Subsections -->
             <div id="subSections" class="subsections-wrapper">
-                
-                <!-- Python Sub-card -->
                 <div class="sub-card">
                     <div class="sub-info">
                         <h3>🐍 Python Programming</h3>
@@ -250,7 +238,6 @@
                     <a href="python-lists.html" class="sub-btn">Detailed Topics →</a>
                 </div>
 
-                <!-- HTML Sub-card -->
                 <div class="sub-card">
                     <div class="sub-info">
                         <h3>🌐 HTML & Web Design</h3>
@@ -258,21 +245,18 @@
                     </div>
                     <a href="html-topics.html" class="sub-btn">Detailed Topics →</a>
                 </div>
-
             </div>
         </div>
 
-        <!-- Python Online IDE Card (Replaced broken Trinket embed with a clean runner link & playground) -->
+        <!-- Python Online IDE Card -->
         <div class="topic-card">
             <div class="topic-header">
                 <h2>💻 Python Online IDE</h2>
-                <p>Test and run your Python code snippets instantly in a secure browser environment.</p>
+                <p>Test and run your Python code snippets directly inside the browser.</p>
             </div>
             
-            <div class="ide-preview-box">
-                <p>Click below to open the fully featured live Python compiler in a new window or workspace:</p>
-                <a href="https://www.onlinegdb.com/online_python_compiler" target="_blank" class="action-btn">🚀 Launch Python Compiler (OnlineGDB)</a>
-            </div>
+            <!-- Embedded Online Python Compiler -->
+            <iframe src="https://www.onlinegdb.com/embed/online_python_compiler" width="100%" height="450" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen class="ide-container"></iframe>
         </div>
     </div>
 
