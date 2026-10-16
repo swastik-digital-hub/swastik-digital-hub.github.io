@@ -78,6 +78,7 @@
             max-width: 800px;
         }
 
+        /* Main Card */
         .topic-card {
             background: var(--card-bg);
             border: 1px solid var(--border-glow);
@@ -104,6 +105,7 @@
             font-size: 0.95rem;
         }
 
+        /* Action Buttons */
         .action-btn {
             display: block;
             width: 100%;
@@ -117,7 +119,6 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s ease;
-            box-sizing: border-box;
         }
 
         .action-btn:hover {
@@ -126,6 +127,7 @@
             box-shadow: 0 0 12px var(--cyan-accent);
         }
 
+        /* Subsections Container (Hidden by default) */
         .subsections-wrapper {
             max-height: 0;
             overflow: hidden;
@@ -189,15 +191,6 @@
             transform: translateY(-1px);
         }
 
-        .ide-container {
-            width: 100%;
-            height: 420px;
-            border: 1px solid var(--border-glow);
-            border-radius: 8px;
-            margin-top: 15px;
-            background: #1e1e1e;
-        }
-
         .back-link {
             display: inline-block;
             margin-bottom: 20px;
@@ -220,16 +213,19 @@
     <div class="hub-container">
         <a href="index.html" class="back-link">← Back to Portal Main</a>
 
-        <!-- CS Topics Card with Interactive Detailed Topics Subsections -->
         <div class="topic-card">
             <div class="topic-header">
                 <h2>📋 CS Topics</h2>
                 <p>Explore detailed chapter tutorials for Class 11 Computer Science.</p>
             </div>
 
+            <!-- Main Detailed Topics Button that toggles subsections -->
             <button class="action-btn" onclick="toggleSubsections()">📖 Detailed Topics</button>
 
+            <!-- Python & HTML Subsections -->
             <div id="subSections" class="subsections-wrapper">
+                
+                <!-- Python Sub-card -->
                 <div class="sub-card">
                     <div class="sub-info">
                         <h3>🐍 Python Programming</h3>
@@ -238,6 +234,7 @@
                     <a href="python-lists.html" class="sub-btn">Detailed Topics →</a>
                 </div>
 
+                <!-- HTML Sub-card -->
                 <div class="sub-card">
                     <div class="sub-info">
                         <h3>🌐 HTML & Web Design</h3>
@@ -245,18 +242,8 @@
                     </div>
                     <a href="html-topics.html" class="sub-btn">Detailed Topics →</a>
                 </div>
-            </div>
-        </div>
 
-        <!-- Python Online IDE Card -->
-        <div class="topic-card">
-            <div class="topic-header">
-                <h2>💻 Python Online IDE</h2>
-                <p>Test and run your Python code snippets directly inside the browser.</p>
             </div>
-            
-            <!-- Embedded Online Python Compiler -->
-            <iframe src="https://www.onlinegdb.com/embed/online_python_compiler" width="100%" height="450" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen class="ide-container"></iframe>
         </div>
     </div>
 
