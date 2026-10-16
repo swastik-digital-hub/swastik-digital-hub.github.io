@@ -191,6 +191,15 @@
             transform: translateY(-1px);
         }
 
+        /* Python IDE Section Styling */
+        .ide-container {
+            width: 100%;
+            height: 420px;
+            border: none;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
         .back-link {
             display: inline-block;
             margin-bottom: 20px;
@@ -213,6 +222,7 @@
     <div class="hub-container">
         <a href="index.html" class="back-link">← Back to Portal Main</a>
 
+        <!-- CS Topics Card with Interactive Detailed Topics Subsections -->
         <div class="topic-card">
             <div class="topic-header">
                 <h2>📋 CS Topics</h2>
@@ -228,7 +238,7 @@
                 <!-- Python Sub-card -->
                 <div class="sub-card">
                     <div class="sub-info">
-                        <h2>🐍 Python Programming</h2>
+                        <h3>🐍 Python Programming</h3>
                         <p>Lists, Tuples, Loops, and string manipulation masterclass.</p>
                     </div>
                     <a href="python-lists.html" class="sub-btn">Detailed Topics →</a>
@@ -237,13 +247,23 @@
                 <!-- HTML Sub-card -->
                 <div class="sub-card">
                     <div class="sub-info">
-                        <h2>🌐 HTML & Web Design</h2>
+                        <h3>🌐 HTML & Web Design</h3>
                         <p>Web structure, tags, forms, and formatting elements.</p>
                     </div>
                     <a href="html-topics.html" class="sub-btn">Detailed Topics →</a>
                 </div>
 
             </div>
+        </div>
+
+        <!-- Python IDE / Live Console Card -->
+        <div class="topic-card">
+            <div class="topic-header">
+                <h2>💻 Python Online IDE</h2>
+                <p>Test and run your Python code snippets directly inside the browser.</p>
+            </div>
+            <!-- Embedded Python Online Compiler / IDE -->
+            <iframe src="https://trinket.io/embed/python3/2592994cfc" width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen class="ide-container"></iframe>
         </div>
     </div>
 
