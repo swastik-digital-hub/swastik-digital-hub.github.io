@@ -6,6 +6,7 @@
     <title>Computer Science Practice | Swastik-Tech Portal</title>
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9509706674270233" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
@@ -38,7 +39,7 @@
             background-size: 100% 100%, 30px 30px, 30px 30px;
             color: var(--text-primary);
             margin: 0;
-            padding: 40px 20px;
+            padding: 80px 20px 40px 20px; /* Added top padding to prevent content overlapping header bar */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -51,9 +52,11 @@
             top: 20px;
             right: 30px;
             z-index: 100;
+            display: flex;
+            gap: 12px;
         }
 
-        .theme-toggle-btn {
+        .top-nav-btn {
             background: var(--card-bg);
             color: var(--cyan-accent);
             border: 1px solid var(--border-glow);
@@ -62,12 +65,16 @@
             cursor: pointer;
             font-weight: 600;
             font-size: 13px;
+            text-decoration: none;
             backdrop-filter: blur(10px);
             box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            gap: 6px;
             transition: all 0.2s ease;
         }
 
-        .theme-toggle-btn:hover {
+        .top-nav-btn:hover {
             background: var(--cyan-accent);
             color: #000;
             box-shadow: 0 0 15px var(--cyan-accent);
@@ -205,14 +212,20 @@
 </head>
 <body>
 
+    <!-- Top Right Navigation Bar with Dashboard Icon & Theme Toggle -->
     <div class="top-header-bar">
-        <button class="theme-toggle-btn" onclick="toggleTheme()">⚡ Theme</button>
+        <a href="dashboard.html" class="top-nav-btn" title="Go to Dashboard">
+            <i class="fa-solid fa-gauge-high"></i> Dashboard
+        </a>
+        <button class="top-nav-btn" onclick="toggleTheme()">
+            <i class="fa-solid fa-circle-half-stroke"></i> Theme
+        </button>
     </div>
 
     <div class="hub-container">
         <a href="index.html" class="back-link">← Back to Portal Main</a>
 
-        <!-- Section 1: CS Topics (With Python & HTML Subsections) -->
+        <!-- CS Topics Card with Interactive Detailed Topics Subsections (Python & HTML) -->
         <div class="topic-card">
             <div class="topic-header">
                 <h2>📋 CS Topics</h2>
@@ -225,7 +238,7 @@
                 <!-- Python Sub-section -->
                 <div class="sub-card">
                     <div class="sub-info">
-                        <h3>🐍 Python Programming</h3>
+                        <h3>🐍 Python</h3>
                         <p>Lists, Tuples, Loops, and core programming modules.</p>
                     </div>
                     <a href="python-lists.html" class="sub-btn">Detailed Topics →</a>
@@ -234,7 +247,7 @@
                 <!-- HTML Sub-section -->
                 <div class="sub-card">
                     <div class="sub-info">
-                        <h3>🌐 HTML & Web Design</h3>
+                        <h3>🌐 HTML</h3>
                         <p>Web structure, tags, forms, and layout fundamentals.</p>
                     </div>
                     <a href="html-topics.html" class="sub-btn">Detailed Topics →</a>
@@ -242,11 +255,11 @@
             </div>
         </div>
 
-        <!-- Section 2: Python IDE Card (Links directly to your custom local Python IDE file, e.g., python-ide.html) -->
+        <!-- Python Online IDE Card -->
         <div class="topic-card">
             <div class="topic-header">
                 <h2>💻 Python Online IDE</h2>
-                <p>Test and run your Python code snippets directly inside the Pyodide browser environment.</p>
+                <p>Test and run your Python code snippets directly inside the browser.</p>
             </div>
             
             <a href="python-ide.html" class="action-btn">🚀 Launch Python IDE</a>
