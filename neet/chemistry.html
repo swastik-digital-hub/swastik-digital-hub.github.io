@@ -5,43 +5,224 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chemistry Reference Books | Swastik-Tech</title>
     
-     <!-- Favicon -->
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%2300f3ff%22><path d=%22M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5%22/></svg>">
+    
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google AdSense Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9509706674270233" crossorigin="anonymous"></script>
+
     <style>
         :root {
-            --bg-color: #03151c; --card-bg: rgba(6, 32, 43, 0.85); --card-border: #0e3746;
-            --accent-cyan: #00f3ff; --text-main: #ffffff; --text-muted: #83c5be;
-            --border-glow: rgba(0, 243, 255, 0.25); --header-bg: rgba(3, 21, 28, 0.85);
-            --grid-color: rgba(0, 243, 255, 0.04); --input-bg: rgba(0, 243, 255, 0.04);
+            --bg-color: #03151c; 
+            --card-bg: rgba(6, 32, 43, 0.85); 
+            --card-border: #0e3746;
+            --accent-cyan: #00f3ff; 
+            --text-main: #ffffff; 
+            --text-muted: #83c5be;
+            --border-glow: rgba(0, 243, 255, 0.25); 
+            --header-bg: rgba(3, 21, 28, 0.85);
+            --grid-color: rgba(0, 243, 255, 0.04); 
+            --input-bg: rgba(0, 243, 255, 0.04);
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Rajdhani', 'Orbitron', sans-serif; letter-spacing: 0.5px; }
-        body { background-color: var(--bg-color); background-image: radial-gradient(circle at 50% 20%, rgba(0, 180, 216, 0.12) 0%, transparent 70%), linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px); background-size: 100% 100%, 35px 35px, 35px 35px; color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; }
-        header { height: 60px; padding: 0 2rem; background: var(--header-bg); border-bottom: 1px solid var(--card-border); display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 10; }
-        .header-title { font-family: 'Orbitron', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--accent-cyan); border-left: 3px solid var(--accent-cyan); padding-left: 10px; }
-        .back-btn { background: var(--input-bg); border: 1px solid var(--card-border); color: var(--text-muted); padding: 0.4rem 0.9rem; border-radius: 6px; text-decoration: none; font-size: 0.85rem; font-family: 'Orbitron', sans-serif; transition: all 0.3s; }
-        .back-btn:hover { color: var(--accent-cyan); border-color: var(--accent-cyan); }
-        .portal-container { padding: 2.5rem; max-width: 1200px; margin: 0 auto; width: 100%; display: flex; flex-direction: column; gap: 1.5rem; }
-        .section-tag { font-family: 'Orbitron', sans-serif; font-size: 0.9rem; color: var(--text-muted); letter-spacing: 1.5px; text-transform: uppercase; }
-        .books-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
-        .book-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.8rem; display: flex; flex-direction: column; gap: 1rem; transition: all 0.3s ease; }
-        .book-card:hover { border-color: var(--accent-cyan); box-shadow: 0 0 20px var(--border-glow); transform: translateY(-2px); }
-        .book-info { display: flex; align-items: flex-start; gap: 1rem; }
-        .book-icon { font-size: 2rem; color: #ff4d4d; }
-        .book-details h3 { font-family: 'Orbitron', sans-serif; font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; }
-        .pdf-badge { background: rgba(255, 77, 77, 0.15); color: #ff6b6b; font-size: 0.65rem; padding: 2px 6px; border-radius: 4px; font-family: 'Orbitron', sans-serif; }
-        .book-meta { font-size: 0.85rem; color: var(--text-muted); }
-        .download-btn { background: var(--input-bg); border: 1px solid var(--card-border); color: var(--accent-cyan); padding: 0.6rem 1rem; border-radius: 6px; font-size: 0.85rem; font-family: 'Orbitron', sans-serif; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: auto; transition: all 0.3s; }
-        .download-btn:hover { background: rgba(0, 243, 255, 0.1); border-color: var(--accent-cyan); box-shadow: 0 0 10px var(--border-glow); }
+
+        body.light-mode {
+            --bg-color: #f1f5f9;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --card-border: #cbd5e1;
+            --accent-cyan: #059669;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-glow: rgba(5, 150, 105, 0.25);
+            --header-bg: rgba(241, 245, 249, 0.85);
+            --grid-color: rgba(5, 150, 105, 0.04);
+            --input-bg: rgba(5, 150, 105, 0.04);
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Rajdhani', 'Orbitron', sans-serif; 
+            letter-spacing: 0.5px; 
+        }
+
+        body { 
+            background-color: var(--bg-color); 
+            background-image: 
+                radial-gradient(circle at 50% 20%, rgba(0, 180, 216, 0.12) 0%, transparent 70%), 
+                linear-gradient(var(--grid-color) 1px, transparent 1px), 
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px); 
+            background-size: 100% 100%, 35px 35px, 35px 35px; 
+            color: var(--text-main); 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        header { 
+            height: 60px; 
+            padding: 0 2rem; 
+            background: var(--header-bg); 
+            border-bottom: 1px solid var(--card-border); 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            position: sticky; 
+            top: 0; 
+            z-index: 10; 
+            backdrop-filter: blur(10px);
+        }
+
+        .header-title { 
+            font-family: 'Orbitron', sans-serif; 
+            font-size: 1.1rem; 
+            font-weight: 700; 
+            color: var(--accent-cyan); 
+            border-left: 3px solid var(--accent-cyan); 
+            padding-left: 10px; 
+        }
+
+        .top-nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-btn { 
+            background: var(--input-bg); 
+            border: 1px solid var(--card-border); 
+            color: var(--accent-cyan); 
+            padding: 0.4rem 0.9rem; 
+            border-radius: 6px; 
+            text-decoration: none; 
+            font-size: 0.85rem; 
+            font-family: 'Orbitron', sans-serif; 
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.3s; 
+        }
+
+        .nav-btn:hover { 
+            background: rgba(0, 243, 255, 0.1); 
+            border-color: var(--accent-cyan); 
+            box-shadow: 0 0 10px var(--border-glow);
+        }
+
+        .portal-container { 
+            padding: 2.5rem; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            width: 100%; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 1.5rem; 
+        }
+
+        .section-heading { 
+            font-family: 'Orbitron', sans-serif; 
+            font-size: 0.95rem; 
+            color: var(--text-muted); 
+            letter-spacing: 1.5px; 
+            text-transform: uppercase; 
+        }
+
+        /* PDF Card Styling */
+        .pdf-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+        }
+
+        .pdf-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px var(--border-glow);
+        }
+
+        .pdf-top {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.2rem;
+        }
+
+        .pdf-top i {
+            font-size: 2rem;
+            color: var(--accent-cyan);
+        }
+
+        .pdf-details h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 6px;
+        }
+
+        .pdf-details p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .card-divider {
+            height: 1px;
+            background: var(--card-border);
+            width: 100%;
+        }
+
+        /* Action Buttons Styling */
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .btn-view, .btn-download {
+            background: var(--input-bg);
+            border: 1px solid var(--card-border);
+            color: var(--accent-cyan);
+            padding: 0.5rem 1.2rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-family: 'Orbitron', sans-serif;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-view:hover, .btn-download:hover {
+            background: var(--accent-cyan);
+            color: #000;
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 12px var(--accent-cyan);
+        }
     </style>
 </head>
 <body>
+
     <header>
         <div class="header-title">| Chemistry Library</div>
-        <a href="books.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Books Hub</a>
+        <div class="top-nav-right">
+            <button onclick="toggleTheme()" class="nav-btn"><i class="fa-solid fa-circle-half-stroke"></i> Theme</button>
+            <a href="books.html" class="nav-btn"><i class="fa-solid fa-arrow-left"></i> Books Hub</a>
+        </div>
     </header>
+
     <main class="portal-container">
         <div class="section-heading">Available Chemistry Books & Handbooks</div>
 
@@ -65,5 +246,23 @@
             </div>
         </div>
     </main>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            if (document.body.classList.contains('light-mode')) {
+                localStorage.setItem('portal-theme', 'light');
+            } else {
+                localStorage.setItem('portal-theme', 'dark');
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('portal-theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-mode');
+            }
+        });
+    </script>
 </body>
 </html>
