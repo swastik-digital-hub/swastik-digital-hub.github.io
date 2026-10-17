@@ -4,14 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reference Books Library | Swastik-Tech</title>
-
-     <!-- Favicon -->
+    
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%2300f3ff%22><path d=%22M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5%22/></svg>">
+
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <!-- Google AdSense Script -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUB_ID_HERE" crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9509706674270233" crossorigin="anonymous"></script>
 
     <style>
         :root {
@@ -26,6 +28,20 @@
             --header-bg: rgba(3, 21, 28, 0.85);
             --grid-color: rgba(0, 243, 255, 0.04);
             --input-bg: rgba(0, 243, 255, 0.04);
+        }
+
+        body.light-mode {
+            --bg-color: #f1f5f9;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --card-border: #cbd5e1;
+            --accent-cyan: #059669;
+            --accent-blue: #047857;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-glow: rgba(5, 150, 105, 0.25);
+            --header-bg: rgba(241, 245, 249, 0.85);
+            --grid-color: rgba(5, 150, 105, 0.04);
+            --input-bg: rgba(5, 150, 105, 0.04);
         }
 
         * {
@@ -47,6 +63,7 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         header {
@@ -60,6 +77,7 @@
             position: sticky;
             top: 0;
             z-index: 10;
+            backdrop-filter: blur(10px);
         }
 
         .header-title {
@@ -70,23 +88,35 @@
             border-left: 3px solid var(--accent-cyan);
             padding-left: 10px;
             letter-spacing: 1px;
+            text-decoration: none;
         }
 
-        .back-btn {
+        .top-nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-btn {
             background: var(--input-bg);
             border: 1px solid var(--card-border);
-            color: var(--text-muted);
+            color: var(--accent-cyan);
             padding: 0.4rem 0.9rem;
             border-radius: 6px;
             text-decoration: none;
             font-size: 0.85rem;
             font-family: 'Orbitron', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
             transition: all 0.3s;
         }
 
-        .back-btn:hover {
-            color: var(--accent-cyan);
+        .nav-btn:hover {
+            background: rgba(0, 243, 255, 0.1);
             border-color: var(--accent-cyan);
+            box-shadow: 0 0 10px var(--border-glow);
         }
 
         .portal-container {
@@ -96,7 +126,7 @@
             width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 2rem;
         }
 
         .section-tag {
@@ -107,10 +137,9 @@
             text-transform: uppercase;
         }
 
-        /* 4-Card Subject Grid */
-        .subjects-grid {
+        .subject-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
         }
 
@@ -118,53 +147,59 @@
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 12px;
-            padding: 2rem;
-            text-decoration: none;
-            color: var(--text-main);
-            transition: all 0.3s ease;
+            padding: 1.8rem;
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
+            gap: 1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
         }
 
         .subject-card:hover {
             border-color: var(--accent-cyan);
-            transform: translateY(-3px);
             box-shadow: 0 0 20px var(--border-glow);
+            transform: translateY(-2px);
         }
 
-        .subject-card i.main-icon {
-            font-size: 2.2rem;
+        .subject-icon {
+            font-size: 2rem;
             color: var(--accent-cyan);
-            margin-bottom: 1.2rem;
         }
 
-        .subject-card h3 {
+        .subject-title {
             font-family: 'Orbitron', sans-serif;
             font-size: 1.2rem;
-            margin-bottom: 0.6rem;
             font-weight: 700;
+            color: var(--text-main);
         }
 
-        .subject-card p {
-            font-size: 0.9rem;
+        .subject-desc {
             color: var(--text-muted);
-            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
             line-height: 1.5;
+            margin-bottom: 0.5rem;
         }
 
-        .card-link {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.85rem;
+        .action-btn {
+            background: var(--input-bg);
+            border: 1px solid var(--card-border);
             color: var(--accent-cyan);
-            display: flex;
+            padding: 0.5rem 1.2rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-family: 'Orbitron', sans-serif;
+            text-decoration: none;
+            display: inline-flex;
             align-items: center;
             gap: 8px;
-            margin-top: auto;
+            align-self: flex-start;
+            transition: all 0.3s;
         }
 
-        @media(max-width: 768px) {
-            .subjects-grid { grid-template-columns: 1fr; }
+        .action-btn:hover {
+            background: rgba(0, 243, 255, 0.1);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 10px var(--border-glow);
         }
     </style>
 </head>
@@ -172,46 +207,67 @@
 
     <header>
         <div class="header-title">| Reference Books Library</div>
-        <a href="neet-hub.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> NEET Hub</a>
+        <!-- Top Right Navigation Bar with Theme & NEET Hub -->
+        <div class="top-nav-right">
+            <button onclick="toggleTheme()" class="nav-btn"><i class="fa-solid fa-circle-half-stroke"></i> Theme</button>
+            <a href="neet-hub.html" class="nav-btn"><i class="fa-solid fa-arrow-left"></i> NEET Hub</a>
+        </div>
     </header>
 
     <main class="portal-container">
         <div class="section-tag">Select Subject Section</div>
         
-        <div class="subjects-grid">
-            <!-- Physics -->
-            <a href="physics.html" class="subject-card">
-                <i class="fa-solid fa-atom main-icon"></i>
-                <h3>Physics</h3>
-                <p>Mechanics, Electrodynamics, Optics, and Advanced Problem-Solving Modules.</p>
-                <div class="card-link">Open Library <i class="fa-solid fa-arrow-right"></i></div>
-            </a>
+        <div class="subject-grid">
+            <!-- Physics Card -->
+            <div class="subject-card">
+                <i class="fa-solid fa-atom subject-icon"></i>
+                <div class="subject-title">Physics</div>
+                <p class="subject-desc">Mechanics, Electrodynamics, Optics, and Advanced Problem-Solving Modules.</p>
+                <a href="physics.html" class="action-btn">Open Library <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
 
-            <!-- Chemistry -->
-            <a href="chemistry.html" class="subject-card">
-                <i class="fa-solid fa-flask main-icon"></i>
-                <h3>Chemistry</h3>
-                <p>Physical Chemistry Numericals, Organic Reaction Sets, and Inorganic Notes.</p>
-                <div class="card-link">Open Library <i class="fa-solid fa-arrow-right"></i></div>
-            </a>
+            <!-- Chemistry Card -->
+            <div class="subject-card">
+                <i class="fa-solid fa-flask subject-icon"></i>
+                <div class="subject-title">Chemistry</div>
+                <p class="subject-desc">Physical Chemistry Numericals, Organic Reaction Sets, and Inorganic Notes.</p>
+                <a href="chemistry.html" class="action-btn">Open Library <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
 
-            <!-- Botany -->
-            <a href="botany.html" class="subject-card">
-                <i class="fa-solid fa-seedling main-icon"></i>
-                <h3>Botany</h3>
-                <p>Plant Physiology, Genetics, Cell Biology, and NCERT Line-by-Line Modules.</p>
-                <div class="card-link">Open Library <i class="fa-solid fa-arrow-right"></i></div>
-            </a>
+            <!-- Botany Card -->
+            <div class="subject-card">
+                <i class="fa-solid fa-plant-wilt subject-icon"></i>
+                <div class="subject-title">Botany</div>
+                <p class="subject-desc">Plant Physiology, Genetics, Cell Biology, and NCERT Line-by-Line Modules.</p>
+                <a href="botany.html" class="action-btn">Open Library <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
 
-            <!-- Zoology -->
-            <a href="zoology.html" class="subject-card">
-                <i class="fa-solid fa-dna main-icon"></i>
-                <h3>Zoology</h3>
-                <p>Human Physiology, Animal Kingdom, Biotechnology, and High-Yield Question Banks.</p>
-                <div class="card-link">Open Library <i class="fa-solid fa-arrow-right"></i></div>
-            </a>
+            <!-- Zoology Card -->
+            <div class="subject-card">
+                <i class="fa-solid fa-dna subject-icon"></i>
+                <div class="subject-title">Zoology</div>
+                <p class="subject-desc">Human Physiology, Animal Kingdom, Biotechnology, and High-Yield Question Banks.</p>
+                <a href="zoology.html" class="action-btn">Open Library <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
         </div>
     </main>
 
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            if (document.body.classList.contains('light-mode')) {
+                localStorage.setItem('portal-theme', 'light');
+            } else {
+                localStorage.setItem('portal-theme', 'dark');
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('portal-theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-mode');
+            }
+        });
+    </script>
 </body>
 </html>
