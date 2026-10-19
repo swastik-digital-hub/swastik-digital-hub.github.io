@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEET Physics Reference & Study Hub | Swastik-Tech</title>
+    <title>NEET Physics Library | Swastik-Tech</title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%2300f3ff%22><path d=%22M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5%22/></svg>">
@@ -69,6 +69,7 @@
         .header-title {
             font-family: 'Orbitron', sans-serif; font-size: 1.1rem; font-weight: 700;
             color: var(--accent-cyan); border-left: 3px solid var(--accent-cyan); padding-left: 10px;
+            text-decoration: none;
         }
 
         .top-nav-right { display: flex; align-items: center; gap: 12px; }
@@ -81,38 +82,37 @@
         }
         .nav-btn:hover { background: rgba(0, 243, 255, 0.1); border-color: var(--accent-cyan); box-shadow: 0 0 10px var(--border-glow); }
 
-        .portal-container { padding: 2.5rem; max-width: 1200px; margin: 0 auto; width: 100%; display: flex; flex-direction: column; gap: 1.5rem; }
-        .section-tag { font-family: 'Orbitron', sans-serif; font-size: 0.9rem; color: var(--text-muted); letter-spacing: 1.5px; text-transform: uppercase; }
-
-        .books-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
-
-        .book-card {
+        .portal-container { padding: 2.5rem; max-width: 1100px; margin: 0 auto; width: 100%; display: flex; flex-direction: column; gap: 1.5rem; }
+        
+        .study-notes-card {
             background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px;
-            padding: 1.8rem; display: flex; flex-direction: column; gap: 1rem; transition: all 0.3s ease;
-            backdrop-filter: blur(8px);
+            padding: 1.8rem; backdrop-filter: blur(8px); line-height: 1.6;
         }
-        .book-card:hover { border-color: var(--accent-cyan); box-shadow: 0 0 20px var(--border-glow); transform: translateY(-2px); }
+        .study-notes-card h2 { font-family: 'Orbitron', sans-serif; color: var(--accent-cyan); font-size: 1.2rem; margin-bottom: 0.8rem; }
+        .study-notes-card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem; }
+        .notes-list { margin-left: 1.2rem; color: var(--text-main); font-size: 0.95rem; display: flex; flex-direction: column; gap: 0.6rem; }
 
-        .book-info { display: flex; align-items: flex-start; gap: 1rem; }
-        .book-icon { font-size: 2rem; color: var(--accent-cyan); }
-        .book-details h3 { font-family: 'Orbitron', sans-serif; font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; color: var(--text-main); }
-        .book-details p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; }
+        .section-tag { font-family: 'Orbitron', sans-serif; font-size: 0.95rem; color: var(--text-muted); letter-spacing: 1.5px; text-transform: uppercase; }
 
-        /* PDF Card Styling */
         .pdf-card {
             background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px;
             padding: 1.8rem; display: flex; flex-direction: column; gap: 1rem; transition: all 0.3s ease;
             backdrop-filter: blur(8px);
         }
         .pdf-card:hover { border-color: var(--accent-cyan); box-shadow: 0 0 20px var(--border-glow); }
+        .pdf-top { display: flex; align-items: flex-start; gap: 1.2rem; }
+        .pdf-top i { font-size: 2.1rem; color: var(--accent-cyan); }
+        .pdf-details h4 { font-family: 'Orbitron', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--text-main); margin-bottom: 6px; }
+        .pdf-details p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.4; }
         .card-divider { height: 1px; background: var(--card-border); width: 100%; }
-        .action-buttons { display: flex; gap: 12px; }
+        
+        .action-buttons { display: flex; gap: 12px; align-items: center; }
         .btn-action {
             background: var(--input-bg); border: 1px solid var(--card-border); color: var(--accent-cyan);
             padding: 0.5rem 1.2rem; border-radius: 6px; font-size: 0.85rem; font-family: 'Orbitron', sans-serif;
             text-decoration: none; display: inline-flex; align-items: center; gap: 8px; font-weight: 600; transition: all 0.3s;
         }
-        .btn-action:hover { background: var(--accent-cyan); color: #000; box-shadow: 0 0 12px var(--accent-cyan); }
+        .btn-action:hover { background: var(--accent-cyan); color: #000; border-color: var(--accent-cyan); box-shadow: 0 0 12px var(--accent-cyan); }
 
         footer {
             margin-top: auto; padding: 1.5rem; text-align: center; border-top: 1px solid var(--card-border);
@@ -124,78 +124,39 @@
 </head>
 <body>
     <header>
-        <div class="header-title">| NEET Physics Library</div>
+        <a href="neet-hub.html" class="header-title">| NEET Physics Library</a>
         <div class="top-nav-right">
             <button onclick="toggleTheme()" class="nav-btn"><i class="fa-solid fa-circle-half-stroke"></i> Theme</button>
-            <a href="books.html" class="nav-btn"><i class="fa-solid fa-arrow-left"></i> Books Hub</a>
+            <a href="neet-hub.html" class="nav-btn"><i class="fa-solid fa-arrow-left"></i> Hub</a>
         </div>
     </header>
 
     <main class="portal-container">
-        <!-- Educational Study Notes Block for SEO & AdSense -->
-        <div class="section-tag">NEET Physics High-Yield Core Modules</div>
-        
-        <div class="books-grid">
-            <!-- Module 1 -->
-            <div class="book-card">
-                <div class="book-info">
-                    <i class="fa-solid fa-gauge-high book-icon"></i>
-                    <div class="book-details">
-                        <h3>Mechanics & Kinematics</h3>
-                        <p>In-depth conceptual study covering vectors, projectile motion, Newton's laws of motion, work-energy theorem, and rotational dynamics.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Module 2 -->
-            <div class="book-card">
-                <div class="book-info">
-                    <i class="fa-solid fa-bolt book-icon"></i>
-                    <div class="book-details">
-                        <h3>Electrodynamics & Circuits</h3>
-                        <p>Core analysis of electrostatic potential, capacitance, current electricity, magnetic effects of current, and electromagnetic induction.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Module 3 -->
-            <div class="book-card">
-                <div class="book-info">
-                    <i class="fa-solid fa-lightbulb book-icon"></i>
-                    <div class="book-details">
-                        <h3>Optics & Wave Theory</h3>
-                        <p>Comprehensive review of ray optics, optical instruments, wave front analysis, interference, diffraction, and dual nature of matter.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Module 4 -->
-            <div class="book-card">
-                <div class="book-info">
-                    <i class="fa-solid fa-fire book-icon"></i>
-                    <div class="book-details">
-                        <h3>Thermodynamics & Modern Physics</h3>
-                        <p>Exploration of laws of thermodynamics, kinetic theory of gases, atomic structure, nuclei behavior, and semiconductor electronics.</p>
-                    </div>
-                </div>
-            </div>
+        <!-- Indexable Text Block for AdSense Compliance -->
+        <div class="study-notes-card">
+            <h2>⚡ NEET Physics Quick Review & Formula Handbook</h2>
+            <p>Mastering core principles in mechanics, electrodynamics, optics, and thermodynamics is critical for cracking medical entrance examinations. Review high-yield concepts below:</p>
+            <ul class="notes-list">
+                <li><strong>Formula Memorization:</strong> Direct access to shortcut formulas and dimensional analysis tools.</li>
+                <li><strong>Problem-Solving Efficiency:</strong> Designed to accelerate numerical evaluation speed during mock tests.</li>
+            </ul>
         </div>
 
-        <div class="section-tag" style="margin-top: 1rem;">Featured Physics Reference Material</div>
+        <div class="section-tag">Featured Reference File</div>
 
-        <!-- PDF Card matching exact VS Code path -->
+        <!-- Single Target PDF Card -->
         <div class="pdf-card">
-            <div class="book-info">
-                <i class="fa-solid fa-file-pdf book-icon"></i>
-                <div class="book-details">
-                    <h3>PHYSICS MED EASY.pdf</h3>
-                    <p>High-yield formula handbook and quick problem-solving techniques designed for NEET aspirants.</p>
+            <div class="pdf-top">
+                <i class="fa-solid fa-file-pdf"></i>
+                <div class="pdf-details">
+                    <h4>PHYSICS MED EASY.pdf</h4>
+                    <p>High-yield formula handbook and quick problem-solving techniques designed specifically for NEET aspirants.</p>
                 </div>
             </div>
             <div class="card-divider"></div>
             <div class="action-buttons">
-                <a href="Books-Pdf/Physics/PHYSICS MED EASY.pdf" target="_blank" class="btn-action"><i class="fa-solid fa-eye"></i> View PDF</a>
-                <a href="Books-Pdf/Physics/PHYSICS MED EASY.pdf" download class="btn-action"><i class="fa-solid fa-download"></i> Download PDF</a>
+                <a href="Books-Pdf/Physics/PHYSICS MED EASY.pdf" target="_blank" class="btn-action"><i class="fa-solid fa-eye"></i> View</a>
+                <a href="Books-Pdf/Physics/PHYSICS MED EASY.pdf" download class="btn-action"><i class="fa-solid fa-download"></i> Download</a>
             </div>
         </div>
     </main>
