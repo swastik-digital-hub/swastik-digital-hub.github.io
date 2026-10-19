@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class 11 Biology Library | Swastik-Tech</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%2300f3ff%22><path d=%22M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5%22/></svg>">
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google AdSense Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9509706674270233" crossorigin="anonymous"></script>
+
+    <style>
+        :root {
+            --bg-color: #03151c; 
+            --card-bg: rgba(6, 32, 43, 0.85); 
+            --card-border: #0e3746;
+            --accent-cyan: #00f3ff; 
+            --text-main: #ffffff; 
+            --text-muted: #83c5be;
+            --border-glow: rgba(0, 243, 255, 0.25); 
+            --header-bg: rgba(3, 21, 28, 0.85);
+            --grid-color: rgba(0, 243, 255, 0.04); 
+            --input-bg: rgba(0, 243, 255, 0.04);
+        }
+
+        body.light-mode {
+            --bg-color: #f1f5f9;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --card-border: #cbd5e1;
+            --accent-cyan: #059669;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-glow: rgba(5, 150, 105, 0.25);
+            --header-bg: rgba(241, 245, 249, 0.85);
+            --grid-color: rgba(5, 150, 105, 0.04);
+            --input-bg: rgba(5, 150, 105, 0.04);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Rajdhani', 'Orbitron', sans-serif; letter-spacing: 0.5px; }
+
+        body { 
+            background-color: var(--bg-color); 
+            background-image: 
+                radial-gradient(circle at 50% 20%, rgba(0, 180, 216, 0.12) 0%, transparent 70%), 
+                linear-gradient(var(--grid-color) 1px, transparent 1px), 
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px); 
+            background-size: 100% 100%, 35px 35px, 35px 35px; 
+            color: var(--text-main); 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        header { 
+            height: 60px; 
+            padding: 0 2rem; 
+            background: var(--header-bg); 
+            border-bottom: 1px solid var(--card-border); 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            position: sticky; 
+            top: 0; 
+            z-index: 10; 
+            backdrop-filter: blur(10px);
+        }
+
+        .header-title { 
+            font-family: 'Orbitron', sans-serif; 
+            font-size: 1.1rem; 
+            font-weight: 700; 
+            color: var(--accent-cyan); 
+            border-left: 3px solid var(--accent-cyan); 
+            padding-left: 10px; 
+            text-decoration: none;
+        }
+
+        .top-nav-right { display: flex; align-items: center; gap: 12px; }
+
+        .nav-btn { 
+            background: var(--input-bg); 
+            border: 1px solid var(--card-border); 
+            color: var(--accent-cyan); 
+            padding: 0.4rem 0.9rem; 
+            border-radius: 6px; 
+            text-decoration: none; 
+            font-size: 0.85rem; 
+            font-family: 'Orbitron', sans-serif; 
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.3s; 
+        }
+
+        .nav-btn:hover { 
+            background: rgba(0, 243, 255, 0.1); 
+            border-color: var(--accent-cyan); 
+            box-shadow: 0 0 10px var(--border-glow);
+        }
+
+        .portal-container { 
+            padding: 2.5rem; 
+            max-width: 1100px; 
+            margin: 0 auto; 
+            width: 100%; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 1.5rem; 
+        }
+
+        .section-heading { 
+            font-family: 'Orbitron', sans-serif; 
+            font-size: 0.95rem; 
+            color: var(--text-muted); 
+            letter-spacing: 1.5px; 
+            text-transform: uppercase; 
+        }
+
+        /* Class 11 Written Educational Content Block */
+        .study-notes-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1.8rem;
+            backdrop-filter: blur(8px);
+            line-height: 1.6;
+        }
+
+        .study-notes-card h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent-cyan);
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .study-notes-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .notes-list {
+            margin-left: 1.2rem;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        /* PDF Card Styling */
+        .pdf-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+        }
+
+        .pdf-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px var(--border-glow);
+        }
+
+        .pdf-top { display: flex; align-items: flex-start; gap: 1.2rem; }
+        .pdf-top i { font-size: 2rem; color: var(--accent-cyan); }
+        .pdf-details h4 { font-family: 'Orbitron', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--text-main); margin-bottom: 6px; }
+        .pdf-details p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.4; }
+        .card-divider { height: 1px; background: var(--card-border); width: 100%; }
+
+        .action-buttons { display: flex; gap: 12px; align-items: center; }
+
+        .btn-action {
+            background: var(--input-bg);
+            border: 1px solid var(--card-border);
+            color: var(--accent-cyan);
+            padding: 0.5rem 1.2rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-family: 'Orbitron', sans-serif;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-action:hover {
+            background: var(--accent-cyan);
+            color: #000;
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 12px var(--accent-cyan);
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 1.5rem;
+            text-align: center;
+            border-top: 1px solid var(--card-border);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        footer a { color: var(--accent-cyan); text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="class11-hub.html" class="header-title">| Class 11 Biology Library</a>
+        <div class="top-nav-right">
+            <button onclick="toggleTheme()" class="nav-btn"><i class="fa-solid fa-circle-half-stroke"></i> Theme</button>
+            <a href="class11-hub.html" class="nav-btn"><i class="fa-solid fa-arrow-left"></i> Hub</a>
+        </div>
+    </header>
+
+    <main class="portal-container">
+        <!-- Class 11 Educational Study Notes Block for SEO & AdSense -->
+        <div class="study-notes-card">
+            <h2>🌱 Class 11 Biology High-Yield Core Topics</h2>
+            <p>Class 11 Biology forms the bedrock of fundamental life sciences and competitive medical exams. Key high-priority units include:</p>
+            
+            <ul class="notes-list">
+                <li><strong>Diversity in Living Organisms:</strong> Five Kingdom Classification system (Whittaker), Monera, Protista, Fungi, Plant Kingdom (Gymnosperms/Angiosperms), and Animal Kingdom phyla traits.</li>
+                <li><strong>Cell Structure & Division:</strong> Prokaryotic vs. Eukaryotic organelle mechanisms, Fluid Mosaic Model, Biomolecules (Proteins, Lipids, Enzymes), and Mitosis/Meiosis cell cycle checkpoints.</li>
+                <li><strong>Plant Physiology:</strong> Photosynthesis in higher plants (C3 and C4 pathways, Calvin Cycle), cellular respiration (Glycolysis, Krebs Cycle), and plant growth regulators (Auxins, Gibberellins, Cytokinins).</li>
+                <li><strong>Human Physiology:</strong> Breathing and gas exchange mechanisms, body fluids and circulation (cardiac cycle), excretory products (nephron function), and neural coordination.</li>
+            </ul>
+        </div>
+
+        <div class="section-heading">Class 11 Biology Resources & Question Banks</div>
+
+        <!-- Class 11 Biology Notes Card -->
+        <div class="pdf-card">
+            <div class="pdf-top">
+                <i class="fa-solid fa-file-pdf"></i>
+                <div class="pdf-details">
+                    <h4>Class_11_Biology_Comprehensive_Notes.pdf</h4>
+                    <p>NCERT line-by-line summary charts, labeled anatomical diagrams, and chapter revision modules.</p>
+                </div>
+            </div>
+            <div class="card-divider"></div>
+            <div class="action-buttons">
+                <a href="pdfs/Class_11_Biology_Notes.pdf" target="_blank" class="btn-action">
+                    <i class="fa-solid fa-eye"></i> View
+                </a>
+                <a href="pdfs/Class_11_Biology_Notes.pdf" download class="btn-action">
+                    <i class="fa-solid fa-download"></i> Download
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer linking to root compliance pages -->
+    <footer>
+        <span>Swastik-Tech © 2026</span>
+        <a href="../privacy-policy.html">Privacy Policy</a>
+        <a href="../about.html">About Us</a>
+        <a href="../contact.html">Contact Us</a>
+    </footer>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            localStorage.setItem('portal-theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+        }
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('portal-theme') === 'light') {
+                document.body.classList.add('light-mode');
+            }
+        });
+    </script>
+</body>
+</html>
