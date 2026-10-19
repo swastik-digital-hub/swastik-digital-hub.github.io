@@ -42,13 +42,7 @@
             --input-bg: rgba(5, 150, 105, 0.04);
         }
 
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
-            font-family: 'Rajdhani', 'Orbitron', sans-serif; 
-            letter-spacing: 0.5px; 
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Rajdhani', 'Orbitron', sans-serif; letter-spacing: 0.5px; }
 
         body { 
             background-color: var(--bg-color); 
@@ -85,13 +79,10 @@
             color: var(--accent-cyan); 
             border-left: 3px solid var(--accent-cyan); 
             padding-left: 10px; 
+            text-decoration: none;
         }
 
-        .top-nav-right {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+        .top-nav-right { display: flex; align-items: center; gap: 12px; }
 
         .nav-btn { 
             background: var(--input-bg); 
@@ -117,7 +108,7 @@
 
         .portal-container { 
             padding: 2.5rem; 
-            max-width: 1200px; 
+            max-width: 1100px; 
             margin: 0 auto; 
             width: 100%; 
             display: flex; 
@@ -133,6 +124,38 @@
             text-transform: uppercase; 
         }
 
+        /* Written Educational Content Block (Adds Text Value for AdSense) */
+        .study-notes-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1.8rem;
+            backdrop-filter: blur(8px);
+            line-height: 1.6;
+        }
+
+        .study-notes-card h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent-cyan);
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .study-notes-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .notes-list {
+            margin-left: 1.2rem;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
         /* PDF Card Styling */
         .pdf-card {
             background: var(--card-bg);
@@ -146,48 +169,13 @@
             backdrop-filter: blur(8px);
         }
 
-        .pdf-card:hover {
-            border-color: var(--accent-cyan);
-            box-shadow: 0 0 20px var(--border-glow);
-        }
+        .pdf-top { display: flex; align-items: flex-start; gap: 1.2rem; }
+        .pdf-top i { font-size: 2rem; color: var(--accent-cyan); }
+        .pdf-details h4 { font-family: 'Orbitron', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--text-main); margin-bottom: 6px; }
+        .pdf-details p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.4; }
+        .card-divider { height: 1px; background: var(--card-border); width: 100%; }
 
-        .pdf-top {
-            display: flex;
-            align-items: flex-start;
-            gap: 1.2rem;
-        }
-
-        .pdf-top i {
-            font-size: 2rem;
-            color: var(--accent-cyan);
-        }
-
-        .pdf-details h4 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 6px;
-        }
-
-        .pdf-details p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            line-height: 1.4;
-        }
-
-        .card-divider {
-            height: 1px;
-            background: var(--card-border);
-            width: 100%;
-        }
-
-        /* Action Buttons Styling */
-        .action-buttons {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-        }
+        .action-buttons { display: flex; gap: 12px; align-items: center; }
 
         .btn-view, .btn-download {
             background: var(--input-bg);
@@ -211,12 +199,27 @@
             border-color: var(--accent-cyan);
             box-shadow: 0 0 12px var(--accent-cyan);
         }
+
+        footer {
+            margin-top: auto;
+            padding: 1.5rem;
+            text-align: center;
+            border-top: 1px solid var(--card-border);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        footer a { color: var(--accent-cyan); text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="header-title">| Chemistry Library</div>
+        <a href="books.html" class="header-title">| Chemistry Library</a>
         <div class="top-nav-right">
             <button onclick="toggleTheme()" class="nav-btn"><i class="fa-solid fa-circle-half-stroke"></i> Theme</button>
             <a href="books.html" class="nav-btn"><i class="fa-solid fa-arrow-left"></i> Books Hub</a>
@@ -224,42 +227,58 @@
     </header>
 
     <main class="portal-container">
+        <!-- Educational Text Block to increase indexable text content -->
+        <div class="study-notes-card">
+            <h2>🧪 High-Yield Chemistry Revision Notes</h2>
+            <p>Mastering Class 11 Organic Chemistry requires a strong conceptual understanding of electronic effects, reaction intermediates, and fundamental IUPAC rules. Key high-frequency exam topics include:</p>
+            
+            <ul class="notes-list">
+                <li><strong>Inductive Effect (±I):</strong> Permanent displacement of sigma electrons along a carbon chain due to electronegativity differences.</li>
+                <li><strong>Resonance Effect (±R/±M):</strong> Delocalization of pi electrons in conjugated systems, heavily influencing molecular stability and acidity.</li>
+                <li><strong>Hyperconjugation (No-Bond Resonance):</strong> Delocalization of alpha-C-H sigma electrons with adjacent vacant p-orbitals, stabilizing carbocations and alkenes.</li>
+                <li><strong>Electrophilic Addition Reactions:</strong> Addition of reagents across unsymmetrical double bonds governed by Markovnikov's Rule.</li>
+            </ul>
+        </div>
+
         <div class="section-heading">Available Chemistry Books & Handbooks</div>
 
-        <!-- 1. Chemistry_arihant_handbook -->
+        <!-- Chemistry Arihant Handbook PDF Card -->
         <div class="pdf-card">
             <div class="pdf-top">
                 <i class="fa-solid fa-file-pdf"></i>
                 <div class="pdf-details">
                     <h4>Chemistry_arihant_handbook</h4>
-                    <p>Comprehensive Organic Chemistry theory, reaction mechanisms & advanced practice modules</p>
+                    <p>Comprehensive Organic Chemistry theory, reaction mechanisms & advanced practice modules.</p>
                 </div>
             </div>
             <div class="card-divider"></div>
             <div class="action-buttons">
-                <a href="Books-Pdf/Chemistry/Chemistry_arihant_handbook.pdf" target="_blank" class="btn-view">
+                <a href="../notes/Chemistry_arihant_handbook.pdf" target="_blank" class="btn-view">
                     <i class="fa-solid fa-eye"></i> View
                 </a>
-                <a href="books-pdf/Chemistry/IIT_JEE_Super_Course_in_Chemistry_Organic_Chemistry_by_Trish.pdf" download class="btn-download">
+                <a href="../notes/Chemistry_arihant_handbook.pdf" download class="btn-download">
                     <i class="fa-solid fa-download"></i> Download
                 </a>
             </div>
         </div>
     </main>
 
+    <!-- Footer pointing back up to root legal pages -->
+    <footer>
+        <span>Swastik-Tech © 2026</span>
+        <a href="../privacy-policy.html">Privacy Policy</a>
+        <a href="../about.html">About Us</a>
+        <a href="../contact.html">Contact Us</a>
+    </footer>
+
     <script>
         function toggleTheme() {
             document.body.classList.toggle('light-mode');
-            if (document.body.classList.contains('light-mode')) {
-                localStorage.setItem('portal-theme', 'light');
-            } else {
-                localStorage.setItem('portal-theme', 'dark');
-            }
+            localStorage.setItem('portal-theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
         }
-
+        
         window.addEventListener('DOMContentLoaded', () => {
-            const savedTheme = localStorage.getItem('portal-theme');
-            if (savedTheme === 'light') {
+            if (localStorage.getItem('portal-theme') === 'light') {
                 document.body.classList.add('light-mode');
             }
         });
