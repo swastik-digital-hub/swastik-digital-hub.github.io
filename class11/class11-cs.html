@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Computer Science Practice | Swastik-Tech Portal</title>
     
+    <!-- Google AdSense Main Script -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9509706674270233" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -196,6 +197,17 @@
             box-shadow: 0 0 15px var(--cyan-accent);
             transform: translateY(-1px);
         }
+
+        /* AdSense Container Styling */
+        .adsense-card {
+            background: var(--card-bg);
+            border: 1px dashed var(--border-glow);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 25px;
+            text-align: center;
+            backdrop-filter: blur(8px);
+        }
     </style>
 </head>
 <body>
@@ -211,7 +223,7 @@
     </div>
 
     <div class="hub-container">
-        <!-- CS Topics Card with Python Sub-section -->
+        <!-- CS Topics Card -->
         <div class="topic-card">
             <div class="topic-header">
                 <h2>📋 CS Topics</h2>
@@ -230,6 +242,19 @@
                     <a href="python-lists.html" class="sub-btn">Detailed Topics →</a>
                 </div>
             </div>
+        </div>
+
+        <!-- AdSense Display Unit Container -->
+        <div class="adsense-card">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-9509706674270233"
+                 data-ad-slot="auto"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
         </div>
 
         <!-- Python Online IDE Card -->
