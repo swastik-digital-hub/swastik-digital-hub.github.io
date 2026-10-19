@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Botany Reference & Study Hub | Swastik-Tech</title>
+    <title>Botany Master Hub | Swastik-Tech</title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%2300f3ff%22><path d=%22M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5%22/></svg>">
@@ -79,6 +79,7 @@
             color: var(--accent-cyan); 
             border-left: 3px solid var(--accent-cyan); 
             padding-left: 10px; 
+            text-decoration: none;
         }
 
         .top-nav-right { display: flex; align-items: center; gap: 12px; }
@@ -121,6 +122,38 @@
             color: var(--text-muted); 
             letter-spacing: 1.5px; 
             text-transform: uppercase; 
+        }
+
+        /* High-yield Notes Block */
+        .study-notes-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1.8rem;
+            backdrop-filter: blur(8px);
+            line-height: 1.6;
+        }
+
+        .study-notes-card h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent-cyan);
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .study-notes-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .notes-list {
+            margin-left: 1.2rem;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
         }
 
         .books-grid { 
@@ -171,7 +204,7 @@
 <body>
 
     <header>
-        <div class="header-title">| Botany Master Hub</div>
+        <a href="books.html" class="header-title">| Botany Master Hub</a>
         <div class="top-nav-right">
             <button onclick="toggleTheme()" class="nav-btn"><i class="fa-solid fa-circle-half-stroke"></i> Theme</button>
             <a href="books.html" class="nav-btn"><i class="fa-solid fa-arrow-left"></i> Books Hub</a>
@@ -179,7 +212,20 @@
     </header>
 
     <main class="portal-container">
-        <div class="section-tag">Botany High-Yield Core Modules & Summaries</div>
+        <!-- High Content Density SEO Block for AdSense Approval -->
+        <div class="study-notes-card">
+            <h2>🌱 High-Yield NEET Botany Core Revision Summary</h2>
+            <p>Targeted metabolic cycles, anatomical structures, and genetic principles mandatory for securing top scores in NEET Botany:</p>
+            
+            <ul class="notes-list">
+                <li><strong>Photosynthesis & C4 Pathway:</strong> C4 plants (like maize and sugarcane) utilize PEP carboxylase in mesophyll cells for initial $CO_2$ fixation, avoiding photorespiration by concentrating $CO_2$ in bundle sheath cells via the Hatch-Slack pathway.</li>
+                <li><strong>Plant Growth Regulators (Phytohormones):</strong> Auxin promotes apical dominance, Gibberellins stimulate bolting in rosette plants, Cytokinins delay leaf senescence (Richmond-Lang effect), and Abscisic Acid (ABA) acts as a stress hormone closing stomata.</li>
+                <li><strong>Sexual Reproduction in Flowering Plants:</strong> Microsporogenesis produces pollen grains containing a vegetative cell and a generative cell. Double fertilization involves syngamy (forming a diploid zygote) and triple fusion (forming a triploid primary endosperm nucleus).</li>
+                <li><strong>Molecular Genetics & DNA Fingerprinting:</strong> Transcription in eukaryotes involves RNA Polymerase II synthesizing mRNA, followed by post-transcriptional modifications including capping, tailing, and splicing.</li>
+            </ul>
+        </div>
+
+        <div class="section-tag">Botany Conceptual Modules & Syllabus Highlights</div>
         
         <div class="books-grid">
             <!-- Module 1 -->
@@ -188,7 +234,7 @@
                     <i class="fa-solid fa-seedling book-icon"></i>
                     <div class="book-details">
                         <h3>Plant Physiology & Transport</h3>
-                        <p>Covers water potential, transpiration pull, mineral absorption, and active translocation across xylem and phloem pathways.</p>
+                        <p>Detailed analysis of water potential equations, transpiration pull theory, active/passive mineral absorption, and pressure flow hypothesis in phloem translocation.</p>
                     </div>
                 </div>
             </div>
@@ -198,8 +244,8 @@
                 <div class="book-info">
                     <i class="fa-solid fa-sun book-icon"></i>
                     <div class="book-details">
-                        <h3>Photosynthesis & Respiration</h3>
-                        <p>Detailed breakdown of light reactions, Calvin cycle (C3/C4 pathways), photophosphorylation, and cellular aerobic respiration.</p>
+                        <h3>Photosynthesis & Cellular Respiration</h3>
+                        <p>Comprehensive review of cyclic and non-cyclic photophosphorylation, Calvin cycle energetics, glycolysis, Krebs cycle, and the electron transport chain (ETC).</p>
                     </div>
                 </div>
             </div>
@@ -207,10 +253,10 @@
             <!-- Module 3 -->
             <div class="book-card">
                 <div class="book-info">
-                    <i class="fa-solid fa-dna book-icon"></i>
+                    <i class="fa-solid fa-tree book-icon"></i>
                     <div class="book-details">
-                        <h3>Plant Growth & Development</h3>
-                        <p> Hormonal control mechanisms regulated by auxins, gibberellins, cytokinins, ethylene, and abscisic acid (ABA) during photoperiodism.</p>
+                        <h3>Plant Anatomy & Morphology</h3>
+                        <p>In-depth study of meristematic tissues, secondary growth in dicot stems (vascular cambium and cork cambium), root/stem modifications, and inflorescence types.</p>
                     </div>
                 </div>
             </div>
@@ -218,10 +264,10 @@
             <!-- Module 4 -->
             <div class="book-card">
                 <div class="book-info">
-                    <i class="fa-solid fa-leaf book-icon"></i>
+                    <i class="fa-solid fa-dna book-icon"></i>
                     <div class="book-details">
-                        <h3>Plant Kingdom Taxonomy</h3>
-                        <p>Classification frameworks from Algae, Bryophytes, and Pteridophytes to Gymnosperms and Angiosperms life cycle alternations.</p>
+                        <h3>Genetics & Plant Breeding</h3>
+                        <p>Exploration of Mendelian inheritance deviations, chromosomal theory of inheritance, linkage mapping, polygenic inheritance, and crop improvement strategies.</p>
                     </div>
                 </div>
             </div>
@@ -230,9 +276,9 @@
 
     <footer>
         <span>Swastik-Tech © 2026</span>
-        <a href="privacy-policy.html">Privacy Policy</a>
-        <a href="about.html">About Us</a>
-        <a href="contact.html">Contact Us</a>
+        <a href="../privacy-policy.html">Privacy Policy</a>
+        <a href="../about.html">About Us</a>
+        <a href="../contact.html">Contact Us</a>
     </footer>
 
     <script>
