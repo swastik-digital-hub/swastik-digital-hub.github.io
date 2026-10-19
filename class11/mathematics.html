@@ -3,182 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mathematics Books | Swastik-Tech</title>
+    <title>Mathematics Library | Swastik-Tech</title>
     
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9509706674270233" crossorigin="anonymous"></script>
-
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%2300f3ff%22><path d=%22M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5%22/></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9509706674270233" crossorigin="anonymous"></script>
 
     <style>
         :root {
-            --bg-color: #080c14;
-            --card-bg: rgba(15, 23, 42, 0.9);
-            --accent-green: #10b981;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-glow-green: rgba(16, 185, 129, 0.3);
+            --bg-color: #03151c; --card-bg: rgba(6, 32, 43, 0.85); --card-border: #0e3746;
+            --accent-cyan: #00f3ff; --text-main: #ffffff; --text-muted: #83c5be;
+            --header-bg: rgba(3, 21, 28, 0.85); --grid-color: rgba(0, 243, 255, 0.04); --input-bg: rgba(0, 243, 255, 0.04);
         }
-
         body.light-mode {
-            --bg-color: #f1f5f9;
-            --card-bg: rgba(255, 255, 255, 0.95);
-            --accent-green: #059669;
-            --text-main: #0f172a;
-            --text-muted: #475569;
-            --border-glow-green: rgba(5, 150, 105, 0.3);
+            --bg-color: #f1f5f9; --card-bg: rgba(255, 255, 255, 0.95); --card-border: #cbd5e1;
+            --accent-cyan: #059669; --text-main: #0f172a; --text-muted: #475569;
+            --header-bg: rgba(241, 245, 249, 0.85);
         }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: 'Rajdhani', sans-serif;
-            min-height: 100vh;
-            padding: 1.5rem;
-            transition: background-color 0.4s ease, color 0.4s ease;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid var(--border-glow-green);
-            margin-bottom: 2rem;
-        }
-
-        .header-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
-            color: var(--accent-green);
-            border-left: 3px solid var(--accent-green);
-            padding-left: 10px;
-            text-decoration: none;
-        }
-
-        .top-nav-right { display: flex; gap: 1rem; align-items: center; }
-
-        .nav-btn {
-            background: var(--card-bg);
-            border: 1px solid var(--border-glow-green);
-            color: var(--accent-green);
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.85rem;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .nav-btn:hover { box-shadow: 0 0 10px var(--border-glow-green); }
-
-        .pdf-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .pdf-item {
-            background: var(--card-bg);
-            border: 1px solid var(--border-glow-green);
-            border-radius: 8px;
-            padding: 1rem 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            text-decoration: none;
-            color: var(--text-main);
-            transition: all 0.2s ease;
-        }
-
-        .pdf-item:hover {
-            border-color: var(--accent-green);
-            box-shadow: 0 0 12px var(--border-glow-green);
-            transform: translateX(4px);
-        }
-
-        .pdf-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 1rem;
-            font-weight: 600;
-        }
-
-        .pdf-info i {
-            font-size: 1.4rem;
-            color: var(--accent-green);
-        }
-
-        .download-tag {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.8rem;
-            color: var(--accent-green);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Rajdhani', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; transition: background-color 0.3s; }
+        header { height: 60px; padding: 0 2rem; background: var(--header-bg); border-bottom: 1px solid var(--card-border); display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 10; }
+        .header-title { font-family: 'Orbitron', sans-serif; font-size: 1.1rem; color: var(--accent-cyan); text-decoration: none; border-left: 3px solid var(--accent-cyan); padding-left: 10px; }
+        .portal-container { padding: 2.5rem; max-width: 1100px; margin: 0 auto; width: 100%; display: flex; flex-direction: column; gap: 1.5rem; }
+        .study-notes-card, .pdf-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.8rem; backdrop-filter: blur(8px); }
+        .study-notes-card h2, .pdf-details h4 { font-family: 'Orbitron', sans-serif; color: var(--accent-cyan); margin-bottom: 0.8rem; }
+        .study-notes-card p, .pdf-details p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1rem; }
+        .notes-list { margin-left: 1.2rem; color: var(--text-main); display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.95rem; }
+        .pdf-card { display: flex; flex-direction: column; gap: 1rem; transition: all 0.3s ease; }
+        .pdf-card:hover { border-color: var(--accent-cyan); box-shadow: 0 0 15px rgba(0, 243, 255, 0.2); }
+        .pdf-top { display: flex; align-items: flex-start; gap: 1.2rem; }
+        .pdf-top i { font-size: 2rem; color: var(--accent-cyan); }
+        .card-divider { height: 1px; background: var(--card-border); width: 100%; }
+        .action-buttons { display: flex; gap: 12px; }
+        .btn-action { background: var(--input-bg); border: 1px solid var(--card-border); color: var(--accent-cyan); padding: 0.5rem 1.2rem; border-radius: 6px; font-size: 0.85rem; font-family: 'Orbitron', sans-serif; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; font-weight: 600; transition: all 0.3s; }
+        .btn-action:hover { background: var(--accent-cyan); color: #000; box-shadow: 0 0 12px var(--accent-cyan); }
+        .nav-btn { background: var(--input-bg); border: 1px solid var(--card-border); color: var(--accent-cyan); padding: 0.4rem 0.9rem; border-radius: 6px; text-decoration: none; font-size: 0.85rem; font-family: 'Orbitron', sans-serif; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; }
     </style>
 </head>
 <body>
-
     <header>
-        <a href="books.html" class="header-title">| Mathematics Reference Library</a>
-        <div class="top-nav-right">
+        <a href="class11-hub.html" class="header-title">| Mathematics Library</a>
+        <div style="display: flex; gap: 12px;">
             <button onclick="toggleTheme()" class="nav-btn"><i class="fa-solid fa-circle-half-stroke"></i> Theme</button>
-            <a href="books.html" class="nav-btn"><i class="fa-solid fa-arrow-left"></i> Books Hub</a>
+            <a href="class11-hub.html" class="nav-btn"><i class="fa-solid fa-arrow-left"></i> Hub</a>
         </div>
     </header>
 
-    <main>
-        <div class="pdf-list">
-            <a href="books-pdf/Mathematics/algebra-trigonometry.pdf" class="pdf-item" target="_blank">
-                <div class="pdf-info">
-                    <i class="fa-solid fa-file-pdf"></i>
-                    <span>Algebra & Trigonometry Handbook</span>
-                </div>
-                <div class="download-tag">PDF <i class="fa-solid fa-download"></i></div>
-            </a>
+    <main class="portal-container">
+        <!-- Indexable Text Block for AdSense Compliance -->
+        <div class="study-notes-card">
+            <h2>📐 Mathematics Sample Papers & Practice Modules</h2>
+            <p>Rigorous problem practice is essential for mastering mathematical reasoning, algebraic proofs, and calculus applications. Explore our curated sets of standard sample papers below:</p>
+            <ul class="notes-list">
+                <li><strong>Exam Pattern Alignment:</strong> Structured as per latest board and competitive examination guidelines.</li>
+                <li><strong>Step-by-Step Solutions:</strong> Designed to help students analyze alternative problem-solving techniques and time management.</li>
+            </ul>
+        </div>
 
-            <a href="books-pdf/Mathematics/calculus-companion.pdf" class="pdf-item" target="_blank">
-                <div class="pdf-info">
-                    <i class="fa-solid fa-file-pdf"></i>
-                    <span>Calculus Problem Companion</span>
+        <!-- Set 1 Card -->
+        <div class="pdf-card">
+            <div class="pdf-top">
+                <i class="fa-solid fa-file-pdf"></i>
+                <div class="pdf-details">
+                    <h4>Class 10 Maths (Standard) Sample Paper Set 1 (2024-25)</h4>
+                    <p>Comprehensive practice set focusing on core algebra, geometry, and trigonometry problem modules.</p>
                 </div>
-                <div class="download-tag">PDF <i class="fa-solid fa-download"></i></div>
-            </a>
+            </div>
+            <div class="card-divider"></div>
+            <div class="action-buttons">
+                <a href="pdfs/Class 10 Maths (Standard) Sample Paper Set 1 (2024-25) FREE PDF.pdf" target="_blank" class="btn-action"><i class="fa-solid fa-eye"></i> View</a>
+                <a href="pdfs/Class 10 Maths (Standard) Sample Paper Set 1 (2024-25) FREE PDF.pdf" download class="btn-action"><i class="fa-solid fa-download"></i> Download</a>
+            </div>
+        </div>
 
-            <a href="books-pdf/Mathematics/coordinate-geometry.pdf" class="pdf-item" target="_blank">
-                <div class="pdf-info">
-                    <i class="fa-solid fa-file-pdf"></i>
-                    <span>Coordinate Geometry Question Bank</span>
+        <!-- Set 2 Card -->
+        <div class="pdf-card">
+            <div class="pdf-top">
+                <i class="fa-solid fa-file-pdf"></i>
+                <div class="pdf-details">
+                    <h4>Class 10 Maths (Standard) Sample Paper Set 2 (2024-25)</h4>
+                    <p>Advanced numerical practice set covering statistics, probability, and quadratic equations.</p>
                 </div>
-                <div class="download-tag">PDF <i class="fa-solid fa-download"></i></div>
-            </a>
+            </div>
+            <div class="card-divider"></div>
+            <div class="action-buttons">
+                <a href="pdfs/Class 10 Maths (Standard) Sample Paper Set 2 (2024-25) FREE PDF.pdf" target="_blank" class="btn-action"><i class="fa-solid fa-eye"></i> View</a>
+                <a href="pdfs/Class 10 Maths (Standard) Sample Paper Set 2 (2024-25) FREE PDF.pdf" download class="btn-action"><i class="fa-solid fa-download"></i> Download</a>
+            </div>
+        </div>
+
+        <!-- Set 3 Card -->
+        <div class="pdf-card">
+            <div class="pdf-top">
+                <i class="fa-solid fa-file-pdf"></i>
+                <div class="pdf-details">
+                    <h4>Class 10 Maths (Standard) Sample Paper Set 3 (2024-25)</h4>
+                    <p>High-yield mock test paper designed for final board revision and speed enhancement.</p>
+                </div>
+            </div>
+            <div class="card-divider"></div>
+            <div class="action-buttons">
+                <a href="pdfs/Class 10 Maths (Standard) Sample Paper Set 3 (2024-25) FREE PDF.pdf" target="_blank" class="btn-action"><i class="fa-solid fa-eye"></i> View</a>
+                <a href="pdfs/Class 10 Maths (Standard) Sample Paper Set 3 (2024-25) FREE PDF.pdf" download class="btn-action"><i class="fa-solid fa-download"></i> Download</a>
+            </div>
         </div>
     </main>
 
     <script>
-        if (localStorage.getItem('theme') === 'light') {
-            document.body.classList.add('light-mode');
-        }
-
         function toggleTheme() {
             document.body.classList.toggle('light-mode');
-            if (document.body.classList.contains('light-mode')) {
-                localStorage.setItem('theme', 'light');
-            } else {
-                localStorage.setItem('theme', 'dark');
-            }
+            localStorage.setItem('portal-theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
         }
+        if (localStorage.getItem('portal-theme') === 'light') document.body.classList.add('light-mode');
     </script>
 </body>
 </html>
