@@ -4,8 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Class 11 Physics Notes | Swastik-Tech</title>
+    
+    <!-- Browser Tab Favicon Logo -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+
+    <!-- Google AdSense Main Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9509706674270233" crossorigin="anonymous"></script>
+
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         :root {
             --bg-color: #03151c;
@@ -17,6 +25,18 @@
             --border-glow: rgba(0, 243, 255, 0.25);
             --grid-color: rgba(0, 243, 255, 0.04);
             --input-bg: rgba(0, 243, 255, 0.04);
+        }
+
+        body.light-mode {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --card-border: #cbd5e1;
+            --accent-cyan: #059669;
+            --text-main: #334155;
+            --text-muted: #64748b;
+            --border-glow: rgba(5, 150, 105, 0.25);
+            --grid-color: rgba(0, 0, 0, 0.03);
+            --input-bg: #e6fffa;
         }
 
         * {
@@ -37,6 +57,7 @@
             color: var(--text-main);
             min-height: 100vh;
             padding: 2rem;
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
         .top-bar {
@@ -54,6 +75,36 @@
             color: var(--accent-cyan);
             border-left: 3px solid var(--accent-cyan);
             padding-left: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .top-nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .theme-btn {
+            background: var(--card-bg);
+            color: var(--accent-cyan);
+            border: 1px solid var(--card-border);
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .theme-btn:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 10px var(--border-glow);
         }
 
         .back-link {
@@ -62,6 +113,9 @@
             font-family: 'Orbitron', sans-serif;
             font-size: 0.85rem;
             transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .back-link:hover {
@@ -76,12 +130,20 @@
             letter-spacing: 1px;
         }
 
+        .content-layout {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            max-width: 900px;
+        }
+
         .pdf-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 8px;
             padding: 1.2rem;
-            width: 380px;
+            width: 100%;
+            max-width: 450px;
             display: flex;
             flex-direction: column;
             gap: 1.2rem;
@@ -145,36 +207,122 @@
             background: var(--input-bg);
             box-shadow: 0 0 10px var(--border-glow);
         }
+
+        /* Study Notes Summary Box */
+        .notes-summary-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 1.8rem;
+            line-height: 1.6;
+        }
+
+        .notes-summary-card h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent-cyan);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .notes-summary-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--text-main);
+            font-size: 1rem;
+            margin: 1.2rem 0 0.5rem 0;
+        }
+
+        .notes-summary-card p, .notes-summary-card ul {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .notes-summary-card ul {
+            padding-left: 1.2rem;
+        }
+
+        .notes-summary-card li {
+            margin-bottom: 0.4rem;
+        }
     </style>
 </head>
 <body>
 
     <div class="top-bar">
-        <div class="brand">| Class 11 Physics Notes</div>
-        <a href="notes.html" class="back-link">← Back to Sections</a>
+        <div class="brand">
+            <i class="fa-solid fa-atom"></i> Class 11 Physics Notes
+        </div>
+        <div class="top-nav-right">
+            <button class="theme-btn" onclick="toggleTheme()">
+                <i class="fa-solid fa-circle-half-stroke"></i> Theme
+            </button>
+            <a href="notes.html" class="back-link">
+                <i class="fa-solid fa-arrow-left"></i> Back to Sections
+            </a>
+        </div>
     </div>
 
     <div class="section-header">Available Study Notes</div>
 
-    <div class="pdf-card">
-        <div class="pdf-card-top">
-            <i class="fa-solid fa-file-pdf pdf-icon"></i>
-            <div class="pdf-info">
-                <h3>Units and Measurement</h3>
-                <p>Physics Comprehensive Revision Notes (2026)</p>
+    <div class="content-layout">
+        <!-- PDF Download/View Card -->
+        <div class="pdf-card">
+            <div class="pdf-card-top">
+                <i class="fa-solid fa-file-pdf pdf-icon"></i>
+                <div class="pdf-info">
+                    <h3>Units and Measurement</h3>
+                    <p>Physics Comprehensive Revision Notes (2026)</p>
+                </div>
+            </div>
+            <div class="pdf-actions">
+                <a href="pdfs/Physics/Units%20and%20Measurement.pdf" target="_blank" class="btn-action">
+                    <i class="fa-solid fa-eye"></i> View
+                </a>
+                <a href="pdfs/Physics/Units%20and%20Measurement.pdf" download="Units-and-Measurement.pdf" class="btn-action">
+                    <i class="fa-solid fa-download"></i> Download
+                </a>
             </div>
         </div>
-        <div class="pdf-actions">
-            <!-- View using relative path -->
-            <a href="pdfs/Physics/Units%20and%20Measurement.pdf" target="_blank" class="btn-action">
-                <i class="fa-solid fa-eye"></i> View
-            </a>
-            <!-- Download using relative path -->
-            <a href="pdfs/Physics/Units%20and%20Measurement.pdf" download="Units-and-Measurement.pdf" class="btn-action">
-                <i class="fa-solid fa-download"></i> Download
-            </a>
+
+        <!-- High-Yield Revision Text Block -->
+        <div class="notes-summary-card">
+            <h2>📌 Chapter Overview: Units and Measurement</h2>
+            <p>Measurement of physical quantities forms the base of experimental physics. A physical quantity is any characteristic that can be measured and quantified using a standard numerical value and a unit.</p>
+            
+            <h3>1. Fundamental vs. Derived Units</h3>
+            <ul>
+                <li><strong>Fundamental Units:</strong> Independent physical quantities that cannot be defined in terms of other units (e.g., Mass [kg], Length [m], Time [s], Electric Current [A], Temperature [K], Luminous Intensity [cd], Amount of Substance [mol]).</li>
+                <li><strong>Derived Units:</strong> Units expressed as combinations of base units (e.g., Force [N = kg·m/s²], Velocity [m/s], Pressure [Pa = N/m²]).</li>
+            </ul>
+
+            <h3>2. Dimensional Analysis Applications</h3>
+            <ul>
+                <li>Checking the dimensional correctness of equations using the Principle of Homogeneity.</li>
+                <li>Deriving relationships between physical quantities.</li>
+                <li>Converting values between different systems of units (e.g., CGS to SI).</li>
+            </ul>
+
+            <h3>3. Errors in Measurement</h3>
+            <p>Errors represent the difference between the true value and the measured value of a physical quantity. They are categorized into Systematic Errors (instrumental, observational) and Random Errors.</p>
         </div>
     </div>
 
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            if (document.body.classList.contains('light-mode')) {
+                localStorage.setItem('portal-theme', 'light');
+            } else {
+                localStorage.setItem('portal-theme', 'dark');
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('portal-theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-mode');
+            }
+        });
+    </script>
 </body>
 </html>
