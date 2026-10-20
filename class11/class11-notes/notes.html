@@ -4,8 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Class 11 Notes Portal | Swastik-Tech</title>
+    
+    <!-- Browser Tab Favicon Logo -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+
+    <!-- Google AdSense Main Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9509706674270233" crossorigin="anonymous"></script>
+
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         :root {
             --bg-color: #03151c;
@@ -17,6 +25,18 @@
             --border-glow: rgba(0, 243, 255, 0.25);
             --grid-color: rgba(0, 243, 255, 0.04);
             --input-bg: rgba(0, 243, 255, 0.04);
+        }
+
+        body.light-mode {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --card-border: #cbd5e1;
+            --accent-cyan: #059669;
+            --text-main: #334155;
+            --text-muted: #64748b;
+            --border-glow: rgba(5, 150, 105, 0.25);
+            --grid-color: rgba(0, 0, 0, 0.03);
+            --input-bg: #e6fffa;
         }
 
         * {
@@ -37,6 +57,7 @@
             color: var(--text-main);
             min-height: 100vh;
             padding: 2rem;
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
         .top-bar {
@@ -54,6 +75,36 @@
             color: var(--accent-cyan);
             border-left: 3px solid var(--accent-cyan);
             padding-left: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .top-nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .theme-btn {
+            background: var(--card-bg);
+            color: var(--accent-cyan);
+            border: 1px solid var(--card-border);
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .theme-btn:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 10px var(--border-glow);
         }
 
         .back-link {
@@ -62,6 +113,9 @@
             font-family: 'Orbitron', sans-serif;
             font-size: 0.85rem;
             transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .back-link:hover {
@@ -113,8 +167,17 @@
 <body>
 
     <div class="top-bar">
-        <div class="brand">| Class 11 Notes Portal</div>
-        <a href="../class11-hub.html" class="back-link">← Back to Hub</a>
+        <div class="brand">
+            <i class="fa-solid fa-graduation-cap"></i> Class 11 Notes Portal
+        </div>
+        <div class="top-nav-right">
+            <button class="theme-btn" onclick="toggleTheme()">
+                <i class="fa-solid fa-circle-half-stroke"></i> Theme
+            </button>
+            <a href="../class11-hub.html" class="back-link">
+                <i class="fa-solid fa-arrow-left"></i> Back to Hub
+            </a>
+        </div>
     </div>
 
     <div class="section-label">Available Subject Sections</div>
@@ -131,5 +194,22 @@
         </a>
     </div>
 
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            if (document.body.classList.contains('light-mode')) {
+                localStorage.setItem('portal-theme', 'light');
+            } else {
+                localStorage.setItem('portal-theme', 'dark');
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('portal-theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-mode');
+            }
+        });
+    </script>
 </body>
 </html>
